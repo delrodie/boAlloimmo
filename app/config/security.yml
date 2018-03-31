@@ -58,4 +58,5 @@ security:
         - { path: ^/backend/mode, role: ROLE_ADMIN }
         - { path: ^/backend/typebien, role: ROLE_ADMIN }
         - { path: ^/backend/domaine, role: ROLE_ADMIN }
+        - { path: ^/backend/service, role: ROLE_ADMIN }
         - { path: ^/admin/, role: ROLE_ADMIN }

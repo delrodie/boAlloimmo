@@ -6,12 +6,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Domaine
+ * Service
  *
- * @ORM\Table(name="domaine")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\DomaineRepository")
+ * @ORM\Table(name="service")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ServiceRepository")
  */
-class Domaine
+class Service
 {
     /**
      * @var int
@@ -37,9 +37,10 @@ class Domaine
     private $statut;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Service", mappedBy="domaine")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Domaine", inversedBy="services")
+     * @ORM\JoinColumn(name="domaine_id", referencedColumnName="id")
      */
-    private $services;
+    private $domaine;
 
     /**
      * @var string
@@ -97,7 +98,7 @@ class Domaine
      *
      * @param string $libelle
      *
-     * @return Domaine
+     * @return Service
      */
     public function setLibelle($libelle)
     {
@@ -121,7 +122,7 @@ class Domaine
      *
      * @param boolean $statut
      *
-     * @return Domaine
+     * @return Service
      */
     public function setStatut($statut)
     {
@@ -145,7 +146,7 @@ class Domaine
      *
      * @param string $slug
      *
-     * @return Domaine
+     * @return Service
      */
     public function setSlug($slug)
     {
@@ -169,7 +170,7 @@ class Domaine
      *
      * @param string $publiePar
      *
-     * @return Domaine
+     * @return Service
      */
     public function setPubliePar($publiePar)
     {
@@ -193,7 +194,7 @@ class Domaine
      *
      * @param string $modifiePar
      *
-     * @return Domaine
+     * @return Service
      */
     public function setModifiePar($modifiePar)
     {
@@ -217,7 +218,7 @@ class Domaine
      *
      * @param \DateTime $publieLe
      *
-     * @return Domaine
+     * @return Service
      */
     public function setPublieLe($publieLe)
     {
@@ -241,7 +242,7 @@ class Domaine
      *
      * @param \DateTime $modifieLe
      *
-     * @return Domaine
+     * @return Service
      */
     public function setModifieLe($modifieLe)
     {
@@ -259,49 +260,28 @@ class Domaine
     {
         return $this->modifieLe;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->services = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add service
+     * Set domaine
      *
-     * @param \AppBundle\Entity\Service $services
+     * @param \AppBundle\Entity\Domaine $domaine
      *
-     * @return Domaine
+     * @return Service
      */
-    public function addServices(\AppBundle\Entity\Service $services)
+    public function setDomaine(\AppBundle\Entity\Domaine $domaine = null)
     {
-        $this->services[] = $services;
+        $this->domaine = $domaine;
 
         return $this;
     }
 
     /**
-     * Remove services
+     * Get domaine
      *
-     * @param \AppBundle\Entity\Service $services
+     * @return \AppBundle\Entity\Domaine
      */
-    public function removeServices(\AppBundle\Entity\Service $services)
+    public function getDomaine()
     {
-        $this->services->removeElement($services);
-    }
-
-    /**
-     * Get services
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getServices()
-    {
-        return $this->services;
-    }
-
-    public function __toString() {
-        return $this->getLibelle();
+        return $this->domaine;
     }
 }
