@@ -1,31 +1,31 @@
 {% extends 'backend_layout.html.twig' %}
 
-{% block title %}Modification du type de bien {{ typebien.libelle }}{% endblock %}
+{% block title %}Modification des zones{% endblock %}
 
 {% block body %}
     <div class="main-content">
         <div class="page-title">
             <h4 class="mb-0">
-                Gestion des types de bien
+                Gestion des zones
                 <small> </small>
             </h4>
             <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
                 <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
-                <li class="breadcrumb-item active">Modification des types de bien</li>
+                <li class="breadcrumb-item active">Modification des zones</li>
             </ol>
         </div>
 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a href="{{ path('typebien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des types de bien</a>
+                    <a href="{{ path('admin_zone_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des zones</a>
                 </div>
                 <br>
                 <div class="col-md-12">
                     <div class="card card-shadow mb-4">
                         <div class="card-header">
                             <div class="card-title">
-                                Modification des types de bien
+                                Modification des zones
                             </div>
                         </div>
                         <div class="card-body">
@@ -53,7 +53,7 @@
                             </div>
                             {{ form_end(edit_form) }}
                             <div class="text-right">
-                                {{ form_start(delete_form, {'attr': {'onsubmit': "return confirm('Etes-vous sûr de vouloir vraiment supprimer ce type de bien?');"}}) }}
+                                {{ form_start(delete_form, {'attr': {'onsubmit': "return confirm('Etes-vous sûr de vouloir vraiment supprimer cette zone?');"}}) }}
                                 <input type="submit" value="Supprimer" class="btn btn-danger">
                                 {{ form_end(delete_form) }}
 
@@ -65,6 +65,5 @@
         </div>
     </div>
 {% endblock %}
-
 
 
