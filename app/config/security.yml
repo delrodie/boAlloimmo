@@ -55,4 +55,6 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, role: ROLE_USER }
         - { path: ^/backend, role: ROLE_USER }
+        - { path: ^/backend/mode, role: ROLE_ADMIN }
+        - { path: ^/backend/typebien, role: ROLE_ADMIN }
         - { path: ^/admin/, role: ROLE_ADMIN }

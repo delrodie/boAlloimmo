@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Typebien controller.
  *
- * @Route("admin/typebien")
+ * @Route("backend/typebien")
  */
 class TypebienController extends Controller
 {
