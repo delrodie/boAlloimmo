@@ -37,6 +37,11 @@ class Rubrique
     private $statut;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article", mappedBy="rubrique")
+     */
+    private $articles;
+
+    /**
      * @var string
      *
      * @Gedmo\Slug(fields={"libelle"})
@@ -253,5 +258,50 @@ class Rubrique
     public function getModifieLe()
     {
         return $this->modifieLe;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add article
+     *
+     * @param \AppBundle\Entity\Article $article
+     *
+     * @return Rubrique
+     */
+    public function addArticle(\AppBundle\Entity\Article $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \AppBundle\Entity\Article $article
+     */
+    public function removeArticle(\AppBundle\Entity\Article $article)
+    {
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    public function __toString() {
+        return $this->getLibelle();
     }
 }
