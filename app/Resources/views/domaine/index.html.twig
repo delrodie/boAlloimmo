@@ -1,0 +1,67 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Liste des domaines{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des domaines
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Liste des domaines</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_domaine_new') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter un type de bien</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Liste des domaines
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">#ID</th>
+                                    <th scope="col" class="text-center">Noms</th>
+                                    <th scope="col" class="text-center">Statut</th>
+                                    <th scope="col" class="text-center">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for domaine in domaines %}
+                                    <tr>
+                                        <th scope="col" class="text-right">{{ loop.index }}</th>
+                                        <td>{{ domaine.libelle }}</td>
+                                        <td class="text-center">
+                                            {% if (domaine.statut) %}
+                                                <span class="badge badge-pill badge-success">Actif</span>
+                                            {% else %}
+                                                <span class="badge badge-pill badge-danger">Désactivé</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ path('backend_domaine_edit', {'slug': domaine.slug}) }}"><i class="fa fa-edit"></i></a> |
+                                            <a href="{{ path('backend_domaine_edit', {'slug': domaine.slug}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer {{ domaine.libelle }} ?'));"><i class="fa fa-trash-o"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
