@@ -1,0 +1,141 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Enregistrement des partenaires{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des partenaires
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Enregistrement des partenaires</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_partenaire_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des partenaires</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Enregistrement des partenaires
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(form, {'attr': {'class': 'right-text-label-form', 'id':'signupForm'}}) }}
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="nom" class="control-label">Raison sociale</label>
+                                    {{ form_widget(form.nom) }} <br>
+                                    <label for="adresse" class="control-label">Adresse</label>
+                                    {{ form_widget(form.adresse) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="description" class="control-label">Description </label>
+                                    {{ form_widget(form.description) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="localisation" class="control-label">Localisation</label>
+                                    {{ form_widget(form.localisation) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="email" class="control-label">E-mail</label>
+                                    {{ form_widget(form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="website" class="control-label">Site internet</label>
+                                    {{ form_widget(form.website) }}
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="fax" class="control-label">Fax</label>
+                                    {{ form_widget(form.fax) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-4">
+                                    <label for="contact1" class="control-label">Contact Telephonie 1</label>
+                                    {{ form_widget(form.contact1) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="contact2" class="control-label">Contact Telephonie 2</label>
+                                    {{ form_widget(form.contact2) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="contact3" class="control-label">Contact Telephonie 3</label>
+                                    {{ form_widget(form.contact3) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label for="services" class="control-label">Services</label>
+                                    {{ form_widget(form.services) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-1 control-label" for="tags">.</label>
+                                <div class="col-sm-8">
+                                    {{ form_widget(form.imageFile) }}
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <div class="col-sm-5 col-sm-offset-1">.</div>
+                                <label class="custom-control custom-checkbox">
+                                    {{ form_widget(form.statut) }}
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Statut</span>
+                                </label>
+                            </div>
+                            {{ form_rest(form) }}
+                            <div class="form-group row">
+                                <div class="col-sm-5 ml-auto">
+                                    <button class="btn btn-primary" name="signup">Enregistrement</button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('backend/vendor/select2/css/select2.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/vendor/tagsinput/js/bootstrap-tagsinput.css')}}" rel="stylesheet">
+    <style>
+
+        .bootstrap-tagsinput .tag {
+            margin-right: 2px;
+            color: #666666;
+        }
+    </style>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('backend/vendor/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('backend/vendor/tagsinput/js/bootstrap-tagsinput.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&language=fr"></script>
+    <script>
+        $(function () {
+            $(".select-multiple").select2();
+            //$("#appbundle_partenaire_services").select2();
+            $("tag-input").tagsinput();
+        })
+    </script>
+{% endblock %}

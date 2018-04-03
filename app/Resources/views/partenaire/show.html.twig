@@ -1,0 +1,135 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}
+    {{ partenaire.nom }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des partenaires
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Enregistrement des partenaires</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_partenaire_new') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter un partenaire</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                {{ partenaire.nom }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-1">
+                                    <img src="{{ vich_uploader_asset(partenaire, 'imageFile') }}" alt="{{ partenaire.nom }}" title="{{ partenaire.nom }}"  class="card-img-top img-fluid"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Raison sociale: </strong></div>
+                                        <div class="col-sm-6">{{ partenaire.nom }}</div>
+                                    </div>
+                                    <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Adresse: </strong></div>
+                                        <div class="col-sm-6">{{ partenaire.adresse }}</div>
+                                    </div>
+                                    <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Contacts: </strong></div>
+                                        <div class="col-sm-6">
+                                            {{ partenaire.contact1 }}
+                                            {% if (partenaire.contact2) %}
+                                                / {{ partenaire.contact2 }}
+                                            {% endif %}
+                                            {% if (partenaire.contact3) %}
+                                                / {{ partenaire.contact3 }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Fax: </strong></div>
+                                        <div class="col-sm-6">{{ partenaire.fax }}</div>
+                                    </div>
+                                        <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Website: </strong></div>
+                                        <div class="col-sm-6"><a href="http://{{ partenaire.website }}" target="_blank" title="Voir le site">{{ partenaire.website }}</a></div>
+                                    </div>
+                                    <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Email: </strong></div>
+                                        <div class="col-sm-6">{{ partenaire.email }}</div>
+                                    </div>
+                                    <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Localisation: </strong></div>
+                                        <div class="col-sm-6">{{ partenaire.localisation }}</div>
+                                    </div>
+                                    <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Statut: </strong></div>
+                                        <div class="col-sm-6">
+                                            {% if (partenaire.statut) %}
+                                                <span class="btn btn-success">Actif</span>
+                                            {% else %}
+                                                <span class="btn btn-danger">Désactivé</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8 col-sm-offset-1">
+                                    <strong>Description: </strong> <br>
+                                    {{ partenaire.description }}
+                                </div>
+                            </div>
+                            <div class="row services">
+                                <div class="col-sm-11 col-sm-offset-1">
+                                    <strong>Services: </strong> <br>
+                                    {% for service in partenaire.services %}
+                                        <a href="#" class="btn-sm btn-outline-secondary">#{{ service }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 bouton">
+                                    <div class="form-group">
+                                        <div class="col-sm-11 col-sm-offset-1">
+                                            <a href="{{ path('backend_partenaire_edit', {'slug': partenaire.slug}) }}" class="btn btn-outline-danger"><i class="fa fa-edit"></i> Modifier</a>
+                                            <a href="#" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Voir les projets</a>
+                                            <a href="{{ path('backend_partenaire_index') }}" class="btn btn-outline-secondary"><i class="fa fa-list"></i> Liste des partenaires</a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3 col-sm-offset-8 ml-auto">
+                                            {{ form_start(delete_form, {'attr': {'onsubmit': "return confirm('Etes-vous sûr de vouloir vraiment supprimer ce partenaire?');"}}) }}
+                                            <input type="submit" value="Supprimer" class="btn btn-danger">
+                                            {{ form_end(delete_form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .presentation{ padding: 5px 0px;}
+        .bouton{ margin-top: 75px; }
+        .services{ margin-top: 30px}
+    </style>
+{% endblock %}
+

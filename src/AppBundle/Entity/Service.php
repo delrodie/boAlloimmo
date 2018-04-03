@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping\ManyToMany;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,6 +42,12 @@ class Service
      * @ORM\JoinColumn(name="domaine_id", referencedColumnName="id")
      */
     private $domaine;
+
+    /**
+     * Many Groups have Many Users.
+     * @ManyToMany(targetEntity="Partenaire", mappedBy="services")
+     */
+    private $partenaires;
 
     /**
      * @var string
@@ -283,5 +290,51 @@ class Service
     public function getDomaine()
     {
         return $this->domaine;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->partenaires = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add partenaire
+     *
+     * @param \AppBundle\Entity\Partenaire $partenaire
+     *
+     * @return Service
+     */
+    public function addPartenaire(\AppBundle\Entity\Partenaire $partenaire)
+    {
+        $this->partenaires[] = $partenaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove partenaire
+     *
+     * @param \AppBundle\Entity\Partenaire $partenaire
+     */
+    public function removePartenaire(\AppBundle\Entity\Partenaire $partenaire)
+    {
+        $this->partenaires->removeElement($partenaire);
+    }
+
+    /**
+     * Get partenaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPartenaires()
+    {
+        return $this->partenaires;
+    }
+
+    public function __toString()
+    {
+        return $this->getLibelle();
     }
 }

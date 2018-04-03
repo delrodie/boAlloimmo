@@ -2,19 +2,21 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Article
+ * Partenaire
  *
- * @ORM\Table(name="article")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
+ * @ORM\Table(name="partenaire")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PartenaireRepository")
  * @Vich\Uploadable
  */
-class Article
+class Partenaire
 {
     /**
      * @var int
@@ -28,30 +30,72 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $titre;
+    private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="resume", type="text", nullable=true)
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $resume;
+    private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="text", nullable=true)
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
-    private $contenu;
+    private $adresse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tags", type="string", length=255, nullable=true)
+     * @ORM\Column(name="localisation", type="string", length=255, nullable=true)
      */
-    private $tags;
+    private $localisation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="website", type="string", length=255, nullable=true)
+     */
+    private $website;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact1", type="string", length=255, nullable=true)
+     */
+    private $contact1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact2", type="string", length=255, nullable=true)
+     */
+    private $contact2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact3", type="string", length=255, nullable=true)
+     */
+    private $contact3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fax", type="string", length=255, nullable=true)
+     */
+    private $fax;
 
     /**
      * @var bool
@@ -61,15 +105,16 @@ class Article
     private $statut;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Rubrique", inversedBy="articles")
-     * @ORM\JoinColumn(name="rubrique_id", referencedColumnName="id")
+     * Plusieurs partenaire font plusieurs services.
+     * @ManyToMany(targetEntity="Service", inversedBy="partenaires")
+     * @JoinTable(name="partenaires_services")
      */
-    private $rubrique;
+    private $services;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="partenaire_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
      */
@@ -99,7 +144,7 @@ class Article
     /**
      * @var string
      *
-     * @Gedmo\Slug(fields={"titre"})
+     * @Gedmo\Slug(fields={"nom"})
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
@@ -148,75 +193,243 @@ class Article
     }
 
     /**
-     * Set titre
+     * Set nom
      *
-     * @param string $titre
+     * @param string $nom
      *
-     * @return Article
+     * @return Partenaire
      */
-    public function setTitre($titre)
+    public function setNom($nom)
     {
-        $this->titre = $titre;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get titre
+     * Get nom
      *
      * @return string
      */
-    public function getTitre()
+    public function getNom()
     {
-        return $this->titre;
+        return $this->nom;
     }
 
     /**
-     * Set contenu
+     * Set description
      *
-     * @param string $contenu
+     * @param string $description
      *
-     * @return Article
+     * @return Partenaire
      */
-    public function setContenu($contenu)
+    public function setDescription($description)
     {
-        $this->contenu = $contenu;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get contenu
+     * Get description
      *
      * @return string
      */
-    public function getContenu()
+    public function getDescription()
     {
-        return $this->contenu;
+        return $this->description;
     }
 
     /**
-     * Set tags
+     * Set adresse
      *
-     * @param string $tags
+     * @param string $adresse
      *
-     * @return Article
+     * @return Partenaire
      */
-    public function setTags($tags)
+    public function setAdresse($adresse)
     {
-        $this->tags = $tags;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
     /**
-     * Get tags
+     * Get adresse
      *
      * @return string
      */
-    public function getTags()
+    public function getAdresse()
     {
-        return $this->tags;
+        return $this->adresse;
+    }
+
+    /**
+     * Set localisation
+     *
+     * @param string $localisation
+     *
+     * @return Partenaire
+     */
+    public function setLocalisation($localisation)
+    {
+        $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    /**
+     * Get localisation
+     *
+     * @return string
+     */
+    public function getLocalisation()
+    {
+        return $this->localisation;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Partenaire
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     *
+     * @return Partenaire
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+
+        return $this;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set contact1
+     *
+     * @param string $contact1
+     *
+     * @return Partenaire
+     */
+    public function setContact1($contact1)
+    {
+        $this->contact1 = $contact1;
+
+        return $this;
+    }
+
+    /**
+     * Get contact1
+     *
+     * @return string
+     */
+    public function getContact1()
+    {
+        return $this->contact1;
+    }
+
+    /**
+     * Set contact2
+     *
+     * @param string $contact2
+     *
+     * @return Partenaire
+     */
+    public function setContact2($contact2)
+    {
+        $this->contact2 = $contact2;
+
+        return $this;
+    }
+
+    /**
+     * Get contact2
+     *
+     * @return string
+     */
+    public function getContact2()
+    {
+        return $this->contact2;
+    }
+
+    /**
+     * Set contact3
+     *
+     * @param string $contact3
+     *
+     * @return Partenaire
+     */
+    public function setContact3($contact3)
+    {
+        $this->contact3 = $contact3;
+
+        return $this;
+    }
+
+    /**
+     * Get contact3
+     *
+     * @return string
+     */
+    public function getContact3()
+    {
+        return $this->contact3;
+    }
+
+    /**
+     * Set fax
+     *
+     * @param string $fax
+     *
+     * @return Partenaire
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+
+        return $this;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return string
+     */
+    public function getFax()
+    {
+        return $this->fax;
     }
 
     /**
@@ -224,7 +437,7 @@ class Article
      *
      * @param boolean $statut
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setStatut($statut)
     {
@@ -242,13 +455,20 @@ class Article
     {
         return $this->statut;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->services = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Set imageName
      *
      * @param string $imageName
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setImageName($imageName)
     {
@@ -272,7 +492,7 @@ class Article
      *
      * @param integer $imageSize
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setImageSize($imageSize)
     {
@@ -296,7 +516,7 @@ class Article
      *
      * @param \DateTime $updatedAt
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -324,7 +544,7 @@ class Article
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
-     * @return Post
+     * @return Partenaire
      */
     public function setImageFile(File $image = null)
     {
@@ -352,7 +572,7 @@ class Article
      *
      * @param string $slug
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setSlug($slug)
     {
@@ -376,7 +596,7 @@ class Article
      *
      * @param string $publiePar
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setPubliePar($publiePar)
     {
@@ -400,7 +620,7 @@ class Article
      *
      * @param string $modifiePar
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setModifiePar($modifiePar)
     {
@@ -424,7 +644,7 @@ class Article
      *
      * @param \DateTime $publieLe
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setPublieLe($publieLe)
     {
@@ -448,7 +668,7 @@ class Article
      *
      * @param \DateTime $modifieLe
      *
-     * @return Article
+     * @return Partenaire
      */
     public function setModifieLe($modifieLe)
     {
@@ -468,50 +688,36 @@ class Article
     }
 
     /**
-     * Set rubrique
+     * Add service
      *
-     * @param \AppBundle\Entity\Rubrique $rubrique
+     * @param \AppBundle\Entity\Service $service
      *
-     * @return Article
+     * @return Partenaire
      */
-    public function setRubrique(\AppBundle\Entity\Rubrique $rubrique = null)
+    public function addService(\AppBundle\Entity\Service $service)
     {
-        $this->rubrique = $rubrique;
+        $this->services[] = $service;
 
         return $this;
     }
 
     /**
-     * Get rubrique
+     * Remove service
      *
-     * @return \AppBundle\Entity\Rubrique
+     * @param \AppBundle\Entity\Service $service
      */
-    public function getRubrique()
+    public function removeService(\AppBundle\Entity\Service $service)
     {
-        return $this->rubrique;
+        $this->services->removeElement($service);
     }
 
     /**
-     * Set resume
+     * Get services
      *
-     * @param string $resume
-     *
-     * @return Article
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setResume($resume)
+    public function getServices()
     {
-        $this->resume = $resume;
-
-        return $this;
-    }
-
-    /**
-     * Get resume
-     *
-     * @return string
-     */
-    public function getResume()
-    {
-        return $this->resume;
+        return $this->services;
     }
 }
