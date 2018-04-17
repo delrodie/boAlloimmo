@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Bien</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bien.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ bien.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ bien.description }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ bien.prix }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ bien.localisation }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{% if bien.disponibilite %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Tags</th>
+                <td>{{ bien.tags }}</td>
+            </tr>
+            <tr>
+                <th>Imagename</th>
+                <td>{{ bien.imageName }}</td>
+            </tr>
+            <tr>
+                <th>Imagesize</th>
+                <td>{{ bien.imageSize }}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if bien.updatedAt %}{{ bien.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ bien.slug }}</td>
+            </tr>
+            <tr>
+                <th>Publiepar</th>
+                <td>{{ bien.publiePar }}</td>
+            </tr>
+            <tr>
+                <th>Modifiepar</th>
+                <td>{{ bien.modifiePar }}</td>
+            </tr>
+            <tr>
+                <th>Publiele</th>
+                <td>{{ bien.publieLe }}</td>
+            </tr>
+            <tr>
+                <th>Modifiele</th>
+                <td>{{ bien.modifieLe }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('bien_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('bien_edit', { 'id': bien.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
