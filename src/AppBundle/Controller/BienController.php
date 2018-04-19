@@ -47,11 +47,19 @@ class BienController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $resume = $utilities->resume($bien->getDescription(), 103, '...', true);
+            $typebienslug = $utilities->resume($bien->getTypebien()->getSlug(), 5, '', true);
             $bien->setResume($resume);
+            $bien->getTypebienslug($typebienslug);
             $em->persist($bien);
             $em->flush();
 
-            return $this->redirectToRoute('backend_autrebien_new', array('bien' => $bien->getId()));
+            if ($typebienslug === 'immeu'){
+                return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
+            }else{
+                return $this->redirectToRoute('backend_autrebien_new', array('bien' => $bien->getId()));
+            }
+
+
         }
 
         return $this->render('bien/new.html.twig', array(
@@ -69,10 +77,28 @@ class BienController extends Controller
     public function showAction(Bien $bien)
     {
         $em = $this->getDoctrine()->getManager();
+
+        if ($bien->getTypebienslug() === 'immeu'){
+            $immeuble = $em->getRepository('AppBundle:Immeuble')->findOneBy(array('bien' => $bien->getId()));
+            if ($immeuble){
+                return $this->redirectToRoute('backend_immeuble_show', array('id' => $immeuble->getId(), 'bien' =>$bien->getSlug()));
+            }else{
+                return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
+            }
+        }else{
+            $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
+            if ($autrebien){
+                return $this->redirectToRoute('backend_autrebien_show', array('id' => $autrebien->getId(), 'bien' =>$bien->getSlug()));
+            }else{
+                return $this->redirectToRoute('backend_autrebien_new', array('bien' => $bien->getId()));
+            }
+        }
+
         $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
         if ($autrebien){
             return $this->redirectToRoute('backend_autrebien_show', array('id' => $autrebien->getId(), 'bien' =>$bien->getSlug()));
         }
+
         $deleteForm = $this->createDeleteForm($bien);
 
         return $this->render('bien/show.html.twig', array(
@@ -95,14 +121,29 @@ class BienController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $resume = $utilities->resume($bien->getDescription(), 103, '...', true);
+            $typebienslug = $utilities->resume($bien->getTypebien()->getSlug(), 5, '', true);
             $bien->setResume($resume);
+            $bien->setTypebienslug($typebienslug);
             $this->getDoctrine()->getManager()->flush();
 
             $em = $this->getDoctrine()->getManager();
-            $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
-            if ($autrebien){
-                return $this->redirectToRoute('backend_autrebien_edit', array('id' => $autrebien->getId(), 'bien' =>$bien->getSlug()));
+
+            if ($typebienslug === 'immeu'){
+                $immeuble = $em->getRepository('AppBundle:Immeuble')->findOneBy(array('bien' => $bien->getId()));
+                if ($immeuble){
+                    return $this->redirectToRoute('backend_immeuble_edit', array('id' => $immeuble->getId(), 'bien' =>$bien->getSlug()));
+                }else{
+                    return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
+                }
+            }else{
+                $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
+                if ($autrebien){
+                    return $this->redirectToRoute('backend_autrebien_edit', array('id' => $autrebien->getId(), 'bien' =>$bien->getSlug()));
+                }else{
+                    return $this->redirectToRoute('backend_autrebien_new', array('bien' => $bien->getId()));
+                }
             }
+
 
             return $this->redirectToRoute('backend_bien_edit', array('slug' => $bien->getSlug()));
         }

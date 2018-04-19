@@ -75,6 +75,13 @@ class Bien
     private $tags;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="typebienslug", type="string", length=5, nullable=true)
+     */
+    private $typebienslug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="biens")
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
@@ -662,5 +669,21 @@ class Bien
     public function getPartenaire()
     {
         return $this->partenaire;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypebienslug()
+    {
+        return $this->typebienslug;
+    }
+
+    /**
+     * @param mixed $typebienslug
+     */
+    public function setTypebienslug($typebienslug)
+    {
+        $this->typebienslug = $typebienslug;
     }
 }

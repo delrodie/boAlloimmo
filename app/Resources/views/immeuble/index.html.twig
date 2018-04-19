@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Immeubles list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Appartement</th>
+                <th>Etage</th>
+                <th>Parking</th>
+                <th>Ascenceur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for immeuble in immeubles %}
+            <tr>
+                <td><a href="{{ path('backend_immeuble_show', { 'id': immeuble.id }) }}">{{ immeuble.id }}</a></td>
+                <td>{{ immeuble.appartement }}</td>
+                <td>{{ immeuble.etage }}</td>
+                <td>{{ immeuble.parking }}</td>
+                <td>{% if immeuble.ascenceur %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('backend_immeuble_show', { 'id': immeuble.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('backend_immeuble_edit', { 'id': immeuble.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('backend_immeuble_new') }}">Create a new immeuble</a>
+        </li>
+    </ul>
+{% endblock %}
