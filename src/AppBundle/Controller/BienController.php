@@ -49,14 +49,16 @@ class BienController extends Controller
             $resume = $utilities->resume($bien->getDescription(), 103, '...', true);
             $typebienslug = $utilities->resume($bien->getTypebien()->getSlug(), 5, '', true);
             $bien->setResume($resume);
-            $bien->getTypebienslug($typebienslug);
+            $bien->setTypebienslug($typebienslug);
             $em->persist($bien);
             $em->flush();
 
             if ($typebienslug === 'immeu'){
                 return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
+            }elseif ($typebienslug === 'appar'){
+                return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
             }else{
-                return $this->redirectToRoute('backend_autrebien_new', array('bien' => $bien->getId()));
+                return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
             }
 
 
@@ -84,6 +86,13 @@ class BienController extends Controller
                 return $this->redirectToRoute('backend_immeuble_show', array('id' => $immeuble->getId(), 'bien' =>$bien->getSlug()));
             }else{
                 return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
+            }
+        }elseif ($bien->getTypebienslug() === 'appar'){
+            $appartement = $em->getRepository('AppBundle:Appartement')->findOneBy(array('bien' => $bien->getId()));
+            if ($appartement){
+                return $this->redirectToRoute('backend_appartement_show', array('id' => $appartement->getId(), 'bien' =>$bien->getSlug()));
+            }else{
+                return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
             }
         }else{
             $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
@@ -134,6 +143,13 @@ class BienController extends Controller
                     return $this->redirectToRoute('backend_immeuble_edit', array('id' => $immeuble->getId(), 'bien' =>$bien->getSlug()));
                 }else{
                     return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
+                }
+            }elseif ($typebienslug === 'appar'){
+                $appartement = $em->getRepository('AppBundle:Appartement')->findOneBy(array('bien' => $bien->getId()));
+                if ($appartement){
+                    return $this->redirectToRoute('backend_appartement_edit', array('id' => $appartement->getId(), 'bien' =>$bien->getSlug()));
+                }else{
+                    return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
                 }
             }else{
                 $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));

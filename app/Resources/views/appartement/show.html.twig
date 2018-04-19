@@ -1,0 +1,241 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ appartement.bien.titre }}{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des biens
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item"> Bien</li>
+                <li class="breadcrumb-item active"> {{ appartement.bien.typebien.libelle }}</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_bien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                {{ appartement.bien.titre }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <img src="{{ vich_uploader_asset(appartement.bien, 'imageFile') }}" alt="{{ appartement.bien.titre }}" title="{{ appartement.bien.titre }}"  class="card-img-top img-fluid"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" style="margin-top: 15px">
+                                            {{ appartement.bien.description|raw }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" style="margin-top: 15px">
+                                            <u>Partenaire</u> : <strong>{{ appartement.bien.partenaire }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="control-label" for="rubrique">Type du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.bien.typebien.libelle }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="">
+                                            <label class="control-label" for="rubrique">Titre du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.bien.titre }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Zone</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.bien.zone }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Localisation</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.bien.localisation }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Prix</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.bien.prix }} " readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Mode</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.bien.mode }} " readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Superficie</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.superficie }} m2" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de pièces</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.piece }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de salles d'eau</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.wc }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de douches</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.douche }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Dressing</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.dressing }} m2" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Balcon</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ appartement.balcon }} m2" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Cuisine</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ appartement.cuisine }} m2" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Etage</label>
+                                    <div class="elect2-container">
+                                        {% if (appartement.etage) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">N° Etage</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ appartement.netage }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Parking</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ appartement.parking }} m2" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Chauffe eau</label>
+                                    <div class="elect2-container">
+                                        {% if (appartement.chauffeau) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Vidéo surveillance</label>
+                                    <div class="elect2-container">
+                                        {% if (appartement.videosurveillance) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Alarme</label>
+                                    <div class="elect2-container">
+                                        {% if (appartement.alarme) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Ascenceur</label>
+                                    <div class="elect2-container">
+                                        {% if (appartement.ascenceur) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Buanderie</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ appartement.buanderie }} m2" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Interphone</label>
+                                    <div class="elect2-container">
+                                        {% if (appartement.interphone) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Meubles</label>
+                                    <div class="elect2-container">
+                                        {% if (appartement.meuble) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-7 ml-auto text-right">
+                                    <a class="btn btn-outline-dark" href="{{ path('backend_bien_edit', {'slug': appartement.bien.slug}) }}" >Modifier</a>
+
+                                </div>
+                                <div class="col-sm-3 text-left">
+                                    {{ form_start(delete_form, {'attr': {'onsubmit': 'return confirm("Voulez-vous supprimer ce bien?")'}}) }}
+                                    <input type="submit" value="Supprimer" class="btn btn-danger">
+                                    {{ form_end(delete_form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

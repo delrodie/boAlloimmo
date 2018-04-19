@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Appartements list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Piece</th>
+                <th>Wc</th>
+                <th>Douche</th>
+                <th>Dressing</th>
+                <th>Balcon</th>
+                <th>Superficie</th>
+                <th>Cuisine</th>
+                <th>Etage</th>
+                <th>Netage</th>
+                <th>Parking</th>
+                <th>Chauffeau</th>
+                <th>Videosurveillance</th>
+                <th>Alarme</th>
+                <th>Ascenceur</th>
+                <th>Buanderie</th>
+                <th>Interphone</th>
+                <th>Meuble</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for appartement in appartements %}
+            <tr>
+                <td><a href="{{ path('backend_appartement_show', { 'id': appartement.id }) }}">{{ appartement.id }}</a></td>
+                <td>{{ appartement.piece }}</td>
+                <td>{{ appartement.wc }}</td>
+                <td>{{ appartement.douche }}</td>
+                <td>{{ appartement.dressing }}</td>
+                <td>{{ appartement.balcon }}</td>
+                <td>{{ appartement.superficie }}</td>
+                <td>{{ appartement.cuisine }}</td>
+                <td>{% if appartement.etage %}Yes{% else %}No{% endif %}</td>
+                <td>{{ appartement.netage }}</td>
+                <td>{{ appartement.parking }}</td>
+                <td>{% if appartement.chauffeau %}Yes{% else %}No{% endif %}</td>
+                <td>{% if appartement.videosurveillance %}Yes{% else %}No{% endif %}</td>
+                <td>{% if appartement.alarme %}Yes{% else %}No{% endif %}</td>
+                <td>{% if appartement.ascenceur %}Yes{% else %}No{% endif %}</td>
+                <td>{% if appartement.buanderie %}Yes{% else %}No{% endif %}</td>
+                <td>{% if appartement.interphone %}Yes{% else %}No{% endif %}</td>
+                <td>{% if appartement.meuble %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('backend_appartement_show', { 'id': appartement.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('backend_appartement_edit', { 'id': appartement.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('backend_appartement_new') }}">Create a new appartement</a>
+        </li>
+    </ul>
+{% endblock %}
