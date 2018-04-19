@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Bien;
+use AppBundle\Utils\Utilities;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +25,7 @@ class BienController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $biens = $em->getRepository('AppBundle:Bien')->findAll();
+        $biens = $em->getRepository('AppBundle:Bien')->findAllDesc();
 
         return $this->render('bien/index.html.twig', array(
             'biens' => $biens,
@@ -37,7 +38,7 @@ class BienController extends Controller
      * @Route("/new", name="backend_bien_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Utilities $utilities)
     {
         $bien = new Bien();
         $form = $this->createForm('AppBundle\Form\BienType', $bien);
@@ -45,10 +46,12 @@ class BienController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $resume = $utilities->resume($bien->getDescription(), 103, '...', true);
+            $bien->setResume($resume);
             $em->persist($bien);
             $em->flush();
 
-            return $this->redirectToRoute('bien_show', array('id' => $bien->getId()));
+            return $this->redirectToRoute('backend_autrebien_new', array('bien' => $bien->getId()));
         }
 
         return $this->render('bien/new.html.twig', array(
@@ -60,11 +63,16 @@ class BienController extends Controller
     /**
      * Finds and displays a bien entity.
      *
-     * @Route("/{id}", name="backend_bien_show")
+     * @Route("/{slug}", name="backend_bien_show")
      * @Method("GET")
      */
     public function showAction(Bien $bien)
     {
+        $em = $this->getDoctrine()->getManager();
+        $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
+        if ($autrebien){
+            return $this->redirectToRoute('backend_autrebien_show', array('id' => $autrebien->getId(), 'bien' =>$bien->getSlug()));
+        }
         $deleteForm = $this->createDeleteForm($bien);
 
         return $this->render('bien/show.html.twig', array(
@@ -76,19 +84,27 @@ class BienController extends Controller
     /**
      * Displays a form to edit an existing bien entity.
      *
-     * @Route("/{id}/edit", name="backend_bien_edit")
+     * @Route("/{slug}/edit", name="backend_bien_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Bien $bien)
+    public function editAction(Request $request, Bien $bien, Utilities $utilities)
     {
         $deleteForm = $this->createDeleteForm($bien);
         $editForm = $this->createForm('AppBundle\Form\BienType', $bien);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $resume = $utilities->resume($bien->getDescription(), 103, '...', true);
+            $bien->setResume($resume);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('bien_edit', array('id' => $bien->getId()));
+            $em = $this->getDoctrine()->getManager();
+            $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
+            if ($autrebien){
+                return $this->redirectToRoute('backend_autrebien_edit', array('id' => $autrebien->getId(), 'bien' =>$bien->getSlug()));
+            }
+
+            return $this->redirectToRoute('backend_bien_edit', array('slug' => $bien->getSlug()));
         }
 
         return $this->render('bien/edit.html.twig', array(
@@ -115,7 +131,7 @@ class BienController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('bien_index');
+        return $this->redirectToRoute('backend_bien_index');
     }
 
     /**
@@ -128,7 +144,7 @@ class BienController extends Controller
     private function createDeleteForm(Bien $bien)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('bien_delete', array('id' => $bien->getId())))
+            ->setAction($this->generateUrl('backend_bien_delete', array('id' => $bien->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -10,4 +10,25 @@ namespace AppBundle\Repository;
  */
 class BienRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Recherche du bien par son ID pour AutrebienType.php
+     */
+    public function findBien($bien)
+    {
+        return $q = $this->createQueryBuilder('b')
+                         ->where('b.id = :id')
+                         ->setParameter('id', $bien)
+            ;
+    }
+
+    /**
+     * Liste des bien par ordre decroissant
+     */
+    public function findAllDesc()
+    {
+        return $q = $this->createQueryBuilder('b')
+                         ->orderBy('b.id', 'DESC')
+                         ->getQuery()->getResult()
+            ;
+    }
 }

@@ -1,0 +1,77 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Modification du bien  {{ autrebien.bien.titre }}{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des biens
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Modification du bien  {{ autrebien.bien.titre }}</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_bien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Modification du bien  {{ autrebien.bien.titre }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(edit_form, {'attr': {'class': 'right-text-label-form', 'id':'signupForm'}}) }}
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <img src="{{ vich_uploader_asset(autrebien.bien, 'imageFile') }}" alt="{{ autrebien.bien.titre }}" title="{{ autrebien.bien.titre }}"  class="card-img-top img-fluid"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-11">
+                                            <label class="control-label" for="rubrique">Type du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ autrebien.bien.typebien.libelle }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <label class="control-label" for="rubrique">Titre du bien</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.bien, {'attr':{'readonly': 'readonly'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-11">
+                                            <label class="control-label" for="rubrique">Superficie</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.superficie) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-5 ml-auto">
+                                    <a class="btn btn-outline-dark" href="{{ path('backend_bien_edit', {'slug': autrebien.bien.slug}) }}" >&laquo; Précédent</a>
+                                    <button class="btn btn-primary" name="signup">Modifier</button>
+                                </div>
+                            </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

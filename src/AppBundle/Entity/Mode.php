@@ -37,6 +37,11 @@ class Mode
     private $statut;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bien", mappedBy="mode")
+     */
+    private $biens;
+
+    /**
      * @var string
      *
      * @Gedmo\Slug(fields={"libelle"})
@@ -253,5 +258,50 @@ class Mode
     public function getModifieLe()
     {
         return $this->modifieLe;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->biens = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add bien
+     *
+     * @param \AppBundle\Entity\Bien $bien
+     *
+     * @return Mode
+     */
+    public function addBien(\AppBundle\Entity\Bien $bien)
+    {
+        $this->biens[] = $bien;
+
+        return $this;
+    }
+
+    /**
+     * Remove bien
+     *
+     * @param \AppBundle\Entity\Bien $bien
+     */
+    public function removeBien(\AppBundle\Entity\Bien $bien)
+    {
+        $this->biens->removeElement($bien);
+    }
+
+    /**
+     * Get biens
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBiens()
+    {
+        return $this->biens;
+    }
+
+    public function __toString() {
+        return $this->getLibelle();
     }
 }

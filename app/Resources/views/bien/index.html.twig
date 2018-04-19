@@ -19,29 +19,37 @@
 
             <div class="row mt-5 mb-3">
                 <div class="col-md-12 text-right">
-                    <a href="{{ path('backend_article_new') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter un article</a>
+                    <a href="{{ path('backend_bien_new') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter un bien</a>
                 </div>
                 <br>
             </div>
 
             <div class="card-deck">
-                {% for article in biens %}
+                {% for bien in biens %}
                     <div class="col-md-4 col-sm-6">
                         <div class="card mb-4">
-                            <img src="{{ vich_uploader_asset(article, 'imageFile') }}" alt="{{ article.titre }}" title="{{ article.titre }}"  class="card-img-top img-fluid"/>
+                            <img src="{{ vich_uploader_asset(bien, 'imageFile') }}" alt="{{ bien.titre }}" title="{{ bien.titre }}"  class="card-img-top img-fluid"/>
                             <div class="card-body">
-                                <h5 class="card-title">{{ article.rubrique.libelle }}: {{ article.titre }}</h5>
-                                <p class="card-text">{{ article.resume|raw }}</p>
-                                <a href="#" class="btn btn-outline-danger">Apperçu</a>
-                                <a href="{{ path('backend_article_show', {'slug': article.slug}) }}" class="btn btn-outline-primary">> Lire la suite</a>
-                                {% if (article.statut) %}
-                                    <a href="#" class="btn btn-success" title="Actif"><i class="fa fa-check-square-o"></i> </a>
+                                <span class="text-right">{{ bien.typebien.libelle }}</span>
+                                <h5 class="card-title">{{ bien.titre }}</h5>
+                                <p class="card-text">{{ bien.resume|raw }}</p>
+                                <p class="card-text">
+                                    <i class="fa fa-money"> {{ bien.prix }}</i> &nbsp; &nbsp;
+                                    <i class="fa fa-map-signs"></i> {{ bien.zone }}
+                                </p>
+                                <p class="card-text"></p>
+                                <a href="{{ path('backend_bien_show', {'slug': bien.slug}) }}" class="btn btn-outline-primary">Voir
+                                </a>
+                                {% if (bien.disponibilite) %}
+                                    <a href="#" class="btn btn-success" title="Disponible"><i class="fa fa-check-square-o"></i> </a>
                                 {% else %}
-                                    <a href="#" class="btn btn-danger" title="Desactivé"><i class="fa fa-chain-broken"></i> </a>
+                                    <a href="#" class="btn btn-danger" title="Vendu"><i class="fa fa-chain-broken"></i> </a>
                                 {% endif %}
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted">Publié le {{ article.publieLe|date('d-m-Y H:i:s') }} par {{ article.publiePar }}</small>
+                                <small class="text-muted">
+                                    <small class="text-muted">Partenaire {{ bien.partenaire }}</small>
+                                </small>
                             </div>
                         </div>
                     </div>

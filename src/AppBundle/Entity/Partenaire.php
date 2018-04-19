@@ -112,6 +112,11 @@ class Partenaire
     private $services;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bien", mappedBy="partenaire")
+     */
+    private $biens;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="partenaire_image", fileNameProperty="imageName", size="imageSize")
@@ -719,5 +724,43 @@ class Partenaire
     public function getServices()
     {
         return $this->services;
+    }
+
+    /**
+     * Add bien
+     *
+     * @param \AppBundle\Entity\Bien $bien
+     *
+     * @return Partenaire
+     */
+    public function addBien(\AppBundle\Entity\Bien $bien)
+    {
+        $this->biens[] = $bien;
+
+        return $this;
+    }
+
+    /**
+     * Remove bien
+     *
+     * @param \AppBundle\Entity\Bien $bien
+     */
+    public function removeBien(\AppBundle\Entity\Bien $bien)
+    {
+        $this->biens->removeElement($bien);
+    }
+
+    /**
+     * Get biens
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBiens()
+    {
+        return $this->biens;
+    }
+
+    public function __toString() {
+        return $this->getNom();
     }
 }

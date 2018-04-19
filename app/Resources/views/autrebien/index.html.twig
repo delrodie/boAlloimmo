@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Autrebiens list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Superficie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for autrebien in autrebiens %}
+            <tr>
+                <td><a href="{{ path('backend_autrebien_show', { 'id': autrebien.id }) }}">{{ autrebien.id }}</a></td>
+                <td>{{ autrebien.superficie }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('backend_autrebien_show', { 'id': autrebien.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('backend_autrebien_edit', { 'id': autrebien.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+        </li>
+    </ul>
+{% endblock %}

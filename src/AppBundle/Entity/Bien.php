@@ -42,6 +42,13 @@ class Bien
     /**
      * @var string
      *
+     * @ORM\Column(name="resume", type="text")
+     */
+    private $resume;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="prix", type="string", length=255)
      */
     private $prix;
@@ -72,6 +79,24 @@ class Bien
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
     private $typebien;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zone", inversedBy="biens")
+     * @ORM\JoinColumn(name="zone_id", referencedColumnName="id")
+     */
+    private $zone;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mode", inversedBy="biens")
+     * @ORM\JoinColumn(name="mode_id", referencedColumnName="id")
+     */
+    private $mode;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Partenaire", inversedBy="biens")
+     * @ORM\JoinColumn(name="partenaire_id", referencedColumnName="id")
+     */
+    private $partenaire;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -200,6 +225,22 @@ class Bien
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResume()
+    {
+        return $this->resume;
+    }
+
+    /**
+     * @param string $resume
+     */
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
     }
 
     /**
@@ -545,5 +586,81 @@ class Bien
     public function getTypebien()
     {
         return $this->typebien;
+    }
+
+    /**
+     * Set mode
+     *
+     * @param \AppBundle\Entity\Mode $mode
+     *
+     * @return Bien
+     */
+    public function setMode(\AppBundle\Entity\Mode $mode = null)
+    {
+        $this->mode = $mode;
+
+        return $this;
+    }
+
+    /**
+     * Get mode
+     *
+     * @return \AppBundle\Entity\Mode
+     */
+    public function getMode()
+    {
+        return $this->mode;
+    }
+
+    public function __toString() {
+        return $this->getTitre();
+    }
+
+    /**
+     * Set zone
+     *
+     * @param \AppBundle\Entity\Zone $zone
+     *
+     * @return Bien
+     */
+    public function setZone(\AppBundle\Entity\Zone $zone = null)
+    {
+        $this->zone = $zone;
+
+        return $this;
+    }
+
+    /**
+     * Get zone
+     *
+     * @return \AppBundle\Entity\Zone
+     */
+    public function getZone()
+    {
+        return $this->zone;
+    }
+
+    /**
+     * Set partenaire
+     *
+     * @param \AppBundle\Entity\Partenaire $partenaire
+     *
+     * @return Bien
+     */
+    public function setPartenaire(\AppBundle\Entity\Partenaire $partenaire = null)
+    {
+        $this->partenaire = $partenaire;
+
+        return $this;
+    }
+
+    /**
+     * Get partenaire
+     *
+     * @return \AppBundle\Entity\Partenaire
+     */
+    public function getPartenaire()
+    {
+        return $this->partenaire;
     }
 }

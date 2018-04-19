@@ -51,13 +51,30 @@ class BienType extends AbstractType
                     'class' => 'form-control tag-input',
                     'autocomplete'  => 'off',
                     'data-role' => "tagsinput",
-                    'placeholder'   => 'Titre du bien'
+                    'placeholder'   => 'Mots clés'
                 )
             ))
             ->add('typebien', null, array(
                 'attr' => array(
                     'class' => 'form-control select-typebien',
                     'placeholder'   => 'Le type de bien'
+                )
+            ))
+            ->add('mode', null, array(
+                'attr' => array(
+                    'class' => 'form-control select-typebien',
+                    'placeholder'   => 'Mode de mise en ligne'
+                )
+            ))
+            ->add('zone', null, array(
+                'attr' => array(
+                    'class' => 'form-control select-zone',
+                    'placeholder'   => 'La zone de localisation'
+                )
+            ))
+            ->add('partenaire', null, array(
+                'attr' => array(
+                    'class' => 'form-control select-partenaire',
                 )
             ))
             ->add('imageFile', VichImageType::class, [
