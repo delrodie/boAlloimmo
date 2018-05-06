@@ -57,6 +57,8 @@ class BienController extends Controller
                 return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
             }elseif ($typebienslug === 'appar'){
                 return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
+            }elseif ($typebienslug === 'villa'){
+                return $this->redirectToRoute('backend_villa_new', array('bien' => $bien->getId()));
             }else{
                 return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
             }
@@ -93,6 +95,13 @@ class BienController extends Controller
                 return $this->redirectToRoute('backend_appartement_show', array('id' => $appartement->getId(), 'bien' =>$bien->getSlug()));
             }else{
                 return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
+            }
+        }elseif ($bien->getTypebienslug() === 'villa'){
+            $villa = $em->getRepository('AppBundle:Villa')->findOneBy(array('bien' => $bien->getId()));
+            if ($villa){
+                return $this->redirectToRoute('backend_villa_show', array('id' => $villa->getId(), 'bien' =>$bien->getSlug()));
+            }else{
+                return $this->redirectToRoute('backend_villa_new', array('bien' => $bien->getId()));
             }
         }else{
             $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
@@ -150,6 +159,13 @@ class BienController extends Controller
                     return $this->redirectToRoute('backend_appartement_edit', array('id' => $appartement->getId(), 'bien' =>$bien->getSlug()));
                 }else{
                     return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
+                }
+            }elseif ($typebienslug === 'villa'){
+                $villa = $em->getRepository('AppBundle:Villa')->findOneBy(array('bien' => $bien->getId()));
+                if ($villa){
+                    return $this->redirectToRoute('backend_villa_edit', array('id' => $villa->getId(), 'bien' =>$bien->getSlug()));
+                }else{
+                    return $this->redirectToRoute('backend_villa_new', array('bien' => $bien->getId()));
                 }
             }else{
                 $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));

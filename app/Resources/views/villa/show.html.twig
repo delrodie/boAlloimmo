@@ -1,0 +1,241 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ villa.bien.titre }}{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des biens
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item"> Bien</li>
+                <li class="breadcrumb-item active"> {{ villa.bien.typebien.libelle }}</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_bien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                {{ villa.bien.titre }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <img src="{{ vich_uploader_asset(villa.bien, 'imageFile') }}" alt="{{ villa.bien.titre }}" title="{{ villa.bien.titre }}"  class="card-img-top img-fluid"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" style="margin-top: 15px">
+                                            {{ villa.bien.description|raw }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" style="margin-top: 15px">
+                                            <u>Partenaire</u> : <strong>{{ villa.bien.partenaire }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="control-label" for="rubrique">Type du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.bien.typebien.libelle }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="">
+                                            <label class="control-label" for="rubrique">Titre du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.bien.titre }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Zone</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.bien.zone }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Localisation</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.bien.localisation }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Prix</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.bien.prix }} " readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Mode</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.bien.mode }} " readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Superficie</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.superficie }} m2" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de pièces</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.piece }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de salles d'eau</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.toilette }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de douches</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.douche }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Dressing</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.dressing }} m2" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Balcon</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.terasse }} m2" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Cuisine</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ villa.cuisine }} m2" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Piscine</label>
+                                    <div class="elect2-container">
+                                        {% if (villa.piscine) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Garage</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ villa.garage }}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Parking</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ villa.parking }} m2" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Chauffe eau</label>
+                                    <div class="elect2-container">
+                                        {% if (villa.chauffeau) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Vidéo surveillance</label>
+                                    <div class="elect2-container">
+                                        {% if (villa.videosurveillance) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Alarme</label>
+                                    <div class="elect2-container">
+                                        {% if (villa.alarme) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Piscine</label>
+                                    <div class="elect2-container">
+                                        {% if (villa.piscine) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Buanderie</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ villa.buanderie }} m2" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Interphone</label>
+                                    <div class="elect2-container">
+                                        {% if (villa.interphone) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Meubles</label>
+                                    <div class="elect2-container">
+                                        {% if (villa.meuble) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-7 ml-auto text-right">
+                                    <a class="btn btn-outline-dark" href="{{ path('backend_bien_edit', {'slug': villa.bien.slug}) }}" >Modifier</a>
+
+                                </div>
+                                <div class="col-sm-3 text-left">
+                                    {{ form_start(delete_form, {'attr': {'onsubmit': 'return confirm("Voulez-vous supprimer ce bien?")'}}) }}
+                                    <input type="submit" value="Supprimer" class="btn btn-danger">
+                                    {{ form_end(delete_form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

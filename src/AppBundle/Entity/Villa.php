@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Appartement
+ * Villa
  *
- * @ORM\Table(name="appartement")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\AppartementRepository")
+ * @ORM\Table(name="villa")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\VillaRepository")
  */
-class Appartement
+class Villa
 {
     /**
      * @var int
@@ -31,16 +31,16 @@ class Appartement
     /**
      * @var int
      *
-     * @ORM\Column(name="wc", type="integer")
+     * @ORM\Column(name="douche", type="integer")
      */
-    private $wc;
+    private $douche;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="douche", type="integer")
+     * @ORM\Column(name="toilette", type="integer")
      */
-    private $douche;
+    private $toilette;
 
     /**
      * @var int
@@ -52,9 +52,9 @@ class Appartement
     /**
      * @var int
      *
-     * @ORM\Column(name="balcon", type="integer")
+     * @ORM\Column(name="terasse", type="integer", nullable=true)
      */
-    private $balcon;
+    private $terasse;
 
     /**
      * @var int
@@ -71,18 +71,18 @@ class Appartement
     private $cuisine;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="etage", type="boolean", nullable=true)
-     */
-    private $etage;
-
-    /**
      * @var int
      *
-     * @ORM\Column(name="netage", type="integer", nullable=true)
+     * @ORM\Column(name="garage", type="integer", nullable=true)
      */
-    private $netage;
+    private $garage;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="piscine", type="boolean", nullable=true)
+     */
+    private $piscine;
 
     /**
      * @var int
@@ -92,14 +92,14 @@ class Appartement
     private $parking;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="chauffeau", type="boolean", nullable=true)
      */
     private $chauffeau;
 
     /**
-     * @var bool
+     * @var int
      *
      * @ORM\Column(name="videosurveillance", type="boolean", nullable=true)
      */
@@ -111,13 +111,6 @@ class Appartement
      * @ORM\Column(name="alarme", type="boolean", nullable=true)
      */
     private $alarme;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="ascenceur", type="boolean", nullable=true)
-     */
-    private $ascenceur;
 
     /**
      * @var bool
@@ -141,7 +134,7 @@ class Appartement
     private $meuble;
 
     /**
-     * Un appartement appartient a un bien
+     * Une villa appartient a un bien
      *
      * @ORM\OneToOne(targetEntity="Bien")
      * @ORM\JoinColumn(name="bien_id", referencedColumnName="id")
@@ -164,7 +157,7 @@ class Appartement
      *
      * @param integer $piece
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setPiece($piece)
     {
@@ -184,35 +177,11 @@ class Appartement
     }
 
     /**
-     * Set wc
-     *
-     * @param integer $wc
-     *
-     * @return Appartement
-     */
-    public function setWc($wc)
-    {
-        $this->wc = $wc;
-
-        return $this;
-    }
-
-    /**
-     * Get wc
-     *
-     * @return int
-     */
-    public function getWc()
-    {
-        return $this->wc;
-    }
-
-    /**
      * Set douche
      *
      * @param integer $douche
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setDouche($douche)
     {
@@ -232,11 +201,35 @@ class Appartement
     }
 
     /**
+     * Set toilette
+     *
+     * @param integer $toilette
+     *
+     * @return Villa
+     */
+    public function setToilette($toilette)
+    {
+        $this->toilette = $toilette;
+
+        return $this;
+    }
+
+    /**
+     * Get toilette
+     *
+     * @return int
+     */
+    public function getToilette()
+    {
+        return $this->toilette;
+    }
+
+    /**
      * Set dressing
      *
      * @param integer $dressing
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setDressing($dressing)
     {
@@ -256,27 +249,27 @@ class Appartement
     }
 
     /**
-     * Set balcon
+     * Set terasse
      *
-     * @param integer $balcon
+     * @param integer $terasse
      *
-     * @return Appartement
+     * @return Villa
      */
-    public function setBalcon($balcon)
+    public function setTerasse($terasse)
     {
-        $this->balcon = $balcon;
+        $this->terasse = $terasse;
 
         return $this;
     }
 
     /**
-     * Get balcon
+     * Get terasse
      *
      * @return int
      */
-    public function getBalcon()
+    public function getTerasse()
     {
-        return $this->balcon;
+        return $this->terasse;
     }
 
     /**
@@ -284,7 +277,7 @@ class Appartement
      *
      * @param integer $superficie
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setSuperficie($superficie)
     {
@@ -308,7 +301,7 @@ class Appartement
      *
      * @param integer $cuisine
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setCuisine($cuisine)
     {
@@ -328,51 +321,51 @@ class Appartement
     }
 
     /**
-     * Set etage
+     * Set garage
      *
-     * @param boolean $etage
+     * @param integer $garage
      *
-     * @return Appartement
+     * @return Villa
      */
-    public function setEtage($etage)
+    public function setGarage($garage)
     {
-        $this->etage = $etage;
+        $this->garage = $garage;
 
         return $this;
     }
 
     /**
-     * Get etage
-     *
-     * @return bool
-     */
-    public function getEtage()
-    {
-        return $this->etage;
-    }
-
-    /**
-     * Set netage
-     *
-     * @param integer $netage
-     *
-     * @return Appartement
-     */
-    public function setNetage($netage)
-    {
-        $this->netage = $netage;
-
-        return $this;
-    }
-
-    /**
-     * Get netage
+     * Get garage
      *
      * @return int
      */
-    public function getNetage()
+    public function getGarage()
     {
-        return $this->netage;
+        return $this->garage;
+    }
+
+    /**
+     * Set piscine
+     *
+     * @param boolean $piscine
+     *
+     * @return Villa
+     */
+    public function setPiscine($piscine)
+    {
+        $this->piscine = $piscine;
+
+        return $this;
+    }
+
+    /**
+     * Get piscine
+     *
+     * @return bool
+     */
+    public function getPiscine()
+    {
+        return $this->piscine;
     }
 
     /**
@@ -380,7 +373,7 @@ class Appartement
      *
      * @param integer $parking
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setParking($parking)
     {
@@ -402,11 +395,11 @@ class Appartement
     /**
      * Set chauffeau
      *
-     * @param string $chauffeau
+     * @param integer $chauffeau
      *
-     * @return Appartement
+     * @return Villa
      */
-    public function setChauffeau($chauffeau)
+    public function setchauffeau($chauffeau)
     {
         $this->chauffeau = $chauffeau;
 
@@ -416,7 +409,7 @@ class Appartement
     /**
      * Get chauffeau
      *
-     * @return string
+     * @return int
      */
     public function getChauffeau()
     {
@@ -426,9 +419,9 @@ class Appartement
     /**
      * Set videosurveillance
      *
-     * @param boolean $videosurveillance
+     * @param integer $videosurveillance
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setVideosurveillance($videosurveillance)
     {
@@ -440,7 +433,7 @@ class Appartement
     /**
      * Get videosurveillance
      *
-     * @return bool
+     * @return int
      */
     public function getVideosurveillance()
     {
@@ -452,7 +445,7 @@ class Appartement
      *
      * @param boolean $alarme
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setAlarme($alarme)
     {
@@ -472,35 +465,11 @@ class Appartement
     }
 
     /**
-     * Set ascenceur
-     *
-     * @param boolean $ascenceur
-     *
-     * @return Appartement
-     */
-    public function setAscenceur($ascenceur)
-    {
-        $this->ascenceur = $ascenceur;
-
-        return $this;
-    }
-
-    /**
-     * Get ascenceur
-     *
-     * @return bool
-     */
-    public function getAscenceur()
-    {
-        return $this->ascenceur;
-    }
-
-    /**
      * Set buanderie
      *
      * @param boolean $buanderie
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setBuanderie($buanderie)
     {
@@ -524,7 +493,7 @@ class Appartement
      *
      * @param boolean $interphone
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setInterphone($interphone)
     {
@@ -548,7 +517,7 @@ class Appartement
      *
      * @param boolean $meuble
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setMeuble($meuble)
     {
@@ -572,7 +541,7 @@ class Appartement
      *
      * @param \AppBundle\Entity\Bien $bien
      *
-     * @return Appartement
+     * @return Villa
      */
     public function setBien(\AppBundle\Entity\Bien $bien = null)
     {

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Villas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Piece</th>
+                <th>Douche</th>
+                <th>Toilette</th>
+                <th>Dressing</th>
+                <th>Terasse</th>
+                <th>Superficie</th>
+                <th>Cuisine</th>
+                <th>Garage</th>
+                <th>Piscine</th>
+                <th>Parking</th>
+                <th>Chauffeeau</th>
+                <th>Videosurveillance</th>
+                <th>Alarme</th>
+                <th>Buanderie</th>
+                <th>Interphone</th>
+                <th>Meuble</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for villa in villas %}
+            <tr>
+                <td><a href="{{ path('admin_villa_show', { 'id': villa.id }) }}">{{ villa.id }}</a></td>
+                <td>{{ villa.piece }}</td>
+                <td>{{ villa.douche }}</td>
+                <td>{{ villa.toilette }}</td>
+                <td>{{ villa.dressing }}</td>
+                <td>{{ villa.terasse }}</td>
+                <td>{{ villa.superficie }}</td>
+                <td>{{ villa.cuisine }}</td>
+                <td>{{ villa.garage }}</td>
+                <td>{% if villa.piscine %}Yes{% else %}No{% endif %}</td>
+                <td>{{ villa.parking }}</td>
+                <td>{% if villa.chauffeeau %}Yes{% else %}No{% endif %}</td>
+                <td>{% if villa.videosurveillance %}Yes{% else %}No{% endif %}</td>
+                <td>{% if villa.alarme %}Yes{% else %}No{% endif %}</td>
+                <td>{% if villa.buanderie %}Yes{% else %}No{% endif %}</td>
+                <td>{% if villa.interphone %}Yes{% else %}No{% endif %}</td>
+                <td>{% if villa.meuble %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_villa_show', { 'id': villa.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_villa_edit', { 'id': villa.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_villa_new') }}">Create a new villa</a>
+        </li>
+    </ul>
+{% endblock %}
