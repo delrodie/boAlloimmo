@@ -20,4 +20,28 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Liste des articles par rubrique
+     */
+    public function findArticleByRubrique($slug, $offset, $limit)
+    { //dump($slug); die();
+        $em = $this->getEntityManager();
+        $qb = $em->createQuery('
+                        SELECT a, r 
+                        FROM AppBundle:Article a 
+                        LEFT JOIN a.rubrique r 
+                        WHERE a.statut = 1
+                        AND r.slug LIKE :slug
+                        ORDER BY a.id DESC 
+                    ')
+                    ->setFirstResult($offset)
+                    ->setMaxResults($limit)
+                    ->setParameters(array(
+                        'slug'  => '%'.$slug.'%'
+                    ))
+                    ->getResult()
+        ;
+        return $qb;
+    }
 }

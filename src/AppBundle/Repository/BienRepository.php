@@ -31,4 +31,26 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
                          ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Liste d'un certains nombres de bien
+     */
+    public function findListBien($offset, $limit)
+    {
+        return $q = $this->QueryBien()
+                         ->setFirstResult($offset)
+                         ->setMaxResults($limit)
+                         ->getQuery()->getResult()
+            ;
+    }
+
+    /**
+     * fonction de recherche
+     */
+    public function QueryBien()
+    {
+        return $q = $this->createQueryBuilder('b')
+                         ->orderBy('b.id', 'DESC')
+            ;
+    }
 }

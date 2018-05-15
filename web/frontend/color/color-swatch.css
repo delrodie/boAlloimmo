@@ -1,0 +1,153 @@
+.buy-now {
+	position: fixed;
+	z-index: 1020;
+	top: calc(50% - 120px);
+	left: 0;
+	display: block;
+	text-align: center;
+	height: 70px;
+	width: 70px;
+	clear: both;
+}
+
+.contactez-nous {
+	position: fixed;
+	z-index: 1020;
+	top: calc(50% - 80px);
+	left: 0;
+	display: block;
+	text-align: center;
+	height: 70px;
+	width: 70px;
+	clear: both;
+}
+.buy-now .btn-primary:hover, .contactez-nous .btn-primary:hover {
+	width: 220px;
+	text-decoration: none !important;
+	transition: width .2s ease .1s;
+}
+.buy-now .btn-primary, .contactez-nous .btn-primary {
+	background-color: #22201f;
+	text-align: left;
+	padding-left: 7px;
+	font-weight: 500;
+	transition: width .2s ease .0s;
+}
+.buy-now .btn-primary,
+.colorswatch-btn, .contactez-nous .btn-primary {
+	border-radius: 0 !important;
+	overflow: hidden;
+}
+.colorswatch-btn {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 0 3px 3px 0;
+	padding: 0;
+	transition: .3s;
+	cursor: pointer;
+}
+.colorswatch-btn svg,
+.buy-now .btn-primary svg,
+.contactez-nous .btn-primary svg{
+	width: 27px;
+	height: 27px;
+	position: relative;
+	top: 5px;
+	left: 1px;
+	fill: #fff;
+}
+.buy-now .btn-primary svg,
+.contactez-nous .btn-primary svg{
+	position: relative;
+	left: -2px;
+	margin: 0 10px 0 0;
+}
+.colorswatch {
+	position: fixed;
+	z-index: 1020;
+	top: calc(50% - 80px);
+	left: 0;
+	display: block;
+	text-align: center;
+	width: 40px;
+	height: 40px;
+}
+.colorswatch-inside {
+	position: absolute;
+	left: -140px;
+	width: 140px;
+	background-color: #343332;
+	padding: 18px;
+	transition: .3s;
+}
+.colorswatch.opened .colorswatch-inside {
+	left: 0;
+}
+.colorswatch.opened .colorswatch-btn {
+	left: 140px;
+}
+.colorswatch-inside a {
+	position: relative;
+	width: 34px;
+	height: 33px;
+	display: block;
+	float: left;
+	transition: .2s;
+	text-decoration: none !important;
+}
+.colorswatch-inside a.active {
+	box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+	z-index: 1;
+}
+.colorswatch-inside a.active:after {
+	content: '\e92e';
+	font-family: 'hotelfont';
+	font-size: 14px;
+	color: #fff;
+	position: relative;
+	top: 2px;
+	left: 1px;
+}
+.colorswatch-inside a:hover {
+	opacity: .7;
+}
+.colorswatch-inside a:nth-child(1) {
+	background: #af3c65;
+}
+.colorswatch-inside a:nth-child(2) {
+	background: #8f7e57;
+}
+.colorswatch-inside a:nth-child(3) {
+	background: #d55d4d;
+}
+.colorswatch-inside a:nth-child(4) {
+	background: #8ba489;
+}
+.colorswatch-inside a:nth-child(5) {
+	background: #5a9ebd;
+}
+.colorswatch-inside a:nth-child(6) {
+	background: #c3a468;
+}
+.colorswatch-inside a:nth-child(7) {
+	background: #c09a77;
+}
+.colorswatch-inside a:nth-child(8) {
+	background: #e8b46c;
+}
+.colorswatch-inside a:nth-child(9) {
+	background: #595b81;
+}
+
+.contactez-nous .bgcouleur{
+	background-color: rgba(175, 60, 101, 0.7);
+	color: #fff;
+}
+@media (max-width: 667px) {
+	.colorswatch {
+	}
+}
