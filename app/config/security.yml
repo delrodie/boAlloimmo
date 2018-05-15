@@ -53,8 +53,10 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: ROLE_USER }
-        - { path: ^/backend, role: ROLE_USER }
+        #- { path: ^/, role: ROLE_USER }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/backend/, role: ROLE_ADMIN }
+        - { path: ^/backend/tableau-de-bord, role: ROLE_ADMIN }
         - { path: ^/backend/mode, role: ROLE_ADMIN }
         - { path: ^/backend/typebien, role: ROLE_ADMIN }
         - { path: ^/backend/domaine, role: ROLE_ADMIN }
