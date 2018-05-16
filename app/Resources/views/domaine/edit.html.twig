@@ -37,6 +37,13 @@
                                     {{ form_widget(edit_form.libelle) }}
                                 </div>
                             </div>
+                            <div class="form-group row colorpicker-component" id="cp2">
+                                <label class="col-sm-3 control-label" for="titre">Couleur</label>
+                                <div id="cp2" class="input-group colorpicker-component col-sm-8">
+                                    {{ form_widget(edit_form.couleur) }}
+                                    <span class="input-group-addon"><i></i></span>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-5 col-sm-offset-4">.</div>
                                 <label class="custom-control custom-checkbox">
@@ -64,6 +71,17 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('backend/vendor/colorpicker/css/bootstrap-colorpicker.css') }}" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('backend/vendor/colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('backend/vendor/color-picker-init.js') }}"></script>
 {% endblock %}
 
 

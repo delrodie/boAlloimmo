@@ -433,7 +433,7 @@
                 <div class="col-md-auto col-lg-9 text-center col-md-offset-2 ml-lg-8">
                     <div class="col-md-auto col-lg-auto text-center mt-1 mt-lg-0 col-btn col-md-offet-2 ml-lg-8">
                         {% for domaine in domaines %}
-                            <a href="#" class="btn mb-1" style="background-color: #af3c65;">{{ domaine.libelle }}</a>
+                            <a href="#" class="btn mb-1 btn-domaine" style="background-color: {{ domaine.couleur }};">{{ domaine.libelle }}</a>
                         {% endfor %}
                     </div>
                 </div>

@@ -23,6 +23,14 @@ class DomaineType extends AbstractType
                     'placeholder'   => 'Nom du domaine'
                 )
             ))
+            ->add('couleur', TextType::class, array(
+                'attr' => array(
+                    'class' => 'form-control',
+                    'autocomplete'  => 'off',
+                    'placeholder'   => 'Nom du domaine',
+                    'value'         => "#A768F3",
+                )
+            ))
             ->add('statut', CheckboxType::class, array(
                 'attr'  => array(
                     'class' => 'custom-control-input'
