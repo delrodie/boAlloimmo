@@ -117,6 +117,11 @@ class Partenaire
     private $biens;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Publicite", mappedBy="partenaire")
+     */
+    private $publicites;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="partenaire_image", fileNameProperty="imageName", size="imageSize")
@@ -762,5 +767,39 @@ class Partenaire
 
     public function __toString() {
         return $this->getNom();
+    }
+
+    /**
+     * Add publicite
+     *
+     * @param \AppBundle\Entity\Publicite $publicite
+     *
+     * @return Partenaire
+     */
+    public function addPublicite(\AppBundle\Entity\Publicite $publicite)
+    {
+        $this->publicites[] = $publicite;
+
+        return $this;
+    }
+
+    /**
+     * Remove publicite
+     *
+     * @param \AppBundle\Entity\Publicite $publicite
+     */
+    public function removePublicite(\AppBundle\Entity\Publicite $publicite)
+    {
+        $this->publicites->removeElement($publicite);
+    }
+
+    /**
+     * Get publicites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPublicites()
+    {
+        return $this->publicites;
     }
 }

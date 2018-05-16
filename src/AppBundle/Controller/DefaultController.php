@@ -37,6 +37,7 @@ class DefaultController extends Controller
         $faqs = $em->getRepository('AppBundle:Faq')
             ->findBy(array('statut' => 1), array('id' => 'ASC'));
         $promotions = $em->getRepository('AppBundle:Bien')->findBienEnPromo(0,1);
+        $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,1);
         //dump($promotions);die();
 
         return $this->render('default/index.html.twig', [
@@ -52,6 +53,7 @@ class DefaultController extends Controller
             'articleConseils' => $articleConseils,
             'faqs' => $faqs,
             'promotions' => $promotions,
+            'publicites' => $publicites,
         ]);
     }
 

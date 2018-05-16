@@ -1,0 +1,81 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ publicite.titre }}{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des publicites
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Publicites</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_publicite_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des publicites</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                {{ publicite.titre }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <img src="{{ vich_uploader_asset(publicite, 'imageFile') }}" alt="{{ publicite.titre }}" title="{{ publicite.titre }}"  class="card-img-top img-fluid"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-11">
+                                            <label class="control-label" for="rubrique">Partenaire</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ publicite.partenaire }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-11" style="margin-top: 20px;">
+                                            <label class="control-label" for="rubrique">Titre du publicite</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ publicite.titre }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12" style="margin-top: 20px;">
+                                            <label class="control-label" for="rubrique">Date de publication</label>
+                                            <div class="col-sm-11 input-group" data-date="2018-07-31" data-date-format="yyyy-mm-dd">
+                                                <input type="text" class="form-control" value="{{ publicite.datedebut }}" readonly>
+                                                <span class="input-group-addon">à</span>
+                                                <input type="text" class="form-control" value="{{ publicite.datefin }}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-8 ml-auto text-right">
+                                    <a class="btn btn-outline-dark" href="{{ path('backend_publicite_edit', {'slug': publicite.slug}) }}" >Modifier</a>
+                                </div>
+                                <div class="col-sm-3 text-lef">
+                                    {{ form_start(delete_form, {'attr': {'onsubmit': 'return confirm("Voulez-vous supprimer cette publicité?")'}}) }}
+                                    <input type="submit" value="Supprimer" class="btn btn-danger">
+                                    {{ form_end(delete_form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
