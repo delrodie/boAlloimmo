@@ -45,6 +45,24 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * Bien en publicité
+     */
+    public function findBienEnPromo($offset, $limit)
+    {
+        return $q = $this->createQueryBuilder('b')
+                         ->where('b.datedebut <= :date')
+                         ->andWhere('b.datefin >= :date')
+                         ->orderBy('b.datedebut', 'ASC')
+                         ->setFirstResult($offset)
+                         ->setMaxResults($limit)
+                         ->setParameters(array(
+                             'date' => date('Y-m-d', time())
+                         ))
+                         ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * fonction de recherche
      */
     public function QueryBien()

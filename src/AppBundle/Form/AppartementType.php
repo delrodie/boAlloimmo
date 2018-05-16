@@ -43,19 +43,23 @@ class AppartementType extends AbstractType
                     'placeholder'   => 'Nombre de douche'
                 )
             ))
-            ->add('dressing', IntegerType::class, array(
+            ->add('dressing', ChoiceType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'autocomplete'  => 'off',
-                    'placeholder'   => 'Superficie en m2'
-                )
+                ),
+                'choices'   => array(
+                    'OUI'   => 1,
+                    'NON'   => null,
+                ),
             ))
-            ->add('balcon', IntegerType::class, array(
+            ->add('balcon', ChoiceType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'autocomplete'  => 'off',
-                    'placeholder'   => 'Superficie en m2'
-                )
+                ),
+                'choices'   => array(
+                    'OUI'   => 1,
+                    'NON'   => null,
+                ),
             ))
             ->add('superficie', IntegerType::class, array(
                 'attr' => array(
@@ -88,12 +92,14 @@ class AppartementType extends AbstractType
                 ),
                 'required'  => false,
             ))
-            ->add('parking', IntegerType::class, array(
+            ->add('parking', ChoiceType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'autocomplete'  => 'off',
-                    'placeholder'   => 'la superficie du parketing en m2'
-                )
+                ),
+                'choices'   => array(
+                    'OUI'   => 1,
+                    'NON'   => null,
+                ),
             ))
             ->add('chauffeau', ChoiceType::class, array(
                 'attr' => array(

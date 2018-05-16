@@ -140,7 +140,7 @@ class BienController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $resume = $utilities->resume($bien->getDescription(), 103, '...', true);
             $typebienslug = $utilities->resume($bien->getTypebien()->getSlug(), 5, '', true);
-            $bien->setResume($resume);
+            $bien->setResume($resume); //dump($resume);die();
             $bien->setTypebienslug($typebienslug);
             $this->getDoctrine()->getManager()->flush();
 

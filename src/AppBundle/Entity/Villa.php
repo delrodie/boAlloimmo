@@ -45,14 +45,14 @@ class Villa
     /**
      * @var int
      *
-     * @ORM\Column(name="dressing", type="integer", nullable=true)
+     * @ORM\Column(name="dressing", type="boolean", nullable=true)
      */
     private $dressing;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="terasse", type="integer", nullable=true)
+     * @ORM\Column(name="terasse", type="boolean", nullable=true)
      */
     private $terasse;
 
@@ -73,7 +73,7 @@ class Villa
     /**
      * @var int
      *
-     * @ORM\Column(name="garage", type="integer", nullable=true)
+     * @ORM\Column(name="garage", type="boolean", nullable=true)
      */
     private $garage;
 

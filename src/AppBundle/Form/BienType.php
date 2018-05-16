@@ -54,6 +54,28 @@ class BienType extends AbstractType
                     'placeholder'   => 'Mots clés'
                 )
             ))
+            ->add('datedebut', TextType::class, array(
+                'attr' => array(
+                    'class' => 'form-control dpd1',
+                    'autocomplete'  => 'off',
+                    'placeholder'   => 'La date debut de publicité'
+                ),
+                'required' => false,
+            ))
+            ->add('datefin', TextType::class, array(
+                'attr' => array(
+                    'class' => 'form-control dpd2',
+                    'autocomplete'  => 'off',
+                    'placeholder'   => 'La date fin de publicité'
+                ),
+                'required' => false,
+            ))
+            ->add('promotion', CheckboxType::class, array(
+                'attr'  => array(
+                    'class' => 'custom-control-input'
+                ),
+                'required' => false,
+            ))
             ->add('typebien', null, array(
                 'attr' => array(
                     'class' => 'form-control select-typebien',

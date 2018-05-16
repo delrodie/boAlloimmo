@@ -38,6 +38,19 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        {% if (immeuble.bien.promotion) %}
+                                            <div class="col-sm-12" style="color: #ff0000; font-weight: bold; margin-top: 10px">
+                                                <i class="fa fa-star"></i> Offre promotionnelle
+                                            </div>
+                                        {% endif %}
+                                        {% if (immeuble.bien.datedebut) %}
+                                            <div class="col-sm-12" style="margin-top: 10px;">
+                                                Publicité du <span style="font-style: italic; font-weight: bold">{{ immeuble.bien.datedebut|date('d/m/Y') }}</span>
+                                                au <span style="font-style: italic; font-weight: bold">{{ immeuble.bien.datefin|date('d/m/Y') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-12" style="margin-top: 15px">
                                             {{ immeuble.bien.description|raw }}
                                         </div>
@@ -77,7 +90,7 @@
                                         <div class="col-sm-6" style="margin-top:10px;">
                                             <label class="control-label" for="rubrique">Prix</label>
                                             <div class="elect2-container">
-                                                <input type="text" class="form-control" value="{{ immeuble.bien.prix }} " readonly>
+                                                <input type="text" class="form-control" value="{{ immeuble.bien.prix|number_format(0, '', '.') }} " readonly>
                                             </div>
                                         </div>
                                         <div class="col-sm-6" style="margin-top:10px;">

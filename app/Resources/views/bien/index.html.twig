@@ -31,11 +31,14 @@
                             <img src="{{ vich_uploader_asset(bien, 'imageFile') }}" alt="{{ bien.titre }}" title="{{ bien.titre }}"  class="card-img-top img-fluid"/>
                             <div class="card-body">
                                 <span class="text-right">{{ bien.typebien.libelle }}</span>
+                                {% if (bien.promotion) %}
+                                    <span style="color: red; font-weight: bold; float: right;"><i class="fa fa-star"></i> Promotion</span>
+                                {% endif %}
                                 <h5 class="card-title">{{ bien.titre }}</h5>
                                 <p class="card-text">{{ bien.resume|raw }}</p>
                                 <p class="card-text">
-                                    <i class="fa fa-money"> {{ bien.prix }}</i> &nbsp; &nbsp;
-                                    <i class="fa fa-map-signs"></i> {{ bien.zone }}
+                                    <i class="fa fa-money"> {{ bien.prix|number_format(0,'','.') }}</i> &nbsp; &nbsp;
+                                    <i class="fa fa-map-signs">{{ bien.zone }}</i>
                                 </p>
                                 <p class="card-text"></p>
                                 <a href="{{ path('backend_bien_show', {'slug': bien.slug}) }}" class="btn btn-outline-primary">Voir
@@ -44,6 +47,9 @@
                                     <a href="#" class="btn btn-success" title="Disponible"><i class="fa fa-check-square-o"></i> </a>
                                 {% else %}
                                     <a href="#" class="btn btn-danger" title="Vendu"><i class="fa fa-chain-broken"></i> </a>
+                                {% endif %}
+                                {% if (bien.datedebut) %}
+                                    <a href="#" class="btn btn-info" title="Publicité du {{ bien.datedebut|date('d-m-Y') }} au {{ bien.datefin|date('d-m-Y') }}"><i class="fa fa-picture-o"></i> </a>
                                 {% endif %}
                             </div>
                             <div class="card-footer">

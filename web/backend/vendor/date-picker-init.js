@@ -4,7 +4,7 @@
 $(function(){
 
     $('.date-picker-input').datepicker({
-        format: 'mm-dd-yyyy',
+        format: 'yyyy-mm-dd',
         autoclose: true,
         orientation: "bottom",
         templates: {

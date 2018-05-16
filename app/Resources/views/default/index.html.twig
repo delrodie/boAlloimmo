@@ -464,7 +464,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <div class="room-price">{{ promotion.prix }}</div>
+                                            <div class="room-price">{{ promotion.prix|number_format(0,'','.') }}</div>
                                         </div>
                                         <div class="col-auto ml-auto">
                                             <a href="villa.html" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Détails</a>
@@ -509,19 +509,21 @@
                                     <div class="col">
                                         <h3 class="room-type">{{ bien.typebien }}</h3>
                                     </div>
-                                    <div class="col-auto ml-auto">
-                                        <div class="room-card-attr">
-                                            <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
+                                    {% if (bien.promotion) %}
+                                        <div class="col-auto ml-auto">
+                                            <div class="room-card-attr">
+                                                <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% endif %}
                                 </div>
-                                <div class="room-size mt-0">
+                                <div class="room-size mt-0" style="height: 100px;">
                                     {{ bien.resume|raw }}
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="room-price">
-                                            {{ bien.prix }}
+                                            {{ bien.prix|number_format(0,'','.') }}
                                         </div>
                                     </div>
                                     <div class="col-auto ml-auto">

@@ -36,8 +36,8 @@ class DefaultController extends Controller
             ->findArticleByRubrique($slug = 'conseil', $offset = 0, $limit = 2);
         $faqs = $em->getRepository('AppBundle:Faq')
             ->findBy(array('statut' => 1), array('id' => 'ASC'));
-        $promotions = $em->getRepository('AppBundle:Bien')->findListBien(0,1);
-        //dump($articleConseils);die();
+        $promotions = $em->getRepository('AppBundle:Bien')->findBienEnPromo(0,1);
+        //dump($promotions);die();
 
         return $this->render('default/index.html.twig', [
             'sliders' => $sliders,

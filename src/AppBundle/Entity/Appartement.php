@@ -43,16 +43,16 @@ class Appartement
     private $douche;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="dressing", type="integer", nullable=true)
+     * @ORM\Column(name="dressing", type="boolean", nullable=true)
      */
     private $dressing;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="balcon", type="integer")
+     * @ORM\Column(name="balcon", type="boolean", nullable=true)
      */
     private $balcon;
 
@@ -85,14 +85,14 @@ class Appartement
     private $netage;
 
     /**
-     * @var int
+     * @var bool
      *
-     * @ORM\Column(name="parking", type="integer", nullable=true)
+     * @ORM\Column(name="parking", type="boolean", nullable=true)
      */
     private $parking;
 
     /**
-     * @var string
+     * @var bool
      *
      * @ORM\Column(name="chauffeau", type="boolean", nullable=true)
      */

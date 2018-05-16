@@ -42,19 +42,23 @@ class VillaType extends AbstractType
                     'placeholder'   => 'Nombre de salles d\'eau'
                 )
             ))
-            ->add('dressing', IntegerType::class, array(
+            ->add('dressing', ChoiceType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'autocomplete'  => 'off',
-                    'placeholder'   => 'superficie du dressing'
-                )
+                ),
+                'choices'   => array(
+                    'OUI'   => 1,
+                    'NON'   => null,
+                ),
             ))
-            ->add('terasse', IntegerType::class, array(
+            ->add('terasse', ChoiceType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'autocomplete'  => 'off',
-                    'placeholder'   => 'Superficie du dressing'
-                )
+                ),
+                'choices'   => array(
+                    'OUI'   => 1,
+                    'NON'   => null,
+                ),
             ))
             ->add('superficie', IntegerType::class, array(
                 'attr' => array(
@@ -70,12 +74,14 @@ class VillaType extends AbstractType
                     'placeholder'   => 'Superficie de la cuisine'
                 )
             ))
-            ->add('garage', IntegerType::class, array(
+            ->add('garage', ChoiceType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
-                    'autocomplete'  => 'off',
-                    'placeholder'   => 'Superficie du garage'
-                )
+                ),
+                'choices'   => array(
+                    'OUI'   => 1,
+                    'NON'   => null,
+                ),
             ))
             ->add('piscine', ChoiceType::class, array(
                 'attr' => array(

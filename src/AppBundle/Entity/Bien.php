@@ -82,6 +82,27 @@ class Bien
     private $typebienslug;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="promotion", type="boolean", nullable=true)
+     */
+    private $promotion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="datedebut", type="string", length=255, nullable=true)
+     */
+    private $datedebut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="datefin", type="string", length=255, nullable=true)
+     */
+    private $datefin;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="biens")
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
@@ -685,5 +706,77 @@ class Bien
     public function setTypebienslug($typebienslug)
     {
         $this->typebienslug = $typebienslug;
+    }
+
+    /**
+     * Set promotion
+     *
+     * @param boolean $promotion
+     *
+     * @return Bien
+     */
+    public function setPromotion($promotion)
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * Get promotion
+     *
+     * @return boolean
+     */
+    public function getPromotion()
+    {
+        return $this->promotion;
+    }
+
+    /**
+     * Set datedebut
+     *
+     * @param string $datedebut
+     *
+     * @return Bien
+     */
+    public function setDatedebut($datedebut)
+    {
+        $this->datedebut = $datedebut;
+
+        return $this;
+    }
+
+    /**
+     * Get datedebut
+     *
+     * @return string
+     */
+    public function getDatedebut()
+    {
+        return $this->datedebut;
+    }
+
+    /**
+     * Set datefin
+     *
+     * @param string $datefin
+     *
+     * @return Bien
+     */
+    public function setDatefin($datefin)
+    {
+        $this->datefin = $datefin;
+
+        return $this;
+    }
+
+    /**
+     * Get datefin
+     *
+     * @return string
+     */
+    public function getDatefin()
+    {
+        return $this->datefin;
     }
 }
