@@ -32,7 +32,7 @@ class Domaine
     /**
      * @var string
      *
-     * @ORM\Column(name="couleur", type="string", length=255, unique=true)
+     * @ORM\Column(name="couleur", type="string", length=255, nullable=true)
      */
     private $couleur;
 
