@@ -1,38 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    AlloImmo
+    {{ villa.bien.titre }}
 {% endblock %}
 
 {% block body %}
-    <div class="section mt-0">
-        <div id="mainSliderWrapper">
-            <div class="loading-content">
-                <div class="loading-dots dark-gray">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                </div>
-            </div>
-            <div class="main-slider" id="mainSlider">
-                {% for slider in sliders %}
-                    <div class="slide">
-                        <div class="img--holder" data-bg="{{ vich_uploader_asset(slider, 'imageFile') }}"></div>
-                        <div class="slide-content center">
-                            <div class="vert-wrap container">
-                                <div class="vert">
-                                    <div class="container">
-                                        <h2 class="slide-txt1" data-animation="fadeInUp" data-animation-delay="0.5s">{{ slider.titre }}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
+    <div class="section section-booking">
         <div class="booking-form-wrap">
             <div class="booking-form js-booking-form">
                 <a href="#" class="booking-form-close js-booking-form-close"><i class="icon-close"></i></a>
@@ -63,15 +36,27 @@
                                                                 <span class="custom-control-description">Tous les biens</span>
                                                             </label>
                                                         </div>
-                                                        {% for typebien in typebiens %}
                                                         <div class="form-check">
                                                             <label class="custom-control custom-radio">
-                                                               <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
-                                                               <span class="custom-control-indicator"></span>
-                                                               <span class="custom-control-description">{{ typebien.libelle }}</span>
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa basse">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Villa basse</span>
                                                             </label>
                                                         </div>
-                                                        {% endfor %}
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa Duplex">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Villa Duplex</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Studio Rooms</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,15 +124,41 @@
                                                                 <span class="custom-control-description">Partout</span>
                                                             </label>
                                                         </div>
-                                                        {% for zone in zones %}
-                                                            <div class="form-check">
-                                                                <label class="custom-control custom-radio">
-                                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ zone.libelle }}">
-                                                                    <span class="custom-control-indicator"></span>
-                                                                    <span class="custom-control-description">{{ zone.libelle }}</span>
-                                                                </label>
-                                                            </div>
-                                                        {% endfor %}
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Cocody">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Cocody</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Abobo">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Abobo</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bassam">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Bassam</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio Room">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Studio Rooms</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bingerville">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Bingerville</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -259,15 +270,34 @@
                                                         <div class="form-control" id="roomType">Services</div>
                                                     </div>
                                                     <div class="popover-content">
-                                                        {% for service in services %}
-                                                            <div class="form-check">
-                                                                <label class="custom-control custom-radio">
-                                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ service.libelle }}">
-                                                                    <span class="custom-control-indicator"></span>
-                                                                    <span class="custom-control-description">{{ service.libelle }}</span>
-                                                                </label>
-                                                            </div>
-                                                        {% endfor %}
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Professionnel foncier">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Professionnel foncier</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Agense immobilières">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Agense immobilières</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Administration publique">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Administration publique</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Décoration">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Décoration</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -298,15 +328,20 @@
                                                                 <span class="custom-control-description">Tous les modes</span>
                                                             </label>
                                                         </div>
-                                                        {% for mode in modes %}
-                                                            <div class="form-check">
-                                                                <label class="custom-control custom-radio">
-                                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ mode.libelle }}">
-                                                                    <span class="custom-control-indicator"></span>
-                                                                    <span class="custom-control-description">{{ mode.libelle }}</span>
-                                                                </label>
-                                                            </div>
-                                                        {% endfor %}
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Location">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Location</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Vente">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Vente</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -323,15 +358,27 @@
                                                                 <span class="custom-control-description">Tous les biens</span>
                                                             </label>
                                                         </div>
-                                                        {% for typebien in typebiens %}
-                                                            <div class="form-check">
-                                                                <label class="custom-control custom-radio">
-                                                                    <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
-                                                                    <span class="custom-control-indicator"></span>
-                                                                    <span class="custom-control-description">{{ typebien.libelle }}</span>
-                                                                </label>
-                                                            </div>
-                                                        {% endfor %}
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa basse">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Villa basse</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa Duplex">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Villa Duplex</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Studio Rooms</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -399,15 +446,41 @@
                                                                 <span class="custom-control-description">Partout</span>
                                                             </label>
                                                         </div>
-                                                        {% for zone in zones %}
-                                                            <div class="form-check">
-                                                                <label class="custom-control custom-radio">
-                                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ zone.libelle }}">
-                                                                    <span class="custom-control-indicator"></span>
-                                                                    <span class="custom-control-description">{{ zone.libelle }}</span>
-                                                                </label>
-                                                            </div>
-                                                        {% endfor %}
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Cocody">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Cocody</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Abobo">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Abobo</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bassam">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Bassam</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio Room">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Studio Rooms</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <label class="custom-control custom-radio">
+                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bingerville">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Bingerville</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -430,110 +503,206 @@
     <div class="section">
         <div class="container">
             <div class="title-wrap text-center">
-                <div class="">
-                    <div class="col-md-auto col-lg-auto text-center mt-1 mt-lg-0 col-btn col-md-offet-2 ml-lg-8">
-                        {% for domaine in domaines %}
-                            <a href="#" class="btn mb-1 btn-domaine" style="background-color: {{ domaine.couleur }};">{{ domaine.libelle }}</a>
-                        {% endfor %}
+                <h1>{{ villa.bien.typebien }}</h1>
+            </div>
+            <div class="slider-gallery">
+                <ul class="slider-room-gallery-main list-unstyled js-slider-gallery-room-main">
+                    <li><img src="{{ vich_uploader_asset(villa.bien, 'imageFile') }}" alt="{{ villa.bien.titre }}"></li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="info-grid">
+                        <div class="row align-items-center">
+                            <div class="col-6 col-sm">
+                                <div class="info-grid-label">Mode</div>
+                                <div class="info-grid-text">{{ villa.bien.mode }}</div>
+                            </div>
+                            <div class="col-6 col-sm">
+                                <div class="info-grid-label">Localisation</div>
+                                <div class="info-grid-text">{{ villa.bien.zone }}</div>
+                            </div>
+                            <div class="col-6 col-sm">
+                                <div class="info-grid-label">Superfice</div>
+                                <div class="info-grid-text">{{ villa.superficie }} m<sup>2</sup></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 mt-md-7"></div>
+                    <h2>Description</h2>
+                    <p>
+                        {{ villa.bien.description|raw }}
+                    </p>
+                    <div class="mt-3 mt-md-7"></div>
+                    <h2>Autres caractéristiques</h2>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.garage) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Garage</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Garage</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.piscine) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Piscine</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Piscine</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.chauffeau) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Chauffe eau</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Chauffe eau</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Vidéo surveillance</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Vidéo surveillance</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Alarme</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Alarme</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Buanderie</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Buanderie</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Interphone</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Interphone</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Meublée</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Meublée</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Dressing</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Dressing</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Terrasse</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Terrasse</span></i>
+                                {% endif %}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mt-3 mt-md-5"></div>
+                    <h2>Géolocalisation</h2>
+                    <div class="row">
+                        <div class="col-md-0">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d127106.57832737415!2d-4.061049601343239!3d5.404696785636039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0xfc1949efb148f67%3A0x18f4edc4b076deda!2sangre+petro+ivoire!3m2!1d5.4047008!2d-3.991009!5e0!3m2!1sfr!2sci!4v1520258597609" width="800" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    <div class="row">
+                        <div class="col-sm col-lg-12">
+                            <div class="info-box-color">
+                                <div class="row details">
+                                    <div class="col-sm-8 label">Nombre de pièces</div>
+                                    <div class="col-sm-4 value">{{ villa.piece }}</div>
+                                </div>
+                                <div class="row details">
+                                    <div class="col-sm-8 label">Salles d'eau</div>
+                                    <div class="col-sm-4 value">{{ villa.toilette }}</div>
+                                </div>
+                                <div class="row details">
+                                    <div class="col-sm-8 label">Salle de bain</div>
+                                    <div class="col-sm-4 value">{{ villa.douche }}</div>
+                                </div>
+                                <div class="row details">
+                                    <div class="col-sm-8 label">Cuisine</div>
+                                    <div class="col-sm-4 value">{{ villa.cuisine }} m<sup>2</sup></div>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <div class="info-box-price">{{ villa.bien.prix|number_format(0,'','.') }} Fcfa</div>
+                                    <div class="mt-2"><a href="#" class="btn btn-primary btn-white btn-block">Reservez</a></div>
+                                    <p class="p-sm mt-2"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">
+                            <div class="info-box-grey">
+                                <h4>{{ villa.bien.partenaire }}</h4>
+                                <ul class="icn-list">
+                                    <li><i class="icon-telephone"></i>+225 {{ villa.bien.partenaire.contact1 }}</li>
+                                    <li><i class="icon-closed-envelope"></i><a href="mailto:{{ villa.bien.partenaire.email }}">{{ villa.bien.partenaire.email }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container" style="margin: 100px auto">
-            <div class="row">
-                <div class="col-md-8 ">
-                    <div class="row">
-                        {% for promotion in promotions %}
-                            <div class="col-md-7">
-                                <div class="room-card-photo">
-                                    <img src="{{ vich_uploader_asset(promotion, 'imageFile') }}" alt="{{ promotion.titre }}" class="img-fluid">
-                                    <div class="flex-wrap-center">
-                                        <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="btn btn-primary room-qview">Voir les détails</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="room-card-info">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h3 class="room-type">{{ promotion.typebien }}</h3>
-                                        </div>
-                                    </div>
-                                    <div class="room-size mt-0">
-                                        {{ promotion.resume|raw }}
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="room-price">{{ promotion.prix|number_format(0,'','.') }}</div>
-                                        </div>
-                                        <div class="col-auto ml-auto">
-                                            <a href="#" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Détails</a>
-                                            <div class="popover-content d-none">
-                                                <ul>
-                                                    <li>{{ promotion.zone }} </li>
-                                                    <li>{{ promotion.mode }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="room-card">
-                        {% for publicite in publicites %}
-                            <div class="room-card-photo">
-                                <img src="{{ vich_uploader_asset(publicite, 'imageFile') }}" alt="{{ publicite.titre }}" class="img-fluid">
-                                <div class="flex-wrap-center">
-                                    <a href="#" class="btn btn-primary room-qview">Publicité</a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="title-wrap text-center">
+                {% if (similaires) %}
+                    <h2>Autres offres</h2>
+                {% endif %}
             </div>
         </div>
         <div class="container">
-            <div class="row room-carousel js-room-carousel">
-                {% for bien in biens %}
-                    <div class="col-sm-6 col-lg-4">
+            <div class="row d-flex room-carousel js-room-carousel">
+                {% for similaire in similaires %}
+                    <div class="col-4">
                         <div class="room-card">
                             <div class="room-card-photo">
-                                <img src="{{ vich_uploader_asset(bien, 'imageFile') }}" alt="{{ bien.titre }}" class="img-fluid">
+                                <img src="{{ vich_uploader_asset(similaire.bien, 'imageFile') }}" alt="{{ simialire.bien.titre }}" class="img-fluid">
                                 <div class="flex-wrap-center">
-                                    <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview" data-toggle="modal" data-target="#modalBooking">Voir les détails</a>
+                                    <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview" data-toggle="modal" data-target="#modalBooking">Voir les détails</a>
                                 </div>
                             </div>
                             <div class="room-card-info">
                                 <div class="row">
                                     <div class="col">
-                                        <h3 class="room-type">{{ bien.typebien }}</h3>
+                                        <h3 class="room-type">{{ similaire.bien.typebien }}</h3>
                                     </div>
-                                    {% if (bien.promotion) %}
-                                        <div class="col-auto ml-auto">
-                                            <div class="room-card-attr">
-                                                <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
-                                            </div>
+                                    <div class="col-auto ml-auto">
+                                        <div class="room-card-attr">
+                                            <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
                                         </div>
-                                    {% endif %}
+                                    </div>
                                 </div>
-                                <div class="room-size mt-0" style="height: 100px;">
-                                    {{ bien.resume|raw }}
+                                <div class="room-size mt-0">
+                                    {{ similaire.bien.resume|raw }}
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="room-price">
-                                            {{ bien.prix|number_format(0,'','.') }}
+                                            {{ similaire.bien.prix|number_format(0,'','.') }}
                                         </div>
                                     </div>
                                     <div class="col-auto ml-auto">
                                         <a href="#" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
                                         <div class="popover-content d-none">
                                             <ul>
-                                                <li>{{ bien.zone }}</li>
-                                                <li>{{ bien.mode }}</li>
+                                                <li>{{ similaire.bien.zone }}</li>
+                                                <li>{{ simialire.bien.mode }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -545,127 +714,4 @@
             </div>
         </div>
     </div>
-    <div class="section">
-        <div class="container">
-            <div class="title-wrap text-center">
-            </div>
-        </div>
-        <div class="full-bg-grey">
-            <div class="container">
-                <div class="row no-gutters half-col">
-                    <div class="col-12 col-lg-6 col-text">
-                        {% for articlePresentation in articlePresentations %}
-                            <h2>{{ articlePresentation.titre }}</h2>
-                            <div>
-                                {{ articlePresentation.resume|raw }}
-                            </div>
-                        {% endfor %}
-                        <div class="mt-5"></div>
-                        <h2>Nos services</h2>
-                        <div class="row mt-1">
-                            {% for service in articleServices %}
-                                <div class="col-4">
-                                    <a href="#" class="icn-text">
-                                        <div class="icn-text-circle"><i class="icon-support"></i></div>
-                                        <h6>{{ service.titre }}</h6>
-                                    </a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6 col-img">
-                        <div class="image-caption">
-                            Installez vous! Allo Immo s'occupe de tout
-                        </div>
-                        <div class="img-cover-right" data-bg="{{ asset('frontend/img/bg.jpg') }}"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section" id="specialOffer">
-        <div class="container">
-            <div class="text-center" style="padding-bottom: 75px">
-                <h2 class="h1">Conseil & guide</h2>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                {% for articleConseil in articleConseils %}
-                    <div class="col-6">
-                        <div class="special-card">
-                            <div class="special-card-photo">
-                                <img src="{{ vich_uploader_asset(articleConseil, 'imageFile') }}" alt="">
-                            </div>
-                            <div class="special-card-caption">
-                                <a href="#" class="special-card-caption-header">{{ articleConseil.titre }}</a>
-                                <div class="special-card-caption-text">
-                                    <div class="special-card-txt">
-                                        {{ articleConseil.resume|raw }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="banner-full">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm text-center text-sm-left">
-                        <div class="banner-full-text1">Le temps c'est de l'argent!</div>
-                        <div class="banner-full-text2 d-none d-lg-block">Donc ne perdez plus le temps</div>
-                    </div>
-                    <div class="col-sm-auto text-center text-sm-right">
-                        <div class="banner-full-text3 d-none d-lg-block">
-                            Confiez votre recherche immobilière à Allo Immo
-                        </div>
-                        <div class="banner-full-text2 d-block d-lg-none">
-                            <p>Donc ne perdez plus le temps <br>Confiez vous à Allo Immo</p>
-                        </div>
-                        <div class="mt-2"><a href="#" class="btn btn-primary">Contactez nous</a></div>
-                    </div>
-                </div>
-                <div class="banner-full-image"><img src="{{ asset('frontend/images/icon-ai3.png') }}" alt=""></div>
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="container">
-            <div class="text-center" style="margin-bottom: 50px">
-                <h2 class="h3">Beneficier des services de ALLO IMMO</h2>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col col-lg-10">
-                    <div id="faqAccordion" class="faq-accordion" data-children=".faq-item">
-                        {% for faq in faqs %}
-                            <div class="faq-item">
-                                <a data-toggle="collapse" data-parent="#faqAccordion" href="#faqItem{{ loop.index }}" aria-expanded="{% if (loop.index == 1) %}true{% else %}false{% endif %}" aria-controls="faqItem{{ loop.index }}">{{ faq.question }}</a>
-                                <div id="faqItem{{ loop.index }}" class="collapse {% if (loop.index == 1) %}show{% endif %} faq-item-content" role="tabpanel">
-                                    <div>
-                                        <p>
-                                            {{ faq.reponse|raw }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="text-center mt-3">
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalQuestion"><i class="icon-support"></i>Faire la promotion de son bien immobilier</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block meta %}
-    <meta name="description" content="">
-    <meta name="author" content="">
 {% endblock %}

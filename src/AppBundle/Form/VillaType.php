@@ -58,7 +58,7 @@ class VillaType extends AbstractType
                 'choices'   => array(
                     'OUI'   => 1,
                     'NON'   => null,
-                ),
+                )
             ))
             ->add('superficie', IntegerType::class, array(
                 'attr' => array(
