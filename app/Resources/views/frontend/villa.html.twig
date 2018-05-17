@@ -36,27 +36,15 @@
                                                                 <span class="custom-control-description">Tous les biens</span>
                                                             </label>
                                                         </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa basse">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Villa basse</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa Duplex">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Villa Duplex</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Studio Rooms</span>
-                                                            </label>
-                                                        </div>
+                                                        {% for typebien in typebiens %}
+                                                            <div class="form-check">
+                                                                <label class="custom-control custom-radio">
+                                                                    <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description">{{ typebien.libelle }}</span>
+                                                                </label>
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,41 +112,15 @@
                                                                 <span class="custom-control-description">Partout</span>
                                                             </label>
                                                         </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Cocody">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Cocody</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Abobo">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Abobo</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bassam">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Bassam</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio Room">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Studio Rooms</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bingerville">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Bingerville</span>
-                                                            </label>
-                                                        </div>
+                                                        {% for zone in zones %}
+                                                            <div class="form-check">
+                                                                <label class="custom-control custom-radio">
+                                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ zone.libelle }}">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description">{{ zone.libelle }}</span>
+                                                                </label>
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,34 +232,15 @@
                                                         <div class="form-control" id="roomType">Services</div>
                                                     </div>
                                                     <div class="popover-content">
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Professionnel foncier">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Professionnel foncier</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Agense immobilières">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Agense immobilières</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Administration publique">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Administration publique</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Décoration">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Décoration</span>
-                                                            </label>
-                                                        </div>
+                                                        {% for service in services %}
+                                                            <div class="form-check">
+                                                                <label class="custom-control custom-radio">
+                                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ service.libelle }}">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description">{{ service.libelle }}</span>
+                                                                </label>
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -328,20 +271,15 @@
                                                                 <span class="custom-control-description">Tous les modes</span>
                                                             </label>
                                                         </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Location">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Location</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Vente">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Vente</span>
-                                                            </label>
-                                                        </div>
+                                                        {% for mode in modes %}
+                                                            <div class="form-check">
+                                                                <label class="custom-control custom-radio">
+                                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ mode.libelle }}">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description">{{ mode.libelle }}</span>
+                                                                </label>
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,27 +296,15 @@
                                                                 <span class="custom-control-description">Tous les biens</span>
                                                             </label>
                                                         </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa basse">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Villa basse</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa Duplex">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Villa Duplex</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Studio Rooms</span>
-                                                            </label>
-                                                        </div>
+                                                        {% for typebien in typebiens %}
+                                                            <div class="form-check">
+                                                                <label class="custom-control custom-radio">
+                                                                    <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description">{{ typebien.libelle }}</span>
+                                                                </label>
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -446,41 +372,15 @@
                                                                 <span class="custom-control-description">Partout</span>
                                                             </label>
                                                         </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Cocody">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Cocody</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Abobo">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Abobo</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bassam">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Bassam</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio Room">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Studio Rooms</span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                                <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bingerville">
-                                                                <span class="custom-control-indicator"></span>
-                                                                <span class="custom-control-description">Bingerville</span>
-                                                            </label>
-                                                        </div>
+                                                        {% for zone in zones %}
+                                                            <div class="form-check">
+                                                                <label class="custom-control custom-radio">
+                                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ zone.libelle }}">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description">{{ zone.libelle }}</span>
+                                                                </label>
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
@@ -672,7 +572,7 @@
                     <div class="col-4">
                         <div class="room-card">
                             <div class="room-card-photo">
-                                <img src="{{ vich_uploader_asset(similaire.bien, 'imageFile') }}" alt="{{ simialire.bien.titre }}" class="img-fluid">
+                                <img src="{{ vich_uploader_asset(similaire, 'imageFile') }}" alt="{{ similaire.titre }}" class="img-fluid">
                                 <div class="flex-wrap-center">
                                     <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview" data-toggle="modal" data-target="#modalBooking">Voir les détails</a>
                                 </div>
@@ -680,7 +580,7 @@
                             <div class="room-card-info">
                                 <div class="row">
                                     <div class="col">
-                                        <h3 class="room-type">{{ similaire.bien.typebien }}</h3>
+                                        <h3 class="room-type">{{ similaire.typebien }}</h3>
                                     </div>
                                     <div class="col-auto ml-auto">
                                         <div class="room-card-attr">
@@ -688,21 +588,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="room-size mt-0">
-                                    {{ similaire.bien.resume|raw }}
+                                <div class="room-size mt-0" style="height: 100px;">
+                                    {{ similaire.resume|raw }}
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="room-price">
-                                            {{ similaire.bien.prix|number_format(0,'','.') }}
+                                            {{ similaire.prix|number_format(0,'','.') }}
                                         </div>
                                     </div>
                                     <div class="col-auto ml-auto">
                                         <a href="#" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
                                         <div class="popover-content d-none">
                                             <ul>
-                                                <li>{{ similaire.bien.zone }}</li>
-                                                <li>{{ simialire.bien.mode }}</li>
+                                                <li>{{ similaire.zone }}</li>
+                                                <li>{{ similaire.mode }}</li>
                                             </ul>
                                         </div>
                                     </div>
