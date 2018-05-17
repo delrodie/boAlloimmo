@@ -22,6 +22,11 @@ class FrontendController extends Controller
         if ($bien->getTypebienslug() === 'immeu'){
             $immeuble = $em->getRepository('AppBundle:Immeuble')->findOneBy(array('bien' => $bien->getId()));
 
+            return $this->render("frontend/immeuble.html.twig", [
+                'immeuble' => $immeuble,
+                'similaires'    => $similaires,
+            ]);
+
         }elseif ($bien->getTypebienslug() === 'appar'){
             $appartement = $em->getRepository('AppBundle:Appartement')->findOneBy(array('bien' => $bien->getId()));
 
