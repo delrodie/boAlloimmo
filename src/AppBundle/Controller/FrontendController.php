@@ -45,8 +45,13 @@ class FrontendController extends Controller
         }else{
             $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
 
+            return $this->render("frontend/autrebien.html.twig", [
+                'autrebien' => $autrebien,
+                'similaires'    => $similaires,
+            ]);
+
         }
-        dump('rien'); die();
-        return $this->render("frontend/bien.html.twig");
+
+        return $this->redirectToRoute("homepage");
     }
 }
