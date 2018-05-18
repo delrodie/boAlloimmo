@@ -1,38 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    AlloImmo
+    Annuaire
 {% endblock %}
 
 {% block body %}
-    <div class="section mt-0">
-        <div id="mainSliderWrapper">
-            <div class="loading-content">
-                <div class="loading-dots dark-gray">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                </div>
-            </div>
-            <div class="main-slider" id="mainSlider">
-                {% for slider in sliders %}
-                    <div class="slide">
-                        <div class="img--holder" data-bg="{{ vich_uploader_asset(slider, 'imageFile') }}"></div>
-                        <div class="slide-content center">
-                            <div class="vert-wrap container">
-                                <div class="vert">
-                                    <div class="container">
-                                        <h2 class="slide-txt1" data-animation="fadeInUp" data-animation-delay="0.5s">{{ slider.titre }}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
+    <div class="section section-booking">
         <div class="booking-form-wrap">
             <div class="booking-form js-booking-form">
                 <a href="#" class="booking-form-close js-booking-form-close"><i class="icon-close"></i></a>
@@ -64,13 +37,13 @@
                                                             </label>
                                                         </div>
                                                         {% for typebien in typebiens %}
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                               <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
-                                                               <span class="custom-control-indicator"></span>
-                                                               <span class="custom-control-description">{{ typebien.libelle }}</span>
-                                                            </label>
-                                                        </div>
+                                                            <div class="form-check">
+                                                                <label class="custom-control custom-radio">
+                                                                    <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description">{{ typebien.libelle }}</span>
+                                                                </label>
+                                                            </div>
                                                         {% endfor %}
                                                     </div>
                                                 </div>
@@ -430,79 +403,13 @@
     <div class="section">
         <div class="container">
             <div class="title-wrap text-center">
-                <div class="">
-                    <div class="col-md-auto col-lg-auto text-center mt-1 mt-lg-0 col-btn col-md-offet-2 ml-lg-8">
-                        {% for domaine in domaines %}
-                            <a href="#" class="btn mb-1 btn-domaine" style="background-color: {{ domaine.couleur }};">{{ domaine.libelle }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container" style="margin: 100px auto">
-            <div class="row">
-                <div class="col-md-8 ">
-                    <div class="row">
-                        {% for promotion in promotions %}
-                            <div class="col-md-7">
-                                <div class="room-card-photo">
-                                    <img src="{{ vich_uploader_asset(promotion, 'imageFile') }}" alt="{{ promotion.titre }}" class="img-fluid">
-                                    <div class="flex-wrap-center">
-                                        {% if (promotion.disponibilite) %}
-                                            <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
-                                        {% else %}
-                                            <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="room-card-info">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h3 class="room-type">{{ promotion.typebien }}</h3>
-                                        </div>
-                                    </div>
-                                    <div class="room-size mt-0">
-                                        {{ promotion.resume|raw }}
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="room-price">{{ promotion.prix|number_format(0,'','.') }}</div>
-                                        </div>
-                                        <div class="col-auto ml-auto">
-                                            <a href="#" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Détails</a>
-                                            <div class="popover-content d-none">
-                                                <ul>
-                                                    <li>{{ promotion.zone }} </li>
-                                                    <li>{{ promotion.mode }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="room-card">
-                        {% for publicite in publicites %}
-                            <div class="room-card-photo">
-                                <img src="{{ vich_uploader_asset(publicite, 'imageFile') }}" alt="{{ publicite.titre }}" class="img-fluid">
-                                <div class="flex-wrap-center">
-                                    <a href="#" class="btn btn-primary room-qview">Publicité</a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
+                <h2 class="h1">Annuaire</h2>
             </div>
         </div>
         <div class="container">
-            <div class="row room-carousel js-room-carousel">
+            <div class="row room-grid">
                 {% for bien in biens %}
-                    <div class="col-sm-6 col-lg-4">
+                    <div class="col-sm-6 col-md-6 col-lg-4">
                         <div class="room-card">
                             <div class="room-card-photo">
                                 <img src="{{ vich_uploader_asset(bien, 'imageFile') }}" alt="{{ bien.titre }}" class="img-fluid">
@@ -519,13 +426,13 @@
                                     <div class="col">
                                         <h3 class="room-type">{{ bien.typebien }}</h3>
                                     </div>
-                                    {% if (bien.promotion) %}
-                                        <div class="col-auto ml-auto">
-                                            <div class="room-card-attr">
+                                    <div class="col-auto ml-auto">
+                                        <div class="room-card-attr">
+                                            {% if (bien.promotion) %}
                                                 <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
-                                            </div>
+                                            {% endif %}
                                         </div>
-                                    {% endif %}
+                                    </div>
                                 </div>
                                 <div class="room-size mt-0" style="height: 100px;">
                                     {{ bien.resume|raw }}
@@ -548,132 +455,32 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>   
                 {% endfor %}
             </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="container">
-            <div class="title-wrap text-center">
-            </div>
-        </div>
-        <div class="full-bg-grey">
-            <div class="container">
-                <div class="row no-gutters half-col">
-                    <div class="col-12 col-lg-6 col-text">
-                        {% for articlePresentation in articlePresentations %}
-                            <h2>{{ articlePresentation.titre }}</h2>
-                            <div>
-                                {{ articlePresentation.resume|raw }}
-                            </div>
-                        {% endfor %}
-                        <div class="mt-5"></div>
-                        <h2>Nos services</h2>
-                        <div class="row mt-1">
-                            {% for service in articleServices %}
-                                <div class="col-4">
-                                    <a href="#" class="icn-text">
-                                        <div class="icn-text-circle"><i class="icon-support"></i></div>
-                                        <h6>{{ service.titre }}</h6>
-                                    </a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6 col-img">
-                        <div class="image-caption">
-                            Installez vous! Allo Immo s'occupe de tout
-                        </div>
-                        <div class="img-cover-right" data-bg="{{ asset('frontend/img/bg.jpg') }}"></div>
+            {% if (pagination) %}
+                <div class="row ">
+                    <div class="col-sm-12 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 text-center " style="">
+                        <ul class="paginations">
+                            <li class="page-item">
+                                <a href="#" class="page-link">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Prec</span>
+                                </a>
+                            </li>
+                            <li class="page-item disabled"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item">
+                                <a href="#" class="page-link">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Suiv</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
-    <div class="section" id="specialOffer">
-        <div class="container">
-            <div class="text-center" style="padding-bottom: 75px">
-                <h2 class="h1">Conseil & guide</h2>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                {% for articleConseil in articleConseils %}
-                    <div class="col-6">
-                        <div class="special-card">
-                            <div class="special-card-photo">
-                                <img src="{{ vich_uploader_asset(articleConseil, 'imageFile') }}" alt="">
-                            </div>
-                            <div class="special-card-caption">
-                                <a href="#" class="special-card-caption-header">{{ articleConseil.titre }}</a>
-                                <div class="special-card-caption-text">
-                                    <div class="special-card-txt">
-                                        {{ articleConseil.resume|raw }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="banner-full">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm text-center text-sm-left">
-                        <div class="banner-full-text1">Le temps c'est de l'argent!</div>
-                        <div class="banner-full-text2 d-none d-lg-block">Donc ne perdez plus le temps</div>
-                    </div>
-                    <div class="col-sm-auto text-center text-sm-right">
-                        <div class="banner-full-text3 d-none d-lg-block">
-                            Confiez votre recherche immobilière à Allo Immo
-                        </div>
-                        <div class="banner-full-text2 d-block d-lg-none">
-                            <p>Donc ne perdez plus le temps <br>Confiez vous à Allo Immo</p>
-                        </div>
-                        <div class="mt-2"><a href="#" class="btn btn-primary">Contactez nous</a></div>
-                    </div>
-                </div>
-                <div class="banner-full-image"><img src="{{ asset('frontend/images/icon-ai3.png') }}" alt=""></div>
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="container">
-            <div class="text-center" style="margin-bottom: 50px">
-                <h2 class="h3">Beneficier des services de ALLO IMMO</h2>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col col-lg-10">
-                    <div id="faqAccordion" class="faq-accordion" data-children=".faq-item">
-                        {% for faq in faqs %}
-                            <div class="faq-item">
-                                <a data-toggle="collapse" data-parent="#faqAccordion" href="#faqItem{{ loop.index }}" aria-expanded="{% if (loop.index == 1) %}true{% else %}false{% endif %}" aria-controls="faqItem{{ loop.index }}">{{ faq.question }}</a>
-                                <div id="faqItem{{ loop.index }}" class="collapse {% if (loop.index == 1) %}show{% endif %} faq-item-content" role="tabpanel">
-                                    <div>
-                                        <p>
-                                            {{ faq.reponse|raw }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="text-center mt-3">
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalQuestion"><i class="icon-support"></i>Faire la promotion de son bien immobilier</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
-
-{% block meta %}
-    <meta name="description" content="">
-    <meta name="author" content="">
 {% endblock %}

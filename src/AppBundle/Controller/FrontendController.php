@@ -78,4 +78,36 @@ class FrontendController extends Controller
 
         return $this->redirectToRoute("homepage");
     }
+
+    /**
+     * Listes des biens pour l'annuaires
+     *
+     * @Route("/annuaire", name="frontend_annuaire")
+     */
+    public function annuaireAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $typebiens = $em->getRepository('AppBundle:Typebien')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $zones = $em->getRepository('AppBundle:Zone')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $services = $em->getRepository('AppBundle:Service')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $modes = $em->getRepository('AppBundle:Mode')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+
+        $biens = $em->getRepository('AppBundle:Bien')->findListBien(0, 9);
+        $pagination = null;
+
+        return $this->render("frontend/annuaire.html.twig", [
+            'biens' => $biens,
+            'pagination'    => $pagination,
+            'typebiens' => $typebiens,
+            'zones' => $zones,
+            'services' => $services,
+            'modes' => $modes,
+        ]);
+    }
+
+
 }
