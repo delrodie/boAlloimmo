@@ -408,10 +408,17 @@
             <div class="slider-gallery">
                 <ul class="slider-room-gallery-main list-unstyled js-slider-gallery-room-main">
                     <li><img src="{{ vich_uploader_asset(immeuble.bien, 'imageFile') }}" alt="{{ immeuble.bien.titre }}"></li>
+                    <li><img src="{{ vich_uploader_asset(immeuble.bien, 'imageFile') }}" alt="{{ immeuble.bien.titre }}"></li>
                 </ul>
             </div>
             <div class="row">
                 <div class="col-lg-8">
+                    <div class="slider-gallery">
+                        <ul class="slider-room-gallery-thumbs list-unstyled js-slider-gallery-room-thumbs">
+                            <li><img src="{{ vich_uploader_asset(immeuble.bien, 'imageFile') }}" alt=""></li>
+                            <li><img src="{{ vich_uploader_asset(immeuble.bien.partenaire, 'imageFile') }}" alt=""></li>
+                        </ul>
+                    </div>
                     <div class="info-grid">
                         <div class="row align-items-center">
                             <div class="col-6 col-sm">
@@ -478,11 +485,38 @@
                         </div>
                         <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">
                             <div class="info-box-grey">
-                                <h4>{{ immeuble.bien.partenaire }}</h4>
+                                <img src="{{ vich_uploader_asset(immeuble.bien.partenaire, 'imageFile') }}" alt="{{ immeuble.bien.partenaire }}" title="{{ immeuble.bien.partenaire }}" class="img-fluid">
                                 <ul class="icn-list">
                                     <li><i class="icon-telephone"></i>+225 {{ immeuble.bien.partenaire.contact1 }}</li>
                                     <li><i class="icon-closed-envelope"></i><a href="mailto:{{ immeuble.bien.partenaire.email }}">{{ immeuble.bien.partenaire.email }}</a></li>
                                 </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-center mt-15">Etes-vous interessés?</h4>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                                            <div class="form-group">
+                                                <input type="text" name="" class="form-control" placeholder="Nom">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="" class="form-control" placeholder="Prénoms">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="" class="form-control" placeholder="Téléphone">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="" class="form-control" placeholder="Email">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="form-control" placeholder="Observations"></textarea>
+                                            </div>
+                                            <div class="form-group text-right">
+                                                <input type="submit" name="" class="btn btn-primary" value="Envoyer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

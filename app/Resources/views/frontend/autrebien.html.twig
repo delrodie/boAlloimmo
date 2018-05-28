@@ -408,10 +408,17 @@
             <div class="slider-gallery">
                 <ul class="slider-room-gallery-main list-unstyled js-slider-gallery-room-main">
                     <li><img src="{{ vich_uploader_asset(autrebien.bien, 'imageFile') }}" alt="{{ autrebien.bien.titre }}"></li>
+                    <li><img src="{{ vich_uploader_asset(autrebien.bien, 'imageFile') }}" alt="{{ autrebien.bien.titre }}"></li>
                 </ul>
             </div>
             <div class="row">
                 <div class="col-lg-8">
+                    <div class="slider-gallery">
+                        <ul class="slider-room-gallery-thumbs list-unstyled js-slider-gallery-room-thumbs">
+                            <li><img src="{{ vich_uploader_asset(autrebien.bien, 'imageFile') }}" alt=""></li>
+                            <li><img src="{{ vich_uploader_asset(autrebien.bien.partenaire, 'imageFile') }}" alt=""></li>
+                        </ul>
+                    </div>
                     <div class="info-grid">
                         <div class="row align-items-center">
                             <div class="col-6 col-sm">
@@ -454,7 +461,7 @@
                         </div>
                         <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">
                             <div class="info-box-grey">
-                                <h4>{{ autrebien.bien.partenaire }}</h4>
+                                <img src="{{ vich_uploader_asset(autrebien.bien.partenaire, 'imageFile') }}" alt="{{ autrebien.bien.partenaire }}" title="{{ autrebien.bien.partenaire }}" class="img-fluid">
                                 <ul class="icn-list">
                                     <li><i class="icon-telephone"></i>+225 {{ autrebien.bien.partenaire.contact1 }}</li>
                                     <li><i class="icon-closed-envelope"></i><a href="mailto:{{ autrebien.bien.partenaire.email }}">{{ autrebien.bien.partenaire.email }}</a></li>
