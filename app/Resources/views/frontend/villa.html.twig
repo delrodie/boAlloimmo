@@ -407,16 +407,20 @@
             </div>
             <div class="slider-gallery">
                 <ul class="slider-room-gallery-main list-unstyled js-slider-gallery-room-main">
-                    <li><img src="{{ vich_uploader_asset(villa.bien, 'imageFile') }}" alt="{{ villa.bien.titre }}"></li>
-                    <li><img src="{{ vich_uploader_asset(villa.bien.partenaire, 'imageFile') }}" alt="{{ villa.bien.titre }}"></li>
+                    <li><img src="{{ asset('uploads/biens/'~ villa.bien.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ villa.bien.titre }}"></li>
+                    {% for photo in photos %}
+                        <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ photo.bien.titre }}"></li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="slider-gallery">
                         <ul class="slider-room-gallery-thumbs list-unstyled js-slider-gallery-room-thumbs">
-                            <li><img src="{{ vich_uploader_asset(villa.bien, 'imageFile') }}" alt=""></li>
-                            <li><img src="{{ vich_uploader_asset(villa.bien.partenaire, 'imageFile') }}" alt=""></li>
+                                <li><img src="{{ asset('uploads/biens/'~ villa.bien.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ villa.bien.titre }}"></li>
+                            {% for photo in photos %}
+                                <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ photo.bien.titre }}"></li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="info-grid">
@@ -546,7 +550,6 @@
                                 </div>
                                 <div class="text-center mt-2">
                                     <div class="info-box-price">{{ villa.bien.prix|number_format(0,'','.') }} Fcfa</div>
-                                    <div class="mt-2"><a href="#" class="btn btn-primary btn-white btn-block">Reservez</a></div>
                                     <p class="p-sm mt-2"></p>
                                 </div>
                             </div>
@@ -609,7 +612,7 @@
                     <div class="col-4">
                         <div class="room-card">
                             <div class="room-card-photo">
-                                <img src="{{ vich_uploader_asset(similaire, 'imageFile') }}" alt="{{ similaire.titre }}" class="img-fluid">
+                                <img src="{{ asset('uploads/biens/'~ similaire.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}" class="img-fluid">
                                 <div class="flex-wrap-center">
                                     {% if (similaire.disponibilite) %}
                                         <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview">Disponible</a>

@@ -25,6 +25,8 @@ class FrontendController extends Controller
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
         $modes = $em->getRepository('AppBundle:Mode')
             ->findBy(array('statut' => 1), array('libelle' => 'ASC')); //dump($similaires);die();
+        $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $bien->getId()));
+        //dump($photos);die();
 
         // Verification du type de bien puis renvoie a la page correspondante a ce type de bien
         if ($bien->getTypebienslug() === 'immeu'){
@@ -37,6 +39,7 @@ class FrontendController extends Controller
                 'zones' => $zones,
                 'services' => $services,
                 'modes' => $modes,
+                'photos' => $photos,
             ]);
 
         }elseif ($bien->getTypebienslug() === 'appar'){
@@ -49,6 +52,7 @@ class FrontendController extends Controller
                 'zones' => $zones,
                 'services' => $services,
                 'modes' => $modes,
+                'photos' => $photos,
             ]);
 
         }elseif ($bien->getTypebienslug() === 'villa'){
@@ -61,6 +65,7 @@ class FrontendController extends Controller
                 'zones' => $zones,
                 'services' => $services,
                 'modes' => $modes,
+                'photos' => $photos,
             ]);
         }else{
             $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
@@ -72,6 +77,7 @@ class FrontendController extends Controller
                 'zones' => $zones,
                 'services' => $services,
                 'modes' => $modes,
+                'photos' => $photos,
             ]);
 
         }
