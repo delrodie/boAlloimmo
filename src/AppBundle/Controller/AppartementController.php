@@ -71,9 +71,14 @@ class AppartementController extends Controller
     {
         $deleteForm = $this->createDeleteForm($appartement);
 
+        $em = $this->getDoctrine()->getManager();
+
+        $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $appartement->getBien()->getId()));
+
         return $this->render('appartement/show.html.twig', array(
             'appartement' => $appartement,
             'delete_form' => $deleteForm->createView(),
+            'photos'    => $photos,
         ));
     }
 

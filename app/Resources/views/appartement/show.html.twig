@@ -234,8 +234,21 @@
                                     </div>
                                 </div>
                             </div>
+                            {% if (photos) %}
+                                <div class="row" style="margin-top: 25px; margin-bottom: 35px;">
+                                    <div class="col-sm-12 mb-15">
+                                        <h4>Autres images</h4>
+                                    </div>
+                                    {% for photo in photos %}
+                                        <div class="col-sm-3">
+                                            <img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('bo_galleriebien') }}" alt="{{ photo.bien }}" class="img-fluid">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                             <div class="form-group row">
                                 <div class="col-sm-7 ml-auto text-right">
+                                    <a href="{{ path('backend_galleriebien_new', {'bien': appartement.bien.id}) }}" class="btn btn-primary">Ajouter des photos</a>
                                     <a class="btn btn-outline-dark" href="{{ path('backend_bien_edit', {'slug': appartement.bien.slug}) }}" >Modifier</a>
 
                                 </div>
