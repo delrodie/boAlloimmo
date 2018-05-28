@@ -72,9 +72,14 @@ class AutrebienController extends Controller
     {
         $deleteForm = $this->createDeleteForm($autrebien);
 
+        $em = $this->getDoctrine()->getManager();
+
+        $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $autrebien->getBien()->getId()));
+
         return $this->render('autrebien/show.html.twig', array(
             'autrebien' => $autrebien,
             'delete_form' => $deleteForm->createView(),
+            'photos'    => $photos,
         ));
     }
 
