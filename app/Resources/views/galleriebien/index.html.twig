@@ -1,0 +1,43 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block body %}
+    <h1>Galleriebiens list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Imagename</th>
+                <th>Imagesize</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for galleriebien in galleriebiens %}
+            <tr>
+                <td><a href="{{ path('backend_galleriebien_show', { 'id': galleriebien.id }) }}">{{ galleriebien.id }}</a></td>
+                <td>{{ galleriebien.imageName }}</td>
+                <td>{{ galleriebien.imageSize }}</td>
+                <td>{% if galleriebien.updatedAt %}{{ galleriebien.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('backend_galleriebien_show', { 'id': galleriebien.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('backend_galleriebien_edit', { 'id': galleriebien.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('backend_galleriebien_new') }}">Create a new galleriebien</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -67,13 +67,18 @@ class VillaController extends Controller
      * @Route("/{id}/{bien}", name="backend_villa_show")
      * @Method("GET")
      */
-    public function showAction(Villa $villa)
+    public function showAction(Villa $villa, $bien)
     {
         $deleteForm = $this->createDeleteForm($villa);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $villa->getBien()->getId()));
 
         return $this->render('villa/show.html.twig', array(
             'villa' => $villa,
             'delete_form' => $deleteForm->createView(),
+            'photos'    => $photos,
         ));
     }
 

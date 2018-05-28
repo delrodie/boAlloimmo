@@ -103,6 +103,11 @@ class Bien
     private $datefin;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Galleriebien", mappedBy="bien")
+     */
+    private $photos;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="biens")
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
@@ -778,5 +783,46 @@ class Bien
     public function getDatefin()
     {
         return $this->datefin;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add photo
+     *
+     * @param \AppBundle\Entity\Galleriebien $photo
+     *
+     * @return Bien
+     */
+    public function addPhoto(\AppBundle\Entity\Galleriebien $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \AppBundle\Entity\Galleriebien $photo
+     */
+    public function removePhoto(\AppBundle\Entity\Galleriebien $photo)
+    {
+        $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
     }
 }

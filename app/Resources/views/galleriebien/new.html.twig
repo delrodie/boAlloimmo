@@ -1,31 +1,31 @@
 {% extends 'backend_layout.html.twig' %}
 
-{% block title %}Enregistrement des publicites{% endblock %}
+{% block title %}Enregistrement des photos{% endblock %}
 
 {% block body %}
     <div class="main-content">
         <div class="page-title">
             <h4 class="mb-0">
-                Gestion des publicites
+                Gestion des photos
                 <small> </small>
             </h4>
             <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
                 <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
-                <li class="breadcrumb-item active">Enregistrement des publicites</li>
+                <li class="breadcrumb-item active">Enregistrement des photos</li>
             </ol>
         </div>
 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a href="{{ path('backend_publicite_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des publicites</a>
+                    <a href="{{ path('backend_bien_show', {'slug': retourBien.slug}) }}" class="btn  btn-light"><i class="fa fa-list"></i> Retour au bien</a>
                 </div>
                 <br>
                 <div class="col-md-12">
                     <div class="card card-shadow mb-4">
                         <div class="card-header">
                             <div class="card-title">
-                                Enregistrement des publicites
+                                Enregistrement des photos
                             </div>
                         </div>
                         <div class="card-body">
@@ -33,13 +33,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 control-label" for="Partenaire">Partenaire</label>
                                 <div class="col-sm-8 select2-container">
-                                    {{ form_widget(form.partenaire) }}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 control-label" for="titre">Titre</label>
-                                <div class="col-sm-8">
-                                    {{ form_widget(form.titre) }}
+                                    {{ form_widget(form.bien) }}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -48,30 +42,23 @@
                                     {{ form_widget(form.imageFile) }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 control-label" for="Contenu">Date</label>
-                                <div class="col-sm-8 input-group" data-date="2018-07-31" data-date-format="yyyy-mm-dd">
-                                    {{ form_widget(form.datedebut) }}
-                                    <span class="input-group-addon">à</span>
-                                    {{ form_widget(form.datefin) }}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-3 col-sm-offset-0">.</div>
-                                <label class="custom-control custom-checkbox">
-                                    {{ form_widget(form.statut) }}
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Statut</span>
-                                </label>
-                            </div>
                             {{ form_rest(form) }}
                             <div class="form-group row">
                                 <div class="col-sm-5 ml-auto">
                                     <input type="reset" class="btn btn-default" value="Annuler">
-                                    <button class="btn btn-primary" name="signup">Enregistrer</button>
+                                    <button class="btn btn-primary" name="signup">Ajouter</button>
                                 </div>
                             </div>
                             {{ form_end(form) }}
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                {% for photo in photos %}
+                                    <div class="col-sm-2">
+                                        <a href="{{ path('backend_galleriebien_edit', {'id': photo.id, 'bien': photo.bien.id}) }}"><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('bo_galleriebien') }}" alt="{{ photo.bien }}" class="img-fluid"></a>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </div>
