@@ -431,7 +431,7 @@
         <div class="container">
             <div class="title-wrap text-center">
                 <div class="">
-                    <div class="col-md-auto col-lg-auto text-center mt-1 mt-lg-0 col-btn col-md-offet-2 ml-lg-8">
+                    <div class="col-md-auto col-lg-auto text-center mt-1 mt-lg-0 col-btn col-md-offet-0 ml-lg-12">
                         {% for domaine in domaines %}
                             <a href="#" class="btn mb-1 btn-domaine" style="background-color: {{ domaine.couleur }};">{{ domaine.libelle }}</a>
                         {% endfor %}
@@ -505,7 +505,7 @@
                     <div class="col-sm-6 col-lg-4">
                         <div class="room-card">
                             <div class="room-card-photo">
-                                <img src="{{ vich_uploader_asset(bien, 'imageFile') }}" alt="{{ bien.titre }}" class="img-fluid">
+                                <img src="{{ asset('uploads/biens/'~ bien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ bien.titre }}" class="img-fluid">
                                 <div class="flex-wrap-center">
                                     {% if (bien.disponibilite) %}
                                         <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
@@ -594,11 +594,11 @@
     <div class="section" id="specialOffer">
         <div class="container">
             <div class="text-center" style="padding-bottom: 75px">
-                <h2 class="h1">Conseil & guide</h2>
+                <h2 class="h1">Conseils & guides</h2>
             </div>
         </div>
         <div class="container">
-            <div class="row">
+            <div class="special-carousel js-special-carousel row">
                 {% for articleConseil in articleConseils %}
                     <div class="col-6">
                         <div class="special-card">
