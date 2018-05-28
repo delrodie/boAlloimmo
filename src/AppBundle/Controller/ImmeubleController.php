@@ -71,9 +71,14 @@ class ImmeubleController extends Controller
     {
         $deleteForm = $this->createDeleteForm($immeuble);
 
+        $em = $this->getDoctrine()->getManager();
+
+        $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $immeuble->getBien()->getId()));
+
         return $this->render('immeuble/show.html.twig', array(
             'immeuble' => $immeuble,
             'delete_form' => $deleteForm->createView(),
+            'photos'    => $photos,
         ));
     }
 
