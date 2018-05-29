@@ -115,5 +115,35 @@ class FrontendController extends Controller
         ]);
     }
 
+    /**
+     * Affichage de la page qui sommes-nous
+     *
+     * @Route("/page/{rubrique}/{slug}", name="frontend_page")
+     */
+    public function pageAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $page = $em->getRepository('AppBundle:Article')->findOneBy(array('slug'=> $slug));
+        $typebiens = $em->getRepository('AppBundle:Typebien')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $zones = $em->getRepository('AppBundle:Zone')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $services = $em->getRepository('AppBundle:Service')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $modes = $em->getRepository('AppBundle:Mode')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,4);
+
+
+        return $this->render("frontend/page.html.twig", [
+            'typebiens' => $typebiens,
+            'zones' => $zones,
+            'services' => $services,
+            'modes' => $modes,
+            'page'  => $page,
+            'publicites'  => $publicites,
+        ]);
+    }
+
 
 }

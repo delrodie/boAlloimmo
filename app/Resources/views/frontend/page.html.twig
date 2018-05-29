@@ -1,38 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    AlloImmo
+    {{ page.titre }}
 {% endblock %}
 
 {% block body %}
-    <div class="section mt-0">
-        <div id="mainSliderWrapper">
-            <div class="loading-content">
-                <div class="loading-dots dark-gray">
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                    <i></i>
-                </div>
-            </div>
-            <div class="main-slider" id="mainSlider">
-                {% for slider in sliders %}
-                    <div class="slide">
-                        <div class="img--holder" data-bg="{{ vich_uploader_asset(slider, 'imageFile') }}"></div>
-                        <div class="slide-content center">
-                            <div class="vert-wrap container">
-                                <div class="vert">
-                                    <div class="container">
-                                        <h2 class="slide-txt1" data-animation="fadeInUp" data-animation-delay="0.5s">{{ slider.titre }}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
+    <div class="section section-booking">
         <div class="booking-form-wrap">
             <div class="booking-form js-booking-form">
                 <a href="#" class="booking-form-close js-booking-form-close"><i class="icon-close"></i></a>
@@ -64,13 +37,13 @@
                                                             </label>
                                                         </div>
                                                         {% for typebien in typebiens %}
-                                                        <div class="form-check">
-                                                            <label class="custom-control custom-radio">
-                                                               <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
-                                                               <span class="custom-control-indicator"></span>
-                                                               <span class="custom-control-description">{{ typebien.libelle }}</span>
-                                                            </label>
-                                                        </div>
+                                                            <div class="form-check">
+                                                                <label class="custom-control custom-radio">
+                                                                    <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
+                                                                    <span class="custom-control-indicator"></span>
+                                                                    <span class="custom-control-description">{{ typebien.libelle }}</span>
+                                                                </label>
+                                                            </div>
                                                         {% endfor %}
                                                     </div>
                                                 </div>
@@ -430,250 +403,40 @@
     <div class="section">
         <div class="container">
             <div class="title-wrap text-center">
-                <div class="">
-                    <div class="col-md-auto col-lg-auto text-center mt-1 mt-lg-0 col-btn col-md-offet-0 ml-lg-12">
-                        {% for domaine in domaines %}
-                            <a href="#" class="btn mb-1 btn-domaine" style="background-color: {{ domaine.couleur }};">{{ domaine.libelle }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
+                <h2 class="h1">{{ page.rubrique }}</h2>
             </div>
         </div>
-        <div class="container" style="margin: 100px auto">
+        <div class="container" style="margin-bottom: 100px">
             <div class="row">
-                <div class="col-md-8 ">
-                    <div class="row">
-                        {% for promotion in promotions %}
-                            <div class="col-md-7">
-                                <div class="room-card-photo">
-                                    <img src="{{ vich_uploader_asset(promotion, 'imageFile') }}" alt="{{ promotion.titre }}" class="img-fluid">
-                                    <div class="flex-wrap-center">
-                                        {% if (promotion.disponibilite) %}
-                                            <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
-                                        {% else %}
-                                            <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="room-card-info">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h3 class="room-type">{{ promotion.typebien }}</h3>
-                                        </div>
-                                    </div>
-                                    <div class="room-size mt-0">
-                                        {{ promotion.resume|raw }}
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="room-price">{{ promotion.prix|number_format(0,'','.') }}</div>
-                                        </div>
-                                        <div class="col-auto ml-auto">
-                                            <a href="#" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Détails</a>
-                                            <div class="popover-content d-none">
-                                                <ul>
-                                                    <li>{{ promotion.zone }} </li>
-                                                    <li>{{ promotion.mode }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+                <div class="col-md-8">
+                    <img src="{{ vich_uploader_asset(page, 'imageFile') }}" class="w-100" alt="">
+                    <h3 class="mt-15">{{ page.titre }}</h3>
+                    <div class="text-justify">
+                        {{ page.contenu|raw }}
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="room-card">
-                        <ul class="slider-single list-unstyled js-slider-single">
-                            {% for publicite in publicites %}
-                                <img src="{{ vich_uploader_asset(publicite, 'imageFile') }}" alt="{{ publicite.titre }}" class="img-fluid">
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row room-carousel js-room-carousel">
-                {% for bien in biens %}
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="room-card">
-                            <div class="room-card-photo">
-                                <img src="{{ asset('uploads/biens/'~ bien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ bien.titre }}" class="img-fluid">
-                                <div class="flex-wrap-center">
-                                    {% if (bien.disponibilite) %}
-                                        <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
-                                    {% else %}
-                                        <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="room-card-info">
-                                <div class="row">
-                                    <div class="col">
-                                        <h3 class="room-type">{{ bien.typebien }}</h3>
-                                    </div>
-                                    {% if (bien.promotion) %}
-                                        <div class="col-auto ml-auto">
-                                            <div class="room-card-attr">
-                                                <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                                <div class="room-size mt-0" style="height: 100px;">
-                                    {{ bien.resume|raw }}
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="room-price">
-                                            {{ bien.prix|number_format(0,'','.') }}
-                                        </div>
-                                    </div>
-                                    <div class="col-auto ml-auto">
-                                        <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
-                                        <div class="popover-content d-none">
-                                            <ul>
-                                                <li>{{ bien.zone }}</li>
-                                                <li>{{ bien.mode }}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="container">
-            <div class="title-wrap text-center">
-            </div>
-        </div>
-        <div class="full-bg-grey">
-            <div class="container">
-                <div class="row no-gutters half-col">
-                    <div class="col-12 col-lg-6 col-text">
-                        {% for articlePresentation in articlePresentations %}
-                            <h2>{{ articlePresentation.titre }}</h2>
-                            <div>
-                                {{ articlePresentation.resume|raw }}
-                            </div>
-                            <div class="text-right text-sm-right mt-15">
-                                <a href="{{ path('frontend_page', {'rubrique': articlePresentation.rubrique, 'slug':articlePresentation.slug}) }}" class="btn btn-primary">Lire la suite</a>
-                            </div>
-                        {% endfor %}
-                        <div class="mt-5"></div>
-                        <h2>Nos services</h2>
-                        <div class="row mt-1">
-                            {% for service in articleServices %}
-                                <div class="col-4">
-                                    <a href="{{ path('frontend_page', {'rubrique': service.rubrique, 'slug':service.slug}) }}" class="icn-text">
-                                        <div class="icn-text-circle"><i class="icon-support"></i></div>
-                                        <h6>{{ service.titre }}</h6>
-                                    </a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6 col-img">
-                        <div class="image-caption">
-                            Installez vous! Allo Immo s'occupe de tout
-                        </div>
-                        <div class="img-cover-right" data-bg="{{ asset('frontend/img/bg.jpg') }}"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section" id="specialOffer">
-        <div class="container">
-            <div class="text-center" style="padding-bottom: 75px">
-                <h2 class="h1">Conseils & guides</h2>
-            </div>
-        </div>
-        <div class="container">
-            <div class="special-carousel js-special-carousel row">
-                {% for articleConseil in articleConseils %}
-                    <div class="col-6">
-                        <div class="special-card">
-                            <div class="special-card-photo">
-                                <img src="{{ vich_uploader_asset(articleConseil, 'imageFile') }}" alt="">
-                            </div>
-                            <div class="special-card-caption">
-                                <a href="{{ path('frontend_page', {'rubrique': articleConseil.rubrique, 'slug':articleConseil.slug}) }}" class="special-card-caption-header">{{ articleConseil.titre }}</a>
-                                <div class="special-card-caption-text">
-                                    <div class="special-card-txt">
-                                        {{ articleConseil.resume|raw }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="banner-full">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm text-center text-sm-left">
-                        <div class="banner-full-text1">Le temps c'est de l'argent!</div>
-                        <div class="banner-full-text2 d-none d-lg-block">Donc ne perdez plus le temps</div>
-                    </div>
-                    <div class="col-sm-auto text-center text-sm-right">
-                        <div class="banner-full-text3 d-none d-lg-block">
-                            Confiez votre recherche immobilière à Allo Immo
-                        </div>
-                        <div class="banner-full-text2 d-block d-lg-none">
-                            <p>Donc ne perdez plus le temps <br>Confiez vous à Allo Immo</p>
-                        </div>
-                        <div class="mt-2"><a href="#" class="btn btn-primary">Contactez nous</a></div>
-                    </div>
-                </div>
-                <div class="banner-full-image"><img src="{{ asset('frontend/images/icon-ai3.png') }}" alt=""></div>
-            </div>
-        </div>
-    </div>
-    <div class="section">
-        <div class="container">
-            <div class="text-center" style="margin-bottom: 50px">
-                <h2 class="h3">Beneficier des services de ALLO IMMO</h2>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col col-lg-10">
-                    <div id="faqAccordion" class="faq-accordion" data-children=".faq-item">
-                        {% for faq in faqs %}
-                            <div class="faq-item">
-                                <a data-toggle="collapse" data-parent="#faqAccordion" href="#faqItem{{ loop.index }}" aria-expanded="{% if (loop.index == 1) %}true{% else %}false{% endif %}" aria-controls="faqItem{{ loop.index }}">{{ faq.question }}</a>
-                                <div id="faqItem{{ loop.index }}" class="collapse {% if (loop.index == 1) %}show{% endif %} faq-item-content" role="tabpanel">
-                                    <div>
-                                        <p>
-                                            {{ faq.reponse|raw }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <!--<div class="text-center mt-3">
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalQuestion"><i class="icon-support"></i>Faire la promotion de son bien immobilier</a>
-                    </div>-->
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
 
-{% block meta %}
-    <meta name="description" content="">
-    <meta name="author" content="">
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <ul class="slider-single list-unstyled js-slider-single">
+                        {% for publicite in publicites %}
+                            <li><img src="{{ vich_uploader_asset(publicite, 'imageFile') }}" alt="" class="img-fluid"></li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="row" style="margin-top: 50px">
+                        <div class="col-sm-12">
+                            <h4>Nous suivre</h4>
+                            <div class="text-center" style="margin-left: 25px">
+                                <a href="#"><i class="icon-facebook-logo fa-2x"></i></a>
+                                <a href="#"><i class="icon-twitter-logo1 fa-2x"></i></a>
+                                <a href="#"><i class="icon-google-logo fa-2x"></i></a>
+                                <a href="#"><i class="icon-instagram-logo fa-2x"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
