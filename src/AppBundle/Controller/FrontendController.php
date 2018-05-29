@@ -88,9 +88,9 @@ class FrontendController extends Controller
     /**
      * Listes des biens pour l'annuaires
      *
-     * @Route("/annuaire", name="frontend_annuaire")
+     * @Route("/annonces", name="frontend_annonce")
      */
-    public function annuaireAction()
+    public function annonceAction()
     {
         $em = $this->getDoctrine()->getManager();
         $typebiens = $em->getRepository('AppBundle:Typebien')
@@ -141,6 +141,37 @@ class FrontendController extends Controller
             'services' => $services,
             'modes' => $modes,
             'page'  => $page,
+            'publicites'  => $publicites,
+        ]);
+    }
+
+    /**
+     * Liste des articles de conseils et guides
+     *
+     * @Route("/{page}/conseils-et-guide/", name="frontend_conseils")
+     */
+    public function conseilAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository('AppBundle:Article')
+            ->findArticleByRubrique($slug = 'conseil', $offset = 0, $limit = 6);
+        $typebiens = $em->getRepository('AppBundle:Typebien')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $zones = $em->getRepository('AppBundle:Zone')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $services = $em->getRepository('AppBundle:Service')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $modes = $em->getRepository('AppBundle:Mode')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,4);
+
+
+        return $this->render("frontend/conseil.html.twig", [
+            'typebiens' => $typebiens,
+            'zones' => $zones,
+            'services' => $services,
+            'modes' => $modes,
+            'articles'  => $articles,
             'publicites'  => $publicites,
         ]);
     }
