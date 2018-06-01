@@ -11298,3 +11298,62 @@ iframe.iframe-facebook {
 .btn-domaine{
   width: 250px;
 }
+
+.service-block .special-card-2-info {
+  height: 220px;
+}
+
+.service-block .special-card-2-info > ul {
+  height: 125px;
+}
+
+.service-titre{
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+  line-height: 50px;
+}
+
+.autre-service{
+  font-size: 13px;
+  line-height: 35px;
+  font-style: italic;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.badge-service{
+  float: right;
+  color: #af3c65;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.badge-domaine{
+  float: right;
+  color: #ffffff;
+  font-size: 0.9em;
+  font-weight: 600;
+  padding-right: 10px;
+}
+
+.section-annuaire{
+  background-color: rgba(224, 224, 224, 0.6);
+}
+
+.section-annuaire .container{
+  padding-bottom: 50px;
+}
+
+.service-liste{
+  background-color: #ffffff;
+}
+

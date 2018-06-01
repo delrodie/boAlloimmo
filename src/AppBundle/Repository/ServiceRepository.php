@@ -21,4 +21,32 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Calcul du nombre de partenaire concernés par le service
+     */
+    public function cpteurPartenaire($service)
+    {
+        return $q = $this->createQueryBuilder('s')
+                        ->select('count(p.id)')
+                        ->innerJoin('s.partenaires', 'p')
+                        ->where('s.id = :service')
+                        ->setParameter('service', $service)
+                        ->getQuery()->getSingleScalarResult();
+            ;
+    }
+
+    /**
+     * Calcul du nombre de partenaire concernés par le service
+     */
+    public function cpteurDomainePartenaire($domaine)
+    {
+        return $q = $this->createQueryBuilder('s')
+            ->select('count(p.id)')
+            ->innerJoin('s.partenaires', 'p')
+            ->where('s.domaine = :domaine')
+            ->setParameter('domaine', $domaine)
+            ->getQuery()->getSingleScalarResult();
+        ;
+    }
 }

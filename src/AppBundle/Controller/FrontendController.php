@@ -105,7 +105,7 @@ class FrontendController extends Controller
         $biens = $em->getRepository('AppBundle:Bien')->findListBien(0, 9);
         $pagination = null;
 
-        return $this->render("frontend/annuaire.html.twig", [
+        return $this->render("frontend/annonce.html.twig", [
             'biens' => $biens,
             'pagination'    => $pagination,
             'typebiens' => $typebiens,
@@ -175,6 +175,5 @@ class FrontendController extends Controller
             'publicites'  => $publicites,
         ]);
     }
-
 
 }

@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,7 +30,7 @@ class BaseType extends AbstractType
                   )
             ))
             ->add('description', CKEditorType::class)
-            ->add('statut')
+            ->add('statut', IntegerType::class)
             /*->add('imageFile', FileType::class, array(
                   'label' => "Telecharger l'illustration",
                   'required' => false,
