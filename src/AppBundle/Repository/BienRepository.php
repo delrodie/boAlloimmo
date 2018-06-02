@@ -63,6 +63,19 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * Liste des derniers bien et en promotion
+     */
+    public function findDernierBienEnPromo($limit, $offset)
+    {
+        return $q = $this->QueryBien()
+                         ->addOrderBy('b.promotion', 'ASC')
+                         ->setFirstResult($offset)
+                         ->setMaxResults($limit)
+                         ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * fonction de recherche
      */
     public function QueryBien()

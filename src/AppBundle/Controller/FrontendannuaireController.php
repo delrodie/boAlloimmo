@@ -26,7 +26,10 @@ class FrontendannuaireController extends Controller
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
 
         $biens = $em->getRepository('AppBundle:Bien')
-            ->findBy(array('promotion' => 1));
+            ->findDernierBienEnPromo(6, 0);
+
+        $promotions = $em->getRepository('AppBundle:Bien')
+            ->findBienEnPromo(0, 6);
 
         $domaines = $em->getRepository('AppBundle:Domaine')
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
@@ -39,6 +42,7 @@ class FrontendannuaireController extends Controller
             'services' => $services,
             'modes' => $modes,
             'biens' => $biens,
+            'promotions' => $promotions,
         ]);
 
     }
