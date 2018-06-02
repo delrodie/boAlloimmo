@@ -155,4 +155,44 @@ class FrontendannuaireController extends Controller
         ]);
     }
 
+    /**
+     * Affichage du partenaire
+     *
+     * @Route("/annuaire/{domaine}/{service}/{annee}/{slug}", name="fannuaire_partenaire")
+     */
+    public function partenaireAction($domaine, $service, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $typebiens = $em->getRepository('AppBundle:Typebien')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $zones = $em->getRepository('AppBundle:Zone')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $services = $em->getRepository('AppBundle:Service')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $modes = $em->getRepository('AppBundle:Mode')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+
+        $domaine = $em->getRepository('AppBundle:Domaine')->findOneBy(array('slug' => $domaine));
+        $service = $em->getRepository('AppBundle:Service')->findOneBy(array('slug'=> $service));
+        $partenaire = $em->getRepository('AppBundle:Partenaire')->findOneBy(array('slug'=> $slug));
+
+        $promotions = $em->getRepository('AppBundle:Bien')
+            ->findBienEnPromo(0, 4);
+        $biens = $em->getRepository('AppBundle:Bien')
+            ->findBienPartenaire($slug, 6, 0);
+
+        return $this->render('frontend/annuaire_partenaire.html.twig',[
+            'domaine' => $domaine,
+            'typebiens' => $typebiens,
+            'zones' => $zones,
+            'services' => $services,
+            'service' => $service,
+            'modes' => $modes,
+            'promotions' => $promotions,
+            'biens' => $biens,
+            'partenaire' => $partenaire,
+            'service' => $service,
+        ]);
+    }
+
 }
