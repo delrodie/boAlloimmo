@@ -109,4 +109,50 @@ class FrontendannuaireController extends Controller
 
     }
 
+    /**
+     * Liste des prestataires du service
+     *
+     * @Route("/annuaire/{domaine}/{slug}/{page}", name="fannuaire_liste_partenaires")
+     */
+    public function listeAction($domaine, $slug, $page = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $typebiens = $em->getRepository('AppBundle:Typebien')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $zones = $em->getRepository('AppBundle:Zone')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $services = $em->getRepository('AppBundle:Service')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $modes = $em->getRepository('AppBundle:Mode')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+
+        $partenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireBy($slug, 10, 0); //dump($partenaires); die();
+        $listeservices = $em->getRepository('AppBundle:Service')->findListeServiceBy($domaine);
+        $domaine = $em->getRepository('AppBundle:Domaine')->findOneBy(array('slug' => $domaine));
+        $autreDomaines = $em->getRepository('AppBundle:Domaine')->findAutreDomaine($domaine);
+        $service = $em->getRepository('AppBundle:Service')->findOneBy(array('slug'=> $slug));
+
+        $promotions = $em->getRepository('AppBundle:Bien')
+            ->findBienEnPromo(0, 4);
+        $domaines = $em->getRepository('AppBundle:Domaine')
+            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $biens = $em->getRepository('AppBundle:Bien')
+            ->findDernierBienEnPromo(4, 0);
+
+        return $this->render('frontend/annuaire_liste_prestataires.html.twig',[
+            'domaine' => $domaine,
+            'autreDomaines' => $autreDomaines,
+            'partenaires'    => $partenaires,
+            'typebiens' => $typebiens,
+            'zones' => $zones,
+            'services' => $services,
+            'service' => $service,
+            'modes' => $modes,
+            'listeservices' => $listeservices,
+            'domaines' => $domaines,
+            'promotions' => $promotions,
+            'biens' => $biens,
+        ]);
+    }
+
 }

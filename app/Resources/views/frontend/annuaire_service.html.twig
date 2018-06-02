@@ -1,7 +1,7 @@
     <ul class="marker-list-sm mt-2">
         {% for service in services %}
             <li>
-                <a href="#">{{ service.libelle }} </a>
+                <a href="{{ path('fannuaire_liste_partenaires', {'domaine': service.domaine.slug, 'slug': service.slug, 'page': null}) }}">{{ service.libelle }} </a>
                 <span class="badge-service">
                     {{ render(url('fnombre_partenaire_service', {'service': service.id})) }}
                 </span>

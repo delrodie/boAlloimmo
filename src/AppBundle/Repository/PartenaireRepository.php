@@ -20,4 +20,20 @@ class PartenaireRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Liste des partenaires selon le service
+     */
+    public function findListePartenaireBy($service, $limit, $offset)
+    {
+        return $this->createQueryBuilder('p')
+                    ->innerJoin('p.services', 's')
+                    ->where('s.slug = :service')
+                    ->orderBy('p.nom', 'ASC')
+                    ->setFirstResult($offset)
+                    ->setMaxResults($limit)
+                    ->setParameter('service', $service)
+                    ->getQuery()->getResult();
+            ;
+    }
 }

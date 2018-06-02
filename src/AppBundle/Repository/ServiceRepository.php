@@ -49,4 +49,18 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()->getSingleScalarResult();
         ;
     }
+
+    /**
+     * Liste des services selon le domaine
+     */
+    public function findListeServiceBy($domaine)
+    {
+        return $this->createQueryBuilder('s')
+                    ->innerJoin('s.domaine', 'd')
+                    ->where('d.slug = :domaine')
+                    ->orderBy('s.libelle', 'ASC')
+                    ->setParameter('domaine', $domaine)
+                    ->getQuery()->getResult();
+            ;
+    }
 }

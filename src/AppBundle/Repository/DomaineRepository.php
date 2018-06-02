@@ -20,4 +20,17 @@ class DomaineRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Liste des autres domaines
+     */
+    public function findAutreDomaine($domaine)
+    {
+        return $this->createQueryBuilder('d')
+                    ->where('d.slug <> :domaine')
+                    ->orderBy('d.libelle', 'ASC')
+                    ->setParameter('domaine', $domaine)
+                    ->getQuery()->getResult();
+            ;
+    }
 }

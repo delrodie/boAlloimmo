@@ -10687,7 +10687,7 @@ a.link-whatsapp:hover [class*='icon-'] {
     margin-bottom: 0; }
   .review-box-text {
     font-size: 15px;
-    line-height: 28px; }
+    line-height: 20px; }
   .review-box-date {
     font-size: 14px;
     line-height: 28px;
@@ -10695,16 +10695,16 @@ a.link-whatsapp:hover [class*='icon-'] {
     white-space: nowrap; }
   .review-box-bot {
     font-size: 14px;
-    line-height: 26px; }
+    line-height: 20px; }
     .review-box-bot b {
       font-weight: 600; }
-    .review-box-bot [class*='icon-'] {
+    .review-box-bot [class*='icon-'], .review-box-bot [class*='fa'] {
       position: relative;
       top: 1px;
       color: #af3c65;
       padding-right: 15px; }
   .review-box-text:not(:first-child), .review-box-title:not(:first-child), .review-box-bot:not(:first-child) {
-    margin-top: 26px; }
+    margin-top: 15px; }
   .review-box-helpful > * {
     padding-right: 10px; }
   .review-box-helpful a {
@@ -11303,8 +11303,16 @@ iframe.iframe-facebook {
   height: 220px;
 }
 
+.special-card-2-info .domaine {
+  height: auto;
+}
+
 .service-block .special-card-2-info > ul {
   height: 125px;
+}
+
+.service-block .special-card-2-info > ul.domaine {
+  height: auto;
 }
 
 .service-titre{
@@ -11355,5 +11363,28 @@ iframe.iframe-facebook {
 
 .service-liste{
   background-color: #ffffff;
+}
+
+.btn-details {
+  color: #af3c65;
+  background-color: #ffffff;
+  border: solid 1px ;
+  border-color: #af3c65; }
+.btn-details:hover {
+  color: #fff;
+  background-color: #933255;
+  border-color: #892f4f; }
+
+.review-box-text {
+  border-top: solid 1px #cccc;
+  width: 100%;
+}
+
+.review-box-text p {
+  padding-top: 10px;
+}
+
+.recherche-alerte{
+  color: #af3c65;
 }
 
