@@ -604,7 +604,7 @@
                                 <ul class="marker-list-sm mt-2 domaine">
                                     {% for domaine in autreDomaines %}
                                         <li>
-                                            <a href="#">{{ domaine.libelle }}</a>
+                                            <a href="{{ path('fannuaire_domaine_partenaire', {'slug': domaine.slug, 'page': 1}) }}">{{ domaine.libelle }}</a>
                                             <span class="badge-service">
                                                 {{ render(url('fnombre_partenaire_domaine', {'domaine': domaine.id})) }}
                                             </span>

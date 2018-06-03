@@ -36,4 +36,21 @@ class PartenaireRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult();
             ;
     }
+
+    /**
+     * Liste des partenaires selon le domaine
+     */
+    public function findListePartenaireByDomaine($slug, $limit, $offset)
+    {
+        return $this->createQueryBuilder('p')
+                    ->innerJoin('p.services', 's')
+                    ->innerJoin('s.domaine', 'd')
+                    ->where('d.slug = :slug')
+                    ->orderBy('p.nom', 'ASC')
+                    ->setFirstResult($offset)
+                    ->setMaxResults($limit)
+                    ->setParameter('slug', $slug)
+                    ->getQuery()->getResult()
+            ;
+    }
 }
