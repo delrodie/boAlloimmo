@@ -2,65 +2,22 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Base controller.
+ *
+ * @Route("recherche")
+ */
 class FRechercheController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
-     */
-    public function indexAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $sliders = $em->getRepository('AppBundle:Slider')
-                        ->findBy(array('statut' => 1), array('id' => 'DESC'), 4, 0);
-        $typebiens = $em->getRepository('AppBundle:Typebien')
-                        ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $zones = $em->getRepository('AppBundle:Zone')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $services = $em->getRepository('AppBundle:Service')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $modes = $em->getRepository('AppBundle:Mode')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $domaines = $em->getRepository('AppBundle:Domaine')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $biens = $em->getRepository('AppBundle:Bien')->findListBien(0, 6);
-        $articleServices = $em->getRepository('AppBundle:Article')
-            ->findArticleByRubrique($slug = 'service', $offset = 0, $limit = 3);
-        $articlePresentations = $em->getRepository('AppBundle:Article')
-            ->findArticleByRubrique($slug = 'somme', $offset = 0, $limit = 1);
-        $articleConseils = $em->getRepository('AppBundle:Article')
-            ->findArticleByRubrique($slug = 'conseil', $offset = 0, $limit = 2);
-        $faqs = $em->getRepository('AppBundle:Faq')
-            ->findBy(array('statut' => 1), array('id' => 'ASC'));
-        $promotions = $em->getRepository('AppBundle:Bien')->findBienEnPromo(0,1);
-        $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,4);
-        //dump($promotions);die();
-
-        return $this->render('default/index.html.twig', [
-            'sliders' => $sliders,
-            'typebiens' => $typebiens,
-            'zones' => $zones,
-            'services' => $services,
-            'modes' => $modes,
-            'domaines' => $domaines,
-            'biens' => $biens,
-            'articleServices' => $articleServices,
-            'articlePresentations' => $articlePresentations,
-            'articleConseils' => $articleConseils,
-            'faqs' => $faqs,
-            'promotions' => $promotions,
-            'publicites' => $publicites,
-        ]);
-    }
-
-    /**
      * Affichage du formulaire de recherche
      *
-     * @Route("/recherche/", name="rfrontend_principale")
+     * @Route("/", name="rfrontend_principale")
      */
     public function rechercheAction()
     {
@@ -80,6 +37,35 @@ class FRechercheController extends Controller
             'services' => $services,
             'modes' => $modes,
         ]);
+
+    }
+
+    /**
+     * Requête de recherche du service par le formulaire
+     *
+     * @Route("/services/", name="rfrontend_service")
+     * @Method({"GET", "POST"})
+     */
+    public function serviceAction(Request $request)
+    {
+        $getService = $request->get('service');
+
+        $em = $this->getDoctrine()->getManager();
+
+        if ($getService){
+            $service = $em->getRepository('AppBundle:Service')->findOneBy(array('libelle' => $getService));
+
+            return $this->redirectToRoute('fannuaire_liste_partenaires', [
+                'domaine'   => $service->getDomaine()->getSlug(),
+                'slug'      => $service->getSlug(),
+                'page'      => null,
+            ]);
+
+            dump($service);die();
+        }else {
+            return $this->redirectToRoute('frontend_annuaire');
+        }
+
 
     }
 }

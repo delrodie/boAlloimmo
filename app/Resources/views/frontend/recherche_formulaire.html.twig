@@ -215,7 +215,7 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-0">
 
-                        <form action="#">
+                        <form action="{{ path('rfrontend_service') }}" method="get" name="recherche_service">
                             <div class="row">
                                 <div class="col-12 col-md-7 mt-1 mt-md-0">
                                     <div class="popover-markup popover-2">
@@ -226,7 +226,7 @@
                                             {% for service in services %}
                                                 <div class="form-check">
                                                     <label class="custom-control custom-radio">
-                                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ service.libelle }}">
+                                                        <input class="form-check-input custom-control-input js-radio-room" name="service" type="radio" value="{{ service.libelle }}">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">{{ service.libelle }}</span>
                                                     </label>
@@ -236,7 +236,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6 col-md-12 col-lg-auto text-center mt-1 mt-lg-0 col-btn">
-                                    <button class="btn btn-primary">Rechercher</button>
+                                    <button type="submit" class="btn btn-primary">Rechercher</button>
                                 </div>
                             </div>
                         </form>

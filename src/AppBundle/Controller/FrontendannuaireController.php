@@ -6,12 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Base controller.
+ *
+ * @Route("annuaire")
+ */
 class FrontendannuaireController extends Controller
 {
     /**
      * Liste des services selon le domaine
      *
-     * @Route("/annuaire/", name="frontend_annuaire")
+     * @Route("/", name="frontend_annuaire")
      */
     public function annuaireAction()
     {
@@ -38,7 +43,7 @@ class FrontendannuaireController extends Controller
     /**
      * Liste des services selon le domaine
      *
-     * @Route("/annuaire/{domaine}/domaine", name="fannuaire_domaine")
+     * @Route("/{domaine}/domaine", name="fannuaire_domaine")
      */
     public function domaineAction($domaine)
     {
@@ -55,7 +60,7 @@ class FrontendannuaireController extends Controller
     /**
      * Nombre de services par domaine
      *
-     * @Route("/annuaire/domaine/compteur/{domaine}", name="fannuaire_compteur_service")
+     * @Route("/domaine/compteur/{domaine}", name="fannuaire_compteur_service")
      */
     public function compteurAction($domaine)
     {
@@ -100,7 +105,7 @@ class FrontendannuaireController extends Controller
     /**
      * Liste des prestataires du service
      *
-     * @Route("/annuaire/{domaine}/{slug}/{page}", name="fannuaire_liste_partenaires")
+     * @Route("/{domaine}/{slug}/{page}", name="fannuaire_liste_partenaires")
      */
     public function listeAction($domaine, $slug, $page = null)
     {
@@ -146,7 +151,7 @@ class FrontendannuaireController extends Controller
     /**
      * Affichage du partenaire
      *
-     * @Route("/annuaire/{domaine}/{service}/{annee}/{slug}", name="fannuaire_partenaire")
+     * @Route("/{domaine}/{service}/{annee}/{slug}", name="fannuaire_partenaire")
      */
     public function partenaireAction($domaine, $service, $slug)
     {

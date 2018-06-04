@@ -10,7 +10,7 @@ class FrontendController extends Controller
     /**
      * Affichage du bien selectionné
      *
-     * @Route("/{typebien}/{slug}", name="frontend_bien")
+     * @Route("/page/{typebien}/{slug}", name="frontend_bien")
      */
     public function bienAction(Request $request, $typebien, $slug)
     {
