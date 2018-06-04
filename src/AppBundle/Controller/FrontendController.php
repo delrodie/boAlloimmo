@@ -17,14 +17,6 @@ class FrontendController extends Controller
         $em = $this->getDoctrine()->getManager();
         $bien = $em->getRepository('AppBundle:Bien')->findOneBy(array('slug' => $slug));
         $similaires = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $bien->getTypebien()->getId()), array('slug' => 'DESC'), 4, 0);
-        $typebiens = $em->getRepository('AppBundle:Typebien')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $zones = $em->getRepository('AppBundle:Zone')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $services = $em->getRepository('AppBundle:Service')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $modes = $em->getRepository('AppBundle:Mode')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC')); //dump($similaires);die();
         $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $bien->getId()));
         //dump($photos);die();
 
@@ -35,10 +27,6 @@ class FrontendController extends Controller
             return $this->render("frontend/immeuble.html.twig", [
                 'immeuble' => $immeuble,
                 'similaires'    => $similaires,
-                'typebiens' => $typebiens,
-                'zones' => $zones,
-                'services' => $services,
-                'modes' => $modes,
                 'photos' => $photos,
             ]);
 
@@ -48,10 +36,6 @@ class FrontendController extends Controller
             return $this->render("frontend/appartement.html.twig", [
                 'appartement' => $appartement,
                 'similaires'    => $similaires,
-                'typebiens' => $typebiens,
-                'zones' => $zones,
-                'services' => $services,
-                'modes' => $modes,
                 'photos' => $photos,
             ]);
 
@@ -61,10 +45,6 @@ class FrontendController extends Controller
             return $this->render("frontend/villa.html.twig", [
                 'villa' => $villa,
                 'similaires'    => $similaires,
-                'typebiens' => $typebiens,
-                'zones' => $zones,
-                'services' => $services,
-                'modes' => $modes,
                 'photos' => $photos,
             ]);
         }else{
@@ -73,10 +53,6 @@ class FrontendController extends Controller
             return $this->render("frontend/autrebien.html.twig", [
                 'autrebien' => $autrebien,
                 'similaires'    => $similaires,
-                'typebiens' => $typebiens,
-                'zones' => $zones,
-                'services' => $services,
-                'modes' => $modes,
                 'photos' => $photos,
             ]);
 
@@ -93,14 +69,6 @@ class FrontendController extends Controller
     public function annonceAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $typebiens = $em->getRepository('AppBundle:Typebien')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $zones = $em->getRepository('AppBundle:Zone')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $services = $em->getRepository('AppBundle:Service')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $modes = $em->getRepository('AppBundle:Mode')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
 
         $biens = $em->getRepository('AppBundle:Bien')->findListBien(0, 9);
         $pagination = null;
@@ -108,10 +76,6 @@ class FrontendController extends Controller
         return $this->render("frontend/annonce.html.twig", [
             'biens' => $biens,
             'pagination'    => $pagination,
-            'typebiens' => $typebiens,
-            'zones' => $zones,
-            'services' => $services,
-            'modes' => $modes,
         ]);
     }
 
@@ -124,22 +88,10 @@ class FrontendController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository('AppBundle:Article')->findOneBy(array('slug'=> $slug));
-        $typebiens = $em->getRepository('AppBundle:Typebien')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $zones = $em->getRepository('AppBundle:Zone')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $services = $em->getRepository('AppBundle:Service')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $modes = $em->getRepository('AppBundle:Mode')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
         $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,4);
 
 
         return $this->render("frontend/page.html.twig", [
-            'typebiens' => $typebiens,
-            'zones' => $zones,
-            'services' => $services,
-            'modes' => $modes,
             'page'  => $page,
             'publicites'  => $publicites,
         ]);
@@ -155,22 +107,10 @@ class FrontendController extends Controller
         $em = $this->getDoctrine()->getManager();
         $articles = $em->getRepository('AppBundle:Article')
             ->findArticleByRubrique($slug = 'conseil', $offset = 0, $limit = 6);
-        $typebiens = $em->getRepository('AppBundle:Typebien')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $zones = $em->getRepository('AppBundle:Zone')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $services = $em->getRepository('AppBundle:Service')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $modes = $em->getRepository('AppBundle:Mode')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
         $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,4);
 
 
         return $this->render("frontend/conseil.html.twig", [
-            'typebiens' => $typebiens,
-            'zones' => $zones,
-            'services' => $services,
-            'modes' => $modes,
             'articles'  => $articles,
             'publicites'  => $publicites,
         ]);

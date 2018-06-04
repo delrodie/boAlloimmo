@@ -16,14 +16,6 @@ class FrontendannuaireController extends Controller
     public function annuaireAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $typebiens = $em->getRepository('AppBundle:Typebien')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $zones = $em->getRepository('AppBundle:Zone')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $services = $em->getRepository('AppBundle:Service')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
-        $modes = $em->getRepository('AppBundle:Mode')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
 
         $biens = $em->getRepository('AppBundle:Bien')
             ->findDernierBienEnPromo(6, 0);
@@ -37,10 +29,6 @@ class FrontendannuaireController extends Controller
         return $this->render("frontend/annuaire.html.twig", [
             'domaines' => $domaines,
             //'pagination'    => $pagination,
-            'typebiens' => $typebiens,
-            'zones' => $zones,
-            'services' => $services,
-            'modes' => $modes,
             'biens' => $biens,
             'promotions' => $promotions,
         ]);
