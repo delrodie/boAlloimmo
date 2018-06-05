@@ -7723,7 +7723,9 @@ ul.services-list {
   right: 0;
   z-index: 1;
   border: 1px solid #d8d8d8;
-  border-radius: 2px; }
+  border-radius: 2px;
+  overflow-y: auto;
+  height: 250px;}
   .popover-content .form-group {
     margin-bottom: 12px; }
   .popover-content .form-group:last-child {
