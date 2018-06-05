@@ -10,4 +10,36 @@ namespace AppBundle\Repository;
  */
 class ImmeubleRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Recherche des immeubles
+     */
+    public function findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, $limit, $offset)
+    { //die($mode);
+        return $this->createQueryBuilder('i')
+            ->addSelect('b')
+            ->addSelect('z')
+            ->addSelect('m')
+            ->innerJoin('i.bien', 'b')
+            ->innerJoin('b.typebien', 't')
+            ->innerJoin('b.zone', 'z')
+            ->innerJoin('b.mode', 'm')
+            ->where('t.libelle = :typebien')
+            ->andWhere($whereZone)
+            ->andWhere($whereMin)
+            ->andWhere($whereMax)
+            ->andWhere($wherePiece)
+            ->andWhere('m.libelle = :mode')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->setParameters(array(
+                'typebien'  => $typebien,
+                'localite'  => $localisation,
+                'min'       => $min,
+                'max'       => $max,
+                'piece'     => $nbPiece,
+                'mode'      => $mode,
+            ))
+            ->getQuery()->getResult()
+            ;
+    }
 }

@@ -4,7 +4,7 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active tab1"><a href="#immo" aria-controls="immo" role="tab" data-toggle="tab">Acheter immo neuf</a></li>
             <li role="presentation" class="tab2"><a href="#services" aria-controls="services" role="tab" data-toggle="tab">Services equipements</a></li>
-            <li role="presentation" class="tab3"><a href="#locations" aria-controls="locations" role="tab" data-toggle="tab">ventes et locations</a></li>
+            <li role="presentation" class="tab3"><a href="#locations" aria-controls="locations" role="tab" data-toggle="tab">Location immo</a></li>
         </ul>
 
         <div class="tab-content">
@@ -247,52 +247,38 @@
                 <div class="row">
                     <div class="col-md-12 col-md-offset-0">
 
-                        <form action="#">
+                        <form action="{{ path('rfrontend_location') }}" method="get">
                             <div class="row">
-                                <div class="col-6 col-md-auto mt-1 mt-md-0">
-                                    <div class="popover-markup popover-2">
-                                        <div class="trigger form-group form-location">
-                                            <div class="form-control" id="roomType">Mode</div>
-                                        </div>
-                                        <div class="popover-content">
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Tous les modes">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">Tous les modes</span>
-                                                </label>
-                                            </div>
-                                            {% for mode in modes %}
-                                                <div class="form-check">
-                                                    <label class="custom-control custom-radio">
-                                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ mode.libelle }}">
-                                                        <span class="custom-control-indicator"></span>
-                                                        <span class="custom-control-description">{{ mode.libelle }}</span>
-                                                    </label>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-8 col-md-auto mt-1 mt-md-0">
                                     <div class="popover-markup popover-2">
                                         <div class="trigger form-group form-location">
                                             <div class="form-control" id="roomType">Type de bien</div>
                                         </div>
                                         <div class="popover-content">
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="Tous les biens">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">Tous les biens</span>
-                                                </label>
-                                            </div>
                                             {% for typebien in typebiens %}
                                                 <div class="form-check">
                                                     <label class="custom-control custom-radio">
-                                                        <input class="form-check-input custom-control-input js-radio-room input-immo" name="room-type" type="radio" value="{{ typebien.libelle }}">
+                                                        <input class="form-check-input custom-control-input js-radio-room input-immo" name="typebien" type="radio" value="{{ typebien.libelle }}">
                                                         <span class="custom-control-indicator"></span>
                                                         <span class="custom-control-description">{{ typebien.libelle }}</span>
+                                                    </label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-md-auto mt-1 mt-md-0">
+                                    <div class="popover-markup popover-2">
+                                        <div class="trigger form-group form-location">
+                                            <div class="form-control" id="roomType">Localisation</div>
+                                        </div>
+                                        <div class="popover-content">
+                                            {% for zone in zones %}
+                                                <div class="form-check">
+                                                    <label class="custom-control custom-radio">
+                                                        <input class="form-check-input custom-control-input js-radio-room" name="localisation" type="radio" value="{{ zone.libelle }}">
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">{{ zone.libelle }}</span>
                                                     </label>
                                                 </div>
                                             {% endfor %}
@@ -305,78 +291,83 @@
                                             <div class="form-control" id="roomType">Nombre de pièces</div>
                                         </div>
                                         <div class="popover-content">
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="5+">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">Plus de 5 pièces</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="1 pièce">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">1 pièce</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="2 pièces">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">2 pièces</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="3 pièces">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">3 pièces</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="4 pièces">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">4 pièces</span>
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="5 pièces">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">5 pièces</span>
-                                                </label>
-                                            </div>
+                                            {% for i in range(1,6) %}
+                                                {% if (loop.first) %}
+                                                    <div class="form-check">
+                                                        <label class="custom-control custom-radio">
+                                                            <input class="form-check-input custom-control-input js-radio-room" name="piece" type="radio" value="{{ i }}">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">{{ i }} pièce</span>
+                                                        </label>
+                                                    </div>
+                                                {% elseif (loop.last) %}
+                                                    <div class="form-check">
+                                                        <label class="custom-control custom-radio">
+                                                            <input class="form-check-input custom-control-input js-radio-room" name="piece" type="radio" value="{{ i }}+">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">plus de {{ i }} pièces</span>
+                                                        </label>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="form-check">
+                                                        <label class="custom-control custom-radio">
+                                                            <input class="form-check-input custom-control-input js-radio-room" name="piece" type="radio" value="{{ i }}">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">{{ i }} pièces</span>
+                                                        </label>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-md-auto mt-1 mt-md-0">
                                     <div class="popover-markup popover-2">
                                         <div class="trigger form-group form-location">
-                                            <div class="form-control" id="roomType">Localisation</div>
+                                            <div class="form-control" id="roomType">Budget minimum</div>
                                         </div>
                                         <div class="popover-content">
-                                            <div class="form-check">
-                                                <label class="custom-control custom-radio">
-                                                    <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Partout">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">Partout</span>
-                                                </label>
-                                            </div>
-                                            {% for zone in zones %}
+                                            {% for budget in range(low=50000, high=1500000, step=150000) %}
                                                 <div class="form-check">
                                                     <label class="custom-control custom-radio">
-                                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="{{ zone.libelle }}">
+                                                        <input class="form-check-input custom-control-input js-radio-room" name="minimum" type="radio" value="{{ budget}}">
                                                         <span class="custom-control-indicator"></span>
-                                                        <span class="custom-control-description">{{ zone.libelle }}</span>
+                                                        <span class="custom-control-description">{{ budget|number_format(0,'','.') }}</span>
                                                     </label>
                                                 </div>
                                             {% endfor %}
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-6 col-md-auto mt-1 mt-md-0">
+                                    <div class="popover-markup popover-2">
+                                        <div class="trigger form-group form-location">
+                                            <div class="form-control" id="roomType">Budget maximum</div>
+                                        </div>
+                                        <div class="popover-content">
+                                            {% for budget in range(low=100000, high=2300000, step=200000) %}
+                                                <div class="form-check">
+                                                    <label class="custom-control custom-radio">
+                                                        <input class="form-check-input custom-control-input js-radio-room" name="maximum" type="radio" value="{{ budget }}">
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">{{ budget|number_format(0,'','.') }}</span>
+                                                    </label>
+                                                </div>
+                                                {% if (loop.last) %}
+                                                    <div class="form-check">
+                                                        <label class="custom-control custom-radio">
+                                                            <input class="form-check-input custom-control-input js-radio-room" name="maximum" type="radio" value="25000000">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">{{ 25000000|number_format(0,'','.') }}</span>
+                                                        </label>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-6 col-md-12 col-lg-auto text-center mt-1 mt-lg-0 col-btn">
-                                    <button class="btn btn-primary">Rechercher</button>
+                                    <button type="submit" class="btn btn-primary">Rechercher</button>
                                 </div>
                             </div>
                         </form>

@@ -10,4 +10,37 @@ namespace AppBundle\Repository;
  */
 class VillaRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Recherche des villa
+     * findVilla($typebien, $limit, $offset)
+     */
+    public function findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, $limit, $offset)
+    { //die($mode);
+        return $this->createQueryBuilder('v')
+                    ->addSelect('b')
+                    ->addSelect('z')
+                    ->addSelect('m')
+                    ->innerJoin('v.bien', 'b')
+                    ->innerJoin('b.typebien', 't')
+                    ->innerJoin('b.zone', 'z')
+                    ->innerJoin('b.mode', 'm')
+                    ->where('t.libelle = :typebien')
+                    ->andWhere($whereZone)
+                    ->andWhere($whereMin)
+                    ->andWhere($whereMax)
+                    ->andWhere($wherePiece)
+                    ->andWhere('m.libelle = :mode')
+                    ->setFirstResult($offset)
+                    ->setMaxResults($limit)
+                    ->setParameters(array(
+                        'typebien'  => $typebien,
+                        'localite'  => $localisation,
+                        'min'       => $min,
+                        'max'       => $max,
+                        'piece'     => $nbPiece,
+                        'mode'      => $mode,
+                    ))
+                    ->getQuery()->getResult()
+            ;
+    }
 }

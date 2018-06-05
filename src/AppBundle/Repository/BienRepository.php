@@ -92,6 +92,48 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     *
+     */
+    public function findBienR($typebien, $whereZone, $localisation)
+    {
+        if (!$localisation) $localisation = null; //ump($localisation);die();
+        return $q = $this->createQueryBuilder('b')
+                    ->innerJoin('b.zone', 'z')
+                    ->where('b.typebien = :typebien')
+                    ->andWhere($whereZone)
+                    ->setParameters(array(
+                        'typebien' => $typebien,
+                        'localite'  => $localisation,
+                    ))
+                    ->getQuery()->getResult();
+            ;
+
+    }
+
+    /**
+     * Liste des biens selon la zone
+     */
+    public function findBienZone($localisation, $wherePrix, $min, $max, $mode, $limit, $offset)
+    {
+        return $this->QueryBien()
+                    ->innerJoin('b.zone', 'z')
+                    ->innerJoin('b.mode', 'm')
+                    ->where('z.libelle = :zone')
+                    ->andWhere('m.libelle = :mode')
+                    ->andWhere($wherePrix)
+                    ->setFirstResult($offset)
+                    ->setMaxResults($limit)
+                    ->setParameters(array(
+                        'zone'  => $localisation,
+                        'min'   => $min,
+                        'max'   => $max,
+                        'mode'  => $mode,
+                    ))
+                    ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * fonction de recherche
      */
     public function QueryBien()

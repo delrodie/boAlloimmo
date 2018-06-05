@@ -2,10 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Utils\Utilities;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Base controller.
@@ -60,12 +62,161 @@ class FRechercheController extends Controller
                 'slug'      => $service->getSlug(),
                 'page'      => null,
             ]);
-
-            dump($service);die();
         }else {
             return $this->redirectToRoute('frontend_annuaire');
         }
 
+    }
 
+    /**
+     * Recherche de la vente et location par le formulaire
+     *
+     * @Route("/vente/location/", name="rfrontend_location")
+     * @Method("GET")
+     */
+    public function locationAction(Request $request, Utilities $utilities)
+    {
+        $typebien = $request->get('typebien');
+        $piece = $request->get('piece');
+        $localisation = $request->get('localisation');
+        $min = $request->get('minimum');
+        $max = $request->get('maximum');
+
+        $em = $this->getDoctrine()->getManager();
+
+        if ($typebien or $piece or $localisation){
+            // Si le type de bien est selectionné veifier
+            // sinon verifier uniquement la localite
+            if ($typebien){
+                $mode = 'Location';
+                $typebiens = $em->getRepository('AppBundle:Typebien')->findOneBy(array('libelle'=> $typebien));
+                $resume = $utilities->resume($typebiens->getSlug(), 5, '', true);
+                $nbPiece = $utilities->resume($piece, 1, '', true);
+
+                //Test d'existence de la zone et formaulation de la requête
+                if ($localisation){
+                    $whereZone = 'z.libelle = :localite';
+                } else{
+                    $whereZone = 'z.libelle <> :localite';
+                    $localisation = 'a';
+                }
+
+                // Formulation de la requete du prix
+                if ($min){ $whereMin = 'b.prix >= :min'; }else { $whereMin = 'b.prix >= :min'; $min = 0;}
+                if ($max){ $whereMax = 'b.prix <= :max'; } else{ $whereMax = 'b.prix <= :max'; $max = 1000000000; }
+
+                // Verification du type de bien puis renvoie a la page correspondante a ce type de bien
+                if ($resume === 'immeu'){
+                    // Formulation de la requete du nombre de pièce
+                    if (!$nbPiece){
+                        $wherePiece = 'i.appartement > :piece'; $nbPiece = 0;
+                    } elseif ($nbPiece <= 5){ $wherePiece = 'i.appartement = :piece'; } else{ $wherePiece = 'i.appartement > :piece'; $nbPiece = 5;}
+
+                    $immeubles = $em->getRepository('AppBundle:Immeuble')
+                        ->findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, 9, 0)
+                    ;
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $pagination = null ;
+
+                    return $this->render('frontend/recherche_immeuble.html.twig',[
+                        'immeubles'        => $immeubles,
+                        'pagination'    => $pagination,
+                        'typebien'    => $typebien,
+                        'biens'    => $biens,
+                    ]);
+
+                }elseif ($resume === 'appar'){
+                    // Formulation de la requete du nombre de pièce
+                    if (!$nbPiece){
+                        $wherePiece = 'a.piece > :piece'; $nbPiece = 0;
+                    } elseif ($nbPiece <= 5){ $wherePiece = 'a.piece = :piece'; } else{ $wherePiece = 'a.piece > :piece'; $nbPiece = 5;}
+
+                    $appartements = $em->getRepository('AppBundle:Appartement')
+                        ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, 9, 0)
+                    ;
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $pagination = null ;
+
+                    return $this->render('frontend/recherche_appartement.html.twig',[
+                        'appartements'        => $appartements,
+                        'pagination'    => $pagination,
+                        'typebien'    => $typebien,
+                        'biens'    => $biens,
+                    ]);
+
+                }elseif ($resume === 'villa'){
+                    // Formulation de la requete du nombre de pièce
+                    if (!$nbPiece){
+                        $wherePiece = 'v.piece > :piece'; $nbPiece = 0;
+                    } elseif ($nbPiece <= 5){ $wherePiece = 'v.piece = :piece'; } else{ $wherePiece = 'v.piece > :piece'; $nbPiece = 5;}
+
+                    $villas = $em->getRepository('AppBundle:Villa')
+                        ->findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, 9, 0)
+                    ;
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $pagination = null ;
+
+                    return $this->render('frontend/recherche_villa.html.twig',[
+                        'villas'        => $villas,
+                        'pagination'    => $pagination,
+                        'typebien'    => $typebien,
+                        'biens'    => $biens,
+                    ]);
+
+                }else{
+                    $autrebiens = $em->getRepository('AppBundle:Autrebien')
+                        ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max, 9, 0)
+                    ;
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $pagination = null ;
+
+                    return $this->render('frontend/recherche_autrebien.html.twig',[
+                        'autrebiens'        => $autrebiens,
+                        'pagination'    => $pagination,
+                        'typebien'    => $typebien,
+                        'biens'    => $biens,
+                    ]);
+                }
+
+                $biens = $em->getRepository('AppBundle:Bien')->findBienR($typebiens->getId(), $whereZone, $localisation);
+
+                dump($biens);die();
+
+            }elseif ($localisation){
+                $mode = 'Location'; //die($min);
+
+                // Formulation de la requete du prix
+                //if ($min){ $whereMin = 'b.prix >= :min'; }else { $whereMin = 'b.prix >= :min'; $min = 0;}
+                //if ($max){ $whereMax = 'b.prix <= :max'; } else{ $whereMax = 'b.prix <= :max'; $max = 1000000000; }
+                if ($min and $max){
+                    $wherePrix = 'b.prix BETWEEN :min and :max';
+                }elseif ($min and !$max){
+                    $wherePrix = 'b.prix BETWEEN :min and :max';
+                    $max = 1000000000;
+                }elseif (!$min and $max){
+                    $wherePrix = 'b.prix BETWEEN :min and :max';
+                    $min = 0;
+                }else{
+                    $wherePrix = 'b.prix BETWEEN :min and :max';
+                    $min = 0; $max = 1000000000;
+                }
+
+                $zones = $em->getRepository('AppBundle:Bien')->findBienZone($localisation, $wherePrix, $min, $max, $mode, 9, 0);
+                $biens = $em->getRepository('AppBundle:Bien')->findDernierBienEnPromo(0,9);
+                $pagination = null; //dump($zones);die();
+
+                return $this->render('frontend/recherche_zone.html.twig',[
+                    'zones'        => $zones,
+                    'pagination'    => $pagination,
+                    'localisation'    => $localisation,
+                    'biens'    => $biens,
+                ]);
+            }else{
+                return $this->redirectToRoute('frontend_annonce');
+            }
+
+        }else{
+            return $this->redirectToRoute('frontend_annonce');
+        }
     }
 }
