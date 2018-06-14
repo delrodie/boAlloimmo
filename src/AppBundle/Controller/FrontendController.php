@@ -82,7 +82,7 @@ class FrontendController extends Controller
     /**
      * Affichage de la page qui sommes-nous
      *
-     * @Route("/page/{rubrique}/{slug}", name="frontend_page")
+     * @Route("/page/{rubrique}/{slug}/", name="frontend_page")
      */
     public function pageAction($slug)
     {
