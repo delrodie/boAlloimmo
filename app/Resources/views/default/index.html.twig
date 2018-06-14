@@ -180,7 +180,7 @@
                                 {{ articlePresentation.resume|raw }}
                             </div>
                             <div class="text-right text-sm-right mt-15">
-                                <a href="{{ path('frontend_page', {'rubrique': articlePresentation.rubrique, 'slug':articlePresentation.slug}) }}" class="btn btn-primary">Lire la suite</a>
+                                <a href="{{ path('frontend_page', {'rubrique': articlePresentation.rubrique.slug, 'slug':articlePresentation.slug}) }}" class="btn btn-primary">Lire la suite</a>
                             </div>
                         {% endfor %}
                         <div class="mt-5"></div>
@@ -188,7 +188,7 @@
                         <div class="row mt-1">
                             {% for service in articleServices %}
                                 <div class="col-4">
-                                    <a href="{{ path('frontend_page', {'rubrique': service.rubrique, 'slug':service.slug}) }}" class="icn-text">
+                                    <a href="{{ path('frontend_page', {'rubrique': service.rubrique.slug, 'slug':service.slug}) }}" class="icn-text">
                                         <div class="icn-text-circle"><i class="icon-support"></i></div>
                                         <h6>{{ service.titre }}</h6>
                                     </a>
@@ -221,7 +221,7 @@
                                 <img src="{{ vich_uploader_asset(articleConseil, 'imageFile') }}" alt="">
                             </div>
                             <div class="special-card-caption">
-                                <a href="{{ path('frontend_page', {'rubrique': articleConseil.rubrique, 'slug':articleConseil.slug}) }}" class="special-card-caption-header">{{ articleConseil.titre }}</a>
+                                <a href="{{ path('frontend_page', {'rubrique': articleConseil.rubrique.slug, 'slug':articleConseil.slug}) }}" class="special-card-caption-header">{{ articleConseil.titre }}</a>
                                 <div class="special-card-caption-text">
                                     <div class="special-card-txt">
                                         {{ articleConseil.resume|raw }}
