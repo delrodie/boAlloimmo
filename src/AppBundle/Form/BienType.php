@@ -76,6 +76,12 @@ class BienType extends AbstractType
                 ),
                 'required' => false,
             ))
+            ->add('affichagePrix', CheckboxType::class, array(
+                'attr'  => array(
+                    'class' => 'custom-control-input'
+                ),
+                'required' => false,
+            ))
             ->add('typebien', null, array(
                 'attr' => array(
                     'class' => 'form-control select-typebien',

@@ -89,6 +89,13 @@ class Bien
     private $promotion;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="affichage_prix", type="boolean", nullable=true)
+     */
+    private $affichagePrix;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="datedebut", type="string", length=255, nullable=true)
@@ -824,5 +831,29 @@ class Bien
     public function getPhotos()
     {
         return $this->photos;
+    }
+
+    /**
+     * Set affichagePrix
+     *
+     * @param boolean $affichagePrix
+     *
+     * @return Bien
+     */
+    public function setAffichagePrix($affichagePrix)
+    {
+        $this->affichagePrix = $affichagePrix;
+
+        return $this;
+    }
+
+    /**
+     * Get affichagePrix
+     *
+     * @return boolean
+     */
+    public function getAffichagePrix()
+    {
+        return $this->affichagePrix;
     }
 }

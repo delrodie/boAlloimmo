@@ -51,24 +51,44 @@
                                     {{ bien.resume|raw }}
                                 </div>
                                 <div class="row">
-                                    <div class="col">
-                                        <div class="room-price">
-                                            {{ bien.prix|number_format(0,'','.') }}
-                                        </div>
+                                  {% if bien.affichagePrix and bien.prix != 0 %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les détails">
+                                        <i class="fa fa-money"></i> <span class="">{{ bien.prix|number_format(0,'','.') }} FCFA</span>
+                                      </a>
                                     </div>
-                                    <div class="col-auto ml-auto">
-                                        <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
-                                        <div class="popover-content d-none">
-                                            <ul>
-                                                <li>{{ bien.zone }}</li>
-                                                <li>{{ bien.mode }}</li>
-                                            </ul>
-                                        </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les détails">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
+                                      </a>
                                     </div>
+                                  {% elseif (bien.prix == 0) %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les details">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
+                                      </a>
+                                    </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
+                                        <i class="fa fa-exclamation-circle"></i> <span class="">{{ bien.mode }}</span>
+                                      </a>
+                                    </div>
+                                  {% else %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
+                                      </a>
+                                    </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
+                                        <i class="fa fa-exclamation-circle"></i> <span class="">{{ bien.mode }}</span>
+                                      </a>
+                                    </div>
+                                  {% endif %}
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 {% endfor %}
             </div>
             {% if (pagination) %}

@@ -250,32 +250,54 @@
                             <div class="room-card-info">
                                 <div class="row">
                                     <div class="col">
-                                        <h3 class="room-type">{{ similaire.typebien }}</h3>
+                                        <h3 class="room-type">{{ similaire.titre }}</h3>
                                     </div>
+                                    {% if similaire.promotion %}
                                     <div class="col-auto ml-auto">
                                         <div class="room-card-attr">
                                             <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
                                         </div>
                                     </div>
+                                    {% endif %}
                                 </div>
                                 <div class="room-size mt-0">
                                     {{ similaire.resume|raw }}
                                 </div>
                                 <div class="row">
-                                    <div class="col">
-                                        <div class="room-price">
-                                            {{ similaire.prix|number_format(0,'','.') }}
-                                        </div>
+                                  {% if similaire.affichagePrix and similaire.prix != 0 %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
+                                        <i class="fa fa-money"></i> <span class="">{{ similaire.prix|number_format(0,'','.') }} FCFA</span>
+                                      </a>
                                     </div>
-                                    <div class="col-auto ml-auto">
-                                        <a href="#" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
-                                        <div class="popover-content d-none">
-                                            <ul>
-                                                <li>{{ similaire.zone }}</li>
-                                                <li>{{ similaire.mode }}</li>
-                                            </ul>
-                                        </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                      </a>
                                     </div>
+                                  {% elseif (similaire.prix == 0) %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les details">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                      </a>
+                                    </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                        <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
+                                      </a>
+                                    </div>
+                                  {% else %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                      </a>
+                                    </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                        <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
+                                      </a>
+                                    </div>
+                                  {% endif %}
                                 </div>
                             </div>
                         </div>
