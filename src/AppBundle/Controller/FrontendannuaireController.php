@@ -68,9 +68,11 @@ class FrontendannuaireController extends Controller
         $nombre = $em->getRepository('AppBundle:Service')
             ->findBy(array('domaine' => $domaine), array('libelle' => 'ASC'), 5, 5)
         ;//dump($nombre);die();
+        $domaines = $em->getRepository('AppBundle:Domaine')->findOneBy(array('id'=>$domaine));
 
         return $this->render("frontend/annuaire_autreservice.html.twig",[
             'nombre' => $nombre,
+            'domaine' => $domaines,
         ]);
     }
 

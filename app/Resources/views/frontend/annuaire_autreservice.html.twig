@@ -1,3 +1,3 @@
 {% if (nombre) %}
-    <a href="#" class="autre-service" >Voir les autres services</a>
+  <a href="{{ path('frontend_domaines_liste_partenaires', {'domaine': domaine.slug})}}" class="autre-service" >Voir les autres services</a>
 {% endif %}

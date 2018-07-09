@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Foire Aux Questions
+{% endblock %}
+
+{% block body %}
+  <div class="section section-booking">
+      <div class="booking-form-wrap">
+          {{ render(url('rfrontend_principale')) }}
+          <div class="booking-form-toggle d-md-none"><a href="tel:+225 03 25 54 47"><i class="icon-telephone"></i></a>
+              <div class="js-booking-form-toggle"><span>Detail</span><span class="close-text js-close-text">CLOSE</span></div>
+          </div>
+      </div>
+  </div>
+    <div class="section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 50px">
+                <h2 class="h3">Foire Aux Questions</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col col-lg-10">
+                    <div id="faqAccordion" class="faq-accordion" data-children=".faq-item">
+                        {% for faq in faqs %}
+                            <div class="faq-item">
+                                <a data-toggle="collapse" data-parent="#faqAccordion" href="#faqItem{{ loop.index }}" aria-expanded="{% if (loop.index == 1) %}true{% else %}false{% endif %}" aria-controls="faqItem{{ loop.index }}">{{ faq.question }}</a>
+                                <div id="faqItem{{ loop.index }}" class="collapse {% if (loop.index == 1) %}show{% endif %} faq-item-content" role="tabpanel">
+                                    <div>
+                                        <p>
+                                            {{ faq.reponse|raw }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!--<div class="text-center mt-3">
+                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalQuestion"><i class="icon-support"></i>Faire la promotion de son bien immobilier</a>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="">
+    <meta name="author" content="">
+{% endblock %}

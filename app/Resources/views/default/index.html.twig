@@ -82,26 +82,29 @@
                                         {{ promotion.resume|raw }}
                                     </div>
                                     <div class="row">
-                                        {% if promotion.affichagePrix %}
+                                        {% if promotion.affichagePrix and promotion.prix != 0 %}
                                           <div class="col">
                                             <i class="fa fa-money"></i> <span class="room-information">{{ promotion.prix|number_format(0,'','.') }}</span>
                                           </div>
-                                          <div class="col">
-                                            <i class="fa fa-map-signs"></i> <span class="room-information">{{ promotion.zone }}</span>
-                                          </div>
-                                        {% elseif (promotion.prix == 0) %}
-                                          <div class="col">
-                                            <i class="fa fa-map-signs"></i> <span class="room-information">{{ promotion.zone }}</span>
-                                          </div>
-                                          <div class="col">
-                                            <i class="fa fa-exclamation-circle"></i> <span class="room-information">{{ promotion.mode }}</span>
+                                          <div class="col-auto ml-auto">
+                                            <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                            <div class="popover-content d-none">
+                                                <ul>
+                                                    <li>{{ promotion.zone }}</li>
+                                                    <li>{{ promotion.mode }}</li>
+                                                </ul>
+                                            </div>
                                           </div>
                                         {% else %}
-                                          <div class="col">
-                                            <i class="fa fa-map-signs"></i> <span class="room-information">{{ promotion.zone }}</span>
-                                          </div>
-                                          <div class="col">
-                                            <i class="fa fa-exclamation-circle"></i> <span class="room-information">{{ promotion.mode }}</span>
+                                          <div class="col"></div>
+                                          <div class="col-auto ml-auto">
+                                            <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                            <div class="popover-content d-none">
+                                                <ul>
+                                                    <li>{{ promotion.zone }}</li>
+                                                    <li>{{ promotion.mode }}</li>
+                                                </ul>
+                                            </div>
                                           </div>
                                         {% endif %}
                                         <!--<div class="col">
@@ -166,37 +169,28 @@
                                 </div>
                                 <div class="row">
                                   {% if bien.affichagePrix and bien.prix != 0 %}
-                                    <div class="col room-information">
-                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les détails">
-                                        <i class="fa fa-money"></i> <span class="">{{ bien.prix|number_format(0,'','.') }} FCFA</span>
-                                      </a>
+                                    <div class="col">
+                                      <span class="room-information">{{ bien.prix|number_format(0,'','.') }} FCFA</span>
                                     </div>
-                                    <div class="col room-information">
-                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les détails">
-                                        <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
-                                      </a>
-                                    </div>
-                                  {% elseif (bien.prix == 0) %}
-                                    <div class="col room-information">
-                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les details">
-                                        <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
-                                      </a>
-                                    </div>
-                                    <div class="col room-information">
-                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
-                                        <i class="fa fa-exclamation-circle"></i> <span class="">{{ bien.mode }}</span>
-                                      </a>
+                                    <div class="col-auto ml-auto">
+                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                      <div class="popover-content d-none">
+                                          <ul>
+                                              <li>{{ bien.zone }}</li>
+                                              <li>{{ bien.mode }}</li>
+                                          </ul>
+                                      </div>
                                     </div>
                                   {% else %}
-                                    <div class="col room-information">
-                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
-                                        <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
-                                      </a>                                      
-                                    </div>
-                                    <div class="col room-information">
-                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
-                                        <i class="fa fa-exclamation-circle"></i> <span class="">{{ bien.mode }}</span>
-                                      </a>
+                                    <div class="col"></div>
+                                    <div class="col-auto ml-auto">
+                                      <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                      <div class="popover-content d-none">
+                                          <ul>
+                                              <li>{{ bien.zone }}</li>
+                                              <li>{{ bien.mode }}</li>
+                                          </ul>
+                                      </div>
                                     </div>
                                   {% endif %}
                                 </div>
@@ -209,8 +203,7 @@
     </div>
     <div class="section">
         <div class="container">
-            <div class="title-wrap text-center">
-            </div>
+            <div class="title-wrap text-center"></div>
         </div>
         <div class="full-bg-grey">
             <div class="container">
