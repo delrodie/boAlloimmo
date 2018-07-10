@@ -161,10 +161,12 @@
                                     <div class="col-sm-8 label">Cuisine</div>
                                     <div class="col-sm-4 value">{{ villa.cuisine }} m<sup>2</sup></div>
                                 </div>
+                                {% if (villa.bien.affichagePrix and villa.bien.prix != 0) %}
                                 <div class="text-center mt-2">
                                     <div class="info-box-price">{{ villa.bien.prix|number_format(0,'','.') }} Fcfa</div>
                                     <p class="p-sm mt-2"></p>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">

@@ -93,10 +93,12 @@
                                     <div class="col-sm-8 label">Nombre d'étages</div>
                                     <div class="col-sm-4 value">{{ immeuble.etage }}</div>
                                 </div>
+                                {% if (immeuble.bien.affichagePrix and immeuble.bien.prix != 0) %}
                                 <div class="text-center mt-2">
                                     <div class="info-box-price">{{ immeuble.bien.prix|number_format(0,'','.') }} Fcfa</div>
                                     <p class="p-sm mt-2"></p>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">
