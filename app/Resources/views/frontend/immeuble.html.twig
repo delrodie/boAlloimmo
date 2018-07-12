@@ -15,6 +15,47 @@
     </div>
     <div class="section">
         <div class="container">
+            
+            {% if (app.flashes('notice')) %}
+            <div class="modal fade" id="overlay">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-center">Votre message a été envoyé avec succès! </h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in app.flashes('notice') %}
+                            <div class="flash-notice">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if (app.flashes('erreur')) %}
+            <div class="modal fade" id="overlay">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-center">Oups!! votre message n'a pas être envoyé, veuillez réessayer plutard! </h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in app.flashes('erreur') %}
+                            <div class="flash-notice">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
             <div class="title-wrap text-center" style="font-style: italic">
                 <h3>{{ immeuble.bien.titre }}</h3>
             </div>
@@ -111,26 +152,30 @@
                             </div>
                             <div>
                                 <h4 class="text-center mt-15">Etes-vous interessés?</h4>
-                                <form>
+                                <form action="{{ path('mail_interesse_bien')}}" method="post">
                                     <div class="row">
                                         <div class="col-sm-12 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
                                             <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Nom">
+                                                <input type="text" name="Nom" class="form-control" placeholder="Nom" autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Prénoms">
+                                                <input type="text" name="Prenoms" class="form-control" placeholder="Prénoms" autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Téléphone">
+                                                <input type="text" name="Telephone" class="form-control" placeholder="Téléphone" autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="" class="form-control" placeholder="Email">
+                                                <input type="text" name="Email" class="form-control" placeholder="Email" autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <textarea class="form-control" placeholder="Observations"></textarea>
+                                                <textarea name="Observation" class="form-control" placeholder="Observations"></textarea>
                                             </div>
                                             <div class="form-group text-right">
-                                                <input type="submit" name="" class="btn btn-primary" value="Envoyer">
+                                                <input type="hidden" name="Lien" value="{{ absolute_url(path('frontend_bien', {'typebien': immeuble.bien.typebien.slug, 'slug': immeuble.bien.slug}))}}">
+                                                <input type="hidden" name="Partenaire" value="{{immeuble.bien.partenaire.email}}">
+                                                <input type="hidden" name="Tbien" value="{{immeuble.bien.typebien.slug }}">
+                                                <input type="hidden" name="BienSlug" value="{{immeuble.bien.slug }}">
+                                                <input type="submit" name="Interesse" class="btn btn-primary" value="Envoyer">
                                             </div>
                                         </div>
                                     </div>
@@ -220,4 +265,15 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('#overlay').modal('show');
+
+        setTimeout(function() {
+            $('#overlay').modal('hide');
+        }, 10000);
+    </script>
 {% endblock %}

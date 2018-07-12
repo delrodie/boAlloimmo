@@ -535,6 +535,7 @@
         </div>
     </div>
 </div>
+{% block javascripts %}
 <script src="{{ asset('frontend/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('frontend/vendor/jquery-migrate/jquery-migrate-3.0.1.min.js') }}"></script>
 <script src="{{ asset('frontend/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -547,6 +548,7 @@
 <script src="{{ asset('frontend/vendor/slick/slick.min.js') }}"></script>
 <script src="{{ asset('frontend/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('frontend/js/app.js') }}"></script>
+{% endblock %}
 </body>
 
 </html>

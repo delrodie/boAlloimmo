@@ -30,15 +30,18 @@ monolog:
             host: 127.0.0.1:9911
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
-        #firephp:
-        #    type: firephp
-        #    level: info
-        #chromephp:
-        #    type: chromephp
-        #    level: info
+        firephp:
+            type: firephp
+            level: info
+        chromephp:
+            type: chromephp
+            level: info
 
-#swiftmailer:
-#    delivery_addresses: ['me@example.com']
+swiftmailer:
+    delivery_addresses: ['webmaster@alloimmo.ci']
+    delivery_whitelist:
+      - '/@abengourou\.ci$/'
+      - '/^amoikon@abengourou\.ci$/'
 
 web_profiler:
-    intercept_redirects: false
+    intercept_redirects: true
