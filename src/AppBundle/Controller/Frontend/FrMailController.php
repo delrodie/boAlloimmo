@@ -33,11 +33,11 @@ class FrMailController extends Controller
         $typebien = $request->get('Tbien');
         $bien = $request->get('BienSlug'); //dump($bien);die();
 
-        $message = (new \Swift_Message('Je suis interessé par votre bien'))
-                    ->setFrom('infos@alloimmo.ci')
+        $message = (new \Swift_Message('Envoi de mail effectif depuis le site internet alloimmo.ci'))
+                    ->setFrom('noreply@alloimmo.ci')
                     //->setTo($partenaire)
-                    ->setTo('delrodieamoikon@gmail.com')
-                    //->setBcc(['infos@alloimmo.ci', 'delrodieamoikon@gmail.com'])
+                    ->setTo(['logitekci@gmail.com', 'delrodieamoikon@outlook.fr'])
+                    //->setBcc(['info@alloimmo.ci', 'delrodieamoikon@gmail.com'])
                     ->setBcc('delrodieamoikon@gmail.com')
                     ->setReplyTo($email)
                     ->setBody(
