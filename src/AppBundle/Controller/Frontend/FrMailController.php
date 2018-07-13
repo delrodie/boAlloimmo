@@ -34,7 +34,7 @@ class FrMailController extends Controller
         $bien = $request->get('BienSlug'); //dump($bien);die();
 
         $message = (new \Swift_Message('Envoi de mail effectif depuis le site internet alloimmo.ci'))
-                    ->setFrom('noreply@alloimmo.ci')
+                    ->setFrom(['noreply@alloimmo.ci' => 'ALLOIMMO.CI'])
                     //->setTo($partenaire)
                     ->setTo(['logitekci@gmail.com', 'delrodieamoikon@outlook.fr'])
                     //->setBcc(['info@alloimmo.ci', 'delrodieamoikon@gmail.com'])
