@@ -38,7 +38,8 @@ class FrMailController extends Controller
         $message = (new \Swift_Message('Envoi de mail effectif depuis le site internet alloimmo.ci'))
                     ->setFrom(['noreply@alloimmo.ci' => 'ALLOIMMO.CI'])
                     //->setTo($partenaire)
-                    ->setTo(['logitekci@gmail.com', 'delrodieamoikon@outlook.fr'])
+                    //->setTo(['logitekci@gmail.com', 'delrodieamoikon@outlook.fr'])
+                    ->setTo(['delrodieamoikon@gmail.com', 'delrodieamoikon@outlook.fr'])
                     //->setBcc(['info@alloimmo.ci', 'delrodieamoikon@gmail.com'])
                     ->setBcc('delrodieamoikon@gmail.com')
                     ->setReplyTo($email)
@@ -64,7 +65,7 @@ class FrMailController extends Controller
             $this->addFlash('erreur', 'ne sommes desolé votre message n\'a pas pu être envoyé');
         }
 
-        return $this->render('email/mail_interesse.html.twig',[
+        /*return $this->render('email/mail_interesse.html.twig',[
             'nom' => $nom,
             'prenoms' => $prenoms,
             'email' => $email,
@@ -73,9 +74,9 @@ class FrMailController extends Controller
             'lien'  => $lien,
             'image'  => $image,
             'bienNom'  => $bienNom,
-          ]);
+          ]);*/
         
 
-        //return $this->redirectToRoute('frontend_bien',['typebien'=> $typebien, 'slug'=> $bien]);
+        return $this->redirectToRoute('frontend_bien',['typebien'=> $typebien, 'slug'=> $bien]);
     }
 }
