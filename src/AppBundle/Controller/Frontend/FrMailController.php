@@ -32,6 +32,8 @@ class FrMailController extends Controller
 
         $typebien = $request->get('Tbien');
         $bien = $request->get('BienSlug'); //dump($bien);die();
+        $bienNom = $request->get('BienNom'); //dump($bien);die();
+        $image = $request->get('Image'); //dump($image);die();
 
         $message = (new \Swift_Message('Envoi de mail effectif depuis le site internet alloimmo.ci'))
                     ->setFrom(['noreply@alloimmo.ci' => 'ALLOIMMO.CI'])
@@ -49,6 +51,8 @@ class FrMailController extends Controller
                             'telephone' => $telephone,
                             'observation' => $observation,
                             'lien'  => $lien,
+                            'image'  => $image,
+                            'bienNom'  => $bienNom,
                           ]
                         ), 'text/html'
                       )
@@ -59,8 +63,19 @@ class FrMailController extends Controller
         } else {
             $this->addFlash('erreur', 'ne sommes desolé votre message n\'a pas pu être envoyé');
         }
+
+        return $this->render('email/mail_interesse.html.twig',[
+            'nom' => $nom,
+            'prenoms' => $prenoms,
+            'email' => $email,
+            'telephone' => $telephone,
+            'observation' => $observation,
+            'lien'  => $lien,
+            'image'  => $image,
+            'bienNom'  => $bienNom,
+          ]);
         
 
-        return $this->redirectToRoute('frontend_bien',['typebien'=> $typebien, 'slug'=> $bien]);
+        //return $this->redirectToRoute('frontend_bien',['typebien'=> $typebien, 'slug'=> $bien]);
     }
 }

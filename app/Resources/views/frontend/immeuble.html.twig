@@ -175,6 +175,8 @@
                                                 <input type="hidden" name="Partenaire" value="{{immeuble.bien.partenaire.email}}">
                                                 <input type="hidden" name="Tbien" value="{{immeuble.bien.typebien.slug }}">
                                                 <input type="hidden" name="BienSlug" value="{{immeuble.bien.slug }}">
+                                                <input type="hidden" name="BienNom" value="{{immeuble.bien.titre }}">
+                                                <input type="hidden" name="Image" value="{{ absolute_url(asset('uploads/biens/'~ immeuble.bien.imageName)) }}">
                                                 <input type="submit" name="Interesse" class="btn btn-primary" value="Envoyer">
                                             </div>
                                         </div>
