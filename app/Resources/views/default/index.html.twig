@@ -43,11 +43,14 @@
     <div class="section">
         <div class="container">
             <div class="title-wrap text-center">
-                <div class="">
-                    <div class="col-md-auto col-lg-auto text-center mt-1 mt-lg-0 col-btn col-md-offet-0 ml-lg-12">
+                <div class="" style="font-size: 7px">
+                    <div class="col-md-auto col-lg-auto text-left mt-1 mt-lg-0 col-btn col-md-offet-0 ml-lg-12" style="font-size: 7px">
                         {% for domaine in domaines %}
-                            <a href="{{ path('fannuaire_domaine_partenaire', {'slug': domaine.slug, 'page': 1}) }}" class="btn mb-1 btn-domaine" style="background-color: {{ domaine.couleur }};">
+                            <a href="{{ path('fannuaire_domaine_partenaire', {'slug': domaine.slug, 'page': 1}) }}" class="btn mb-1 btn-domaine" style="background-color: {{ domaine.couleur }};" style="font-size: 7px;">
                                 {{ domaine.libelle }}
+                                                    <span class="badge-domaine">
+                                                        {{ render(url('fnombre_partenaire_domaine', {'domaine': domaine.id})) }}
+                                                    </span>
                             </a>
                         {% endfor %}
                     </div>
