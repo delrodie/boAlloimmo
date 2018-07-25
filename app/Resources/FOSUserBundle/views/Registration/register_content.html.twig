@@ -1,8 +1,43 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form-signin rounded'}}) }}
+    <a href="{{ path('homepage') }}" class="brand text-center">
+        <img src="{{ absolute_url(asset('frontend/images/logo-ai.png')) }}" srcset="{{ absolute_url(asset('frontend/images/logo-ai.png 2x')) }}" alt=""/>
+    </a>
+    <h2 class="form-signin-heading text-center">S'inscrire</h2>
+    <div id="fos_user_registration_form">
+        <div>
+            <label for="fos_user_registration_form_email" class="required">Adresse e-mail</label>
+            {{ form_widget(form.email, {'attr':{'class': 'form-control', 'required':'required', 'autocomplete':'off'}})}}
+            {{ form_errors(form.email)}}
+        </div>
+        <div>
+            <label for="fos_user_registration_form_username" class="required">Nom d&#039;utilisateur</label>
+            {{ form_widget(form.username, {'attr':{'class': 'form-control', 'required':'required', 'autocomplete':'off'}})}}
+            {{ form_errors(form.username)}}
+        </div>
+        <div>
+            <label for="fos_user_registration_form_plainPassword_first" class="required">Mot de passe</label>
+            {{ form_widget(form.plainPassword.first, {'attr':{'class': 'form-control', 'required':'required', 'autocomplete':'new-password'}})}}
+            {{ form_errors(form.plainPassword.first)}}
+        </div>
+        <div>
+            <label for="fos_user_registration_form_plainPassword_second" class="required">Repeter le Mot de passe</label>
+            {{ form_widget(form.plainPassword.second, {'attr':{'class': 'form-control', 'required':'required', 'autocomplete':'new-password'}})}}
+            {{ form_errors(form.plainPassword.second)}}
+        </div>
+    </div>
+    {{ form_rest(form, {'attr':{'class': 'form-control', 'required':'required', 'autocomplete':'off'}}) }}
+    <div class="mb-4 mt-4">
+        <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-lg btn-pill btn-block btn-primary" />
+    </div>
+
+    <div class="checkbox mb-4 mt-4">
+        <label class="custom-control custom-checkbox">
+            <span class="custom-control-description">
+                        Avez-vous deja un compte ?
+                    </span>
+        </label>
+        <a href="{{ absolute_url(path('fos_user_security_login'))}}" class="float-right text-muted">Se connecter</a>
     </div>
 {{ form_end(form) }}

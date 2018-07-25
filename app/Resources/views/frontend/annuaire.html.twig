@@ -17,6 +17,46 @@
         <div class="container">
             <div class="title-wrap text-center">
                 <h2 class="h1">Annuaire</h2>
+            
+                {% if (app.flashes('notice')) %}
+                <div class="modal fade" id="overlay">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-center">Votre message a été envoyé avec succès! </h4>
+                        </div>
+                        <div class="modal-body">
+                            {% for message in app.flashes('notice') %}
+                                <div class="flash-notice">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if (app.flashes('erreur')) %}
+                <div class="modal fade" id="overlay">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-center">Oups!! votre message n'a pas être envoyé, veuillez réessayer plutard! </h4>
+                        </div>
+                        <div class="modal-body">
+                            {% for message in app.flashes('erreur') %}
+                                <div class="flash-notice">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
         <div class="section mt-0 section-annuaire" style="margin-bottom: 50px;">
@@ -198,4 +238,15 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('#overlay').modal('show');
+
+        setTimeout(function() {
+            $('#overlay').modal('hide');
+        }, 3000);
+    </script>
 {% endblock %}

@@ -179,3 +179,14 @@
 
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('#overlay').modal('show');
+
+        setTimeout(function() {
+            $('#overlay').modal('hide');
+        }, 5000);
+    </script>
+{% endblock %}

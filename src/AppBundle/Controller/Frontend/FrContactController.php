@@ -149,7 +149,7 @@ class FrContactController extends Controller
           ]);*/
         
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('frontend_annuaire');
     }
 
 }

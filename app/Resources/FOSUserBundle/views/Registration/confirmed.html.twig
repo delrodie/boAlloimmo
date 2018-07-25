@@ -1,10 +1,47 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
-{% endblock fos_user_content %}
+{% block body %}
+    
+     <div class="section section-booking">
+        <div class="booking-form-wrap">
+            {{ render(url('rfrontend_principale')) }}
+            <div class="booking-form-toggle d-md-none"><a href="tel:+225 03 25 54 47"><i class="icon-telephone"></i></a>
+                <div class="js-booking-form-toggle"><span>Detail</span><span class="close-text js-close-text">CLOSE</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="title-wrap text-center">
+                <h2 class="h1">Inscription</h2>
+            </div>
+        </div>
+        <div class="container" style="margin-bottom: 100px">
+            <div class="row">
+                <div class="col-md-8">
+                    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+                    {% if targetUrl %}
+                    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                    {% endif %}
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    
+                    <div class="row" style="margin-top: 50px">
+                        <div class="col-sm-12">
+                            <h4>Nous suivre</h4>
+                            <div class="text-center" style="margin-left: 25px">
+                                <a href="#"><i class="icon-facebook-logo fa-2x"></i></a>
+                                <a href="#"><i class="icon-twitter-logo1 fa-2x"></i></a>
+                                <a href="#"><i class="icon-google-logo fa-2x"></i></a>
+                                <a href="#"><i class="icon-instagram-logo fa-2x"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

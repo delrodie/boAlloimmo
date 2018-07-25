@@ -1,13 +1,13 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
 
 <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin rounded">
     <a href="{{ path('homepage') }}" class="brand text-center">
-        <img src="{{ asset('frontend/img/logo.png') }}" srcset="{{ asset('frontend/img/logo.png 2x') }}" alt=""/>
+        <img src="{{ asset('frontend/images/logo-ai.png') }}" srcset="{{ asset('frontend/images/logo-ai.png 2x') }}" alt=""/>
     </a>
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
     <h2 class="form-signin-heading text-center">
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -40,6 +40,15 @@
     </div>
     <div class="form-group ">
         <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-lg btn-pill btn-block btn-primary" />
+    </div>
+
+    <div class="checkbox mb-4 mt-4">
+        <label class="custom-control custom-checkbox">
+            <span class="custom-control-description">
+                        N'avez-vous pas de compte ?
+                    </span>
+        </label>
+        <a href="{{ absolute_url(path('fos_user_registration_register'))}}" class="float-right text-muted">Creer un compte</a>
     </div>
 
 </form>

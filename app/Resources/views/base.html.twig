@@ -191,8 +191,14 @@
                             Espace membre
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Connexion</a>
-                            <a class="dropdown-item" href="#">Inscription</a>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="{{ path('fos_user_security_logout') }}" class="dropdown-item">
+                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        {% else %}
+                            <a href="{{ path('fos_user_security_login') }}" class="dropdown-item">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        {% endif %}
+                            <a class="dropdown-item" href="{{ path('fos_user_registration_register')}}">Inscription</a>
                             <a class="dropdown-item" href="{{ path('backend') }}">Admin</a>
                         </div>
                     </div>
@@ -369,167 +375,7 @@
             </button>
             <div class="modal-body">
                 <div class="modal-form">
-                    <h4 class="mb-15">Faites votre demande</h4>
-                    <form action="#">
-                        <div class="popover-markup popover-2">
-                            <div class="trigger form-group">
-                                <div class="form-control" id="roomType">Mode</div>
-                            </div>
-                            <div class="popover-content">
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Tous les modes">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Tous les modes</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Location">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Location</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Vente">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Vente</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="popover-markup popover-2">
-                            <div class="trigger form-group">
-                                <div class="form-control" id="roomType">Localisation</div>
-                            </div>
-                            <div class="popover-content">
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Partout">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Partout</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Cocody">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Cocody</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Abobo">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Abobo</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bassam">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Bassam</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio Room">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Studio Rooms</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Bingerville">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Bingerville</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="popover-markup popover-2">
-                            <div class="trigger form-group">
-                                <div class="form-control" id="roomType">Type de bien</div>
-                            </div>
-                            <div class="popover-content">
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa basse">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Villa basse</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Villa Duplex">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Villa Duplex</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="Studio">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Studio Rooms</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="popover-markup popover-2">
-                            <div class="trigger form-group">
-                                <div class="form-control" id="roomType">Nombre de pièces</div>
-                            </div>
-                            <div class="popover-content">
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="5+">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Plus de 5 pièces</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="1 pièce">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">1 pièce</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="2 pièces">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">2 pièces</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="3 pièces">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">3 pièces</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="4 pièces">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">4 pièces</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="custom-control custom-radio">
-                                        <input class="form-check-input custom-control-input js-radio-room" name="room-type" type="radio" value="5 pièces">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">5 pièces</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Votre nom et prenoms" >
-                        <input type="text" class="form-control" placeholder="Email">
-                        <input type="text" class="form-control" placeholder="Telephone">
-                        <button class="btn btn-primary mt-2 mb-1">Envoyer</button>
-                    </form>
+                    {{ render(url('frontend_demande'))}}
                 </div>
             </div>
         </div>
