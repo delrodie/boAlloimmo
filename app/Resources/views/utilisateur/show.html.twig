@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Utilisateur</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ utilisateur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ utilisateur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ utilisateur.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Website</th>
+                <td>{{ utilisateur.website }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ utilisateur.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ utilisateur.description }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ utilisateur.type }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{% if utilisateur.statut %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Imagename</th>
+                <td>{{ utilisateur.imageName }}</td>
+            </tr>
+            <tr>
+                <th>Imagesize</th>
+                <td>{{ utilisateur.imageSize }}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if utilisateur.updatedAt %}{{ utilisateur.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ utilisateur.slug }}</td>
+            </tr>
+            <tr>
+                <th>Publiepar</th>
+                <td>{{ utilisateur.publiePar }}</td>
+            </tr>
+            <tr>
+                <th>Modifiepar</th>
+                <td>{{ utilisateur.modifiePar }}</td>
+            </tr>
+            <tr>
+                <th>Publiele</th>
+                <td>{{ utilisateur.publieLe }}</td>
+            </tr>
+            <tr>
+                <th>Modifiele</th>
+                <td>{{ utilisateur.modifieLe }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('backend_utilisateur_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('backend_utilisateur_edit', { 'id': utilisateur.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

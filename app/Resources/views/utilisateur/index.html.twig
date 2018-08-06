@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Utilisateurs list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Website</th>
+                <th>Telephone</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Statut</th>
+                <th>Imagename</th>
+                <th>Imagesize</th>
+                <th>Updatedat</th>
+                <th>Slug</th>
+                <th>Publiepar</th>
+                <th>Modifiepar</th>
+                <th>Publiele</th>
+                <th>Modifiele</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td><a href="{{ path('backend_utilisateur_show', { 'id': utilisateur.id }) }}">{{ utilisateur.id }}</a></td>
+                <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.adresse }}</td>
+                <td>{{ utilisateur.website }}</td>
+                <td>{{ utilisateur.telephone }}</td>
+                <td>{{ utilisateur.description }}</td>
+                <td>{{ utilisateur.type }}</td>
+                <td>{% if utilisateur.statut %}Yes{% else %}No{% endif %}</td>
+                <td>{{ utilisateur.imageName }}</td>
+                <td>{{ utilisateur.imageSize }}</td>
+                <td>{% if utilisateur.updatedAt %}{{ utilisateur.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ utilisateur.slug }}</td>
+                <td>{{ utilisateur.publiePar }}</td>
+                <td>{{ utilisateur.modifiePar }}</td>
+                <td>{{ utilisateur.publieLe }}</td>
+                <td>{{ utilisateur.modifieLe }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('backend_utilisateur_show', { 'id': utilisateur.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('backend_utilisateur_edit', { 'id': utilisateur.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('backend_utilisateur_new') }}">Create a new utilisateur</a>
+        </li>
+    </ul>
+{% endblock %}

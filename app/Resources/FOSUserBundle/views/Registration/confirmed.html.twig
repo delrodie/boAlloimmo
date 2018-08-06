@@ -15,33 +15,26 @@
     <div class="section">
         <div class="container">
             <div class="title-wrap text-center">
-                <h2 class="h1">Inscription</h2>
-            </div>
-        </div>
-        <div class="container" style="margin-bottom: 100px">
-            <div class="row">
-                <div class="col-md-8">
+                <h2 class="h4">
                     <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
                     {% if targetUrl %}
                     <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
                     {% endif %}
-                </div>
-                <div class="col-md-4 mt-3 mt-md-0">
-                    
-                    <div class="row" style="margin-top: 50px">
-                        <div class="col-sm-12">
-                            <h4>Nous suivre</h4>
-                            <div class="text-center" style="margin-left: 25px">
-                                <a href="#"><i class="icon-facebook-logo fa-2x"></i></a>
-                                <a href="#"><i class="icon-twitter-logo1 fa-2x"></i></a>
-                                <a href="#"><i class="icon-google-logo fa-2x"></i></a>
-                                <a href="#"><i class="icon-instagram-logo fa-2x"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                    Veuillez enregistrer votre profile
+                </h2>
             </div>
+        </div>
+        <div class="container" style="margin-bottom: 100px">
+           {{ render(url('frontend_profile_new'))}}
         </div>
     </div>
 {% endblock body %}
+
+{% block javascripts %}
+    {{ parent()}}
+    
+<script src="{{ asset('frontend/vendor/form-validation/jquery.form.js') }}"></script>   
+<script src="{{ asset('frontend/vendor/form-validation/jquery.validate.min.js') }}"></script>   
+<script src="{{ asset('frontend/vendor/scroll-with-ease/jquery.scroll-with-ease.min.js') }}"></script>   
+<script src="{{ asset('frontend/form/forms.js') }}"></script>   
+{% endblock %}

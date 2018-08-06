@@ -7282,7 +7282,7 @@ ul.services-list {
         font-size: 13px;
         line-height: 18px;
         padding-left: 20px; } }
-    ul.services-list li [class*='icon-'] {
+    ul.services-list li [class*='icon-'], ul.services-list li [class*='fa-'] {
       color: #695c5d;
       position: absolute;
       top: 50%;
@@ -7290,7 +7290,7 @@ ul.services-list {
       margin-top: -9px;
       font-size: 17px; }
       @media (max-width: 1023px) {
-        ul.services-list li [class*='icon-'] {
+        ul.services-list li [class*='icon-'], ul.services-list li [class*='fa-'] {
           font-size: 15px; } }
   ul.services-list li:last-child {
     border-bottom: 0; }
@@ -11388,5 +11388,11 @@ iframe.iframe-facebook {
 
 .recherche-alerte{
   color: #af3c65;
+}
+
+.alert-conseil {
+  color: #f00;
+  font-size: 13px;
+  font-weight: bold;
 }
 

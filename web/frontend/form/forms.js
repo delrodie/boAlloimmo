@@ -6,6 +6,7 @@
 			    $window = $(window),
 			    forms = {
 				contactForm: $('#contactForm'),
+				profileForm: $('#profileForm'),
 				questionForm: $('#questionForm')
 			};
 
@@ -106,6 +107,71 @@
 								}
 							});
 						}
+					});
+				}
+
+				//
+				if (forms.profileForm.length) {
+					var $profileForm = forms.profileForm;
+					$profileForm.validate({
+						rules: {
+							'appbundle_utilisateur[type]': {
+								required: true,
+							},
+							'appbundle_utilisateur[nom]': {
+								required: true,
+							},
+							'appbundle_utilisateur[adresse]': {
+								required: true,
+							},
+							'appbundle_utilisateur[telephone]': {
+								required: true,
+							},
+							'appbundle_utilisateur[description]': {
+								required: true,
+								minlength: 20
+							},
+							email: {
+								required: true,
+								email: true
+							}
+
+						},
+						messages: {
+							'appbundle_utilisateur[type]': {
+								required: "Veuillez choisir un statut",
+							},
+							'appbundle_utilisateur[nom]': {
+								required: "Entrez votre nom ou la raison sociale de votre entreprise",
+							},
+							'appbundle_utilisateur[adresse]': {
+								required: "Entrez votre situation geographique",
+							},
+							'appbundle_utilisateur[telephone]': {
+								required: "Entrez votre contact telephonique",
+							},
+							'appbundle_utilisateur[description]': {
+								required: "Veuillez vous presenter aux internautes",
+								minlength: "Votre presentation doit composter au moins 20 caractères"
+							},
+							email: {
+								required: "Please enter your email"
+							}
+						}/*,
+						submitHandler: function submitHandler(form) {
+							$(form).ajaxSubmit({
+								type: "POST",
+								data: $(form).serialize(),
+								url: "/profile/enregistrement",
+								success: function success() {
+									$('.successform', $contactform).fadeIn();
+									$orderForm.get(0).reset();
+								},
+								error: function error() {
+									$('.errorform', $contactform).fadeIn();
+								}
+							});
+						}*/
 					});
 				}
 			});
