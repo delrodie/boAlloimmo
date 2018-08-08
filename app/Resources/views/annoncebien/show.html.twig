@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annoncebien</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ annonceBien.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ annonceBien.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ annonceBien.description }}</td>
+            </tr>
+            <tr>
+                <th>Resume</th>
+                <td>{{ annonceBien.resume }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ annonceBien.prix }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ annonceBien.localisation }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{% if annonceBien.disponibilite %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Tags</th>
+                <td>{{ annonceBien.tags }}</td>
+            </tr>
+            <tr>
+                <th>Typebienslug</th>
+                <td>{{ annonceBien.typebienslug }}</td>
+            </tr>
+            <tr>
+                <th>Affichageprix</th>
+                <td>{% if annonceBien.affichagePrix %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Imagename</th>
+                <td>{{ annonceBien.imageName }}</td>
+            </tr>
+            <tr>
+                <th>Imagesize</th>
+                <td>{{ annonceBien.imageSize }}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if annonceBien.updatedAt %}{{ annonceBien.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ annonceBien.slug }}</td>
+            </tr>
+            <tr>
+                <th>Publiepar</th>
+                <td>{{ annonceBien.publiePar }}</td>
+            </tr>
+            <tr>
+                <th>Modifiepar</th>
+                <td>{{ annonceBien.modifiePar }}</td>
+            </tr>
+            <tr>
+                <th>Publiele</th>
+                <td>{{ annonceBien.publieLe }}</td>
+            </tr>
+            <tr>
+                <th>Modifiele</th>
+                <td>{{ annonceBien.modifieLe }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('backend_annoncebien_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('backend_annoncebien_edit', { 'id': annonceBien.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

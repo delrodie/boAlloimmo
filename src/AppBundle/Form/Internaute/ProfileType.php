@@ -49,7 +49,7 @@ class ProfileType extends AbstractType
             ->add('telephone', TextType::class, [
                 'attr'=> [
                     'class' => 'form-control',
-                    'autocompletd' => 'off',
+                    'autocompletd' => 'tel',
                     'placeholder' => 'Contact telephonique *'
                 ],
                 'required' => true

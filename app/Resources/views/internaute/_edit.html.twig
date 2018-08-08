@@ -54,7 +54,11 @@
 						<div class="row flex-lg-column">
 							<div class="special-card-2">
 							<div class="special-card-2-photo">
-								<img src="images/content/special-wedding-photo-02.jpg" class="img-fluid" alt="">
+								{% if utilisateur.imagename %}
+                                <img src="{{ absolute_url(vich_uploader_asset(utilisateur, 'imageFile')) }}" class="img-fluid" alt="{{ utilisateur.nom }}">
+                                {% else %}
+                                    <img src="{{ absolute_url(asset('frontend/images/icon-ai.png')) }}" alt="" class="img-fluid">
+                                {% endif %}
 							</div>
 							<div class="special-card-2-info">
 								<div class="col-md ml-auto mt-3 mt-md-0">
@@ -76,13 +80,13 @@
 							</div>
 						</div>
 							<div class="col-sm col-lg-auto mt-3 mt-sm-0 mt-lg-2">
-								<a href="#" class="btn btn-primary dropdown-toggle w-100">
-										<i class="icon-user"></i>Profile
+								<a href="{{ absolute_url(path('frontend_profile_edit', {'user': utilisateur.user.username, 'id': utilisateur.id}))}}" class="btn btn-primary dropdown-toggle w-100" title="Modifier le profile">
+										<i class="icon-user"></i>Profile 
 									</a>
-								<a href="#" class="btn btn-primary btn-light dropdown-toggle w-100">
+								<a href="{{ absolute_url(path('frontend_annonceur_new', {'user':utilisateur.user.username, 'id': utilisateur.id }))}}" class="btn btn-primary btn-light dropdown-toggle w-100">
 										<i class="icon-completed-tasks"></i>Faire une annonce
 									</a>
-								<a href="#" class="btn btn-primary btn-light dropdown-toggle w-100" >
+								<a href="{{ absolute_url(path('frontend_annonceur_index', {'user': utilisateur.user.username, 'id':utilisateur.id}))}}" class="btn btn-primary btn-light dropdown-toggle w-100" >
 										<i class="icon-completed-tasks"></i>Voir ses annonces
 									</a>
 							</div>

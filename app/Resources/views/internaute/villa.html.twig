@@ -1,0 +1,349 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ villa.annoncebien.titre }}
+{% endblock %}
+
+{% block body %}
+    <div class="section section-booking">
+        <div class="booking-form-wrap">
+            {{ render(url('rfrontend_principale')) }}
+            <div class="booking-form-toggle d-md-none"><a href="tel:+225 03 25 54 47"><i class="icon-telephone"></i></a>
+                <div class="js-booking-form-toggle"><span>Detail</span><span class="close-text js-close-text">CLOSE</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            
+            {% if (app.flashes('notice')) %}
+            <div class="modal fade" id="overlay">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-center">Votre message a été envoyé avec succès! </h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in app.flashes('notice') %}
+                            <div class="flash-notice">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if (app.flashes('erreur')) %}
+            <div class="modal fade" id="overlay">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-center">Oups!! votre message n'a pas être envoyé, veuillez réessayer plutard! </h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in app.flashes('erreur') %}
+                            <div class="flash-notice">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="title-wrap text-center" style="font-style: italic">
+                <h3>{{ villa.annoncebien.titre }}</h3>
+            </div>
+            <div class="slider-gallery">
+                <ul class="slider-room-gallery-main list-unstyled js-slider-gallery-room-main">
+                    <li><img src="{{ asset('uploads/biens/'~ villa.annoncebien.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ villa.annoncebien.titre }}"></li>
+                    {% for photo in photos %}
+                        <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="#"></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="slider-gallery">
+                        <ul class="slider-room-gallery-thumbs list-unstyled js-slider-gallery-room-thumbs">
+                                <li><img src="{{ asset('uploads/biens/'~ villa.annoncebien.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ villa.annoncebien.titre }}"></li>
+                            {% for photo in photos %}
+                                <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="#"></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="info-grid">
+                        <div class="row align-items-center">
+                            <div class="col-6 col-sm">
+                                <div class="info-grid-label">Mode</div>
+                                <div class="info-grid-text">{{ villa.annoncebien.mode }}</div>
+                            </div>
+                            <div class="col-6 col-sm">
+                                <div class="info-grid-label">Localisation</div>
+                                <div class="info-grid-text">{{ villa.annoncebien.zone }}</div>
+                            </div>
+                            <div class="col-6 col-sm">
+                                <div class="info-grid-label">Superfice</div>
+                                <div class="info-grid-text">{{ villa.superficie }} m<sup>2</sup></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 mt-md-7"></div>
+                    <h2>Description</h2>
+                    <p>
+                        {{ villa.annoncebien.description|raw }}
+                    </p>
+                    <div class="mt-3 mt-md-7"></div>
+                    <h2>Autres caractéristiques</h2>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.garage) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Garage</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Garage</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.piscine) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Piscine</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Piscine</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.chauffeau) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Chauffe eau</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Chauffe eau</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Vidéo surveillance</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Vidéo surveillance</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Alarme</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Alarme</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Buanderie</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Buanderie</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Interphone</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Interphone</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Meublée</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Meublée</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Dressing</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Dressing</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (villa.videosurveillance) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Terrasse</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Terrasse</span></i>
+                                {% endif %}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mt-3 mt-md-5"></div>
+                    <h2>Géolocalisation</h2>
+                    <div class="row">
+                        <div class="col-md-0">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d127106.57832737415!2d-4.061049601343239!3d5.404696785636039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0xfc1949efb148f67%3A0x18f4edc4b076deda!2sangre+petro+ivoire!3m2!1d5.4047008!2d-3.991009!5e0!3m2!1sfr!2sci!4v1520258597609" width="800" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                    <div class="row">
+                        <div class="col-sm col-lg-12">
+                            <div class="info-box-color">
+                                <div class="row details">
+                                    <div class="col-sm-8 label">Nombre de pièces</div>
+                                    <div class="col-sm-4 value">{{ villa.piece }}</div>
+                                </div>
+                                <div class="row details">
+                                    <div class="col-sm-8 label">Salles d'eau</div>
+                                    <div class="col-sm-4 value">{{ villa.toilette }}</div>
+                                </div>
+                                <div class="row details">
+                                    <div class="col-sm-8 label">Salle de bain</div>
+                                    <div class="col-sm-4 value">{{ villa.douche }}</div>
+                                </div>
+                                <div class="row details">
+                                    <div class="col-sm-8 label">Cuisine</div>
+                                    <div class="col-sm-4 value">{{ villa.cuisine }} m<sup>2</sup></div>
+                                </div>
+                                {% if (villa.annoncebien.affichagePrix and villa.annoncebien.prix != 0) %}
+                                <div class="text-center mt-2">
+                                    <div class="info-box-price">{{ villa.annoncebien.prix|number_format(0,'','.') }} Fcfa</div>
+                                    <p class="p-sm mt-2"></p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">
+                            <div class="info-box-grey">
+                                <img src="{{ vich_uploader_asset(villa.annoncebien.utilisateur, 'imageFile') }}" alt="{{ villa.annoncebien.utilisateur }}" title="{{ villa.annoncebien.utilisateur }}" class="img-fluid">
+                                <ul class="icn-list">
+                                    <li><i class="icon-telephone"></i>+225 {{ villa.annoncebien.utilisateur.telephone }}</li>
+                                    {% if (villa.annoncebien.utilisateur.user.email) %}
+                                        <li><i class="icon-closed-envelope"></i><a href="mailto:{{ villa.annoncebien.utilisateur.user.email }}">{{ villa.annoncebien.utilisateur.user.email }}</a></li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-center mt-15">Etes-vous interessés?</h4>
+                                <form action="{{ path('mail_interesse_bien')}}" method="post">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+                                            <div class="form-group">
+                                                <input type="text" name="Nom" class="form-control" placeholder="Nom" autocomplete="off">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="Prenoms" class="form-control" placeholder="Prénoms" autocomplete="off">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="Telephone" class="form-control" placeholder="Téléphone" autocomplete="off">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="Email" class="form-control" placeholder="Email" autocomplete="off">
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea name="Observation" class="form-control" placeholder="Observations"></textarea>
+                                            </div>
+                                            <div class="form-group text-right">
+                                                <input type="hidden" name="Lien" value="{{ absolute_url(path('frontend_bien', {'typebien': villa.annoncebien.typebien.slug, 'slug': villa.annoncebien.slug}))}}">
+                                                <input type="hidden" name="Partenaire" value="{{villa.annoncebien.utilisateur.user.email}}">
+                                                <input type="hidden" name="Tbien" value="{{villa.annoncebien.typebien.slug }}">
+                                                <input type="hidden" name="BienSlug" value="{{villa.annoncebien.slug }}">
+                                                <input type="hidden" name="BienNom" value="{{villa.annoncebien.titre }}">
+                                                <input type="hidden" name="Image" value="{{ absolute_url(asset('uploads/biens/'~ villa.annoncebien.imageName)) }}">
+                                                <input type="submit" name="Interesse" class="btn btn-primary" value="Envoyer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="title-wrap text-center">
+                {% if (similaires) %}
+                    <h2>Autres offres</h2>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="row d-flex room-carousel js-room-carousel">
+                {% for similaire in similaires %}
+                    <div class="col-4">
+                        <div class="room-card">
+                            <div class="room-card-photo">
+                                <img src="{{ asset('uploads/biens/'~ similaire.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}" class="img-fluid">
+                                <div class="flex-wrap-center">
+                                    {% if (similaire.disponibilite) %}
+                                        <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                    {% else %}
+                                        <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="room-card-info">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3 class="room-type">{{ similaire.titre }}</h3>
+                                    </div>
+                                </div>
+                                <div class="room-size mt-0" style="height: 100px;">
+                                    {{ similaire.resume|raw }}
+                                </div>
+                                <div class="row">
+                                      {% if similaire.affichagePrix and similaire.prix != 0 %}
+                                        <div class="col room-information">
+                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
+                                            <i class="fa fa-money"></i> <span class="">{{ similaire.prix|number_format(0,'','.') }} FCFA</span>
+                                          </a>
+                                        </div>
+                                        <div class="col room-information">
+                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
+                                            <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                          </a>
+                                        </div>
+                                      {% elseif (similaire.prix == 0) %}
+                                        <div class="col room-information">
+                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les details">
+                                            <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                          </a>
+                                        </div>
+                                        <div class="col room-information">
+                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                            <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
+                                          </a>
+                                        </div>
+                                      {% else %}
+                                        <div class="col room-information">
+                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                            <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                          </a>
+                                        </div>
+                                        <div class="col room-information">
+                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                            <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
+                                          </a>
+                                        </div>
+                                      {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('#overlay').modal('show');
+
+        setTimeout(function() {
+            $('#overlay').modal('hide');
+        }, 5000);
+    </script>
+{% endblock %}

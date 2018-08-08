@@ -15,7 +15,7 @@ class FrontendController extends Controller
     public function bienAction(Request $request, $typebien, $slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $bien = $em->getRepository('AppBundle:Bien')->findOneBy(array('slug' => $slug));
+        $bien = $em->getRepository('AppBundle:Bien')->findOneBy(array('slug' => $slug)); 
         $similaires = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $bien->getTypebien()->getId()), array('slug' => 'DESC'), 4, 0);
         $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $bien->getId()));
         //dump($photos);die();

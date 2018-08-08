@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annoncebiens list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Resume</th>
+                <th>Prix</th>
+                <th>Localisation</th>
+                <th>Disponibilite</th>
+                <th>Tags</th>
+                <th>Typebienslug</th>
+                <th>Affichageprix</th>
+                <th>Imagename</th>
+                <th>Imagesize</th>
+                <th>Updatedat</th>
+                <th>Slug</th>
+                <th>Publiepar</th>
+                <th>Modifiepar</th>
+                <th>Publiele</th>
+                <th>Modifiele</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonceBien in annonceBiens %}
+            <tr>
+                <td><a href="{{ path('backend_annoncebien_show', { 'id': annonceBien.id }) }}">{{ annonceBien.id }}</a></td>
+                <td>{{ annonceBien.titre }}</td>
+                <td>{{ annonceBien.description }}</td>
+                <td>{{ annonceBien.resume }}</td>
+                <td>{{ annonceBien.prix }}</td>
+                <td>{{ annonceBien.localisation }}</td>
+                <td>{% if annonceBien.disponibilite %}Yes{% else %}No{% endif %}</td>
+                <td>{{ annonceBien.tags }}</td>
+                <td>{{ annonceBien.typebienslug }}</td>
+                <td>{% if annonceBien.affichagePrix %}Yes{% else %}No{% endif %}</td>
+                <td>{{ annonceBien.imageName }}</td>
+                <td>{{ annonceBien.imageSize }}</td>
+                <td>{% if annonceBien.updatedAt %}{{ annonceBien.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ annonceBien.slug }}</td>
+                <td>{{ annonceBien.publiePar }}</td>
+                <td>{{ annonceBien.modifiePar }}</td>
+                <td>{{ annonceBien.publieLe }}</td>
+                <td>{{ annonceBien.modifieLe }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('backend_annoncebien_show', { 'id': annonceBien.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('backend_annoncebien_edit', { 'id': annonceBien.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('backend_annoncebien_new') }}">Create a new annonceBien</a>
+        </li>
+    </ul>
+{% endblock %}

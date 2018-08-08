@@ -8,13 +8,13 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Utilisateur
+ * AnnonceBien
  *
- * @ORM\Table(name="utilisateur")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UtilisateurRepository")
+ * @ORM\Table(name="annonce_bien")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AnnonceBienRepository")
  * @Vich\Uploadable
  */
-class Utilisateur
+class AnnonceBien
 {
     /**
      * @var int
@@ -23,35 +23,14 @@ class Utilisateur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $id; 
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="titre", type="string", length=255)
      */
-    private $nom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
-     */
-    private $adresse;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="website", type="string", length=255, nullable=true)
-     */
-    private $website;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
-     */
-    private $telephone;
+    private $titre;
 
     /**
      * @var string
@@ -63,34 +42,80 @@ class Utilisateur
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\Column(name="resume", type="text", nullable=true)
      */
-    private $type;
+    private $resume;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prix", type="string", length=255, nullable=true)
+     */
+    private $prix;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="localisation", type="string", length=255, nullable=true)
+     */
+    private $localisation;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="statut", type="boolean", nullable=true)
+     * @ORM\Column(name="disponibilite", type="boolean", nullable=true)
      */
-    private $statut;
+    private $disponibilite;
 
     /**
-     * Un profil appartient a un utilisateur
+     * @var string
      *
-     * @ORM\OneToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\Column(name="tags", type="string", length=255, nullable=true)
      */
-    private $user;
+    private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AnnonceBien", mappedBy="utilisateur")
+     * @var string
+     *
+     * @ORM\Column(name="typebienslug", type="string", length=5, nullable=true)
      */
-    private $annoncebiens;
+    private $typebienslug;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="affichage_prix", type="boolean", nullable=true)
+     */
+    private $affichagePrix;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="annoncebiens")
+     * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
+     */
+    private $typebien;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zone", inversedBy="annoncebiens")
+     * @ORM\JoinColumn(name="zone_id", referencedColumnName="id")
+     */
+    private $zone;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mode", inversedBy="annoncebiens")
+     * @ORM\JoinColumn(name="mode_id", referencedColumnName="id")
+     */
+    private $mode;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Utilisateur", inversedBy="annoncebiens")
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
+     */
+    private $utilisateur;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="utilisateur_image", fileNameProperty="imageName", size="imageSize", nullable=true)
+     * @Vich\UploadableField(mapping="bien_image", fileNameProperty="imageName", size="imageSize", nullable=true)
      *
      * @var File
      */
@@ -120,7 +145,7 @@ class Utilisateur
     /**
      * @var string
      *
-     * @Gedmo\Slug(fields={"nom"})
+     * @Gedmo\Slug(fields={"titre"})
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
@@ -169,99 +194,27 @@ class Utilisateur
     }
 
     /**
-     * Set nom
+     * Set titre
      *
-     * @param string $nom
+     * @param string $titre
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
-    public function setNom($nom)
+    public function setTitre($titre)
     {
-        $this->nom = $nom;
+        $this->titre = $titre;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get titre
      *
      * @return string
      */
-    public function getNom()
+    public function getTitre()
     {
-        return $this->nom;
-    }
-
-    /**
-     * Set adresse
-     *
-     * @param string $adresse
-     *
-     * @return Utilisateur
-     */
-    public function setAdresse($adresse)
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    /**
-     * Get adresse
-     *
-     * @return string
-     */
-    public function getAdresse()
-    {
-        return $this->adresse;
-    }
-
-    /**
-     * Set website
-     *
-     * @param string $website
-     *
-     * @return Utilisateur
-     */
-    public function setWebsite($website)
-    {
-        $this->website = $website;
-
-        return $this;
-    }
-
-    /**
-     * Get website
-     *
-     * @return string
-     */
-    public function getWebsite()
-    {
-        return $this->website;
-    }
-
-    /**
-     * Set telephone
-     *
-     * @param string $telephone
-     *
-     * @return Utilisateur
-     */
-    public function setTelephone($telephone)
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    /**
-     * Get telephone
-     *
-     * @return string
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
+        return $this->titre;
     }
 
     /**
@@ -269,7 +222,7 @@ class Utilisateur
      *
      * @param string $description
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setDescription($description)
     {
@@ -289,51 +242,171 @@ class Utilisateur
     }
 
     /**
-     * Set type
+     * Set resume
      *
-     * @param string $type
+     * @param string $resume
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
-    public function setType($type)
+    public function setResume($resume)
     {
-        $this->type = $type;
+        $this->resume = $resume;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get resume
      *
      * @return string
      */
-    public function getType()
+    public function getResume()
     {
-        return $this->type;
+        return $this->resume;
     }
 
     /**
-     * Set statut
+     * Set prix
      *
-     * @param boolean $statut
+     * @param string $prix
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
-    public function setStatut($statut)
+    public function setPrix($prix)
     {
-        $this->statut = $statut;
+        $this->prix = $prix;
 
         return $this;
     }
 
     /**
-     * Get statut
+     * Get prix
      *
-     * @return bool
+     * @return string
      */
-    public function getStatut()
+    public function getPrix()
     {
-        return $this->statut;
+        return $this->prix;
+    }
+
+    /**
+     * Set localisation
+     *
+     * @param string $localisation
+     *
+     * @return AnnonceBien
+     */
+    public function setLocalisation($localisation)
+    {
+        $this->localisation = $localisation;
+
+        return $this;
+    }
+
+    /**
+     * Get localisation
+     *
+     * @return string
+     */
+    public function getLocalisation()
+    {
+        return $this->localisation;
+    }
+
+    /**
+     * Set disponibilite
+     *
+     * @param boolean $disponibilite
+     *
+     * @return AnnonceBien
+     */
+    public function setDisponibilite($disponibilite)
+    {
+        $this->disponibilite = $disponibilite;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilite
+     *
+     * @return boolean
+     */
+    public function getDisponibilite()
+    {
+        return $this->disponibilite;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param string $tags
+     *
+     * @return AnnonceBien
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return string
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Set typebienslug
+     *
+     * @param string $typebienslug
+     *
+     * @return AnnonceBien
+     */
+    public function setTypebienslug($typebienslug)
+    {
+        $this->typebienslug = $typebienslug;
+
+        return $this;
+    }
+
+    /**
+     * Get typebienslug
+     *
+     * @return string
+     */
+    public function getTypebienslug()
+    {
+        return $this->typebienslug;
+    }
+
+    /**
+     * Set affichagePrix
+     *
+     * @param boolean $affichagePrix
+     *
+     * @return AnnonceBien
+     */
+    public function setAffichagePrix($affichagePrix)
+    {
+        $this->affichagePrix = $affichagePrix;
+
+        return $this;
+    }
+
+    /**
+     * Get affichagePrix
+     *
+     * @return boolean
+     */
+    public function getAffichagePrix()
+    {
+        return $this->affichagePrix;
     }
 
     /**
@@ -341,7 +414,7 @@ class Utilisateur
      *
      * @param string $imageName
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setImageName($imageName)
     {
@@ -365,7 +438,7 @@ class Utilisateur
      *
      * @param integer $imageSize
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setImageSize($imageSize)
     {
@@ -389,7 +462,7 @@ class Utilisateur
      *
      * @param \DateTime $updatedAt
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -417,7 +490,7 @@ class Utilisateur
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      *
-     * @return Post
+     * @return AnnonceBien
      */
     public function setImageFile(File $image = null)
     {
@@ -445,7 +518,7 @@ class Utilisateur
      *
      * @param string $slug
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setSlug($slug)
     {
@@ -469,7 +542,7 @@ class Utilisateur
      *
      * @param string $publiePar
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setPubliePar($publiePar)
     {
@@ -493,7 +566,7 @@ class Utilisateur
      *
      * @param string $modifiePar
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setModifiePar($modifiePar)
     {
@@ -517,7 +590,7 @@ class Utilisateur
      *
      * @param \DateTime $publieLe
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setPublieLe($publieLe)
     {
@@ -541,7 +614,7 @@ class Utilisateur
      *
      * @param \DateTime $modifieLe
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
     public function setModifieLe($modifieLe)
     {
@@ -561,71 +634,98 @@ class Utilisateur
     }
 
     /**
-     * Set user
+     * Set typebien
      *
-     * @param \AppBundle\Entity\User $user
+     * @param \AppBundle\Entity\Typebien $typebien
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
-    public function setUser(\AppBundle\Entity\User $user = null)
+    public function setTypebien(\AppBundle\Entity\Typebien $typebien = null)
     {
-        $this->user = $user;
+        $this->typebien = $typebien;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get typebien
      *
-     * @return \AppBundle\Entity\User
+     * @return \AppBundle\Entity\Typebien
      */
-    public function getUser()
+    public function getTypebien()
     {
-        return $this->user;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->annoncebiens = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->typebien;
     }
 
     /**
-     * Add annoncebien
+     * Set zone
      *
-     * @param \AppBundle\Entity\AnnonceBien $annoncebien
+     * @param \AppBundle\Entity\Zone $zone
      *
-     * @return Utilisateur
+     * @return AnnonceBien
      */
-    public function addAnnoncebien(\AppBundle\Entity\AnnonceBien $annoncebien)
+    public function setZone(\AppBundle\Entity\Zone $zone = null)
     {
-        $this->annoncebiens[] = $annoncebien;
+        $this->zone = $zone;
 
         return $this;
     }
 
     /**
-     * Remove annoncebien
+     * Get zone
      *
-     * @param \AppBundle\Entity\AnnonceBien $annoncebien
+     * @return \AppBundle\Entity\Zone
      */
-    public function removeAnnoncebien(\AppBundle\Entity\AnnonceBien $annoncebien)
+    public function getZone()
     {
-        $this->annoncebiens->removeElement($annoncebien);
+        return $this->zone;
     }
 
     /**
-     * Get annoncebiens
+     * Set mode
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param \AppBundle\Entity\Mode $mode
+     *
+     * @return AnnonceBien
      */
-    public function getAnnoncebiens()
+    public function setMode(\AppBundle\Entity\Mode $mode = null)
     {
-        return $this->annoncebiens;
+        $this->mode = $mode;
+
+        return $this;
     }
 
-    public function __toString() {
-        return $this->getNom();
+    /**
+     * Get mode
+     *
+     * @return \AppBundle\Entity\Mode
+     */
+    public function getMode()
+    {
+        return $this->mode;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \AppBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return AnnonceBien
+     */
+    public function setUtilisateur(\AppBundle\Entity\Utilisateur $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \AppBundle\Entity\Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }

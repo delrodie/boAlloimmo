@@ -42,6 +42,11 @@ class Mode
     private $biens;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\AnnonceBien", mappedBy="mode")
+     */
+    private $annoncebiens;
+
+    /**
      * @var string
      *
      * @Gedmo\Slug(fields={"libelle"})
@@ -303,5 +308,39 @@ class Mode
 
     public function __toString() {
         return $this->getLibelle();
+    }
+
+    /**
+     * Add annoncebien
+     *
+     * @param \AppBundle\Entity\AnnonceBien $annoncebien
+     *
+     * @return Mode
+     */
+    public function addAnnoncebien(\AppBundle\Entity\AnnonceBien $annoncebien)
+    {
+        $this->annoncebiens[] = $annoncebien;
+
+        return $this;
+    }
+
+    /**
+     * Remove annoncebien
+     *
+     * @param \AppBundle\Entity\AnnonceBien $annoncebien
+     */
+    public function removeAnnoncebien(\AppBundle\Entity\AnnonceBien $annoncebien)
+    {
+        $this->annoncebiens->removeElement($annoncebien);
+    }
+
+    /**
+     * Get annoncebiens
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAnnoncebiens()
+    {
+        return $this->annoncebiens;
     }
 }

@@ -62,7 +62,7 @@ class FrProfileController extends Controller
     }
 
     /**
-     * @Route("/{user}{id}/", name="frontend_profile_show")
+     * @Route("/{user}{id}", name="frontend_profile_show")
      * @Method("GET")
      */
     public function showAction(Utilisateur $utilisateur, AuthorizationCheckerInterface $authChecker)

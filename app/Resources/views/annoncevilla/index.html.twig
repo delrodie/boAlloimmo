@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Annoncevillas list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Piece</th>
+                <th>Douche</th>
+                <th>Toilette</th>
+                <th>Dressing</th>
+                <th>Terasse</th>
+                <th>Superficie</th>
+                <th>Cuisine</th>
+                <th>Garage</th>
+                <th>Piscine</th>
+                <th>Parking</th>
+                <th>Chauffeau</th>
+                <th>Videosurveillance</th>
+                <th>Alarme</th>
+                <th>Buanderie</th>
+                <th>Interphone</th>
+                <th>Meuble</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonceVilla in annonceVillas %}
+            <tr>
+                <td><a href="{{ path('backend_annoncevilla_show', { 'id': annonceVilla.id }) }}">{{ annonceVilla.id }}</a></td>
+                <td>{{ annonceVilla.piece }}</td>
+                <td>{{ annonceVilla.douche }}</td>
+                <td>{{ annonceVilla.toilette }}</td>
+                <td>{% if annonceVilla.dressing %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonceVilla.terasse %}Yes{% else %}No{% endif %}</td>
+                <td>{{ annonceVilla.superficie }}</td>
+                <td>{{ annonceVilla.cuisine }}</td>
+                <td>{% if annonceVilla.garage %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonceVilla.piscine %}Yes{% else %}No{% endif %}</td>
+                <td>{{ annonceVilla.parking }}</td>
+                <td>{% if annonceVilla.chauffeau %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonceVilla.videosurveillance %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonceVilla.alarme %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonceVilla.buanderie %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonceVilla.interphone %}Yes{% else %}No{% endif %}</td>
+                <td>{% if annonceVilla.meuble %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('backend_annoncevilla_show', { 'id': annonceVilla.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('backend_annoncevilla_edit', { 'id': annonceVilla.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('backend_annoncevilla_new') }}">Create a new annonceVilla</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -14,7 +14,7 @@
     <div class="section">
         <div class="container">
             <div class="title-wrap text-center">
-                <h2 class="h1">Profile</h2>
+                <h2 class="h1">Enregistrement d'annonce</h2>
             </div>
         </div>
         <div class="container">
@@ -60,8 +60,64 @@
                 <div class="row">
 					<div class="col-lg-8 mt-3 mt-sm-0 order-lg-2 text-lg-right">
 						<div class="col-sm-10 col-sm-offset-1 text-center">
+                            <h4 class="text-left text-primary">Enregistrement de bien <span class="badge badge-primary">1/2</span></h4>
 							<!--<form class="contact-form" id="contactForm" method="post" novalidate="novalidate">-->
-                            Message de bienvenue
+                            {{ form_start(form, {'attr': {'class': 'profile-form', 'id': 'profileForm', 'novalidate': 'novalidate', 'action': path('frontend_annonceur_new', {'user':utilisateur.user.username, 'id': utilisateur.id}) }})}}
+								<div class="successform">
+									<p>Message envoyé avec succès!</p>
+								</div>
+								<div class="errorform">
+									<p>Echec! Veuillez reessayer plutard.</p>
+								</div>
+								<div class="mt-15 alert-conseil text-left">
+									{{ form_widget(form.utilisateur)}}
+                                    {{ form_errors(form.utilisateur)}}
+								</div>
+								<div class="mt-15 alert-conseil text-left">
+									{{ form_widget(form.typebien)}}
+                                    {{ form_errors(form.typebien)}}
+								</div>
+								<div class="mt-15 alert-conseil text-left">
+                                    {{ form_widget(form.titre)}}
+                                    {{ form_errors(form.titre)}}
+                                    <label class="alert-conseil">Utiliser des mots qu'un acheteur utiliserait pour rechercher votre bien</label>
+								</div>
+								<div class="mt-15 alert-conseil text-left">
+									{{ form_widget(form.prix)}}
+                                    {{ form_errors(form.prix)}}
+								</div>
+								<div class="mt-15 alert-conseil text-left">
+									{{ form_widget(form.mode)}}
+                                    {{ form_errors(form.mode)}}
+								</div>
+								<div class="mt-15 alert-conseil text-left">
+									{{ form_widget(form.zone)}}
+                                    {{ form_errors(form.zone)}}
+								</div>
+								<div class="mt-15 alert-conseil text-left">
+									{{ form_widget(form.description)}}
+                                    {{ form_errors(form.description)}}
+								</div>
+								<div class="mt-15 text-left">
+                                    <label>Telecharger la photo du bien</label>
+									{{ form_widget(form.imageFile)}}
+                                    {{ form_errors(form.imageFile)}}
+								</div>
+								<div class="mt-15 text-left">
+									{{ form_widget(form.affichagePrix )}}
+                                    {{ form_errors(form.affichagePrix)}}
+                                    <label> Afficher le prix</label>
+								</div>
+								<div class="mt-15 text-left">
+									{{ form_widget(form.disponibilite, {'attr':{'class':'custom-checbox'}} )}}
+                                    {{ form_errors(form.disponibilite)}}
+                                    <label> Disponiilite</label>
+								</div>
+								<div class="mt-3">
+									<button type="submit" class="btn btn-primary">Suivant</button>
+								</div>
+							<!--</form>-->
+                            {{ form_end(form)}}
 						</div>
 						
 					</div>

@@ -54,13 +54,13 @@
 						<div class="row flex-lg-column">
 							
 							<div class="col-sm col-lg-auto mt-3 mt-sm-0 mt-lg-2">
-								<a href="#" class="btn btn-primary dropdown-toggle w-100">
-										<i class="icon-user"></i>Profile
+								<a href="{{ absolute_url(path('frontend_profile_edit', {'user': utilisateur.user.username, 'id': utilisateur.id}))}}" class="btn btn-primary dropdown-toggle w-100" title="Modifier le profile">
+										<i class="icon-user"></i>Profile 
 									</a>
-								<a href="#" class="btn btn-primary btn-light dropdown-toggle w-100">
+								<a href="{{ absolute_url(path('frontend_annonceur_new', {'user':utilisateur.user.username, 'id': utilisateur.id }))}}" class="btn btn-primary btn-light dropdown-toggle w-100">
 										<i class="icon-completed-tasks"></i>Faire une annonce
 									</a>
-								<a href="#" class="btn btn-primary btn-light dropdown-toggle w-100" >
+								<a href="{{ absolute_url(path('frontend_annonceur_index', {'user': utilisateur.user.username, 'id':utilisateur.id}))}}" class="btn btn-primary btn-light dropdown-toggle w-100" >
 										<i class="icon-completed-tasks"></i>Voir ses annonces
 									</a>
 							</div>
