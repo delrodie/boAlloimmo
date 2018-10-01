@@ -16,7 +16,53 @@ class FrProfileController extends Controller
 {
     /**
      * http://localhost:8000/register/confirmed
-     * 
+     *
+     * @Route("/", name="frontend_profile_confirmation")
+     * @Method({"GET", "POST"})
+     */
+    public function confirmationAction(Request $request, AuthorizationCheckerInterface $authChecker)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        if (true === $authChecker->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('backend');
+        }
+
+        // Test de la non existence d'un compte pur cet user
+        $verifExistenceUser = $em->getRepository('AppBundle:Utilisateur')->findOneBy(array('user'=>$user->getId()));
+
+        if ($verifExistenceUser) { //dump( $user->getUsername()); die();
+            return $this->redirectToRoute('frontend_profile_show', [
+                'id' => $verifExistenceUser->getId(),
+                'user' => $verifExistenceUser->getUser()->getUsername(),
+            ]);
+        }
+
+
+        $utilisateur = new Utilisateur();
+        $form = $this->createForm('AppBundle\Form\Internaute\ProfileType', $utilisateur, array('user' => $user->getId()));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($utilisateur);
+            $em->flush();
+
+            return $this->redirectToRoute('frontend_profile_show', [
+                'id' => $utilisateur->getId(),
+                'user' => $utilisateur->getUser()->getUsername(),
+            ]);
+        }//dump($user);die();
+
+        return $this->render('internaute/_confirmation.html.twig', array(
+            'utilisateur' => $utilisateur,
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
      * @Route("/enregistrement", name="frontend_profile_new")
      * @Method({"GET", "POST"})
      */
@@ -53,10 +99,12 @@ class FrProfileController extends Controller
                 'id' => $utilisateur->getId(),
                 'user' => $utilisateur->getUser()->getUsername(),
             ]);
-        }
+        }//dump($user);die();
 
-        return $this->render('internaute/_save.html.twig', array(
+        return $this->render('internaute/gestion.html.twig', array(
             'utilisateur' => $utilisateur,
+            'user' => $user,
+            'type' => 'save',
             'form' => $form->createView(),
         ));
     }

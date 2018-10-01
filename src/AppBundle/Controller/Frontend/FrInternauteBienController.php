@@ -78,9 +78,13 @@ class FrInternauteBienController extends Controller
             $em->flush(); 
 
             if ($typebienslug === 'immeu'){
-                return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
+                return $this->redirectToRoute('backend_immeuble_new', array('bien' => $annonce->getId()));
             }elseif ($typebienslug === 'appar'){
-                return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
+                return $this->redirectToRoute('frontend_annonceur_appartement_new', [
+                    'bien' => $annonce->getSlug(),
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                ]);
             }elseif ($typebienslug === 'villa'){ //dump($annonce->getSlug());die();
                 return $this->redirectToRoute('frontend_annonceur_villa_new', [
                     'bien' => $annonce->getSlug(),
@@ -134,13 +138,28 @@ class FrInternauteBienController extends Controller
             $em->flush(); 
 
             if ($typebienslug === 'immeu'){
-                return $this->redirectToRoute('backend_immeuble_new', array('bien' => $bien->getId()));
+                return $this->redirectToRoute('backend_immeuble_new', array('annoncebien' => $annonce->getId()));
             }elseif ($typebienslug === 'appar'){
-                return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
+                $appartement = $em->getRepository('AppBundle:AnnonceAppartement')->findOneBy(array('annoncebien' => $annonce->getId()));
+
+                // Si l'appartement n'existe pas alors affecter à la creation
+                if (!$appartement){
+                    return $this->redirectToRoute('frontend_annonceur_appartement_new',[
+                        'bien' => $annonce->getSlug(),
+                        'id' => $utilisateur->getId(),
+                        'user' => $utilisateur->getUser()->getUsername(),
+                    ]);
+                }
+                return $this->redirectToRoute('frontend_annonceur_appartement_edit', [
+                    'appartement' => $appartement->getId(),
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                    'bien' => $annonce->getSlug()
+                    // Si la villa n'existe pas alors affecter a la creation
+                ]);
             }elseif ($typebienslug === 'villa'){ //dump($annonce->getSlug());die();
                 $villa = $em->getRepository('AppBundle:AnnonceVilla')->findOneBy(array('annoncebien'=>$annonce->getId()));
-                
-                // Si la villa n'existe pas alors affecter a la creation
+
                 if(!$villa){
                     return $this->redirectToRoute('frontend_annonceur_villa_new', [
                         'bien' => $annonce->getSlug(),

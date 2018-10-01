@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    {{ villa.annoncebien.titre }}
+    {{ appartement.annoncebien.titre }}
 {% endblock %}
 
 {% block body %}
@@ -42,7 +42,7 @@
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title text-center">Oups!! votre message n'a pas être envoyé, veuillez réessayer plutard! </h4>
+                        <h4 class="modal-title">Oups!! votre message n'a pas être envoyé, veuillez réessayer plutard! </h4>
                     </div>
                     <div class="modal-body">
                         {% for message in app.flashes('erreur') %}
@@ -55,33 +55,34 @@
                 </div>
             </div>
             {% endif %}
-            
             <div class="title-wrap text-center" style="font-style: italic">
-                <h3>{{ villa.annoncebien.titre }}</h3>
+                <h3>{{ appartement.annoncebien.titre }}</h3>
             </div>
             <div class="slider-gallery">
                 <ul class="slider-room-gallery-main list-unstyled js-slider-gallery-room-main">
-                    {% if (villa.annoncebien.imageName) %}
-                        <li><img src="{{ asset('uploads/biens/'~ villa.annoncebien.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ villa.annoncebien.titre }}"></li>
+                    {% if (appartement.annoncebien.imageName) %}
+                        <li><img src="{{ asset('uploads/biens/'~ appartement.annoncebien.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ appartement.annoncebien.titre }}"></li>
                     {% else %}
-                        <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bienshow_principal') }}" alt="{{ villa.annoncebien.titre }}"></li>
+                        <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bienshow_principal') }}" alt="{{ appartement.annoncebien.titre }}"></li>
                     {% endif %}
-                    {% for photo in photos %}
-                        <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="#"></li>
-                    {% endfor %}
+                    {% if photos %}
+                        {% for photo in photos %}
+                            <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ photo.annoncebien.titre }}"></li>
+                        {% endfor %}
+                    {% endif %}
                 </ul>
             </div>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="slider-gallery">
                         <ul class="slider-room-gallery-thumbs list-unstyled js-slider-gallery-room-thumbs">
-                            {% if (villa.annoncebien.imageName) %}
-                                <li><img src="{{ asset('uploads/biens/'~ villa.annoncebien.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ villa.annoncebien.titre }}"></li>
+                            {% if (appartement.annoncebien.imageName) %}
+                                <li><img src="{{ asset('uploads/biens/'~ appartement.annoncebien.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ appartement.annoncebien.titre }}"></li>
                             {% else %}
-                                <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ villa.annoncebien.titre }}"></li>
+                                <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ appartement.annoncebien.titre }}"></li>
                             {% endif %}
                             {% for photo in photos %}
-                                <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="#"></li>
+                                <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ photo.annoncebien.titre }}"></li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -89,95 +90,109 @@
                         <div class="row align-items-center">
                             <div class="col-6 col-sm">
                                 <div class="info-grid-label">Mode</div>
-                                <div class="info-grid-text">{{ villa.annoncebien.mode }}</div>
+                                <div class="info-grid-text">{{ appartement.annoncebien.mode }}</div>
                             </div>
                             <div class="col-6 col-sm">
                                 <div class="info-grid-label">Localisation</div>
-                                <div class="info-grid-text">{{ villa.annoncebien.zone }}</div>
+                                <div class="info-grid-text">{{ appartement.annoncebien.zone }}</div>
                             </div>
                             <div class="col-6 col-sm">
                                 <div class="info-grid-label">Superfice</div>
-                                <div class="info-grid-text">{{ villa.superficie }} m<sup>2</sup></div>
+                                <div class="info-grid-text">{{ appartement.superficie }} m<sup>2</sup></div>
                             </div>
                         </div>
                     </div>
                     <div class="mt-3 mt-md-7"></div>
                     <h2>Description</h2>
                     <p>
-                        {{ villa.annoncebien.description|raw }}
+                        {{ appartement.annoncebien.description|raw }}
                     </p>
                     <div class="mt-3 mt-md-7"></div>
                     <h2>Autres caractéristiques</h2>
                     <div class="row">
                         <div class="form-group">
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.garage) %}
-                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Garage</span></i>
+                                {% if (appartement.parking) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Parking</span></i>
                                 {% else %}
-                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Garage</span></i>
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Parking</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.piscine) %}
-                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Piscine</span></i>
+                                {% if (appartement.ascenceur) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Ascenceur</span></i>
                                 {% else %}
-                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Piscine</span></i>
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Ascenceur</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.chauffeau) %}
+                                {% if (appartement.chauffeau) %}
                                     <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Chauffe eau</span></i>
                                 {% else %}
                                     <i class="fa fa-square-o"> <span style="font-size: 19px">Chauffe eau</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.videosurveillance) %}
+                                {% if (appartement.videosurveillance) %}
                                     <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Vidéo surveillance</span></i>
                                 {% else %}
                                     <i class="fa fa-square-o"> <span style="font-size: 19px">Vidéo surveillance</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.videosurveillance) %}
+                                {% if (appartement.videosurveillance) %}
                                     <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Alarme</span></i>
                                 {% else %}
                                     <i class="fa fa-square-o"> <span style="font-size: 19px">Alarme</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.videosurveillance) %}
+                                {% if (appartement.videosurveillance) %}
                                     <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Buanderie</span></i>
                                 {% else %}
                                     <i class="fa fa-square-o"> <span style="font-size: 19px">Buanderie</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.videosurveillance) %}
+                                {% if (appartement.videosurveillance) %}
                                     <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Interphone</span></i>
                                 {% else %}
                                     <i class="fa fa-square-o"> <span style="font-size: 19px">Interphone</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.videosurveillance) %}
+                                {% if (appartement.videosurveillance) %}
                                     <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Meublée</span></i>
                                 {% else %}
                                     <i class="fa fa-square-o"> <span style="font-size: 19px">Meublée</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.videosurveillance) %}
+                                {% if (appartement.videosurveillance) %}
                                     <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Dressing</span></i>
                                 {% else %}
                                     <i class="fa fa-square-o"> <span style="font-size: 19px">Dressing</span></i>
                                 {% endif %}
                             </label>
                             <label for="" class="custom-control custom-checbox">
-                                {% if (villa.videosurveillance) %}
+                                {% if (appartement.videosurveillance) %}
                                     <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Terrasse</span></i>
                                 {% else %}
                                     <i class="fa fa-square-o"> <span style="font-size: 19px">Terrasse</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (appartement.etage) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Etage</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Etage</span></i>
+                                {% endif %}
+                            </label>
+                            <label for="" class="custom-control custom-checbox">
+                                {% if (appartement.balcon) %}
+                                    <i class="fa fa-check-square"> <span style="font-size: 19px; color: #af3c65">Balcon</span></i>
+                                {% else %}
+                                    <i class="fa fa-square-o"> <span style="font-size: 19px">Balcon</span></i>
                                 {% endif %}
                             </label>
                         </div>
@@ -196,23 +211,29 @@
                             <div class="info-box-color">
                                 <div class="row details">
                                     <div class="col-sm-8 label">Nombre de pièces</div>
-                                    <div class="col-sm-4 value">{{ villa.piece }}</div>
+                                    <div class="col-sm-4 value">{{ appartement.piece }}</div>
                                 </div>
                                 <div class="row details">
                                     <div class="col-sm-8 label">Salles d'eau</div>
-                                    <div class="col-sm-4 value">{{ villa.toilette }}</div>
+                                    <div class="col-sm-4 value">{{ appartement.wc }}</div>
                                 </div>
                                 <div class="row details">
                                     <div class="col-sm-8 label">Salle de bain</div>
-                                    <div class="col-sm-4 value">{{ villa.douche }}</div>
+                                    <div class="col-sm-4 value">{{ appartement.douche }}</div>
                                 </div>
                                 <div class="row details">
                                     <div class="col-sm-8 label">Cuisine</div>
-                                    <div class="col-sm-4 value">{{ villa.cuisine }} m<sup>2</sup></div>
+                                    <div class="col-sm-4 value">{{ appartement.cuisine }} m<sup>2</sup></div>
                                 </div>
-                                {% if (villa.annoncebien.affichagePrix and villa.annoncebien.prix != 0) %}
+                                {% if (appartement.netage) %}
+                                    <div class="row details">
+                                        <div class="col-sm-8 label">N° etage</div>
+                                        <div class="col-sm-4 value">{{ appartement.netage }} m<sup>2</sup></div>
+                                    </div>
+                                {% endif %}
+                                {% if (appartement.annoncebien.affichagePrix and appartement.annoncebien.prix != 0) %}
                                 <div class="text-center mt-2">
-                                    <div class="info-box-price">{{ villa.annoncebien.prix|number_format(0,'','.') }} Fcfa</div>
+                                    <div class="info-box-price">{{ appartement.annoncebien.prix|number_format(0,'','.') }} Fcfa</div>
                                     <p class="p-sm mt-2"></p>
                                 </div>
                                 {% endif %}
@@ -220,13 +241,10 @@
                         </div>
                         <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">
                             <div class="info-box-grey">
-                                <img src="{{ vich_uploader_asset(villa.annoncebien.utilisateur, 'imageFile') }}" alt="{{ villa.annoncebien.utilisateur }}" title="{{ villa.annoncebien.utilisateur }}" class="img-fluid">
+                                <img src="{{ vich_uploader_asset(appartement.annoncebien.utilisateur, 'imageFile') }}" alt="{{ appartement.annoncebien.utilisateur }}" title="{{ appartement.annoncebien.utilisateur }}" class="img-fluid">
                                 <ul class="icn-list">
-                                    <li><i class="icon-telephone"></i>+225 {{ villa.annoncebien.utilisateur.telephone }}</li>
-                                    {% if (villa.annoncebien.utilisateur.user.email) %}
-                                        <li><i class="icon-closed-envelope"></i><a href="mailto:{{ villa.annoncebien.utilisateur.user.email }}">{{ villa.annoncebien.utilisateur.user.email }}</a></li>
-                                    {% endif %}
-
+                                    <li><i class="icon-telephone"></i>+225 {{ appartement.annoncebien.utilisateur.telephone }}</li>
+                                    <li><i class="icon-closed-envelope"></i><a href="mailto:{{ appartement.annoncebien.utilisateur.user.email }}">{{ appartement.annoncebien.utilisateur.user.email }}</a></li>
                                 </ul>
                             </div>
                             <div>
@@ -241,21 +259,21 @@
                                                 <input type="text" name="Prenoms" class="form-control" placeholder="Prénoms" autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="Telephone" class="form-control" placeholder="Téléphone" autocomplete="off">
+                                                <input type="tel" name="Telephone" class="form-control" placeholder="Téléphone" autocomplete="off">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" name="Email" class="form-control" placeholder="Email" autocomplete="off">
+                                                <input type="email" name="Email" class="form-control" placeholder="Email" autocomplete="off">
                                             </div>
                                             <div class="form-group">
                                                 <textarea name="Observation" class="form-control" placeholder="Observations"></textarea>
                                             </div>
                                             <div class="form-group text-right">
-                                                <input type="hidden" name="Lien" value="{{ absolute_url(path('frontend_bien', {'typebien': villa.annoncebien.typebien.slug, 'slug': villa.annoncebien.slug}))}}">
-                                                <input type="hidden" name="Partenaire" value="{{villa.annoncebien.utilisateur.user.email}}">
-                                                <input type="hidden" name="Tbien" value="{{villa.annoncebien.typebien.slug }}">
-                                                <input type="hidden" name="BienSlug" value="{{villa.annoncebien.slug }}">
-                                                <input type="hidden" name="BienNom" value="{{villa.annoncebien.titre }}">
-                                                <input type="hidden" name="Image" value="{{ absolute_url(asset('uploads/biens/'~ villa.annoncebien.imageName)) }}">
+                                                <input type="hidden" name="Lien" value="{{ absolute_url(path('frontend_bien', {'typebien': appartement.annoncebien.typebien.slug, 'slug': appartement.annoncebien.slug}))}}">
+                                                <input type="hidden" name="Partenaire" value="{{appartement.annoncebien.utilisateur.user.email}}">
+                                                <input type="hidden" name="Tbien" value="{{appartement.annoncebien.typebien.slug }}">
+                                                <input type="hidden" name="BienSlug" value="{{appartement.annoncebien.slug }}">
+                                                <input type="hidden" name="BienNom" value="{{appartement.annoncebien.titre }}">
+                                                <input type="hidden" name="Image" value="{{ absolute_url(asset('uploads/biens/'~ appartement.annoncebien.imageName)) }}">
                                                 <input type="submit" name="Interesse" class="btn btn-primary" value="Envoyer">
                                             </div>
                                         </div>
@@ -282,17 +300,9 @@
                     <div class="col-4">
                         <div class="room-card">
                             <div class="room-card-photo">
-                                {% if (similaire.imageName) %}
-                                    <img src="{{ asset('uploads/biens/'~ similaire.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}" class="img-fluid">
-                                {% else %}
-                                    <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}"></li>
-                                {% endif %}
+                                <img src="{{ asset('uploads/biens/'~ similaire.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}" class="img-fluid">
                                 <div class="flex-wrap-center">
-                                    {% if (similaire.disponibilite) %}
-                                        <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
-                                    {% else %}
-                                        <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
-                                    {% endif %}
+                                    <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview" data-toggle="modal" data-target="#modalBooking">Voir les détails</a>
                                 </div>
                             </div>
                             <div class="room-card-info">
@@ -301,44 +311,44 @@
                                         <h3 class="room-type">{{ similaire.titre }}</h3>
                                     </div>
                                 </div>
-                                <div class="room-size mt-0" style="height: 100px;">
+                                <div class="room-size mt-0">
                                     {{ similaire.resume|raw }}
                                 </div>
                                 <div class="row">
-                                      {% if similaire.affichagePrix and similaire.prix != 0 %}
-                                        <div class="col room-information">
-                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
-                                            <i class="fa fa-money"></i> <span class="">{{ similaire.prix|number_format(0,'','.') }} FCFA</span>
-                                          </a>
-                                        </div>
-                                        <div class="col room-information">
-                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
-                                            <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
-                                          </a>
-                                        </div>
-                                      {% elseif (similaire.prix == 0) %}
-                                        <div class="col room-information">
-                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les details">
-                                            <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
-                                          </a>
-                                        </div>
-                                        <div class="col room-information">
-                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
-                                            <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
-                                          </a>
-                                        </div>
-                                      {% else %}
-                                        <div class="col room-information">
-                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
-                                            <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
-                                          </a>
-                                        </div>
-                                        <div class="col room-information">
-                                          <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
-                                            <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
-                                          </a>
-                                        </div>
-                                      {% endif %}
+                                  {% if similaire.affichagePrix and similaire.prix != 0 %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
+                                        <i class="fa fa-money"></i> <span class="">{{ similaire.prix|number_format(0,'','.') }} FCFA</span>
+                                      </a>
+                                    </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                      </a>
+                                    </div>
+                                  {% elseif (similaire.prix == 0) %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les details">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                      </a>
+                                    </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                        <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
+                                      </a>
+                                    </div>
+                                  {% else %}
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                        <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
+                                      </a>
+                                    </div>
+                                    <div class="col room-information">
+                                      <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                        <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
+                                      </a>
+                                    </div>
+                                  {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -356,6 +366,6 @@
 
         setTimeout(function() {
             $('#overlay').modal('hide');
-        }, 5000);
+        }, 10000);
     </script>
 {% endblock %}

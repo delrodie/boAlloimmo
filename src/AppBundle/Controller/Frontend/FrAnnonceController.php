@@ -56,9 +56,11 @@ class FrAnnonceController extends Controller
             ]);
 
         }elseif ($bien->getTypebienslug() === 'appar'){
-            $appartement = $em->getRepository('AppBundle:Appartement')->findOneBy(array('bien' => $bien->getId()));
+            $appartement = $em->getRepository('AppBundle:AnnonceAppartement')->findOneBy(array('annoncebien' => $bien->getId()));
 
-            return $this->render("frontend/appartement.html.twig", [
+            if (!$appartement) return $this->redirectToRoute('homepage');
+
+            return $this->render("internaute/appartement.html.twig", [
                 'appartement' => $appartement,
                 'similaires'    => $similaires,
                 'photos' => $photos,

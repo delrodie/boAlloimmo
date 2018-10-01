@@ -1,0 +1,230 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrement de bien{% endblock %}
+
+{% block body %}
+    <div class="section section-booking">
+        <div class="booking-form-wrap">
+            {{ render(url('rfrontend_principale')) }}
+            <div class="booking-form-toggle d-md-none"><a href="tel:+225 03 25 54 47"><i class="icon-telephone"></i></a>
+                <div class="js-booking-form-toggle"><span>Detail</span><span class="close-text js-close-text">CLOSE</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="title-wrap text-center">
+                <h2 class="h1">Enregistrement d'annonce</h2>
+            </div>
+        </div>
+        <div class="container">
+            {% if (app.flashes('notice')) %}
+            <div class="modal fade" id="overlay">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-center">Votre message a été envoyé avec succès! </h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in app.flashes('notice') %}
+                            <div class="flash-notice">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if (app.flashes('erreur')) %}
+            <div class="modal fade" id="overlay">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title text-center">Oups!! votre message n'a pas été envoyé, veuillez réessayer plutard! </h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in app.flashes('erreur') %}
+                            <div class="flash-notice">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+                <div class="row">
+					<div class="col-lg-8 mt-3 mt-sm-0 order-lg-2 text-lg-right">
+						<div class="col-sm-10 col-sm-offset-1 text-center">
+                            <h4 class="text-left text-primary">Enregistrement de bien <span class="badge badge-primary">2/2</span></h4>
+							<!--<form class="contact-form" id="contactForm" method="post" novalidate="novalidate">-->
+                            {{ form_start(form, {'attr': {'class': 'profile-form', 'id': 'profileForm', 'novalidate': 'novalidate', 'action': path('frontend_annonceur_appartement_new', {'user':utilisateur.user.username, 'id': utilisateur.id, 'bien': bien}) }})}}
+								<div class="successform">
+									<p>Message envoyé avec succès!</p>
+								</div>
+								<div class="errorform">
+									<p>Echec! Veuillez reessayer plutard.</p>
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.annoncebien)}}
+                                        {{ form_errors(form.annoncebien)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.piece)}}
+                                        {{ form_errors(form.piece)}}
+                                    </div>									
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.douche)}}
+                                        {{ form_errors(form.douche)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.wc)}}
+                                        {{ form_errors(form.wc)}}
+                                    </div>									
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.superficie)}}
+                                        {{ form_errors(form.superficie)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_widget(form.cuisine)}}
+                                        {{ form_errors(form.cuisine)}}
+                                    </div>									
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        <label> Dressing ?</label>
+                                        {{ form_widget(form.dressing)}}
+                                        {{ form_errors(form.dressing)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label> Balcon ?</label>
+                                        {{ form_widget(form.balcon)}}
+                                        {{ form_errors(form.balcon)}}
+                                    </div>
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        <label> Etage ?</label>
+                                        {{ form_widget(form.etage)}}
+                                        {{ form_errors(form.etage)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label> N° etage ?</label>
+                                        {{ form_widget(form.netage)}}
+                                        {{ form_errors(form.netage)}}
+                                    </div>
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        <label> Chauffe Eau ?</label>
+                                        {{ form_widget(form.chauffeau)}}
+                                        {{ form_errors(form.chauffeau)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label> Meuble ?</label>
+                                        {{ form_widget(form.meuble)}}
+                                        {{ form_errors(form.meuble)}}
+                                    </div>
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        <label> Buanderie ?</label>
+                                        {{ form_widget(form.buanderie)}}
+                                        {{ form_errors(form.buanderie)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label> Interphone ?</label>
+                                        {{ form_widget(form.interphone)}}
+                                        {{ form_errors(form.interphone)}}
+                                    </div>
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        <label> Alarme ?</label>
+                                        {{ form_widget(form.alarme)}}
+                                        {{ form_errors(form.alarme)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label> Video surveillance ?</label>
+                                        {{ form_widget(form.videosurveillance)}}
+                                        {{ form_errors(form.videosurveillance)}}
+                                    </div>
+								</div>
+								<div class="mt-15 text-left row">
+                                    <div class="col-sm-6">
+                                        <label>Parking ?</label>
+                                        {{ form_widget(form.parking)}}
+                                        {{ form_errors(form.parking)}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Ascenceur ? </label>
+                                        {{ form_widget(form.ascenceur)}}
+                                        {{ form_errors(form.ascenceur)}}
+                                    </div>
+								</div>
+								<div class="mt-3 text-right">
+									<button type="reset" class="btn btn-default">Precedent</button>
+									<button type="submit" class="btn btn-primary">Enregistrer</button>
+								</div>
+							<!--</form>-->
+                            {{ form_end(form)}}
+						</div>
+						
+					</div>
+					<div class="col-lg-4 mt-3 mt-lg-0">
+						<div class="row flex-lg-column">
+							<div class="special-card-2">
+							<div class="special-card-2-photo">
+								{% if utilisateur.imagename %}
+                                <img src="{{ absolute_url(vich_uploader_asset(utilisateur, 'imageFile')) }}" class="img-fluid" alt="{{ utilisateur.nom }}">
+                                {% else %}
+                                    <img src="{{ absolute_url(asset('frontend/images/icon-ai.png')) }}" alt="" class="img-fluid">
+                                {% endif %}
+                                
+							</div>
+							<div class="special-card-2-info">
+								<div class="row">									
+									<div class="col-md ml-auto mt-3 mt-md-0">
+										<ul class="services-list">
+											<li><i class="icon-user"> {{ utilisateur.nom }}</i><span class="badge badge-primary">{{ utilisateur.user.username|title }}</span></li>
+											<li><i class="fa fa-map-marker">&nbsp;&nbsp;&nbsp; {{ utilisateur.adresse }}</i>.</li>
+											<li><i class="icon icon-telephone"> {{ utilisateur.telephone }}</i>.</li>
+											{% if utilisateur.website %}
+                                            <li><i class="fa fa-globe">&nbsp;&nbsp;&nbsp; {{ utilisateur.website }}</i>.</li>
+                                            {% endif %}                                            
+											<li><i class="icon-closed-envelope"> {{ utilisateur.user.email }}</i>.</li>
+											<li></li>
+										</ul>
+										<p class="text-justify">
+											{{ utilisateur.description }}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+							<div class="col-sm col-lg-auto mt-3 mt-sm-0 mt-lg-2">
+								<a href="{{ absolute_url(path('frontend_profile_edit', {'user': utilisateur.user.username, 'id': utilisateur.id}))}}" class="btn btn-primary btn-light dropdown-toggle w-100" title="Modifier le profile">
+										<i class="icon-user"></i>Profile 
+									</a>
+								<a href="{{ absolute_url(path('frontend_annonceur_new', {'user':utilisateur.user.username, 'id': utilisateur.id }))}}" class="btn btn-primary dropdown-toggle w-100">
+										<i class="icon-completed-tasks"></i>Faire une annonce
+									</a>
+								<a href="{{ absolute_url(path('frontend_annonceur_index', {'user': utilisateur.user.username, 'id':utilisateur.id}))}}" class="btn btn-primary btn-light dropdown-toggle w-100" >
+										<i class="icon-completed-tasks"></i>Voir ses annonces
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>
+        </div>
+    </div>
+{% endblock %}
