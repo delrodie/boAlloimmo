@@ -47,9 +47,9 @@ class FrAnnonceController extends Controller
 
         // Verification du type de bien puis renvoie a la page correspondante a ce type de bien
         if ($bien->getTypebienslug() === 'immeu'){
-            $immeuble = $em->getRepository('AppBundle:Immeuble')->findOneBy(array('bien' => $bien->getId()));
+            $immeuble = $em->getRepository('AppBundle:AnnonceImmeuble')->findOneBy(array('annoncebien' => $bien->getId()));
 
-            return $this->render("frontend/immeuble.html.twig", [
+            return $this->render("internaute/immeuble.html.twig", [
                 'immeuble' => $immeuble,
                 'similaires'    => $similaires,
                 'photos' => $photos,

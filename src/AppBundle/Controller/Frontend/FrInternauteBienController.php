@@ -78,7 +78,11 @@ class FrInternauteBienController extends Controller
             $em->flush(); 
 
             if ($typebienslug === 'immeu'){
-                return $this->redirectToRoute('backend_immeuble_new', array('bien' => $annonce->getId()));
+                return $this->redirectToRoute('frontend_annonceur_immeuble_new', [
+                    'bien' => $annonce->getSlug(),
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername()
+                ]);
             }elseif ($typebienslug === 'appar'){
                 return $this->redirectToRoute('frontend_annonceur_appartement_new', [
                     'bien' => $annonce->getSlug(),
@@ -138,7 +142,22 @@ class FrInternauteBienController extends Controller
             $em->flush(); 
 
             if ($typebienslug === 'immeu'){
-                return $this->redirectToRoute('backend_immeuble_new', array('annoncebien' => $annonce->getId()));
+                $immeuble = $em->getRepository('AppBundle:AnnonceImmeuble')->findOneBy(array('annoncebien' => $annonce->getId()));
+
+                // Si l'immeuble n'existe pas donc affectation à la creation
+                if (!$immeuble){
+                    return $this->redirectToRoute('frontend_annonceur_immeuble_new', [
+                        'bien' => $annonce->getSlug(),
+                        'id' => $utilisateur->getId(),
+                        'user' => $utilisateur->getUser()->getUsername()
+                    ]);
+                }
+                return $this->redirectToRoute('frontend_annonceur_immeuble_edit', array(
+                    'immeuble' => $immeuble->getId(),
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                    'bien' => $annonce->getSlug()
+                ));
             }elseif ($typebienslug === 'appar'){
                 $appartement = $em->getRepository('AppBundle:AnnonceAppartement')->findOneBy(array('annoncebien' => $annonce->getId()));
 
