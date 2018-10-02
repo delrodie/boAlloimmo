@@ -63,3 +63,4 @@ security:
         - { path: ^/backend/service, role: ROLE_ADMIN }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/profile/, role: ROLE_USER }
+        - { path: ^/internaute, role: ROLE_USER }

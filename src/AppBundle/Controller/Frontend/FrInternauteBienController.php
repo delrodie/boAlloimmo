@@ -96,7 +96,11 @@ class FrInternauteBienController extends Controller
                     'user' => $utilisateur->getUser()->getUsername(),
                 ]);
             }else{
-                return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
+                return $this->redirectToRoute('frontend_annonceur_autrebien_new', array(
+                    'bien' => $annonce->getSlug(),
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername()
+                ));
             }
         }
 
@@ -194,7 +198,21 @@ class FrInternauteBienController extends Controller
                     'user' => $utilisateur->getUser()->getUsername(),
                 ]);
             }else{
-                return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
+                $autrebien = $em->getRepository('AppBundle:AnnonceAutrebien')->findOneBy(array('annoncebien'=>$annonce->getId()));
+
+                if (!$autrebien){
+                    return $this->redirectToRoute('frontend_annonceur_autrebien_new',[
+                        'bien' => $annonce->getSlug(),
+                        'id' => $utilisateur->getId(),
+                        'user' => $utilisateur->getUser()->getUsername(),
+                    ]);
+                }
+                return $this->redirectToRoute('frontend_annonceur_autrebien_edit', array(
+                    'bien' => $annonce->getSlug(),
+                    'id' => $utilisateur->getId(),
+                    'autrebien' => $autrebien->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                ));
             }
         }
 

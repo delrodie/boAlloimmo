@@ -79,9 +79,9 @@ class FrAnnonceController extends Controller
                 'photos' => $photos,
             ]);
         }else{
-            $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $bien->getId()));
+            $autrebien = $em->getRepository('AppBundle:AnnonceAutrebien')->findOneBy(array('annoncebien' => $bien->getId()));
 
-            return $this->render("frontend/autrebien.html.twig", [
+            return $this->render("internaute/autrebien.html.twig", [
                 'autrebien' => $autrebien,
                 'similaires'    => $similaires,
                 'photos' => $photos,
