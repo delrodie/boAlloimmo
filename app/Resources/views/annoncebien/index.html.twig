@@ -1,71 +1,59 @@
-{% extends 'base.html.twig' %}
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Liste des annonces utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>Annoncebiens list</h1>
+    <main class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0"> Gestion des annonces utilisateurs
+                <small></small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="#" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">liste des annonces utilisateurs</li>
+            </ol>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Resume</th>
-                <th>Prix</th>
-                <th>Localisation</th>
-                <th>Disponibilite</th>
-                <th>Tags</th>
-                <th>Typebienslug</th>
-                <th>Affichageprix</th>
-                <th>Imagename</th>
-                <th>Imagesize</th>
-                <th>Updatedat</th>
-                <th>Slug</th>
-                <th>Publiepar</th>
-                <th>Modifiepar</th>
-                <th>Publiele</th>
-                <th>Modifiele</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for annonceBien in annonceBiens %}
-            <tr>
-                <td><a href="{{ path('backend_annoncebien_show', { 'id': annonceBien.id }) }}">{{ annonceBien.id }}</a></td>
-                <td>{{ annonceBien.titre }}</td>
-                <td>{{ annonceBien.description }}</td>
-                <td>{{ annonceBien.resume }}</td>
-                <td>{{ annonceBien.prix }}</td>
-                <td>{{ annonceBien.localisation }}</td>
-                <td>{% if annonceBien.disponibilite %}Yes{% else %}No{% endif %}</td>
-                <td>{{ annonceBien.tags }}</td>
-                <td>{{ annonceBien.typebienslug }}</td>
-                <td>{% if annonceBien.affichagePrix %}Yes{% else %}No{% endif %}</td>
-                <td>{{ annonceBien.imageName }}</td>
-                <td>{{ annonceBien.imageSize }}</td>
-                <td>{% if annonceBien.updatedAt %}{{ annonceBien.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ annonceBien.slug }}</td>
-                <td>{{ annonceBien.publiePar }}</td>
-                <td>{{ annonceBien.modifiePar }}</td>
-                <td>{{ annonceBien.publieLe }}</td>
-                <td>{{ annonceBien.modifieLe }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('backend_annoncebien_show', { 'id': annonceBien.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('backend_annoncebien_edit', { 'id': annonceBien.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="container-fluid">
 
-    <ul>
-        <li>
-            <a href="{{ path('backend_annoncebien_new') }}">Create a new annonceBien</a>
-        </li>
-    </ul>
+
+            <div class="card-deck">
+                {% for annoncebien in annonceBiens %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card mb-4">
+                            {% if (annoncebien.imageName) %}
+                                <img src="{{ vich_uploader_asset(annoncebien, 'imageFile') }}" alt="{{ annoncebien.titre }}" title="{{ annoncebien.titre }}"  class="card-img-top img-fluid"/>
+                            {% else %}
+                                <img src="{{ asset('frontend/images/icon-ai.png')}}" class="card-img-top img-fluid">
+                            {% endif %}
+                            <div class="card-body">
+                                <span class="text-right">{{ annoncebien.typebien.libelle }}</span>
+
+                                <h5 class="card-title">{{ annoncebien.titre }}</h5>
+                                <p class="card-text">{{ annoncebien.resume|raw }}</p>
+                                <p class="card-text">
+                                    <i class="fa fa-money"> {{ annoncebien.prix|number_format(0,'','.') }}</i> &nbsp; &nbsp;
+                                    <i class="fa fa-map-signs">{{ annoncebien.zone }}</i>
+                                </p>
+                                <p class="card-text"></p>
+                                <a href="{{ path('backend_bien_show', {'slug': annoncebien.slug}) }}" class="btn btn-outline-primary">Voir
+                                </a>
+                                {% if (annoncebien.disponibilite) %}
+                                    <a href="#" class="btn btn-success" title="Disponible"><i class="fa fa-check-square-o"></i> </a>
+                                {% else %}
+                                    <a href="#" class="btn btn-danger" title="Vendu"><i class="fa fa-chain-broken"></i> </a>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    <small class="text-muted">Partenaire {{ annoncebien.utilisateur }}</small>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </main>
 {% endblock %}

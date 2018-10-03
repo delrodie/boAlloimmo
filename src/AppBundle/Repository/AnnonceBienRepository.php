@@ -30,4 +30,14 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
         ;
     }
+
+    /**
+     * Liste decroissante des annonces
+     */
+    public function findListDesc(){
+        return $this->createQueryBuilder('b')
+                    ->orderBy('b.id', 'DESC')
+                    ->getQuery()->getResult()
+            ;
+    }
 }

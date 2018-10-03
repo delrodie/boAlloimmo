@@ -88,7 +88,7 @@ class UtilisateurController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('backend_utilisateur_edit', array('id' => $utilisateur->getId()));
+            return $this->redirectToRoute('backend_utilisateur_index');
         }
 
         return $this->render('utilisateur/edit.html.twig', array(

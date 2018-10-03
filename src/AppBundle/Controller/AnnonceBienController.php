@@ -24,7 +24,7 @@ class AnnonceBienController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findAll();
+        $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findListDesc();
 
         return $this->render('annoncebien/index.html.twig', array(
             'annonceBiens' => $annonceBiens,
