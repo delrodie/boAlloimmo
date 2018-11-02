@@ -60,15 +60,52 @@ class AnnonceBienController extends Controller
     /**
      * Finds and displays a annonceBien entity.
      *
-     * @Route("/{id}", name="backend_annoncebien_show")
+     * @Route("/{slug}", name="backend_annoncebien_show")
      * @Method("GET")
      */
     public function showAction(AnnonceBien $annonceBien)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        if ($annonceBien->getTypebienslug() === 'immeu'){
+            $immeuble = $em->getRepository('AppBundle:AnnonceImmeuble')->findOneBy(array('annoncebien' => $annonceBien->getId()));
+            if ($immeuble){
+                return $this->redirectToRoute('backend_annonceimmeuble_show', array('id' => $immeuble->getId(), 'slug' =>$annonceBien->getSlug()));
+            }else{
+                return $this->redirectToRoute('backend_immeuble_new', array('bien' => $annonceBien->getId()));
+            }
+        }elseif ($annonceBien->getTypebienslug() === 'appar'){
+            $appartement = $em->getRepository('AppBundle:Appartement')->findOneBy(array('bien' => $annonceBien->getId()));
+            if ($appartement){
+                return $this->redirectToRoute('backend_appartement_show', array('id' => $appartement->getId(), 'bien' =>$annonceBien->getSlug()));
+            }else{
+                return $this->redirectToRoute('backend_appartement_new', array('bien' => $annonceBien->getId()));
+            }
+        }elseif ($annonceBien->getTypebienslug() === 'villa'){
+            $villa = $em->getRepository('AppBundle:Villa')->findOneBy(array('bien' => $annonceBien->getId()));
+            if ($villa){
+                return $this->redirectToRoute('backend_villa_show', array('id' => $villa->getId(), 'bien' =>$annonceBien->getSlug()));
+            }else{
+                return $this->redirectToRoute('backend_villa_new', array('bien' => $annonceBien->getId()));
+            }
+        }else{
+            $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $annonceBien->getId()));
+            if ($autrebien){
+                return $this->redirectToRoute('backend_autrebien_show', array('id' => $autrebien->getId(), 'bien' =>$annonceBien->getSlug()));
+            }else{
+                return $this->redirectToRoute('backend_autrebien_new', array('bien' => $annonceBien->getId()));
+            }
+        }
+
+        $autrebien = $em->getRepository('AppBundle:Autrebien')->findOneBy(array('bien' => $annonceBien->getId()));
+        if ($autrebien){
+            return $this->redirectToRoute('backend_autrebien_show', array('id' => $autrebien->getId(), 'bien' =>$annonceBien->getSlug()));
+        }
+
         $deleteForm = $this->createDeleteForm($annonceBien);
 
-        return $this->render('annoncebien/show.html.twig', array(
-            'annonceBien' => $annonceBien,
+        return $this->render('bien/show.html.twig', array(
+            'bien' => $annonceBien,
             'delete_form' => $deleteForm->createView(),
         ));
     }

@@ -76,7 +76,8 @@ class FRechercheController extends Controller
      */
     public function locationAction(Request $request, Utilities $utilities)
     {
-        $typebien = $request->get('typebien');
+
+        $typebien = $request->get('typebien'); dump($typebien);die();
         $piece = $request->get('piece');
         $localisation = $request->get('localisation');
         $min = $request->get('minimum');
@@ -228,6 +229,9 @@ class FRechercheController extends Controller
      */
     public function achatAction(Request $request, Utilities $utilities)
     {
+        $mode = $request->get('Mode');
+
+
         $typebien = $request->get('typebien');
         $piece = $request->get('piece');
         $localisation = $request->get('localisation');
@@ -240,7 +244,7 @@ class FRechercheController extends Controller
             // Si le type de bien est selectionné veifier
             // sinon verifier uniquement la localite
             if ($typebien){
-                $mode = 'Vente';
+                //$mode = 'Vente';
                 $typebiens = $em->getRepository('AppBundle:Typebien')->findOneBy(array('libelle'=> $typebien));
                 $resume = $utilities->resume($typebiens->getSlug(), 5, '', true);
                 $nbPiece = $utilities->resume($piece, 1, '', true);
@@ -335,7 +339,7 @@ class FRechercheController extends Controller
                 dump($biens);die();
 
             }elseif ($localisation){
-                $mode = 'Vente'; //die($min);
+                //$mode = 'Vente'; //die($min);
 
                 // Formulation de la requete du prix
                 //if ($min){ $whereMin = 'b.prix >= :min'; }else { $whereMin = 'b.prix >= :min'; $min = 0;}

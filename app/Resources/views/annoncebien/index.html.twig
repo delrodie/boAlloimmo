@@ -36,7 +36,7 @@
                                     <i class="fa fa-map-signs">{{ annoncebien.zone }}</i>
                                 </p>
                                 <p class="card-text"></p>
-                                <a href="{{ path('backend_bien_show', {'slug': annoncebien.slug}) }}" class="btn btn-outline-primary">Voir
+                                <a href="{{ path('backend_annoncebien_show', {'slug': annoncebien.slug}) }}" class="btn btn-outline-primary">Voir
                                 </a>
                                 {% if (annoncebien.disponibilite) %}
                                     <a href="#" class="btn btn-success" title="Disponible"><i class="fa fa-check-square-o"></i> </a>

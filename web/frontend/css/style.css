@@ -7677,7 +7677,7 @@ ul.services-list {
 
 .popover-markup .trigger > .form-control {
   position: relative;
-  min-width: 180px; }
+  min-width: 170px; }
   .popover-markup .trigger > .form-control:after {
     position: absolute;
     margin-top: -12px;
@@ -7690,7 +7690,7 @@ ul.services-list {
 
 @media (max-width: 1229px) {
   .popover-markup .trigger > .form-control {
-    min-width: 160px; } }
+    min-width: 150px; } }
 @media (max-width: 767px) {
   .popover-markup .trigger > .form-control {
     width: 100%;
@@ -7714,7 +7714,7 @@ ul.services-list {
   margin-left: -4px; }
 
 .popover-content {
-  min-width: 242px;
+  min-width: 175px;
   padding: 15px;
   background: #fff;
   margin-top: 3px;
@@ -7742,7 +7742,7 @@ ul.services-list {
 @media (max-width: 1023px) {
   .popover-2 .popover-content {
     left: 0;
-    min-width: 200px; } }
+    min-width: 150px; } }
 @media (max-width: 767px) {
   .popover-content {
     bottom: 42px; } }

@@ -182,7 +182,7 @@
                 <div class="col-auto col-lg-64 col-xl-5 d-none d-lg-flex">
                     <div class="header-info">
                         <i class="icon-telephone"></i>
-                        <span>Nous contacter:</span> +225 22 54 47 78 / 08 85 78 87
+                        <span>Nous contacter:</span> +225 75 83 33 75
                     </div>
                 </div>
                 <div class="col-auto ml-auto d-none d-lg-flex">
@@ -212,7 +212,7 @@
                     </div>
                 </div>
                 <div class="col col-md-auto ml-auto justify-content-end d-flex d-lg-none">
-                    <a href="#" class="header-toggle-slide" data-slide="info2">
+                    <a href="{{ absolute_url(path('homepage')) }}" class="header-toggle-slide" data-slide="info2">
                         <i class="icon-support"></i>
                         <span class="d-inline-block d-md-none">
 								info@alloimmo.ci
@@ -221,7 +221,7 @@
                     <a href="#" class="header-toggle-slide" data-slide="info1">
                         <i class="icon-support"></i>
                         <span class="d-inline-block d-md-none">
-								 +225 22 54 47 78 / 08 85 78 87
+								 +225 75 83 33 75
 							</span>
                     </a>
                     <a href="#" class="header-toggle-slide" data-slide="info3"><i class="icon-search"></i></a>
@@ -271,22 +271,22 @@
                 <div class="navbar-collapse">
                     <ul class="navbar-nav w-100 js-main-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('homepage') }}">Accueil</a>
+                            <a class="nav-link" href="{{ absolute_url(path('homepage')) }}">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('frontend_annuaire') }}">Annuaire</a>
+                            <a class="nav-link" href="{{ absolute_url(path('frontend_annuaire')) }}">Annuaire</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('frontend_conseils', {'page': 1}) }}">Conseils & guides</a>
+                            <a class="nav-link" href="{{ absolute_url(path('frontend_conseils', {'page': 1})) }}">Conseils & guides</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('frontend_annonce') }}">Annonces</a>
+                            <a class="nav-link" href="{{ absolute_url(path('frontend_annonce')) }}">Annonces</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('frontend_faq')}}">FAQ</a>
+                            <a class="nav-link" href="{{ absolute_url(path('frontend_faq'))}}">FAQ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('frontend_contact')}}">Contact</a>
+                            <a class="nav-link" href="{{ absolute_url(path('frontend_contact'))}}">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -305,10 +305,9 @@
                 <h2 class="mb-1">Assistance</h2>
                 <div class="d-flex flex-column flex-md-row flex-lg-column">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
+                        ALLO IMMO vous accompagnent et vous conseillent pour la réussite de votre projet immobilier, l’acquisition ou la vente d’un bien immobilier, l’établissement de l’ACD, etc...
                     </p>
-                    <p class="pl-0 pl-md-3 pl-lg-0"><a href="#" class="btn btn-primary btn-with-arrow js-footer-map-toggle"><i class="icon-support"></i><span class="opened-text">Close Map</span><span>Contactez-nous</span></a></p>
+                    <p class="pl-0 pl-md-3 pl-lg-0"><a href="{{ absolute_url(path('frontend_contact')) }}" class="btn btn-primary btn-with-arrow js-footer-map-toggle"><i class="icon-support"></i><span class="opened-text">Close Map</span><span>Contactez-nous</span></a></p>
                 </div>
             </div>
             <div class="col-lg-7 ml-lg-auto d-flex flex-column position-static">
@@ -316,9 +315,9 @@
                     <div class="col-sm col-lg-5">
                         <h4>Rubriques</h4>
                         <ul class="list-unstyled">
-                            <li><a href="#">Annuaire</a></li>
-                            <li><a href="#">Conseils &amp; guide</a></li>
-                            <li><a href="#">Annonces</a></li>
+                            <li><a href="{{ absolute_url(path('frontend_annuaire')) }}">Annuaire</a></li>
+                            <li><a href="{{ absolute_url(path('frontend_conseils', {'page': 1})) }}">Conseils &amp; guide</a></li>
+                            <li><a href="{{ absolute_url(path('frontend_annonce')) }}">Annonces</a></li>
                         </ul>
                     </div>
                     <div class="col-sm mt-2 mt-sm-0">
@@ -327,8 +326,8 @@
                             <li><i class="icon-placeholder"></i>Cocody Angre
                                 <br>Abidjan, Côte d'Ivoire</li>
                             <li>
-                                <i class="icon-telephone"></i><span class="phone">+225 22 54 47 78</span> <br>
-                                <i class="icon-telephone"></i><span class="phone">+225 08 85 78 87</span>
+                                <!--<i class="icon-telephone"></i><span class="phone">+225 22 54 47 78</span> <br>-->
+                                <i class="icon-telephone"></i><span class="phone">+225 75 83 33 75</span>
                             </li>
                             <li><i class="icon-closed-envelope"></i><a href="mailto: info@alloimmo.ci"> info@alloimmo.ci</a></li>
                         </ul>

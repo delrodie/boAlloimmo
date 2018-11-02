@@ -102,7 +102,7 @@ class PartenaireType extends AbstractType
                 'required' => false,
             ))
             ->add('imageFile', VichImageType::class, [
-                'required' => false,
+                'required' => true,
                 'allow_delete' => true,
                 'label' => 'Le logo',
             ])
