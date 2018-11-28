@@ -26,7 +26,7 @@
 
             <div class="card-deck">
                 {% for publicite in publicites %}
-                    <div class="col-md-4 col-sm-6">
+                    <div class="col-md-4 col-sm-6 bien">
                         <div class="card mb-4">
                             <img src="{{ vich_uploader_asset(publicite, 'imageFile') }}" alt="{{ publicite.titre }}" title="{{ publicite.titre }}"  class="card-img-top img-fluid"/>
                             <div class="card-body">
@@ -52,7 +52,18 @@
                     </div>
                 {% endfor %}
             </div>
+            <div class="paginator"></div>
 
         </div>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('backend/js/pagination.js')) }}"></script>
+    <script>
+        $(document).ready(function() {
+            pagination(6,'.bien','.paginator',3);
+        });
+    </script>
 {% endblock %}

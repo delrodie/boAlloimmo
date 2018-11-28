@@ -27,7 +27,7 @@
             <div class="card-deck">
                 {% for bien in biens %}
                     <div class="col-md-4 col-sm-6">
-                        <div class="card mb-4">
+                        <div class="card mb-4 bien">
                             <img src="{{ vich_uploader_asset(bien, 'imageFile') }}" alt="{{ bien.titre }}" title="{{ bien.titre }}"  class="card-img-top img-fluid"/>
                             <div class="card-body">
                                 <span class="text-right">{{ bien.typebien.libelle }}</span>
@@ -61,7 +61,18 @@
                     </div>
                 {% endfor %}
             </div>
+            <div class="paginator"></div>
 
         </div>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('backend/js/pagination.js')) }}"></script>
+    <script>
+        $(document).ready(function() {
+            pagination(6,'.bien','.paginator',3);
+        });
+    </script>
 {% endblock %}
