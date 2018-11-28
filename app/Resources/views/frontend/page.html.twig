@@ -22,9 +22,10 @@
         <div class="container" style="margin-bottom: 100px">
             <div class="row">
                 <div class="col-md-8">
-                    <img src="{{ vich_uploader_asset(page, 'imageFile') }}" class="w-100" alt="">
                     <h3 class="mt-15">{{ page.titre }}</h3>
                     <div class="text-justify">
+                        <!--<img src="{{ vich_uploader_asset(page, 'imageFile') }}" class="w-100" alt="{{ page.titre }}" style="float: left;">-->
+                        <img src="{{ absolute_url(asset('uploads/asset/'~ page.imageName) | imagine_filter('fo_page')) }}" alt="{{ page.titre }}" style="float: left; padding-right: 25px;">
                         {{ page.contenu|raw }}
                     </div>
 

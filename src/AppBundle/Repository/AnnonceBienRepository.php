@@ -40,4 +40,17 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Liste des biens annonces
+     */
+    public function findListBien($limit = null, $offset = null)
+    {
+        return $this->createQueryBuilder('b')
+                    ->orderBy('b.id', 'DESC')
+                    ->setFirstResult($offset)
+                    ->setMaxResults($limit)
+                    ->getQuery()->getResult()
+            ;
+    }
 }

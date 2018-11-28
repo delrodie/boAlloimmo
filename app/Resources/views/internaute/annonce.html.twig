@@ -1,0 +1,157 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Annonces
+{% endblock %}
+
+{% block body %}
+    <div class="section section-booking">
+        <div class="booking-form-wrap">
+            {{ render(url('rfrontend_principale')) }}
+            <div class="booking-form-toggle d-md-none"><a href="tel:+225 03 25 54 47"><i class="icon-telephone"></i></a>
+                <div class="js-booking-form-toggle"><span>Detail</span><span class="close-text js-close-text">CLOSE</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="title-wrap text-center">
+                <h2 class="h1">Annonces</h2>
+            </div>
+        </div>
+        <div class="container">
+            {% if (app.flashes('notice')) %}
+                <div class="modal fade" id="overlay">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title text-center">Votre message a été envoyé avec succès! </h4>
+                            </div>
+                            <div class="modal-body">
+                                {% for message in app.flashes('notice') %}
+                                    <div class="flash-notice">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if (app.flashes('erreur')) %}
+                <div class="modal fade" id="overlay">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title text-center">Oups!! votre message n'a pas être envoyé, veuillez réessayer plutard! </h4>
+                            </div>
+                            <div class="modal-body">
+                                {% for message in app.flashes('erreur') %}
+                                    <div class="flash-notice">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row room-grid">
+                {% for bien in biens %}
+                    <div class="col-sm-6 col-md-6 col-lg-4">
+                        <div class="room-card">
+                            <div class="room-card">
+                                <div class="room-card-photo">
+                                    {% if bien.imageName %}
+                                        <img src="{{ absolute_url(asset('uploads/biens/'~ bien.imageName) | imagine_filter('bienAccueil_thumb')) }}" alt="{{ bien.titre }}" class="img-fluid">
+                                    {% else %}
+                                        <img src="{{ absolute_url(asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') ) }}" alt="{{ bien.titre }}" class="img-fluid">
+                                    {% endif %}
+                                    <div class="flex-wrap-center">
+                                        {% if (bien.disponibilite) %}
+                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                        {% else %}
+                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="room-card-info">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h3 class="room-type">{{ bien.typebien }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="room-size mt-0" style="height: 100px;">
+                                        {{ bien.resume|raw }}
+                                    </div>
+                                    <div class="row">
+                                        {% if bien.affichagePrix and bien.prix != 0 %}
+                                            <div class="col room-information">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les détails">
+                                                    <i class="fa fa-money"></i> <span class="">{{ bien.prix|number_format(0,'','.') }} </span><span style="font-size: 12px;">FCFA</span>
+                                                </a>
+                                            </div>
+                                            <div class="col room-information">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les détails">
+                                                    <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
+                                                </a>
+                                            </div>
+                                        {% elseif (bien.prix == 0) %}
+                                            <div class="col room-information">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les details">
+                                                    <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
+                                                </a>
+                                            </div>
+                                            <div class="col room-information">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
+                                                    <i class="fa fa-exclamation-circle"></i> <span class="">{{ bien.mode }}</span>
+                                                </a>
+                                            </div>
+                                        {% else %}
+                                            <div class="col room-information">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
+                                                    <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
+                                                </a>
+                                            </div>
+                                            <div class="col room-information">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
+                                                    <i class="fa fa-exclamation-circle"></i> <span class="">{{ bien.mode }}</span>
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if (pagination) %}
+                <div class="row ">
+                    <div class="col-sm-12 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 text-center " style="">
+                        <ul class="paginations">
+                            <li class="page-item">
+                                <a href="#" class="page-link">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Prec</span>
+                                </a>
+                            </li>
+                            <li class="page-item disabled"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item">
+                                <a href="#" class="page-link">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Suiv</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -70,10 +70,10 @@ class FrontendController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $biens = $em->getRepository('AppBundle:Bien')->findListBien(0, 9);
+        $biens = $em->getRepository('AppBundle:AnnonceBien')->findListBien(9,0); //dump($biens);die();
         $pagination = null;
 
-        return $this->render("frontend/annonce.html.twig", [
+        return $this->render("internaute/annonce.html.twig", [
             'biens' => $biens,
             'pagination'    => $pagination,
         ]);
