@@ -70,8 +70,8 @@ class FrontendController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $biens = $em->getRepository('AppBundle:AnnonceBien')->findListBien(9,0); //dump($biens);die();
-        $pagination = null;
+        $biens = $em->getRepository('AppBundle:AnnonceBien')->findListDesc(); //dump($biens);die();
+        $pagination = true;
 
         return $this->render("internaute/annonce.html.twig", [
             'biens' => $biens,
@@ -106,7 +106,7 @@ class FrontendController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $articles = $em->getRepository('AppBundle:Article')
-            ->findArticleByRubrique($slug = 'conseil', $offset = 0, $limit = 6);
+            ->findArticleByRubrique($slug = 'conseil');
         $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,4);
 
 

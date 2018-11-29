@@ -24,7 +24,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Liste des articles par rubrique
      */
-    public function findArticleByRubrique($slug, $offset, $limit)
+    public function findArticleByRubrique($slug, $offset=null, $limit=null)
     { //dump($slug); die();
         $em = $this->getEntityManager();
         $qb = $em->createQuery('

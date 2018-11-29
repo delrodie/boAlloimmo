@@ -24,7 +24,7 @@
                 <div class="col-md-8">
                     <div class="row special-grid">
                         {% for article in articles %}
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 page">
                                 <div class="special-card-2">
                                     <div class="special-card-2-photo">
                                         <a href="{{ path('frontend_page', {'rubrique': article.rubrique.slug, 'slug':article.slug}) }}">
@@ -47,6 +47,7 @@
                             </div>
                         {% endfor %}
                     </div>
+                    <div class="paginator"></div>
                     <!--<ul class="pagination" style="margin-top: 50px">
                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                         <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -76,4 +77,37 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .pagination{
+            padding-top: 50px;
+        }
+        .page-link{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .page-item{
+            border: solid 1px #CCCCCC;
+        }
+        .page-item:first-child{
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        .page-item:last-child{
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('frontend/js/pagination.js')) }}"></script>
+    <script>
+        $(document).ready(function() {
+            pagination(4,'.page','.paginator',3);
+        });
+    </script>
 {% endblock %}

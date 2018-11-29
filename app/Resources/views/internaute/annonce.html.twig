@@ -63,7 +63,7 @@
                 {% for bien in biens %}
                     <div class="col-sm-6 col-md-6 col-lg-4">
                         <div class="room-card">
-                            <div class="room-card">
+                            <div class="room-card bien">
                                 <div class="room-card-photo">
                                     {% if bien.imageName %}
                                         <img src="{{ absolute_url(asset('uploads/biens/'~ bien.imageName) | imagine_filter('bienAccueil_thumb')) }}" alt="{{ bien.titre }}" class="img-fluid">
@@ -129,29 +129,48 @@
                     </div>
                 {% endfor %}
             </div>
-            {% if (pagination) %}
-                <div class="row ">
-                    <div class="col-sm-12 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 text-center " style="">
-                        <ul class="paginations">
-                            <li class="page-item">
-                                <a href="#" class="page-link">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Prec</span>
-                                </a>
-                            </li>
-                            <li class="page-item disabled"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item">
-                                <a href="#" class="page-link">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Suiv</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            {% endif %}
+            <div class="paginator"></div>
+            <!--<ul class="pagination">
+                <li class="page-item"><a href="#" class="page-link">1</a></li>
+                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                <li class="page-item"><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">4</a></li>
+                <li class="page-item"><a href="#" class="page-link">...</a></li>
+                <li class="page-item"><a href="#" class="page-link">10</a></li>
+            </ul>-->
         </div>
     </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .pagination{
+            padding-top: 50px;
+        }
+        .page-link{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .page-item{
+            border: solid 1px #CCCCCC;
+        }
+        .page-item:first-child{
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        .page-item:last-child{
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('frontend/js/pagination.js')) }}"></script>
+    <script>
+        $(document).ready(function() {
+            pagination(6,'.bien','.paginator',3);
+        });
+    </script>
 {% endblock %}

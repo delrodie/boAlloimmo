@@ -174,7 +174,7 @@ class FrontendannuaireController extends Controller
         $promotions = $em->getRepository('AppBundle:Bien')
             ->findBienEnPromo(0, 4);
         $biens = $em->getRepository('AppBundle:Bien')
-            ->findBienPartenaire($slug, 6, 0);
+            ->findBienPartenaire($slug);
 
         return $this->render('frontend/annuaire_partenaire.html.twig',[
             'domaine' => $domaine,

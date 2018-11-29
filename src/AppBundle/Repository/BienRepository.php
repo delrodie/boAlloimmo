@@ -78,7 +78,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Liste des biens du partenaires
      */
-    public function findBienPartenaire($partenaire, $limit, $offset)
+    public function findBienPartenaire($partenaire, $limit=null, $offset=null)
     {
         return $this->QueryBien()
                     ->innerJoin('b.partenaire', 'p')

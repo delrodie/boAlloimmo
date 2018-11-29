@@ -118,7 +118,7 @@
                     <div class="container">
                         <div class="row d-flex ">
                             {% for bien in biens %}
-                                <div class="col-4">
+                                <div class="col-4 bien">
                                     <div class="room-card">
                                         <div class="room-card-photo">
                                             <img src="{{ asset('uploads/biens/'~ bien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ bien.titre }}" class="img-fluid">
@@ -172,6 +172,7 @@
                                 </h6>
                             {% endfor %}
                         </div>
+                        <div class="paginator"></div>
                     </div>
                 </div>
             </div>
@@ -179,9 +180,38 @@
 
     </div>
 {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .pagination{
+            padding-top: 50px;
+        }
+        .page-link{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .page-item{
+            border: solid 1px #CCCCCC;
+        }
+        .page-item:first-child{
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        .page-item:last-child{
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    </style>
+{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ absolute_url(asset('frontend/js/pagination.js')) }}"></script>
+    <script>
+        $(document).ready(function() {
+            pagination(6,'.bien','.paginator',3);
+        });
+    </script>
     <script>
         $('#overlay').modal('show');
 

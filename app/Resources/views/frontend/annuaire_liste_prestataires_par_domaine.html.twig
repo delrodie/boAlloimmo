@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-9">
                         {% for partenaire in partenaires %}
-                            <div class="review-box">
+                            <div class="review-box partenaire">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-3">
                                         <a href="{{ path('fannuaire_partenaire', {'domaine': domaine.slug, 'service': service.slug, 'annee': partenaire.publieLe|date('Y'), 'slug': partenaire.slug}) }}">
@@ -183,6 +183,7 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        <div class="paginator"></div>
                         <!--<ul class="pagination">
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -232,4 +233,37 @@
         </div>
 
     </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .pagination{
+            padding-top: 50px;
+        }
+        .page-link{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .page-item{
+            border: solid 1px #CCCCCC;
+        }
+        .page-item:first-child{
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        .page-item:last-child{
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('frontend/js/pagination.js')) }}"></script>
+    <script>
+        $(document).ready(function() {
+            pagination(6,'.partenaire','.paginator',3);
+        });
+    </script>
 {% endblock %}
