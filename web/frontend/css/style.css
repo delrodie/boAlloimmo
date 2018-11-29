@@ -9146,12 +9146,12 @@ body.menu-open .modal-backdrop {
       margin-top: .3em; }
   @media (max-width: 1023px) {
     #mainSlider .slide-txt1 {
-      font-size: 50px; }
+      font-size: 45px; }
     #mainSlider .slide-txt2 {
       font-size: 14px; } }
   @media (max-width: 767px) {
     #mainSlider .slide-txt1 {
-      font-size: 41px; }
+      font-size: 35px; }
     #mainSlider .slide-txt2 {
       font-size: 14px; }
     #mainSlider .slide-content.center {

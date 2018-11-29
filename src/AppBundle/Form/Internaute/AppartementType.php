@@ -26,7 +26,7 @@ class AppartementType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'autocomplete'  => 'off',
-                    'placeholder'   => 'Nombre de pièces'
+                    'placeholder'   => 'Nombre de pièces *'
                 ),
                 'required' => true,
             ))
@@ -34,7 +34,7 @@ class AppartementType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'autocomplete'  => 'off',
-                    'placeholder'   => 'Nombre de salles d\'eau'
+                    'placeholder'   => 'Nombre de salles d\'eau *'
                 ),
                 'required' => true,
             ))
@@ -42,7 +42,7 @@ class AppartementType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control',
                     'autocomplete'  => 'off',
-                    'placeholder'   => 'Nombre de douche'
+                    'placeholder'   => 'Nombre de douche *'
                 ),
                 'required' => true,
             ))
