@@ -1,16 +1,16 @@
 {% extends 'backend_layout.html.twig' %}
 
-{% block title %}Liste des annonces utilisateurs{% endblock %}
+{% block title %}Liste des annonces de l'internaute {{ utilisateur.nom }}{% endblock %}
 
 {% block body %}
     <main class="main-content">
         <div class="page-title">
-            <h4 class="mb-0"> Gestion des annonces utilisateurs
+            <h4 class="mb-0"> Gestion des annonces de l'internaute {{ utilisateur.nom }}
                 <small></small>
             </h4>
             <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
                 <li class="breadcrumb-item"><a href="#" class="default-color">Accueil</a></li>
-                <li class="breadcrumb-item active">liste des annonces utilisateurs</li>
+                <li class="breadcrumb-item active">liste des annonces</li>
             </ol>
         </div>
 
@@ -46,9 +46,7 @@
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    <small class="text-muted">Partenaire
-                                        <a href="{{ absolute_url(path('backend_internaute_bien', {'slug': annoncebien.utilisateur.slug})) }}">{{ annoncebien.utilisateur }}</a>
-                                    </small>
+                                    <small class="text-muted">Partenaire {{ annoncebien.utilisateur }}</small>
                                 </small>
                             </div>
                         </div>
@@ -56,7 +54,13 @@
                 {% endfor %}
             </div>
             <div class="paginator"></div>
-
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ absolute_url(path('backend_utilisateur_index')) }}">
+                        <i class="fa fa-reply fa-lg"></i> Retour a liste des utilisateurs
+                    </a>
+                </div>
+            </div>
         </div>
     </main>
 {% endblock %}

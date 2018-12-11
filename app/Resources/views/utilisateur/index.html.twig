@@ -59,7 +59,7 @@
                                             {% endif %}
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ path('backend_utilisateur_edit', {'id': utilisateur.id}) }}"><i class="fa fa-eye"></i></a> |
+                                            <a href="{{ path('backend_internaute_bien', {'slug': utilisateur.slug}) }}"><i class="fa fa-eye"></i></a> |
                                             <a href="{{ path('backend_utilisateur_edit', {'id': utilisateur.id}) }}"><i class="fa fa-edit"></i></a> |
                                             <a href="{{ path('backend_utilisateur_edit', {'id': utilisateur.id}) }}" onclick="return(confirm('Etes-vous sûr de vouloir supprimer {{ utilisateur.nom }} ?'));"><i class="fa fa-trash-o"></i></a>
                                         </td>
