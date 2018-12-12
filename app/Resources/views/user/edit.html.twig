@@ -1,21 +1,80 @@
-{% extends 'base.html.twig' %}
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Modification des utilsateurs{% endblock %}
 
 {% block body %}
-    <h1>User edit</h1>
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des utilsateurs
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Modification des utilsateurs</li>
+            </ol>
+        </div>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_mode_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des utilsateurs</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Modification des utilsateurs
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(edit_form, {'attr': {'class': 'right-text-label-form', 'id':'signupForm'}}) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_user_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                            <div class="form-group row">
+                                <label class="col-sm-3 control-label" for="titre">Nom utilisateur</label>
+                                <div class="col-sm-8">
+                                    {{ form_widget(edit_form.username) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 control-label" for="titre">Adresse email</label>
+                                <div class="col-sm-8">
+                                    {{ form_widget(edit_form.email) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 control-label" for="titre">Mot de passe</label>
+                                <div class="col-sm-8">
+                                    {{ form_widget(edit_form.password) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 control-label" for="titre">Roles</label>
+                                <div class="col-sm-8">
+                                    {{ form_widget(edit_form.roles) }}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-5 col-sm-offset-4">.</div>
+                                <label class="custom-control custom-checkbox">
+                                    {{ form_widget(edit_form.enabled) }}
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Statut</span>
+                                </label>
+                            </div>
+                            {{ form_rest(edit_form) }}
+                            <div class="form-group row">
+                                <div class="col-sm-5 ml-auto">
+                                    <button class="btn btn-primary" name="signup">Modifier</button>
+                                </div>
+                            </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
