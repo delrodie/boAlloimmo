@@ -80,8 +80,11 @@
                                 </div>
                                 <div class="room-card-info">
                                     <div class="row">
-                                        <div class="col">
-                                            <h3 class="room-type">{{ bien.typebien }}</h3>
+                                        <div class="col room-information">
+                                             <h3 class="room-type" style="color: #000;">{{ bien.typebien }}</h3>
+                                        </div>
+                                        <div class="col room-information">
+                                            <span class="badge badge-primary">{{ bien.mode.libelle }}</span>
                                         </div>
                                     </div>
                                     <div class="room-size mt-0" style="height: 100px;">
@@ -101,24 +104,19 @@
                                             </div>
                                         {% elseif (bien.prix == 0) %}
                                             <div class="col room-information">
+                                            </div>
+                                            <div class="col room-information">
                                                 <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" title="Voir les details">
                                                     <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
                                                 </a>
                                             </div>
-                                            <div class="col room-information">
-                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
-                                                    <i class="fa fa-exclamation-circle"></i> <span class="">{{ bien.mode }}</span>
-                                                </a>
-                                            </div>
                                         {% else %}
+                                            <div class="col room-information">
+
+                                            </div>
                                             <div class="col room-information">
                                                 <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
                                                     <i class="fa fa-map-signs"></i> <span class="">{{ bien.zone }}</span>
-                                                </a>
-                                            </div>
-                                            <div class="col room-information">
-                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}">
-                                                    <i class="fa fa-exclamation-circle"></i> <span class="">{{ bien.mode }}</span>
                                                 </a>
                                             </div>
                                         {% endif %}
