@@ -145,6 +145,17 @@
 
                 <li class="sub-menu">
                     <a href="javascript:;">
+                        <i class=" ti-layers"></i>
+                        <span>Partenaires</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="{{ path('backend_partenaire_index') }}">Partenaire</a></li>
+                        <li><a  href="{{ path('backend_compte_index') }}">Comptes</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
                         <i class=" ti-settings"></i>
                         <span>Parametrage</span>
                     </a>
@@ -154,7 +165,6 @@
                         <li><a  href="{{ path('backend_domaine_index') }}">Domaine</a></li>
                         <li><a  href="{{ path('admin_typebien_index') }}">Type de Bien</a></li>
                         <li><a  href="{{ path('backend_rubrique_index') }}">Rubrique</a></li>
-                        <li><a  href="{{ path('backend_partenaire_index') }}">Partenaire</a></li>
                     </ul>
                 </li>
 
@@ -165,7 +175,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="{{ absolute_url(path('admin_user_index')) }}">Utilisateur</a></li>
-                        <li><a  href="#">Gestionnaire</a></li>
+                        <!--<li><a  href="#">Gestionnaire</a></li>-->
                     </ul>
                 </li>
 

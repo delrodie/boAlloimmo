@@ -44,17 +44,32 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager(); //$request->get()
+            $partenaire = $request->get('partenaire'); //dump($partenaire);die();
             $user->setEnabled(true);
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encoded);
             $em->persist($user);
             $em->flush();
+
+            if ($partenaire){ //die('ici');
+                return $this->redirectToRoute('backend_compte_new',[
+                    'partenaire' => $partenaire,
+                    'user' => $user->getUsername(),
+                ]);
+            }
 
             return $this->redirectToRoute('admin_user_show', array('id' => $user->getId()));
         }
 
+        $em = $this->getDoctrine()->getManager();
+        $partenaires = $em->getRepository('AppBundle:Partenaire')->getListeAsc();
+
         return $this->render('user/new.html.twig', array(
             'user' => $user,
             'form' => $form->createView(),
+            'partenaires' => $partenaires
         ));
     }
 
@@ -92,8 +107,18 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($encoded);
             $this->getDoctrine()->getManager()->flush();
+            $partenaire = $request->get('partenaire');
 
+            if ($partenaire) { //die('ici');
+                return $this->redirectToRoute('backend_compte_edit', [
+                    'partenaire' => $partenaire,
+                    'user' => $user->getUsername(),
+                ]);
+            }
             return $this->redirectToRoute('admin_user_index');
         }
 
