@@ -42,9 +42,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <div class="room-price">
-                                            {{ villa.annoncebien.prix|number_format(0,'','.') }}
-                                        </div>
+                                        {% if (villa.annoncebien.prix) %}
+                                            <div class="room-price">
+                                                {{ villa.annoncebien.prix|number_format(0,'','.') }}
+                                            </div>
+                                        {% endif %}
                                     </div>
                                     <div class="col-auto ml-auto">
                                         <a href="{{ path('frontend_bien', {'typebien': villa.annoncebien.typebien.slug, 'slug': villa.annoncebien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
@@ -98,9 +100,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <div class="room-price">
-                                                {{ bien.prix|number_format(0,'','.') }}
-                                            </div>
+                                            {% if (bien.prix) %}
+                                                <div class="room-price">
+                                                    {{ bien.prix|number_format(0,'','.') }}
+                                                </div>
+                                            {% endif %}
                                         </div>
                                         <div class="col-auto ml-auto">
                                             <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
