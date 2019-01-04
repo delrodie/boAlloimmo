@@ -205,7 +205,7 @@
                                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                                 </a>
                             {% endif %}
-                            
+
                         {% else %}
                             <a href="{{ path('fos_user_security_login') }}" class="dropdown-item">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                             <a class="dropdown-item" href="{{ path('fos_user_registration_register')}}">Inscription</a>
@@ -214,12 +214,7 @@
                     </div>
                 </div>
                 <div class="col col-md-auto ml-auto justify-content-end d-flex d-lg-none">
-                    <a href="{{ absolute_url(path('homepage')) }}" class="header-toggle-slide" data-slide="info2">
-                        <i class="icon-support"></i>
-                        <span class="d-inline-block d-md-none">
-								info@alloimmo.ci
-							</span>
-                    </a>
+
                     <a href="#" class="header-toggle-slide" data-slide="info1">
                         <i class="icon-support"></i>
                         <span class="d-inline-block d-md-none">
@@ -229,9 +224,23 @@
                     <a href="#" class="header-toggle-slide" data-slide="info3"><i class="icon-search"></i></a>
                     <div> <a href="#" class="header-toggle-slide dropdown-toggle" data-toggle="dropdown">Espace membre</a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#">Connexion</a>
-                            <a class="dropdown-item" href="#">Inscription</a>
-                            <a class="dropdown-item" href="{{ path('backend') }}">Admin</a>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <a class="dropdown-item" href="{{ path('backend') }}" target="_blank">Backoffice</a>
+                                    <a href="{{ path('fos_user_security_logout') }}" class="dropdown-item">
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                {% else %}
+                                    <a class="dropdown-item" href="{{ path('frontend_profile_new') }}">profile</a>
+                                    <a href="{{ path('fos_user_security_logout') }}" class="dropdown-item">
+                                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                {% endif %}
+
+                            {% else %}
+                                <a href="{{ path('fos_user_security_login') }}" class="dropdown-item">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                <a class="dropdown-item" href="{{ path('fos_user_registration_register')}}">Inscription</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

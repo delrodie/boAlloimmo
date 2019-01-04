@@ -26,7 +26,7 @@
                     <div class="card card-shadow mb-4">
                         <div class="card-header">
                             <div class="card-title">
-                                {{ villa.bien.titre }}
+                                <span class="badge badge-primary">{{ villa.bien.programme }}</span>{{ villa.bien.titre }}
                             </div>
                         </div>
                         <div class="card-body">
@@ -63,6 +63,12 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="control-label" for="rubrique">Programme</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ villa.bien.programme }}" readonly>
+                                            </div>
+                                        </div>
                                         <div class="col-sm-6">
                                             <label class="control-label" for="rubrique">Type du bien</label>
                                             <div class="elect2-container">
@@ -129,16 +135,16 @@
                                                 <input type="text" class="form-control" value="{{ villa.dressing }} m2" readonly>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6" style="margin-top:10px;">
-                                            <label class="control-label" for="rubrique">Balcon</label>
-                                            <div class="elect2-container">
-                                                <input type="text" class="form-control" value="{{ villa.terasse }} m2" readonly>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Balcon</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ villa.terasse }} m2" readonly>
+                                    </div>
+                                </div>
                                 <div class="col-sm-3" style="margin-top:10px;">
                                     <label class="control-label" for="rubrique">Cuisine</label>
                                     <div class="elect2-container">

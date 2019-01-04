@@ -180,7 +180,9 @@
                                       <div class="popover-content d-none">
                                           <ul>
                                               <li>{{ bien.zone }}</li>
-                                              <li>{{ bien.mode }}</li>
+                                              {% if (bien.programme) %}
+                                                  <li>{{ bien.programme }}</li>
+                                              {% endif %}
                                           </ul>
                                       </div>
                                     </div>
@@ -191,7 +193,9 @@
                                       <div class="popover-content d-none">
                                           <ul>
                                               <li>{{ bien.zone }}</li>
-                                              <li>{{ bien.mode }}</li>
+                                              {% if (bien.programme) %}
+                                                  <li>{{ bien.programme }}</li>
+                                              {% endif %}
                                           </ul>
                                       </div>
                                     </div>
@@ -287,7 +291,7 @@
                         <div class="banner-full-text2 d-block d-lg-none">
                             <p>Donc ne perdez plus le temps <br>Confiez vous à Allo Immo</p>
                         </div>
-                        <div class="mt-2"><a href="#" class="btn btn-primary">Contactez nous</a></div>
+                        <div class="mt-2"><a href="{{ absolute_url(path('frontend_contact'))}}" class="btn btn-primary">Contactez nous</a></div>
                     </div>
                 </div>
                 <div class="banner-full-image"><img src="{{ asset('frontend/images/icon-ai3.png') }}" alt=""></div>

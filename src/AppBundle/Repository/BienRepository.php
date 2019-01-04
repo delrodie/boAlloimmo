@@ -24,12 +24,22 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Liste des bien par ordre decroissant
      */
-    public function findAllDesc()
+    public function findAllDesc($partenaire = null)
     {
-        return $q = $this->createQueryBuilder('b')
-                         ->orderBy('b.id', 'DESC')
-                         ->getQuery()->getResult()
-            ;
+        if ($partenaire){
+           return $this->createQueryBuilder('b')
+                        ->leftJoin('b.partenaire','p')
+                        ->where('p.slug LIKE :slug')
+                        ->orderBy('b.id', 'DESC')
+                        ->setParameter('slug', $partenaire)
+                        ->getQuery()->getResult()
+                ;
+        }else{
+            return $q = $this->createQueryBuilder('b')
+                ->orderBy('b.id', 'DESC')
+                ->getQuery()->getResult()
+                ;
+        }
     }
 
     /**

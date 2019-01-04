@@ -25,6 +25,9 @@ class BienType extends AbstractType
                     'placeholder'   => 'Titre du bien'
                 )
             ))
+            ->add('programme', TextType::class,[
+                'attr'=>['class'=> 'form-control', 'autocomplete'=>'off', 'placeholder'=>'Le programme du bien'], 'required'=>false
+            ])
             ->add('description', TextareaType::class)
             ->add('prix', TextType::class, array(
                 'attr' => array(

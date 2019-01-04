@@ -104,7 +104,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-11 col-sm-offset-1">
                                             <a href="{{ path('backend_partenaire_edit', {'slug': partenaire.slug}) }}" class="btn btn-outline-danger"><i class="fa fa-edit"></i> Modifier</a>
-                                            <a href="#" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Voir les projets</a>
+                                            <a href="{{ absolute_url(path('backend_partenaire_bien', {'slug': partenaire.slug})) }}" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Voir les projets</a>
                                             <a href="{{ path('backend_partenaire_index') }}" class="btn btn-outline-secondary"><i class="fa fa-list"></i> Liste des partenaires</a>
                                         </div>
                                     </div>

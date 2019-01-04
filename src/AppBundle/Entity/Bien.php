@@ -35,6 +35,13 @@ class Bien
     /**
      * @var string
      *
+     * @ORM\Column(name="programme", type="string", length=255, nullable=true)
+     */
+    private $programme;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -855,5 +862,29 @@ class Bien
     public function getAffichagePrix()
     {
         return $this->affichagePrix;
+    }
+
+    /**
+     * Set programme
+     *
+     * @param string $programme
+     *
+     * @return Bien
+     */
+    public function setProgramme($programme)
+    {
+        $this->programme = $programme;
+
+        return $this;
+    }
+
+    /**
+     * Get programme
+     *
+     * @return string
+     */
+    public function getProgramme()
+    {
+        return $this->programme;
     }
 }

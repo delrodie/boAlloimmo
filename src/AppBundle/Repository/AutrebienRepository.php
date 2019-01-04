@@ -13,7 +13,7 @@ class AutrebienRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Recherche des immeubles
      */
-    public function findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max, $limit, $offset)
+    public function findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
     { //die($mode);
         return $this->createQueryBuilder('a')
             ->addSelect('b')
@@ -28,8 +28,6 @@ class AutrebienRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere($whereMin)
             ->andWhere($whereMax)
             ->andWhere('m.libelle = :mode')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
             ->setParameters(array(
                 'typebien'  => $typebien,
                 'localite'  => $localisation,

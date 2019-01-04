@@ -14,7 +14,7 @@ class VillaRepository extends \Doctrine\ORM\EntityRepository
      * Recherche des villa
      * findVilla($typebien, $limit, $offset)
      */
-    public function findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, $limit, $offset)
+    public function findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, $limit = null, $offset = null)
     { //die($mode);
         return $this->createQueryBuilder('v')
                     ->addSelect('b')

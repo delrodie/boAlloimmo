@@ -135,4 +135,20 @@ class PartenaireController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Liste des biens du partenaires
+     * @Route("/{slug}/biens/liste", name="backend_partenaire_bien")
+     * @Method("GET")
+     */
+    public function binAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $biens = $em->getRepository('AppBundle:Bien')->findAllDesc($slug);
+
+        return $this->render('bien/index.html.twig', array(
+            'biens' => $biens,
+        ));
+    }
 }

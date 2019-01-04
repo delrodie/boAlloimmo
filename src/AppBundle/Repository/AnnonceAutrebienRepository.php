@@ -10,4 +10,32 @@ namespace AppBundle\Repository;
  */
 class AnnonceAutrebienRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Recherche des immeubles
+     */
+    public function findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
+    { //die($mode);
+        return $this->createQueryBuilder('a')
+            ->addSelect('b')
+            ->addSelect('z')
+            ->addSelect('m')
+            ->innerJoin('a.annoncebien', 'b')
+            ->innerJoin('b.typebien', 't')
+            ->innerJoin('b.zone', 'z')
+            ->innerJoin('b.mode', 'm')
+            ->where('t.libelle = :typebien')
+            ->andWhere($whereZone)
+            ->andWhere($whereMin)
+            ->andWhere($whereMax)
+            ->andWhere('m.libelle = :mode')
+            ->setParameters(array(
+                'typebien'  => $typebien,
+                'localite'  => $localisation,
+                'min'       => $min,
+                'max'       => $max,
+                'mode'      => $mode,
+            ))
+            ->getQuery()->getResult()
+            ;
+    }
 }

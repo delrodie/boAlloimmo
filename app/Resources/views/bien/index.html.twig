@@ -34,7 +34,7 @@
                                 {% if (bien.promotion) %}
                                     <span style="color: red; font-weight: bold; float: right;"><i class="fa fa-star"></i> Promotion</span>
                                 {% endif %}
-                                <h5 class="card-title">{{ bien.titre }}</h5>
+                                <h5 class="card-title"><span class="badge badge-primary">{{ bien.programme }}</span> {{ bien.titre }}</h5>
                                 <p class="card-text">{{ bien.resume|raw }}</p>
                                 <p class="card-text">
                                     <i class="fa fa-money"> {{ bien.prix|number_format(0,'','.') }}</i> &nbsp; &nbsp;
@@ -54,7 +54,9 @@
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    <small class="text-muted">Partenaire {{ bien.partenaire }}</small>
+                                    <small class="text-muted">Partenaire
+                                        <a href="{{ absolute_url(path('backend_partenaire_bien', {'slug': bien.partenaire.slug})) }}">{{ bien.partenaire }}</a>
+                                    </small>
                                 </small>
                             </div>
                         </div>
