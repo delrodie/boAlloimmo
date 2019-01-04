@@ -88,7 +88,11 @@
                         <div class="col-sm-6 col-md-4 col-lg-4">
                             <div class="room-card">
                                 <div class="room-card-photo">
-                                    <img src="{{ asset('uploads/biens/'~ bien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ bien.titre }}" class="img-fluid">
+                                    {% if bien.imageName %}
+                                        <img src="{{ absolute_url(asset('uploads/biens/'~ bien.imageName) | imagine_filter('bienAccueil_thumb')) }}" alt="{{ bien.titre }}" class="img-fluid">
+                                    {% else %}
+                                        <img src="{{ absolute_url(asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') ) }}" alt="{{ bien.titre }}" class="img-fluid">
+                                    {% endif %}
                                     <div class="flex-wrap-center">
                                         {% if (bien.disponibilite) %}
                                             <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
