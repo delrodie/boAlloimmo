@@ -83,6 +83,30 @@
                                             {% endif %}
                                         </div>
                                     </div>
+                                    <div class="row presentation">
+                                        <div class="col-sm-5 col-sm-offset-1"><strong>Affichage: </strong></div>
+                                        <div class="col-sm-6">
+                                            {% if (partenaire.ordre == 5) %}
+                                                {% for i in 1..5 %}
+                                                   <i class="fa fa-star-half-full"></i>
+                                                {% endfor %}
+                                            {% elseif (partenaire.ordre == 4) %}
+                                                {% for i in 1..4 %}
+                                                    <i class="fa fa-star-half-full"></i>
+                                                {% endfor %}
+                                            {% elseif (partenaire.ordre == 3) %}
+                                                {% for i in 1..3 %}
+                                                    <i class="fa fa-star-half-full"></i>
+                                                {% endfor %}
+                                            {% elseif (partenaire.ordre == 2) %}
+                                                {% for i in 1..2 %}
+                                                    <i class="fa fa-star-half-full"></i>
+                                                {% endfor %}
+                                            {% else %}
+                                                <i class="fa fa-star-half-full"></i>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">

@@ -77,9 +77,13 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-8">
                                     <label for="services" class="control-label">Services</label>
                                     {{ form_widget(form.services) }}
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="appbundle_partenaire_ordre" class="control-label">Ordre d'affichage</label>
+                                    {{ form_widget(form.ordre) }}
                                 </div>
                             </div>
                             <div class="form-group row">

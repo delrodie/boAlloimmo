@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -95,6 +96,10 @@ class PartenaireType extends AbstractType
                 ),
                 'required'  => false
             ))
+            ->add('ordre', ChoiceType::class,[
+                'attr'=> ['class' => 'form-control'],
+                'choices' => ['1'=>1, '2'=>2, '3'=>3, '4'=>4,'5'=>5,]
+            ])
             ->add('statut', CheckboxType::class, array(
                 'attr'  => array(
                     'class' => 'custom-control-input'
@@ -102,7 +107,7 @@ class PartenaireType extends AbstractType
                 'required' => false,
             ))
             ->add('imageFile', VichImageType::class, [
-                'required' => true,
+                'required' => false,
                 'allow_delete' => true,
                 'label' => 'Le logo',
             ])

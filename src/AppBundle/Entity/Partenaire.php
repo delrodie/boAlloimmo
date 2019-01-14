@@ -98,6 +98,13 @@ class Partenaire
     private $fax;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="ordre", type="integer", nullable=true)
+     */
+    private $ordre;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="statut", type="boolean", nullable=true)
@@ -801,5 +808,29 @@ class Partenaire
     public function getPublicites()
     {
         return $this->publicites;
+    }
+
+    /**
+     * Set ordre
+     *
+     * @param integer $ordre
+     *
+     * @return Partenaire
+     */
+    public function setOrdre($ordre)
+    {
+        $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    /**
+     * Get ordre
+     *
+     * @return integer
+     */
+    public function getOrdre()
+    {
+        return $this->ordre;
     }
 }

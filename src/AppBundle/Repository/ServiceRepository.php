@@ -31,6 +31,7 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
                         ->select('count(p.id)')
                         ->innerJoin('s.partenaires', 'p')
                         ->where('s.id = :service')
+                        ->andWhere('p.statut = 1')
                         ->setParameter('service', $service)
                         ->getQuery()->getSingleScalarResult();
             ;
@@ -45,6 +46,7 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
             ->select('count(p.id)')
             ->innerJoin('s.partenaires', 'p')
             ->where('s.domaine = :domaine')
+            ->andWhere('p.statut = 1')
             ->setParameter('domaine', $domaine)
             ->getQuery()->getSingleScalarResult();
         ;
