@@ -33,6 +33,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">#ID</th>
+                                    <th scope="col" class="text-center">Affichage</th>
                                     <th scope="col" class="text-center">Noms</th>
                                     <th scope="col" class="text-center">Couleurs</th>
                                     <th scope="col" class="text-center">Statut</th>
@@ -43,6 +44,7 @@
                                 {% for domaine in domaines %}
                                     <tr>
                                         <th scope="col" class="text-right">{{ loop.index }}</th>
+                                        <td class="text-center">{{ domaine.ordre }}</td>
                                         <td>{{ domaine.libelle }}</td>
                                         <td><span style="color: {{ domaine.couleur }}"><i class="fa fa-picture-o"></i></span></td>
                                         <td class="text-center">

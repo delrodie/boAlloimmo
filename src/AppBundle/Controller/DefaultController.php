@@ -26,7 +26,7 @@ class DefaultController extends Controller
         $modes = $em->getRepository('AppBundle:Mode')
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
         $domaines = $em->getRepository('AppBundle:Domaine')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+            ->findBy(array('statut' => 1), array('ordre' => 'ASC'));
         $biens = $em->getRepository('AppBundle:Bien')->findListBien(0, 6);
         $articleServices = $em->getRepository('AppBundle:Article')
             ->findArticleByRubrique($slug = 'service', $offset = 0, $limit = 3);

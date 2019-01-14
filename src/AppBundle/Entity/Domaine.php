@@ -37,6 +37,13 @@ class Domaine
     private $couleur;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="ordre", type="integer", nullable=true)
+     */
+    private $ordre;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="statut", type="boolean", nullable=true)
@@ -358,5 +365,29 @@ class Domaine
     public function removeService(\AppBundle\Entity\Service $service)
     {
         $this->services->removeElement($service);
+    }
+
+    /**
+     * Set ordre
+     *
+     * @param integer $ordre
+     *
+     * @return Domaine
+     */
+    public function setOrdre($ordre)
+    {
+        $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    /**
+     * Get ordre
+     *
+     * @return integer
+     */
+    public function getOrdre()
+    {
+        return $this->ordre;
     }
 }

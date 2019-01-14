@@ -29,7 +29,7 @@ class FrontendannuaireController extends Controller
             ->findBienEnPromo(0, 6);
 
         $domaines = $em->getRepository('AppBundle:Domaine')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+            ->findBy(array('statut' => 1), array('ordre' => 'ASC'));
 
         return $this->render("frontend/annuaire.html.twig", [
             'domaines' => $domaines,
