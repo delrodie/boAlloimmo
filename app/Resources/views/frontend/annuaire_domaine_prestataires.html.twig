@@ -60,7 +60,14 @@
                                                 {% endif %}
                                             </div>
                                         </div>
+                                        <div class="review-box-date mt-1 mt-md-0 ml-lg-auto">
+                                            <strong>Services:</strong>
+                                            {% for service in partenaire.services %}
+                                                {{ service.libelle }}, &nbsp;
+                                            {% endfor %}
+                                        </div>
                                         <div class="text-right btn-group-sm" style="margin-top: 10px">
+                                            {{ render(url('frontend_partenaire_compte',{'partenaire': partenaire.nom })) }}
                                             <a href="{{ path('fannuaire_partenaire', {'domaine': domaine.slug, 'service': serviceSlug, 'annee': partenaire.publieLe|date('Y'), 'slug': partenaire.slug}) }}" class="btn btn-details">
                                                 <i class="fa fa-eye"></i>
                                                 Voir les biens de la société

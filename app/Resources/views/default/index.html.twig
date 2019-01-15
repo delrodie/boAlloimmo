@@ -94,7 +94,10 @@
                                             <div class="popover-content d-none">
                                                 <ul>
                                                     <li>{{ promotion.zone }}</li>
-                                                    <li>{{ promotion.mode }}</li>
+                                                    {% if (promotion.programme) %}
+                                                        <li>{{ promotion.programme }}</li>
+                                                    {% endif %}
+                                                    <li>{{ promotion.partenaire.nom }}</li>
                                                 </ul>
                                             </div>
                                           </div>
@@ -183,6 +186,7 @@
                                               {% if (bien.programme) %}
                                                   <li>{{ bien.programme }}</li>
                                               {% endif %}
+                                              <li>{{ bien.partenaire.nom }}</li>
                                           </ul>
                                       </div>
                                     </div>
@@ -196,6 +200,7 @@
                                               {% if (bien.programme) %}
                                                   <li>{{ bien.programme }}</li>
                                               {% endif %}
+                                              <li>{{ bien.partenaire.nom }}</li>
                                           </ul>
                                       </div>
                                     </div>

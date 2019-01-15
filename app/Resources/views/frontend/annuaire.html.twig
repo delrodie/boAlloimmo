@@ -203,7 +203,10 @@
                                                     <div class="popover-content d-none">
                                                         <ul>
                                                             <li>{{ bien.zone }}</li>
-                                                            <li>{{ bien.mode }}</li>
+                                                            {% if (bien.programme) %}
+                                                                <li>{{ bien.programme }}</li>
+                                                            {% endif %}
+                                                            <li>{{ bien.partenaire.nom }}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -214,7 +217,10 @@
                                                     <div class="popover-content d-none">
                                                         <ul>
                                                             <li>{{ bien.zone }}</li>
-                                                            <li>{{ bien.mode }}</li>
+                                                            {% if (bien.programme) %}
+                                                                <li>{{ bien.programme }}</li>
+                                                            {% endif %}
+                                                            <li>{{ bien.partenaire.nom }}</li>
                                                         </ul>
                                                     </div>
                                                 </div>

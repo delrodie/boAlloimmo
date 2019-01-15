@@ -39,7 +39,9 @@
                                                     {{ partenaire.nom }}
                                                 </a>
                                             </h5>
-                                            <div class="review-box-date mt-1 mt-md-0 ml-lg-auto">{{ domaine.libelle }}</div>
+                                            <div class="review-box-date mt-1 mt-md-0 ml-lg-auto">
+                                                {{ domaine.libelle }}
+                                            </div>
                                         </div>
                                         <div class="review-box-bot d-flex flex-column flex-lg-row">
                                             <div><i class="fa fa-map-marker"></i>
@@ -54,11 +56,14 @@
                                                 {% endif %}
                                             </div>
                                         </div>
+                                        <div class="review-box-date mt-1 mt-md-0 ml-lg-auto">
+                                            <strong>Services:</strong>
+                                            {% for service in partenaire.services %}
+                                                 {{ service.libelle }}, &nbsp;
+                                            {% endfor %}
+                                        </div>
                                         <div class="text-right btn-group-sm" style="margin-top: 10px">
-                                            <a href="{{ path('fannuaire_partenaire', {'domaine': domaine.slug, 'service': service.slug, 'annee': partenaire.publieLe|date('Y'), 'slug': partenaire.slug}) }}" class="btn btn-primary">
-                                                <i class="fa fa-newspaper-o"></i>
-                                                Voir les annonces de la société
-                                            </a>
+                                            {{ render(url('frontend_partenaire_compte',{'partenaire': partenaire.nom })) }}
                                             <a href="{{ path('fannuaire_partenaire', {'domaine': domaine.slug, 'service': service.slug, 'annee': partenaire.publieLe|date('Y'), 'slug': partenaire.slug}) }}" class="btn btn-details">
                                                 <i class="fa fa-eye"></i>
                                                 Voir les biens de la société

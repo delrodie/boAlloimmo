@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class PartenaireCompteRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Verification d'existence de partenaire
+     */
+    public function verif($partenaire)
+    {
+        return $this->createQueryBuilder('pc')
+                    ->where('pc.partenaire LIKE :partenaire')
+                    ->setParameter('partenaire', '%'.$partenaire.'%')
+                    ->getQuery()->getResult()
+            ;
+    }
 }
