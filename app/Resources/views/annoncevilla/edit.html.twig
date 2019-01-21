@@ -1,21 +1,173 @@
-{% extends 'base.html.twig' %}
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Modification de bien{% endblock %}
 
 {% block body %}
-    <h1>Annoncevilla edit</h1>
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des biens
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">Modifications des {{ annonceVilla.annoncebien.typebien.libelle }}s</li>
+            </ol>
+        </div>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('backend_annoncevilla_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_bien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Modifications des  {{ annonceVilla.annoncebien.typebien.libelle }}s
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(edit_form, {'attr': {'class': 'right-text-label-form', 'id':'signupForm'}}) }}
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {% if (annonceVilla.annoncebien.imageName) %}
+                                                <img src="{{ vich_uploader_asset(annonceVilla.annoncebien, 'imageFile') }}" alt="{{ annonceVilla.annoncebien.titre }}" title="{{ annonceVilla.annoncebien.titre }}"  class="card-img-top img-fluid"/>
+                                            {% else %}
+                                                <img src="{{ asset('frontend/images/icon-ai.png')}}" class="card-img-top img-fluid">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="control-label" for="rubrique">Type du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.typebien.libelle }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:0px;">
+                                            <label class="control-label" for="rubrique">Titre du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.titre }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Pièces</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.piece) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Salles d'eau</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.toilette) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Douche</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.douche) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Dressing</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.dressing) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Terrasse</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.terasse) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Superficie</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.superficie) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Cuisine</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.cuisine) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Piscine</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.piscine) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Garage</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.garage) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Parking</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.parking) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Chauffe eau</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.chauffeau) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Vidéo surveillance</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.videosurveillance) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Alarme</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.alarme) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Buanderie</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.buanderie) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Interphone</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.interphone) }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Meubles</label>
+                                    <div class="elect2-container">
+                                        {{ form_widget(edit_form.meuble) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row" style="margin-top: 50px;">
+                                <div class="col-sm-5 ml-auto">
+                                    <a class="btn btn-outline-dark" href="{{ path('backend_bien_edit', {'slug': annonceVilla.annoncebien.slug}) }}" >&laquo; Précédent</a>
+                                    <button class="btn btn-primary" name="signup">Modification</button>
+                                </div>
+                            </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

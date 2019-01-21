@@ -46,6 +46,7 @@ class BienController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $bien->setPrix($utilities->formatage_prix($bien->getPrix()));
             $resume = $utilities->resume($bien->getDescription(), 103, '...', true);
             $typebienslug = $utilities->resume($bien->getTypebien()->getSlug(), 5, '', true);
             $bien->setResume($resume);
@@ -60,7 +61,7 @@ class BienController extends Controller
             }elseif ($typebienslug === 'villa'){
                 return $this->redirectToRoute('backend_villa_new', array('bien' => $bien->getId()));
             }else{
-                return $this->redirectToRoute('backend_appartement_new', array('bien' => $bien->getId()));
+                return $this->redirectToRoute('backend_autrebien_new', array('bien' => $bien->getId()));
             }
 
 
@@ -138,6 +139,7 @@ class BienController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $bien->setPrix($utilities->formatage_prix($bien->getPrix()));
             $resume = $utilities->resume($bien->getDescription(), 103, '...', true);
             $typebienslug = $utilities->resume($bien->getTypebien()->getSlug(), 5, '', true);
             $bien->setResume($resume); //dump($resume);die();

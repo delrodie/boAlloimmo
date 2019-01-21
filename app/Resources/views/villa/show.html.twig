@@ -132,7 +132,11 @@
                                         <div class="col-sm-6" style="margin-top:10px;">
                                             <label class="control-label" for="rubrique">Dressing</label>
                                             <div class="elect2-container">
-                                                <input type="text" class="form-control" value="{{ villa.dressing }} m2" readonly>
+                                                {% if (villa.dressing) %}
+                                                    <input type="text" class="form-control" value="OUI" readonly>
+                                                {% else %}
+                                                    <input type="text" class="form-control" value="NON" readonly>
+                                                {% endif %}
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +146,11 @@
                                 <div class="col-sm-3" style="margin-top:10px;">
                                     <label class="control-label" for="rubrique">Balcon</label>
                                     <div class="elect2-container">
-                                        <input type="text" class="form-control" value="{{ villa.terasse }} m2" readonly>
+                                        {% if (villa.terasse) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="margin-top:10px;">
@@ -164,13 +172,21 @@
                                 <div class="col-sm-3" style="margin-top:10px;">
                                     <label class="control-label" for="rubrique">Garage</label>
                                     <div class="elect2-container">
-                                        <input type="text" class="form-control" value="{{ villa.garage }}" readonly>
+                                        {% if (villa.garage) %}
+                                            <input type="text" class="form-control" value="Oui" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="margin-top:10px;">
                                     <label class="control-label" for="rubrique">Parking</label>
                                     <div class="elect2-container">
-                                        <input type="text" class="form-control" value="{{ villa.parking }} m2" readonly>
+                                        {% if (villa.parking) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="margin-top:10px;">
@@ -216,7 +232,11 @@
                                 <div class="col-sm-3" style="margin-top:10px;">
                                     <label class="control-label" for="rubrique">Buanderie</label>
                                     <div class="elect2-container">
-                                        <input type="text" class="form-control" value="{{ villa.buanderie }} m2" readonly>
+                                        {% if (villa.buanderie) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="margin-top:10px;">

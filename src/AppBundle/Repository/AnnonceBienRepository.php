@@ -10,6 +10,19 @@ namespace AppBundle\Repository;
  */
 class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * calcul du nombre de bien
+     */
+    public function cpteur($typebien)
+    {
+        return $this->createQueryBuilder('b')
+                    ->select('count(b.id)')
+                    ->where('b.typebien = :bien')
+                    ->setParameter('bien', $typebien)
+                    ->getQuery()->getSingleScalarResult()
+            ;
+    }
+
     public function findBien($bien)
     {
         return $this->createQueryBuilder('b')

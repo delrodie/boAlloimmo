@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AnnonceBienType extends AbstractType
 {
@@ -40,17 +41,26 @@ class AnnonceBienType extends AbstractType
                 ],
                 'required' => false
             ])
-            ->add('localisation', TextType::class)
-            ->add('disponibilite', CheckboxType::class)
-            ->add('tags', TextType::class)
-            ->add('typebienslug', null)
-            ->add('affichagePrix', CheckboxType::class)
-            ->add('imageName')
+            ->add('localisation', TextType::class, ['attr'=> ['class'=> 'form-control'], 'required'=> false])
+            ->add('disponibilite', CheckboxType::class, ['attr' => ['class' => 'custom-control-input'], 'required' => false])
+            ->add('tags', TextType::class,[
+                'attr' => [
+                    'class' => 'form-control tag-input',
+                    'data-role' => "tagsinput",
+                ]
+            ])
+            //->add('typebienslug', null)
+            ->add('affichagePrix', CheckboxType::class, ['attr' => ['class' => 'custom-control-input'], 'required' => false])
+            ->add('imageFile', VichImageType::class,[
+                'required' => false,
+                'allow_delete' => true,
+                'label' => '.'
+            ])
             //->add('imageSize')->add('updatedAt')->add('slug')->add('publiePar')->add('modifiePar')->add('publieLe')->add('modifieLe')
-            ->add('typebien')
-            ->add('zone')
-            ->add('mode')
-            ->add('utilisateur')
+            ->add('typebien', null, ['attr'=>['class' => 'form-control']])
+            ->add('zone', null, ['attr'=>['class' => 'form-control']])
+            ->add('mode', null, ['attr'=>['class' => 'form-control']])
+            ->add('utilisateur', null, ['attr'=>['class' => 'form-control']])
             ;
     }/**
      * {@inheritdoc}

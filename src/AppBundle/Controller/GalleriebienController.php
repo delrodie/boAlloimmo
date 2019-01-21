@@ -125,11 +125,12 @@ class GalleriebienController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $bien = $request->get('bien');
             $em->remove($galleriebien);
             $em->flush();
         }
 
-        return $this->redirectToRoute('backend_bien_index');
+        return $this->redirectToRoute('backend_galleriebien_new',['bien'=> $bien]);
     }
 
     /**

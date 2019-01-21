@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -60,14 +61,14 @@ class VillaType extends AbstractType
                     'NON'   => null,
                 )
             ))
-            ->add('superficie', IntegerType::class, array(
+            ->add('superficie', TextType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
                     'autocomplete'  => 'off',
                     'placeholder'   => 'Superficie de la villa'
                 )
             ))
-            ->add('cuisine', IntegerType::class, array(
+            ->add('cuisine', TextType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
                     'autocomplete'  => 'off',

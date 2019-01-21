@@ -107,8 +107,11 @@
                                             <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
                                             <div class="popover-content d-none">
                                                 <ul>
-                                                    <li>{{ promotion.zone }}</li>
-                                                    <li>{{ promotion.mode }}</li>
+													<li>{{ promotion.zone }}</li>
+													{% if (promotion.programme) %}
+														<li>{{ promotion.programme }}</li>
+													{% endif %}
+													<li>{{ promotion.partenaire.nom }}</li>
                                                 </ul>
                                             </div>
                                           </div>

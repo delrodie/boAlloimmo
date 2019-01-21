@@ -57,16 +57,16 @@ class Appartement
     private $balcon;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="superficie", type="integer")
+     * @ORM\Column(name="superficie", type="string", length=255, nullable=true)
      */
     private $superficie;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="cuisine", type="integer")
+     * @ORM\Column(name="cuisine", type="string", length=255, nullable=true)
      */
     private $cuisine;
 

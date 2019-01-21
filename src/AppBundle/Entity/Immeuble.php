@@ -36,9 +36,9 @@ class Immeuble
     private $etage;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="parking", type="integer", nullable=true)
+     * @ORM\Column(name="parking", type="string", nullable=true)
      */
     private $parking;
 

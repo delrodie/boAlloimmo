@@ -22,4 +22,13 @@ class Utilities
 
         return strip_tags(substr_replace($string, $replacement, $max_length));
     }
+
+    /**
+     * Formatage du montant saisie
+     */
+    public function formatage_prix($string)
+    {
+        $format = [".", " "];
+        return str_replace($format, "", $string);
+    }
 }

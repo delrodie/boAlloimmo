@@ -34,13 +34,14 @@ class AnnonceVillaController extends Controller
     /**
      * Creates a new annonceVilla entity.
      *
-     * @Route("/new", name="backend_annoncevilla_new")
+     * @Route("/new/{annoncebien}", name="backend_annoncevilla_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
         $annonceVilla = new Annoncevilla();
-        $form = $this->createForm('AppBundle\Form\AnnonceVillaType', $annonceVilla);
+        $annonceBien = $request->get('annoncebien');
+        $form = $this->createForm('AppBundle\Form\AnnonceVillaType', $annonceVilla, ['bien'=> $annonceBien]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,19 +77,21 @@ class AnnonceVillaController extends Controller
     /**
      * Displays a form to edit an existing annonceVilla entity.
      *
-     * @Route("/{id}/edit", name="backend_annoncevilla_edit")
+     * @Route("/{id}/edit/{annoncebien}", name="backend_annoncevilla_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, AnnonceVilla $annonceVilla)
+    public function editAction(Request $request, AnnonceVilla $annonceVilla, $annoncebien)
     {
+        $em = $this->getDoctrine()->getManager();
+        $bien = $em->getRepository('AppBundle:AnnonceBien')->findOneBy(['slug'=>$annoncebien]);
         $deleteForm = $this->createDeleteForm($annonceVilla);
-        $editForm = $this->createForm('AppBundle\Form\AnnonceVillaType', $annonceVilla);
+        $editForm = $this->createForm('AppBundle\Form\AnnonceVillaType', $annonceVilla, ['bien'=> $bien->getId()]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()->getManager()->flush(); //dump($bien->getSlug());die();
 
-            return $this->redirectToRoute('backend_annoncevilla_edit', array('id' => $annonceVilla->getId()));
+            return $this->redirectToRoute('backend_annoncebien_show', array('slug' => $bien->getSlug()));
         }
 
         return $this->render('annoncevilla/edit.html.twig', array(

@@ -1,92 +1,273 @@
-{% extends 'base.html.twig' %}
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ annonceVilla.annoncebien.titre }}{% endblock %}
 
 {% block body %}
-    <h1>Annoncevilla</h1>
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des biens
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item"> Bien</li>
+                <li class="breadcrumb-item active"> {{ annonceVilla.annoncebien.typebien.libelle }}</li>
+            </ol>
+        </div>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ annonceVilla.id }}</td>
-            </tr>
-            <tr>
-                <th>Piece</th>
-                <td>{{ annonceVilla.piece }}</td>
-            </tr>
-            <tr>
-                <th>Douche</th>
-                <td>{{ annonceVilla.douche }}</td>
-            </tr>
-            <tr>
-                <th>Toilette</th>
-                <td>{{ annonceVilla.toilette }}</td>
-            </tr>
-            <tr>
-                <th>Dressing</th>
-                <td>{% if annonceVilla.dressing %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Terasse</th>
-                <td>{% if annonceVilla.terasse %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Superficie</th>
-                <td>{{ annonceVilla.superficie }}</td>
-            </tr>
-            <tr>
-                <th>Cuisine</th>
-                <td>{{ annonceVilla.cuisine }}</td>
-            </tr>
-            <tr>
-                <th>Garage</th>
-                <td>{% if annonceVilla.garage %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Piscine</th>
-                <td>{% if annonceVilla.piscine %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Parking</th>
-                <td>{{ annonceVilla.parking }}</td>
-            </tr>
-            <tr>
-                <th>Chauffeau</th>
-                <td>{% if annonceVilla.chauffeau %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Videosurveillance</th>
-                <td>{% if annonceVilla.videosurveillance %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Alarme</th>
-                <td>{% if annonceVilla.alarme %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Buanderie</th>
-                <td>{% if annonceVilla.buanderie %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Interphone</th>
-                <td>{% if annonceVilla.interphone %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Meuble</th>
-                <td>{% if annonceVilla.meuble %}Yes{% else %}No{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_annoncebien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                {{ annonceVilla.annoncebien.titre }}
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {% if (annonceVilla.annoncebien.imageName) %}
+                                                <img src="{{ vich_uploader_asset(annonceVilla.annoncebien, 'imageFile') }}" alt="{{ annonceVilla.annoncebien.titre }}" title="{{ annonceVilla.annoncebien.titre }}"  class="card-img-top img-fluid"/>
+                                            {% else %}
+                                                <img src="{{ asset('frontend/images/icon-ai.png')}}" class="card-img-top img-fluid">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" style="margin-top: 15px">
+                                            {{ annonceVilla.annoncebien.description|raw }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12" style="margin-top: 15px">
+                                            <u>Partenaire</u> : <strong>{{ annonceVilla.annoncebien.utilisateur.nom }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label class="control-label" for="rubrique">Programme</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="control-label" for="rubrique">Type du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.typebien.libelle }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="">
+                                            <label class="control-label" for="rubrique">Titre du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.titre }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Zone</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.zone }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Localisation</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.localisation }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Prix</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.prix|number_format(0,'','.') }} " readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Mode</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.mode }} " readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Superficie</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.superficie }} m2" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de pièces</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.piece }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de salles d'eau</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.toilette }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Nombre de douches</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ annonceVilla.douche }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Dressing</label>
+                                            <div class="elect2-container">
+                                                {% if (annonceVilla.dressing) %}
+                                                    <input type="text" class="form-control" value="OUI" readonly>
+                                                {% else %}
+                                                    <input type="text" class="form-control" value="NON" readonly>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Balcon</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.terasse) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Cuisine</label>
+                                    <div class="elect2-container">
+                                        <input type="text" class="form-control" value="{{ annonceVilla.cuisine }} m2" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Piscine</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.piscine) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Garage</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.garage) %}
+                                            <input type="text" class="form-control" value="Oui" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Parking</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.parking) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Chauffe eau</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.chauffeau) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Vidéo surveillance</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.videosurveillance) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Alarme</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.alarme) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Piscine</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.piscine) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Buanderie</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.buanderie) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Interphone</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.interphone) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top:10px;">
+                                    <label class="control-label" for="rubrique">Meubles</label>
+                                    <div class="elect2-container">
+                                        {% if (annonceVilla.meuble) %}
+                                            <input type="text" class="form-control" value="OUI" readonly>
+                                        {% else %}
+                                            <input type="text" class="form-control" value="NON" readonly>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('backend_annoncevilla_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('backend_annoncevilla_edit', { 'id': annonceVilla.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                            <div class="form-group row">
+                                <div class="col-sm-7 ml-auto text-right">
+                                    <!--<a href="{{ path('backend_galleriebien_new', {'bien': annonceVilla.annoncebien.id}) }}" class="btn btn-primary">Ajouter des photos</a>-->
+                                    <a class="btn btn-outline-dark" href="{{ path('backend_annoncebien_edit', {'slug': annonceVilla.annoncebien.slug}) }}" >Modifier</a>
+
+                                </div>
+                                <div class="col-sm-3 text-left">
+                                    {{ form_start(delete_form, {'attr': {'onsubmit': 'return confirm("Voulez-vous supprimer ce bien?")'}}) }}
+                                    <input type="submit" value="Supprimer" class="btn btn-danger">
+                                    {{ form_end(delete_form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

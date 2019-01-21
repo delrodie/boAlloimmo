@@ -44,6 +44,7 @@ class FrAnnonceController extends Controller
         $bien = $em->getRepository('AppBundle:AnnonceBien')->findOneBy(array('slug' => $slug)); //dump($bien);die();
         $similaires = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $bien->getTypebien()->getId()), array('slug' => 'DESC'), 4, 0);
         $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $bien->getId()));
+        $compteurSimilaire = $em->getRepository('AppBundle:AnnonceBien')->cpteur($bien->getTypebien()->getId());
 
         // Verification du type de bien puis renvoie a la page correspondante a ce type de bien
         if ($bien->getTypebienslug() === 'immeu'){
@@ -53,6 +54,7 @@ class FrAnnonceController extends Controller
                 'immeuble' => $immeuble,
                 'similaires'    => $similaires,
                 'photos' => $photos,
+                'compteur' => $compteurSimilaire
             ]);
 
         }elseif ($bien->getTypebienslug() === 'appar'){
@@ -64,6 +66,7 @@ class FrAnnonceController extends Controller
                 'appartement' => $appartement,
                 'similaires'    => $similaires,
                 'photos' => $photos,
+                'compteur' => $compteurSimilaire
             ]);
 
         }elseif ($bien->getTypebienslug() === 'villa'){
@@ -77,14 +80,16 @@ class FrAnnonceController extends Controller
                 'villa' => $villa,
                 'similaires'    => $similaires,
                 'photos' => $photos,
+                'compteur' => $compteurSimilaire
             ]);
         }else{
-            $autrebien = $em->getRepository('AppBundle:AnnonceAutrebien')->findOneBy(array('annoncebien' => $bien->getId()));
+            $autrebien = $em->getRepository('AppBundle:AnnonceAutrebien')->findOneBy(array('annoncebien' => $bien->getId())); //dump($compteurSimilaire);die();
 
             return $this->render("internaute/autrebien.html.twig", [
                 'autrebien' => $autrebien,
                 'similaires'    => $similaires,
                 'photos' => $photos,
+                'compteur' => $compteurSimilaire,
             ]);
 
         }

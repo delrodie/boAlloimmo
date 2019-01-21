@@ -61,14 +61,14 @@ class AppartementType extends AbstractType
                     'NON'   => null,
                 ),
             ))
-            ->add('superficie', IntegerType::class, array(
+            ->add('superficie', TextType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
                     'autocomplete'  => 'off',
                     'placeholder'   => 'la superficie en m2'
                 )
             ))
-            ->add('cuisine', IntegerType::class, array(
+            ->add('cuisine', TextType::class, array(
                 'attr' => array(
                     'class' => 'form-control',
                     'autocomplete'  => 'off',
