@@ -13,12 +13,13 @@ class PubliciteRepository extends \Doctrine\ORM\EntityRepository
     /**
      * La publicite en cours
      */
-    public function findPubliciteEncours($offset, $limit)
+    public function findPubliciteEncours($offset = null, $limit = null)
     {
         return $q = $this->createQueryBuilder('p')
                          ->where('p.statut = 1')
                          ->andWhere('p.datedebut <= :date')
                          ->andWhere('p.datefin >= :date')
+                         ->andWhere('p.statut = 1')
                          ->setFirstResult($offset)
                          ->setMaxResults($limit)
                          ->setParameters(array(

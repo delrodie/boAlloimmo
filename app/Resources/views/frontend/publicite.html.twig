@@ -1,0 +1,57 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ publicite.titre }}
+{% endblock %}
+
+{% block body %}
+    <div class="section section-booking">
+        <div class="booking-form-wrap">
+            {{ render(url('rfrontend_principale')) }}
+            <div class="booking-form-toggle d-md-none"><a href="tel:+225 03 25 54 47"><i class="icon-telephone"></i></a>
+                <div class="js-booking-form-toggle"><span>Detail</span><span class="close-text js-close-text">CLOSE</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+
+            <div class="slider-gallery">
+                <ul class="slider-room-gallery-main list-unstyled js-slider-gallery-room-main">
+                    <li>
+                        <img src="{{ asset('uploads/publicites/'~ publicite.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ publicite.titre }}">
+                    </li>
+                    {% for publicite in autrePublicites %}
+                        <li><img src="{{ asset('uploads/publicites/'~ publicite.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ publicite.titre }}"></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="slider-gallery">
+                        <ul class="slider-room-gallery-thumbs list-unstyled js-slider-gallery-room-thumbs">
+                                <li><img src="{{ asset('uploads/publicites/'~ publicite.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ publicite.titre }}"></li>
+                            {% for publicite in autrePublicites %}
+                                <li><img src="{{ asset('uploads/publicites/'~ publicite.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ publicite.titre }}"></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('#overlay').modal('show');
+
+        setTimeout(function() {
+            $('#overlay').modal('hide');
+        }, 5000);
+    </script>
+{% endblock %}

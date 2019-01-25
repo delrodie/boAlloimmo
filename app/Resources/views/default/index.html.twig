@@ -138,7 +138,9 @@
                     <div class="room-card">
                         <ul class="slider-single list-unstyled js-slider-single">
                             {% for publicite in publicites %}
-                                <img src="{{ vich_uploader_asset(publicite, 'imageFile') }}" alt="{{ publicite.titre }}" class="img-fluid">
+                                <a href="{{ absolute_url(path('frontend_publicite', {'slug': publicite.slug})) }}" title="cliquez pour voir les détails">
+                                    <img src="{{ vich_uploader_asset(publicite, 'imageFile') }}" alt="{{ publicite.titre }}" class="img-fluid">
+                                </a>
                             {% endfor %}
                         </ul>
                     </div>
