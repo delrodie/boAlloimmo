@@ -159,4 +159,12 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
                          ->orderBy('b.id', 'DESC')
             ;
     }
+
+    /**
+     * Fonction de calcul du nombre de bien
+     */
+    public function calcul()
+    {
+        return $this->createQueryBuilder('b')->select('count(b.id)')->where('b.statut = 1');
+    }
 }

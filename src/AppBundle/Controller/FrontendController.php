@@ -16,9 +16,8 @@ class FrontendController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $bien = $em->getRepository('AppBundle:Bien')->findOneBy(array('slug' => $slug)); 
-        $similaires = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $bien->getTypebien()->getId()), array('slug' => 'DESC'), 4, 0);
+        $similaires = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $bien->getTypebien()->getId()), array('slug' => 'DESC'), 3, 0);
         $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $bien->getId()));
-        //dump($photos);die();
 
         // Verification du type de bien puis renvoie a la page correspondante a ce type de bien
         if ($bien->getTypebienslug() === 'immeu'){
