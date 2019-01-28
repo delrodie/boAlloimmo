@@ -39,9 +39,10 @@
                                     </div>
                                     <div class="row">
                                         {% if (autrebien.bien.promotion) %}
-                                            <div class="col-sm-12" style="color: #ff0000; font-weight: bold; margin-top: 10px">
+                                            <div class="col-sm-6" style="color: #ff0000; font-weight: bold; margin-top: 10px">
                                                 <i class="fa fa-star"></i> Offre promotionnelle
                                             </div>
+
                                         {% endif %}
                                         {% if (autrebien.bien.datedebut) %}
                                             <div class="col-sm-12" style="margin-top: 10px;">
@@ -49,6 +50,29 @@
                                                 au <span style="font-style: italic; font-weight: bold">{{ autrebien.bien.datefin|date('d/m/Y') }}</span>
                                             </div>
                                         {% endif %}
+                                        <div class="col-sm-12 text-left"> Affichage:
+                                            <span style="color: rebeccapurple; font-weight: bold; margin-top: 10px">
+                                            {% if (autrebien.bien.flag == 5) %}
+                                                {% for i in 1..5 %}
+                                                    <i class="fa fa-star-half-full"></i>
+                                                {% endfor %}
+                                            {% elseif (autrebien.bien.flag == 4) %}
+                                                {% for i in 1..4 %}
+                                                    <i class="fa fa-star-half-full"></i>
+                                                {% endfor %}
+                                            {% elseif (autrebien.bien.flag == 3) %}
+                                                {% for i in 1..3 %}
+                                                    <i class="fa fa-star-half-full"></i>
+                                                {% endfor %}
+                                            {% elseif (autrebien.bien.flag == 2) %}
+                                                {% for i in 1..2 %}
+                                                    <i class="fa fa-star-half-full"></i>
+                                                {% endfor %}
+                                            {% else %}
+                                                <i class="fa fa-star-half-full"></i>
+                                            {% endif %}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12" style="margin-top: 15px">
