@@ -53,10 +53,18 @@
                                         </div>
                                         <div class="col-sm-12" style="margin-top: 20px;">
                                             <label class="control-label" for="rubrique">Date de publication</label>
-                                            <div class="col-sm-11 input-group" data-date="2018-07-31" data-date-format="yyyy-mm-dd">
+                                            <div class="col-sm-11 input-group text-center" data-date="2018-07-31" data-date-format="yyyy-mm-dd">
                                                 <input type="text" class="form-control" value="{{ publicite.datedebut }}" readonly>
-                                                <span class="input-group-addon">à</span>
+                                                <span class="input-group-addon">au</span>
                                                 <input type="text" class="form-control" value="{{ publicite.datefin }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12" style="margin-top: 20px;">
+                                            <label class="control-label" for="rubrique">Heure de publication</label>
+                                            <div class="col-sm-11 input-group text-center" data-date="2018-07-31" data-date-format="yyyy-mm-dd">
+                                                <input type="text" class="form-control" value="{{ publicite.heuredeb }}" readonly>
+                                                <span class="input-group-addon">à</span>
+                                                <input type="text" class="form-control" value="{{ publicite.heurefin }}" readonly>
                                             </div>
                                         </div>
                                     </div>

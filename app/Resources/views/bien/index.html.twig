@@ -51,11 +51,42 @@
                                 {% if (bien.datedebut) %}
                                     <a href="#" class="btn btn-info" title="Publicité du {{ bien.datedebut|date('d-m-Y') }} au {{ bien.datefin|date('d-m-Y') }}"><i class="fa fa-picture-o"></i> </a>
                                 {% endif %}
+                                <span style="float: right;">
+                                    {% if (bien.flag == 5) %}
+                                        {% for i in 1..5 %}
+                                            <i class="fa fa-star-half-full"></i>
+                                        {% endfor %}
+                                {% elseif (bien.flag == 4) %}
+                                        {% for i in 1..4 %}
+                                            <i class="fa fa-star-half-full"></i>
+                                        {% endfor %}
+                                {% elseif (bien.flag == 3) %}
+                                        {% for i in 1..3 %}
+                                            <i class="fa fa-star-half-full"></i>
+                                        {% endfor %}
+                                {% elseif (bien.flag == 2) %}
+                                        {% for i in 1..2 %}
+                                            <i class="fa fa-star-half-full"></i>
+                                        {% endfor %}
+                                {% else %}
+                                        <i class="fa fa-star-half-full"></i>
+                                    {% endif %}
+                                    {% if (bien.statut) %}
+                                        <span class="badge badge-success">Actif</span>
+                                {% else %}
+                                        <span class="badge badge-danger">Désactivé</span>
+                                    {% endif %}
+                                </span>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">
                                     <small class="text-muted">Partenaire
                                         <a href="{{ absolute_url(path('backend_partenaire_bien', {'slug': bien.partenaire.slug})) }}">{{ bien.partenaire }}</a>
+                                    </small>
+                                </small>
+                                <small class="text-muted pull-right">
+                                    <small class="text-muted">
+                                        {{ bien.publieLe|date('d-m-Y') }}
                                     </small>
                                 </small>
                             </div>

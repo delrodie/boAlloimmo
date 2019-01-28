@@ -19,11 +19,14 @@ class PubliciteRepository extends \Doctrine\ORM\EntityRepository
                          ->where('p.statut = 1')
                          ->andWhere('p.datedebut <= :date')
                          ->andWhere('p.datefin >= :date')
+                         ->andWhere('p.heuredeb <= :heure')
+                         ->andWhere('p.heurefin >= :heure')
                          ->andWhere('p.statut = 1')
                          ->setFirstResult($offset)
                          ->setMaxResults($limit)
                          ->setParameters(array(
-                             'date' => date('Y-m-d', time())
+                             'date' => date('Y-m-d', time()),
+                             'heure' => date('H:i', time())
                          ))
                          ->getQuery()->getResult()
             ;

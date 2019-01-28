@@ -47,6 +47,20 @@ class Publicite
     private $datefin;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="heuredeb", type="string", length=255, nullable=true, options={"default":"00:00"})
+     */
+    private $heuredeb;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="heurefin", type="string", length=255, nullable=true, options={"default":"23:59"})
+     */
+    private $heurefin;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="statut", type="boolean", nullable=true)
@@ -483,5 +497,53 @@ class Publicite
     public function getPartenaire()
     {
         return $this->partenaire;
+    }
+
+    /**
+     * Set heuredeb
+     *
+     * @param string $heuredeb
+     *
+     * @return Publicite
+     */
+    public function setHeuredeb($heuredeb)
+    {
+        $this->heuredeb = $heuredeb;
+
+        return $this;
+    }
+
+    /**
+     * Get heuredeb
+     *
+     * @return string
+     */
+    public function getHeuredeb()
+    {
+        return $this->heuredeb;
+    }
+
+    /**
+     * Set heurefin
+     *
+     * @param string $heurefin
+     *
+     * @return Publicite
+     */
+    public function setHeurefin($heurefin)
+    {
+        $this->heurefin = $heurefin;
+
+        return $this;
+    }
+
+    /**
+     * Get heurefin
+     *
+     * @return string
+     */
+    public function getHeurefin()
+    {
+        return $this->heurefin;
     }
 }

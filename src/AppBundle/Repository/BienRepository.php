@@ -48,6 +48,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     public function findListBien($offset, $limit)
     {
         return $q = $this->QueryBien()
+                         ->where('b.statut = 1')
                          ->setFirstResult($offset)
                          ->setMaxResults($limit)
                          ->getQuery()->getResult()
@@ -60,9 +61,11 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     public function findBienEnPromo($offset, $limit)
     {
         return $q = $this->createQueryBuilder('b')
-                         ->where('b.datedebut <= :date')
+                         ->where('b.statut = 1')
+                         ->andWhere('b.datedebut <= :date')
                          ->andWhere('b.datefin >= :date')
-                         ->orderBy('b.datedebut', 'ASC')
+                         ->orderBy('b.flag', 'DESC')
+                         ->addOrderBy('b.datedebut', 'ASC')
                          ->setFirstResult($offset)
                          ->setMaxResults($limit)
                          ->setParameters(array(
@@ -78,6 +81,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     public function findDernierBienEnPromo($limit, $offset)
     {
         return $q = $this->QueryBien()
+                         ->addOrderBy('b.flag', 'DESC')
                          ->addOrderBy('b.promotion', 'ASC')
                          ->setFirstResult($offset)
                          ->setMaxResults($limit)
@@ -93,6 +97,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
         return $this->QueryBien()
                     ->innerJoin('b.partenaire', 'p')
                     ->where('p.slug = :partenaire')
+                    ->addOrderBy('b.flag', 'DESC')
                     ->addOrderBy('b.promotion', 'DESC')
                     ->setFirstResult($offset)
                     ->setMaxResults($limit)
@@ -110,6 +115,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
         return $q = $this->createQueryBuilder('b')
                     ->innerJoin('b.zone', 'z')
                     ->where('b.typebien = :typebien')
+                    ->orderBy('b.flag', 'DESC')
                     ->andWhere($whereZone)
                     ->setParameters(array(
                         'typebien' => $typebien,
@@ -131,6 +137,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
                     ->where('z.libelle = :zone')
                     ->andWhere('m.libelle = :mode')
                     ->andWhere($wherePrix)
+                    ->addOrderBy('b.flag', 'DESC')
                     ->setFirstResult($offset)
                     ->setMaxResults($limit)
                     ->setParameters(array(

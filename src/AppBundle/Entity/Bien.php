@@ -103,6 +103,20 @@ class Bien
     private $affichagePrix;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="statut", type="boolean", nullable=true, options={"default": true})
+     */
+    private $statut;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="flag", type="integer", nullable=true, options={"default": 1})
+     */
+    private $flag;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="datedebut", type="string", length=255, nullable=true)
@@ -886,5 +900,53 @@ class Bien
     public function getProgramme()
     {
         return $this->programme;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param boolean $statut
+     *
+     * @return Bien
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return boolean
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
+     * Set flag
+     *
+     * @param integer $flag
+     *
+     * @return Bien
+     */
+    public function setFlag($flag)
+    {
+        $this->flag = $flag;
+
+        return $this;
+    }
+
+    /**
+     * Get flag
+     *
+     * @return integer
+     */
+    public function getFlag()
+    {
+        return $this->flag;
     }
 }

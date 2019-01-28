@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -85,6 +86,11 @@ class BienType extends AbstractType
                 ),
                 'required' => false,
             ))
+            ->add('statut', CheckboxType::class, ['attr'=>['class'=> 'custom-control-input'], 'required'=> false])
+            ->add('flag', ChoiceType::class,[
+                'attr'=> ['class'=> 'form-control'],
+                'choices'=>['1'=>1, '2'=>2, '3'=>3, '4'=>4, '5'=>5]
+            ])
             ->add('typebien', null, array(
                 'attr' => array(
                     'class' => 'form-control select-typebien',

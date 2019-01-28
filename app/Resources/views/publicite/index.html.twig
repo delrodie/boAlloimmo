@@ -36,11 +36,19 @@
                                     Publication du <span style="font-style: italic; color: #ff0000; font-weight: bold">{{ publicite.datedebut|date('d-m-Y') }}</span>
                                     au <span style="font-style: italic; color: #ff0000; font-weight: bold">{{ publicite.datefin|date('d-m-Y') }}</span>
                                 </p>
+                                {% if (publicite.heuredeb) %}
+                                    <p style="font-size: 13px">
+                                        Affichage de <span style="font-style: italic; color: #0303ab; font-weight: bold">{{ publicite.heuredeb }}</span>
+                                        à <span style="font-style: italic; color: #ff0000; font-weight: bold">{{ publicite.heurefin }}</span>
+                                    </p>
+                                {% endif %}
                                 <p class="card-text"></p>
                                 <a href="{{ path('backend_publicite_show', {'slug': publicite.slug}) }}" class="btn btn-outline-primary">Voir
                                 </a>
-                                {% if (publicite.datedebut) %}
-                                    <a href="#" class="btn btn-info" title="Publicité du {{ publicite.datedebut|date('d-m-Y') }} au {{ publicite.datefin|date('d-m-Y') }}"><i class="fa fa-picture-o"></i> </a>
+                                {% if (publicite.statut) %}
+                                    <a href="#" class="btn btn-success" title="activé"><i class="fa fa-picture-o"></i> </a>
+                                {% else %}
+                                    <a href="#" class="btn btn-danger" title="Désactivé"><i class="fa fa-unlink"></i> </a>
                                 {% endif %}
                             </div>
                             <div class="card-footer">
