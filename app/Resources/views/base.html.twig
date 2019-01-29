@@ -13,16 +13,21 @@
         {% endblock %}
     </title>
     {% block stylesheets %}
-        <link rel="icon" href="{{ asset('frontend/images/favicon2.png') }}" type="image/x-icon">
-        <link href="{{ asset('frontend/vendor/jquery-ui/jquery-ui.css') }}" rel="stylesheet">
-        <link href="{{ asset('frontend/vendor/slick/slick.css') }}" rel="stylesheet">
-        <link href="{{ asset('frontend/vendor/animate/animate.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('frontend/vendor/mCustomScrollbar/jquery.mCustomScrollbar.css') }}" rel="stylesheet">
-        <link href="{{ asset('frontend/vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
-        <link href="{{ asset('frontend/icons/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('frontend/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
-        <link href="{{ asset('frontend/color/color-swatch.css') }}" rel="stylesheet">
+        <link rel="icon" href="{{ absolute_url(asset('frontend/images/favicon2.png')) }}" type="image/x-icon">
+        {% stylesheets
+			'frontend/vendor/jquery-ui/jquery-ui.css'
+			'frontend/vendor/slick/slick.css'
+			'frontend/vendor/animate/animate.min.css'
+			'frontend/vendor/mCustomScrollbar/jquery.mCustomScrollbar.css'
+			'frontend/vendor/magnific-popup/magnific-popup.css'
+			'frontend/icons/style.css'
+			'frontend/font-awesome/css/font-awesome.min.css'
+			'frontend/css/style.css'
+			'frontend/color/color-swatch.css'
+			filter='cssrewrite' output='ressources/css/alloimmo.css'
+		%}
+			<link rel="stylesheet" href="{{ absolute_url(asset_url)}}" id="style_theme" />
+		{% endstylesheets %}
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CSuravaram%7CCormorant+Garamond:400,400i,500,500i,600,600i" rel="stylesheet">
 
     {% endblock %}
@@ -251,7 +256,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-auto col-sm-5 col-lg-3 d-flex align-items-center">
-                    <a href="" class="header-logo">
+                    <a href="{{ absolute_url(path('homepage')) }}" class="header-logo">
                         <img src="{{ absolute_url(asset('frontend/images/logo-ai.png')) }}" alt="" class="img-fluid">
                     </a>
                 </div>
@@ -400,18 +405,23 @@
     </div>
 </div>
 {% block javascripts %}
-<script src="{{ asset('frontend/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/jquery-migrate/jquery-migrate-3.0.1.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/popper/popper.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/bootstrap/bootstrap.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/waypoints/sticky.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/slick/slick.min.js') }}"></script>
-<script src="{{ asset('frontend/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('frontend/js/app.js') }}"></script>
+    {% javascripts
+        'frontend/vendor/jquery/jquery-3.2.1.min.js'
+        'frontend/vendor/jquery-migrate/jquery-migrate-3.0.1.min.js'
+        'frontend/vendor/jquery-ui/jquery-ui.min.js'
+        'frontend/vendor/popper/popper.min.js'
+        'frontend/vendor/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js'
+        'frontend/vendor/bootstrap/bootstrap.min.js'
+        'frontend/vendor/waypoints/jquery.waypoints.min.js'
+        'frontend/vendor/waypoints/sticky.min.js'
+        'frontend/vendor/imagesloaded/imagesloaded.pkgd.min.js'
+        'frontend/vendor/slick/slick.min.js'
+        'frontend/vendor/magnific-popup/jquery.magnific-popup.min.js'
+        'frontend/js/app.js'
+        output='backoffice/js/alloimmo.js'
+    %}
+    <script src="{{ absolute_url(asset_url)}}"></script>
+    {% endjavascripts %}
 {% endblock %}
 </body>
 
