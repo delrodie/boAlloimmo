@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Autrebien;
 use AppBundle\Entity\Bien;
+use AppBundle\Utils\Gestionbien;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -118,15 +119,26 @@ class AutrebienController extends Controller
      * @Route("/{id}", name="backend_autrebien_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Autrebien $autrebien)
+    public function deleteAction(Request $request, Autrebien $autrebien, Gestionbien $gestionbien)
     {
         $form = $this->createDeleteForm($autrebien);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $bien = $autrebien->getBien()->getId();
+
             $em->remove($autrebien);
             $em->flush();
+
+            $suppressionBien = $gestionbien->suppression($bien);
+
+            if ($suppressionBien){
+                return $this->redirectToRoute('backend_bien_index');
+            }else{
+                $message = "Le bien concerné n'a pas été trouvé!";
+                return $this->render('backend/404.html.twig',['message'=> $message]);
+            }
         }
 
         return $this->redirectToRoute('backend_autrebien_index');

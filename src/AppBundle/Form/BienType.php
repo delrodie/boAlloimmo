@@ -42,7 +42,7 @@ class BienType extends AbstractType
                     'class' => 'form-control',
                     'autocomplete'  => 'off',
                     'placeholder'   => 'Localisation du bien'
-                )
+                ), 'required'=> false
             ))
             ->add('disponibilite', CheckboxType::class, array(
                 'attr'  => array(
@@ -80,6 +80,9 @@ class BienType extends AbstractType
                 ),
                 'required' => false,
             ))
+            ->add('video', TextType::class,[
+                'attr' => ['class'=> 'form-control', 'placeholder'=> 'Le lien de la video'], 'required'=> false
+            ])
             ->add('affichagePrix', CheckboxType::class, array(
                 'attr'  => array(
                     'class' => 'custom-control-input'

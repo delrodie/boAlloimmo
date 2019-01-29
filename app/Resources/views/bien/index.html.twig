@@ -48,6 +48,11 @@
                                 {% else %}
                                     <a href="#" class="btn btn-danger" title="Vendu"><i class="fa fa-chain-broken"></i> </a>
                                 {% endif %}
+                                {% if (bien.video) %}
+                                    <a href="https://www.youtube.com/watch?v={{ bien.video }}" class="btn btn-outline-danger" title="Voir la video" target="_blank">
+                                        <i class="fa fa-youtube-play"></i>
+                                    </a>
+                                {% endif %}
                                 {% if (bien.datedebut) %}
                                     <a href="#" class="btn btn-info" title="Publicité du {{ bien.datedebut|date('d-m-Y') }} au {{ bien.datefin|date('d-m-Y') }}"><i class="fa fa-picture-o"></i> </a>
                                 {% endif %}

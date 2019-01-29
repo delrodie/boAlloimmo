@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Villa;
+use AppBundle\Utils\Gestionbien;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -117,15 +118,31 @@ class VillaController extends Controller
      * @Route("/{id}", name="backend_villa_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Villa $villa)
+    public function deleteAction(Request $request, Villa $villa, Gestionbien $gestionbien)
     {
         $form = $this->createDeleteForm($villa);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if (!$villa){
+                $message = "Aucune villa trouvée!";
+                return $this->render('backend/404.html.twig',['message'=> $message]);
+            }
+
+            $bien = $villa->getBien()->getId();//dump($villa->getBien()->getId());die();
             $em->remove($villa);
             $em->flush();
+
+            $suppressionBien = $gestionbien->suppression($bien);
+
+            if ($suppressionBien){
+                return $this->redirectToRoute('backend_bien_index');
+            }else{
+                $message = "Le bien concerné n'a pas été trouvé!";
+                return $this->render('backend/404.html.twig',['message'=> $message]);
+            }
         }
 
         return $this->redirectToRoute('backend_villa_index');

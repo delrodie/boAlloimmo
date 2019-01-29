@@ -63,7 +63,7 @@ class Bien
     /**
      * @var string
      *
-     * @ORM\Column(name="localisation", type="string", length=255)
+     * @ORM\Column(name="localisation", type="string", length=700, nullable=true)
      */
     private $localisation;
 
@@ -129,6 +129,13 @@ class Bien
      * @ORM\Column(name="datefin", type="string", length=255, nullable=true)
      */
     private $datefin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="video", type="string", length=255, nullable=true)
+     */
+    private $video;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Galleriebien", mappedBy="bien")
@@ -948,5 +955,29 @@ class Bien
     public function getFlag()
     {
         return $this->flag;
+    }
+
+    /**
+     * Set video
+     *
+     * @param string $videedo
+     *
+     * @return Bien
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+    /**
+     * Get video
+     *
+     * @return string
+     */
+    public function getVideo()
+    {
+        return $this->video;
     }
 }

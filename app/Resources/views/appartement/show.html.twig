@@ -55,6 +55,15 @@
                                             {{ appartement.bien.description|raw }}
                                         </div>
                                     </div>
+                                    {% if (appartement.bien.video) %}
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <a href="{{ appartement.bien.video }}" class="btn btn-outline-danger" title="Voir la video" target="_blank">
+                                                    <i class="fa fa-youtube-play"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                     <div class="row">
                                         <div class="col-sm-12" style="margin-top: 15px">
                                             <u>Partenaire</u> : <strong>{{ appartement.bien.partenaire }}</strong>

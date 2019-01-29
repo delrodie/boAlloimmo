@@ -56,6 +56,20 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-sm-12">
+                                        {% if (villa.bien.video) %}
+                                            <a href="https://www.youtube.com/watch?v={{ villa.bien.video }}" class="btn btn-outline-danger" title="Voir la video" target="_blank">
+                                                <i class="fa fa-youtube-play"></i>
+                                            </a>
+                                        {% endif %}
+                                            {% if (villa.bien.localisation) %}
+                                                <a href="#" class="btn btn-outline-primary" title="Voir la localisation">
+                                                    <i class="fa fa-map-o"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-12" style="margin-top: 15px">
                                             <u>Partenaire</u> : <strong>{{ villa.bien.partenaire }}</strong>
                                         </div>
