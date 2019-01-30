@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\AnnonceVilla;
+use AppBundle\Utils\Gestionannonce;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -85,7 +86,7 @@ class AnnonceVillaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $bien = $em->getRepository('AppBundle:AnnonceBien')->findOneBy(['slug'=>$annoncebien]);
         $deleteForm = $this->createDeleteForm($annonceVilla);
-        $editForm = $this->createForm('AppBundle\Form\AnnonceVillaType', $annonceVilla, ['bien'=> $bien->getId()]);
+        $editForm = $this->createForm('AppBundle\Form\AnnonceVillaType', $annonceVilla, ['bien'=> $bien->getSlug()]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -107,7 +108,7 @@ class AnnonceVillaController extends Controller
      * @Route("/{id}", name="backend_annoncevilla_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, AnnonceVilla $annonceVilla)
+    public function deleteAction(Request $request, AnnonceVilla $annonceVilla, Gestionannonce $gestionannonce)
     {
         $form = $this->createDeleteForm($annonceVilla);
         $form->handleRequest($request);
@@ -116,6 +117,7 @@ class AnnonceVillaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($annonceVilla);
             $em->flush();
+
         }
 
         return $this->redirectToRoute('backend_annoncevilla_index');

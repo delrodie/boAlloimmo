@@ -41,7 +41,10 @@
                                 {% if (annoncebien.disponibilite) %}
                                     <a href="#" class="btn btn-success" title="Disponible"><i class="fa fa-check-square-o"></i> </a>
                                 {% else %}
-                                    <a href="#" class="btn btn-danger" title="Vendu"><i class="fa fa-chain-broken"></i> </a>
+                                    <a href="#" class="btn btn-outline-danger" title="Vendu"><i class="fa fa-chain-broken"></i> </a>
+                                {% endif %}
+                                {% if (annoncebien.fille == false) %}
+                                    <a href="#" class="btn btn-danger" title="enregistrement non complet"><i class="fa fa-low-vision"></i></a>
                                 {% endif %}
                             </div>
                             <div class="card-footer">

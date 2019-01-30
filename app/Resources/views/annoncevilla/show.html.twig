@@ -259,9 +259,14 @@
 
                                 </div>
                                 <div class="col-sm-3 text-left">
-                                    {{ form_start(delete_form, {'attr': {'onsubmit': 'return confirm("Voulez-vous supprimer ce bien?")'}}) }}
-                                    <input type="submit" value="Supprimer" class="btn btn-danger">
-                                    {{ form_end(delete_form) }}
+
+                                    <div class="mt-3 text-left">
+                                        <form action="{{ absolute_url(path('backend_annonce_delete')) }}" method="post" onsubmit="return confirm('Voulez-vous supprimer cette annonce?')">
+                                            <input type="hidden" name="bien" value="{{ annonceVilla.annoncebien.id }}">
+                                            <input type="hidden" name="crsf_annonce" value="AlloImmoHabitat!2019">
+                                            <input type="submit" value="Supprimer" class="btn btn-primary">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

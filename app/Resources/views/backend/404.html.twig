@@ -11,7 +11,7 @@
                     <div class="error">
                         <h1>404</h1>
                         <h4>Oups!!!</h4>
-                        <h6>{{ message }}</h6>
+                        <h6>{{ message|raw }}</h6>
                         <a href="{{ absolute_url(path('backend')) }}" class="btn btn-pill btn-primary">Retourner à l'accueil</a>
                     </div>
                 </div>

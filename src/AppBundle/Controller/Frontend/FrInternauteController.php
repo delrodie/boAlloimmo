@@ -35,4 +35,26 @@ class FrInternauteController extends Controller
             }
         }
     }
+
+    /**
+     * Suppression depuis le backoffice
+     * @Route("/delete/backend", name="backend_annonce_delete")
+     * @Method({"GET", "POST"})
+     */
+    public function admindeleteAction(Request $request, Gestionannonce $gestionannonce)
+    {
+        $annonce = $request->get('bien');
+        $crsf = $request->get('crsf_annonce'); //dump($bien);die();
+
+        if ($crsf === 'AlloImmoHabitat!2019'){
+            $suppressionAnnonce = $gestionannonce->suppression($annonce);
+
+            if ($suppressionAnnonce){
+                return $this->redirectToRoute('backend_annoncebien_index');
+            }else{
+                dump('Echec de suppression');die();
+            }
+        }
+
+    }
 }

@@ -25,7 +25,7 @@ class AnnonceBienController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findListDesc();
+        $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findListBien();
 
         return $this->render('annoncebien/index.html.twig', array(
             'annonceBiens' => $annonceBiens,
@@ -73,28 +73,40 @@ class AnnonceBienController extends Controller
             if ($immeuble){
                 return $this->redirectToRoute('backend_annonceimmeuble_show', array('id' => $immeuble->getId(), 'slug' =>$annonceBien->getSlug()));
             }else{
-                return $this->redirectToRoute('backend_annonceimmeuble_new', array('annoncebien' => $annonceBien->getId()));
+                $message = "L'annonceur n'a pas achevé son enregistrement. Prière le contacter pour finaliser l'enregistrement de son immeuble. \n";
+                $message .= "Promoteur: ". $annonceBien->getUtilisateur()->getNom();
+                $message .= "\n Contact: ". $annonceBien->getUtilisateur()->getTelephone();
+                return $this->render('backend/404.html.twig', ['message'=> $message]);
             }
         }elseif ($annonceBien->getTypebienslug() === 'appar'){
             $appartement = $em->getRepository('AppBundle:AnnonceAppartement')->findOneBy(array('annoncebien' => $annonceBien->getId()));
             if ($appartement){
                 return $this->redirectToRoute('backend_appartement_show', array('id' => $appartement->getId(), 'annoncebien' =>$annonceBien->getSlug()));
             }else{
-                return $this->redirectToRoute('backend_appartement_new', array('annoncebien' => $annonceBien->getId()));
+                $message = "L'annonceur n'a pas achevé son enregistrement. Prière le contacter pour finaliser l'enregistrement de son appartement. \n";
+                $message .= "Promoteur: ". $annonceBien->getUtilisateur()->getNom();
+                $message .= "\n Contact: ". $annonceBien->getUtilisateur()->getTelephone();
+                return $this->render('backend/404.html.twig', ['message'=> $message]);
             }
         }elseif ($annonceBien->getTypebienslug() === 'villa'){
-            $villa = $em->getRepository('AppBundle:AnnonceVilla')->findOneBy(array('annoncebien' => $annonceBien->getId()));
+            $villa = $em->getRepository('AppBundle:AnnonceVilla')->findOneBy(array('annoncebien' => $annonceBien->getId()));//dump($villa);die();
             if ($villa){
                 return $this->redirectToRoute('backend_annoncevilla_show', array('id' => $villa->getId(), 'annoncebien' =>$annonceBien->getSlug()));
             }else{
-                return $this->redirectToRoute('backend_annoncevilla_new', array('annoncebien' => $annonceBien->getId()));
+                $message = "L'annonceur n'a pas achevé l'enregistrement de sa VILLA. <br> Prière le contacter. <br>";
+                $message .= "Promoteur: ". $annonceBien->getUtilisateur()->getNom();
+                $message .= "<br> Contact: ". $annonceBien->getUtilisateur()->getTelephone();
+                return $this->render('backend/404.html.twig', ['message'=> $message]);
             }
         }else{
             $autrebien = $em->getRepository('AppBundle:AnnonceAutrebien')->findOneBy(array('annoncebien' => $annonceBien->getId()));
             if ($autrebien){
                 return $this->redirectToRoute('backend_autrebien_show', array('id' => $autrebien->getId(), 'annoncebien' =>$annonceBien->getSlug()));
             }else{
-                return $this->redirectToRoute('backend_autrebien_new', array('annoncebien' => $annonceBien->getId()));
+                $message = "L'annonceur n'a pas achevé son enregistrement. Prière le contacter pour finaliser l'enregistrement de son bien. \n";
+                $message .= "Promoteur: ". $annonceBien->getUtilisateur()->getNom();
+                $message .= "\n Contact: ". $annonceBien->getUtilisateur()->getTelephone();
+                return $this->render('backend/404.html.twig', ['message'=> $message]);
             }
         }
 

@@ -18,7 +18,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a href="{{ path('backend_bien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+                    <a href="{{ path('backend_annoncebien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
                 </div>
                 <br>
                 <div class="col-md-12">
@@ -53,7 +53,7 @@
                                         <div class="col-sm-6" style="margin-top:0px;">
                                             <label class="control-label" for="rubrique">Titre du bien</label>
                                             <div class="elect2-container">
-                                                <input type="text" class="form-control" value="{{ annonceVilla.annoncebien.titre }}" readonly>
+                                                {{ form_widget(edit_form.annoncebien,{'attr': {'readonly': 'readonly'}}) }}
                                             </div>
                                         </div>
                                         <div class="col-sm-6" style="margin-top:10px;">

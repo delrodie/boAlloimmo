@@ -60,11 +60,15 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findListBien($limit = null, $offset = null)
     {
-        return $this->createQueryBuilder('b')
-                    ->orderBy('b.id', 'DESC')
-                    ->setFirstResult($offset)
-                    ->setMaxResults($limit)
-                    ->getQuery()->getResult()
-            ;
+        if ($limit){
+            return $this->createQueryBuilder('b')
+                ->orderBy('b.id', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults($limit)
+                ->getQuery()->getResult()
+                ;
+        }else{
+            return $this->createQueryBuilder('b')->orderBy('b.id', 'DESC')->getQuery()->getResult();
+        }
     }
 }
