@@ -16,7 +16,12 @@
     <div class="section">
         <div class="container">
             <div class="title-wrap text-center">
-                <h2 class="h1">Annonces</h2>
+                {% if (biens) %}
+                    <h2 class="h1">Annonces</h2>
+                {% else %}
+                    <h2><em>Aucune annonce trouvée</em></h2>
+                {% endif %}
+
             </div>
         </div>
         <div class="container">

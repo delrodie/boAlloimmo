@@ -62,7 +62,7 @@
 						<div class="col-sm-10 col-sm-offset-1 text-center">
                             <h4 class="text-left text-primary">Modification de bien <span class="badge badge-primary">2/2</span></h4>
 							<!--<form class="contact-form" id="contactForm" method="post" novalidate="novalidate">-->
-                            {{ form_start(form, {'attr': {'class': 'profile-form', 'id': 'profileForm', 'novalidate': 'novalidate', 'action': path('frontend_annonceur_autrebien_edit', {'user':utilisateur.user.username, 'id': utilisateur.id, 'bien': bien, 'autrebien'}) }})}}
+                            {{ form_start(form, {'attr': {'class': 'profile-form', 'id': 'profileForm', 'novalidate': 'novalidate', 'action': path('frontend_annonceur_autrebien_edit', {'user': utilisateur.user.username, 'id': utilisateur.id, 'bien': bien, 'autrebien': autrebien.id}) }})}}
 								<div class="successform">
 									<p>Message envoyé avec succès!</p>
 								</div>
@@ -85,6 +85,15 @@
 								</div>
 							<!--</form>-->
                             {{ form_end(form)}}
+						</div>
+						<div class="mt-3 text-left">
+							<form action="{{ absolute_url(path('frontend_internaute_delete')) }}" method="post" onsubmit="return confirm('Voulez-vous supprimer cette annonce?')">
+								<input type="hidden" name="id" value="{{ autrebien.annoncebien.id }}">
+								<input type="hidden" name="user" value="{{ utilisateur.user.username }}">
+								<input type="hidden" name="userId" value="{{ utilisateur.id }}">
+								<input type="hidden" name="crsf_annonce" value="AlloImmoHabitat!2019">
+								<input type="submit" value="Supprimer" class="btn btn-primary">
+							</form>
 						</div>
 						
 					</div>

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use AppBundle\Utils\Gestionannonce;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -31,7 +32,7 @@ class FrInternauteVillaController extends Controller
      * @Route("/{user}{id}/{bien}/enregistrement", name="frontend_annonceur_villa_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Utilities $utilities)
+    public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -54,10 +55,20 @@ class FrInternauteVillaController extends Controller
             $em->persist($villa);
             $em->flush(); //dump($villa);die('ici');
 
-            return $this->redirectToRoute('frontend_annonceur_index', [
-                'id' => $utilisateur->getId(),
-                'user' => $utilisateur->getUser()->getUsername(),
-            ]);
+            $majBien = $gestionannonce->maj($bien);
+
+            if ($majBien){
+                return $this->redirectToRoute('frontend_annonceur_index', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                ]);
+            }else {
+                return $this->redirectToRoute('frontend_annonceur_edit', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                    'slug' => $bien
+                ]);
+            }
         }
 
         return $this->render('internaute/villa_new.html.twig', array(
@@ -73,7 +84,7 @@ class FrInternauteVillaController extends Controller
      * @Route("/{user}{id}/{bien}/modification/{villa}", name="frontend_annonceur_villa_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Utilities $utilities)
+    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -97,10 +108,20 @@ class FrInternauteVillaController extends Controller
             $em->persist($villa);
             $em->flush(); //dump($villa);die('ici');
 
-            return $this->redirectToRoute('frontend_annonceur_index', [
-                'id' => $utilisateur->getId(),
-                'user' => $utilisateur->getUser()->getUsername(),
-            ]);
+            $majBien = $gestionannonce->maj($bien);
+
+            if ($majBien){
+                return $this->redirectToRoute('frontend_annonceur_index', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                ]);
+            }else {
+                return $this->redirectToRoute('frontend_annonceur_edit', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                    'slug' => $bien
+                ]);
+            }
         }
 
         return $this->render('internaute/villa_edit.html.twig', array(

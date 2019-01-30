@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use AppBundle\Utils\Gestionannonce;
+use AppBundle\Utils\Gestionbien;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -31,7 +33,7 @@ class FrInternauteImmeubleController extends Controller
      * @Route("/{user}{id}/{bien}/enregistrement", name="frontend_annonceur_immeuble_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Utilities $utilities)
+    public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -52,12 +54,23 @@ class FrInternauteImmeubleController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em->persist($immeuble);
-            $em->flush(); //dump($immeuble);die('ici');
+            $em->flush();
 
-            return $this->redirectToRoute('frontend_annonceur_index', [
-                'id' => $utilisateur->getId(),
-                'user' => $utilisateur->getUser()->getUsername(),
-            ]);
+            $majBien = $gestionannonce->maj($bien);
+
+            if ($majBien){
+                return $this->redirectToRoute('frontend_annonceur_index', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                ]);
+            }else {
+                $biens = $em->getRepository('AppBundle:AnnonceBien')->findOneBy(['id' => $bien]);
+                return $this->redirectToRoute('frontend_annonceur_edit', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                    'slug' => $biens->getSlug()
+                ]);
+            }
         }
 
         return $this->render('internaute/immeuble_new.html.twig', array(
@@ -73,7 +86,7 @@ class FrInternauteImmeubleController extends Controller
      * @Route("/{user}{id}/{bien}/modification/{immeuble}", name="frontend_annonceur_immeuble_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker)
+    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -97,10 +110,20 @@ class FrInternauteImmeubleController extends Controller
             $em->persist($immeuble);
             $em->flush(); //dump($immeuble);die('ici');
 
-            return $this->redirectToRoute('frontend_annonceur_index', [
-                'id' => $utilisateur->getId(),
-                'user' => $utilisateur->getUser()->getUsername(),
-            ]);
+            $majBien = $gestionannonce->maj($bien);
+
+            if ($majBien){
+                return $this->redirectToRoute('frontend_annonceur_index', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                ]);
+            }else {
+                return $this->redirectToRoute('frontend_annonceur_edit', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                    'slug' => $bien
+                ]);
+            }
         }
 
         return $this->render('internaute/immeuble_edit.html.twig', array(

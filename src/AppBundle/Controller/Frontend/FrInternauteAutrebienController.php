@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\AnnonceAutrebien;
+use AppBundle\Utils\Gestionannonce;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -29,7 +30,7 @@ class FrInternauteAutrebienController extends Controller
      * @Route("/{user}{id}/{bien}/enregistrement", name="frontend_annonceur_autrebien_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, AuthorizationCheckerInterface $authChecker)
+    public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -52,10 +53,20 @@ class FrInternauteAutrebienController extends Controller
             $em->persist($autrebien);
             $em->flush(); //dump($villa);die('ici');
 
-            return $this->redirectToRoute('frontend_annonceur_index', [
-                'id' => $utilisateur->getId(),
-                'user' => $utilisateur->getUser()->getUsername(),
-            ]);
+            $majBien = $gestionannonce->maj($bien);
+
+            if ($majBien){
+                return $this->redirectToRoute('frontend_annonceur_index', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                ]);
+            }else {
+                return $this->redirectToRoute('frontend_annonceur_edit', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                    'slug' => $bien
+                ]);
+            }
         }
 
         return $this->render('internaute/autrebien_new.html.twig', array(
@@ -71,7 +82,7 @@ class FrInternauteAutrebienController extends Controller
      * @Route("/{user}{id}/{bien}/modification/{autrebien}", name="frontend_annonceur_autrebien_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker)
+    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -95,10 +106,20 @@ class FrInternauteAutrebienController extends Controller
             $em->persist($autrebien);
             $em->flush(); //dump($autrebien);die('ici');
 
-            return $this->redirectToRoute('frontend_annonceur_index', [
-                'id' => $utilisateur->getId(),
-                'user' => $utilisateur->getUser()->getUsername(),
-            ]);
+            $majBien = $gestionannonce->maj($bien);
+
+            if ($majBien){
+                return $this->redirectToRoute('frontend_annonceur_index', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                ]);
+            }else {
+                return $this->redirectToRoute('frontend_annonceur_edit', [
+                    'id' => $utilisateur->getId(),
+                    'user' => $utilisateur->getUser()->getUsername(),
+                    'slug' => $bien
+                ]);
+            }
         }
 
         return $this->render('internaute/autrebien_edit.html.twig', array(

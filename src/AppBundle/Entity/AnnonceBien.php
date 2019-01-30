@@ -89,6 +89,13 @@ class AnnonceBien
     private $affichagePrix;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="fille", type="boolean", nullable=true)
+     */
+    private $fille;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="annoncebiens")
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
@@ -727,5 +734,29 @@ class AnnonceBien
     public function getUtilisateur()
     {
         return $this->utilisateur;
+    }
+
+    /**
+     * Set fille
+     *
+     * @param boolean $fille
+     *
+     * @return AnnonceBien
+     */
+    public function setFille($fille)
+    {
+        $this->fille = $fille;
+
+        return $this;
+    }
+
+    /**
+     * Get fille
+     *
+     * @return boolean
+     */
+    public function getFille()
+    {
+        return $this->fille;
     }
 }

@@ -49,6 +49,7 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findListDesc(){
         return $this->createQueryBuilder('b')
+                    ->where('b.fille = 1')
                     ->orderBy('b.id', 'DESC')
                     ->getQuery()->getResult()
             ;
