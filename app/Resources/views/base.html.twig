@@ -24,7 +24,7 @@
 			'frontend/font-awesome/css/font-awesome.min.css'
 			'frontend/css/style.css'
 			'frontend/color/color-swatch.css'
-			filter='cssrewrite' output='ressources/css/alloimmo.css'
+			filter='cssrewrite' output='frontend/css/alloimmo.css'
 		%}
 			<link rel="stylesheet" href="{{ absolute_url(asset_url)}}" id="style_theme" />
 		{% endstylesheets %}
@@ -418,7 +418,7 @@
         'frontend/vendor/slick/slick.min.js'
         'frontend/vendor/magnific-popup/jquery.magnific-popup.min.js'
         'frontend/js/app.js'
-        output='backoffice/js/alloimmo.js'
+        output='frontend/js/alloimmo.js'
     %}
     <script src="{{ absolute_url(asset_url)}}"></script>
     {% endjavascripts %}
