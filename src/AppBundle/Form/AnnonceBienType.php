@@ -49,7 +49,7 @@ class AnnonceBienType extends AbstractType
                     'data-role' => "tagsinput",
                 ]
             ])
-            //->add('typebienslug', null)
+            ->add('statut', CheckboxType::class,['attr'=>['class'=>'custom-control-input'], 'required'=>false])
             ->add('affichagePrix', CheckboxType::class, ['attr' => ['class' => 'custom-control-input'], 'required' => false])
             ->add('imageFile', VichImageType::class,[
                 'required' => false,

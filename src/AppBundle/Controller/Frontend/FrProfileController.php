@@ -122,6 +122,15 @@ class FrProfileController extends Controller
 
         if (!$utilisateur) {
             return $this->redirectToRoute('frontend_profile_new');
+        }//dump($utilisateur);die();
+        if ($utilisateur->getStatut()){
+            $message = '<h4>Votre compte est désactivé. Veuillez contacter l\'administrateur</h4>
+                            <h5>info@alloimmo.ci</h5>
+							<h5>00225 75 83 33 75</h5>';
+            return $this->render('internaute/404.html.twig',[
+                'messageError'=>$message,
+                'utilisateur' => $utilisateur
+            ]);
         }
         return $this->render('internaute/show.html.twig', [
             'utilisateur' => $utilisateur,

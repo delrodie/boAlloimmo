@@ -46,10 +46,12 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
 
     /**
      * Liste decroissante des annonces
+     * Utiliser par frontendController/AnnonceAction
      */
     public function findListDesc(){
         return $this->createQueryBuilder('b')
                     ->where('b.fille = 1')
+                    ->andWhere('b.statut = 1')
                     ->orderBy('b.id', 'DESC')
                     ->getQuery()->getResult()
             ;

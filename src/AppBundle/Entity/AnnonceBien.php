@@ -96,6 +96,13 @@ class AnnonceBien
     private $fille;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="statut", type="boolean", nullable=true, options={"default": 1})
+     */
+    private $statut;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="annoncebiens")
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
@@ -758,5 +765,29 @@ class AnnonceBien
     public function getFille()
     {
         return $this->fille;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param boolean $statut
+     *
+     * @return Annoncebien
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return boolean
+     */
+    public function getStatut()
+    {
+        return $this->statut;
     }
 }

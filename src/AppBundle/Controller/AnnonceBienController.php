@@ -46,6 +46,7 @@ class AnnonceBienController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $annonceBien->setStatut(1);
             $em->persist($annonceBien);
             $em->flush();
 
@@ -81,7 +82,7 @@ class AnnonceBienController extends Controller
         }elseif ($annonceBien->getTypebienslug() === 'appar'){
             $appartement = $em->getRepository('AppBundle:AnnonceAppartement')->findOneBy(array('annoncebien' => $annonceBien->getId()));
             if ($appartement){
-                return $this->redirectToRoute('backend_appartement_show', array('id' => $appartement->getId(), 'annoncebien' =>$annonceBien->getSlug()));
+                return $this->redirectToRoute('backend_annonceappartement_show', array('id' => $appartement->getId(), 'annoncebien' =>$annonceBien->getSlug()));
             }else{
                 $message = "L'annonceur n'a pas achevé son enregistrement. Prière le contacter pour finaliser l'enregistrement de son appartement. \n";
                 $message .= "Promoteur: ". $annonceBien->getUtilisateur()->getNom();
@@ -101,7 +102,7 @@ class AnnonceBienController extends Controller
         }else{
             $autrebien = $em->getRepository('AppBundle:AnnonceAutrebien')->findOneBy(array('annoncebien' => $annonceBien->getId()));
             if ($autrebien){
-                return $this->redirectToRoute('backend_autrebien_show', array('id' => $autrebien->getId(), 'annoncebien' =>$annonceBien->getSlug()));
+                return $this->redirectToRoute('backend_annonceautrebien_show', array('id' => $autrebien->getId(), 'annoncebien' =>$annonceBien->getSlug()));
             }else{
                 $message = "L'annonceur n'a pas achevé son enregistrement. Prière le contacter pour finaliser l'enregistrement de son bien. \n";
                 $message .= "Promoteur: ". $annonceBien->getUtilisateur()->getNom();

@@ -79,12 +79,24 @@
                                                 </div>
                                             </div>
                                             <div class="room-card-info">
+												<div class="row">
+													<div class="col">
+														{% if (bien.statut) %}
+															<span class="pull-left" style="font-weight: bold; color: #0b8606; font-size: 75%;">Actif</span>
+														{% else %}
+															<span class="pull-left" style="font-weight: bold; color: #f20c0f; font-size: 75%;">Désactivé</span>
+														{% endif %}
+														{% if (bien.fille == 0) %}
+															<span class="badge badge-primary pull-right">Enregistrment non complet</span>
+														{% endif %}
+													</div>
+												</div>
                                                 <div class="row">
-                                                    <div class="col">
+                                                    <div class="col text-left">
                                                         <h3 class="room-type">{{ bien.typebien }}</h3>
                                                     </div>
                                                 </div>
-                                                <div class="room-size mt-0" style="height: 100px;">
+                                                <div class="room-size mt-0 text-left" style="height: 100px;">
                                                     {{ bien.resume|raw }}
                                                 </div>
                                                 <div class="row">

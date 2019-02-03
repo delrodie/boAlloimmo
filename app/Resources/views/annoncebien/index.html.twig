@@ -46,6 +46,11 @@
                                 {% if (annoncebien.fille == false) %}
                                     <a href="#" class="btn btn-danger" title="enregistrement non complet"><i class="fa fa-low-vision"></i></a>
                                 {% endif %}
+                                {% if (annoncebien.statut) %}
+                                    <span class="badge badge-success pull-right">Actif</span>
+                                {% else %}
+                                    <span class="badge badge-danger pull-right">Déscativé</span>
+                                {% endif %}
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">

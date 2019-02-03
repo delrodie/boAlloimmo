@@ -84,13 +84,13 @@
                                     <label class="custom-control custom-checkbox">
                                         {{ form_widget(edit_form.statut) }}
                                         <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Activé l'utilisateur</span>
+                                        <span class="custom-control-description">Compte désactivé (Décochez pour activer)</span>
                                     </label>
                                 {% else %}
                                     <label class="custom-control custom-checkbox">
                                         {{ form_widget(edit_form.statut) }}
                                         <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">Désactivé l'utilisateur</span>
+                                        <span class="custom-control-description">Compte activé (cochez pour désactiver)</span>
                                     </label>
                                 {% endif %}
                             </div>

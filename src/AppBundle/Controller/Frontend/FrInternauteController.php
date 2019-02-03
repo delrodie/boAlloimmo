@@ -52,7 +52,8 @@ class FrInternauteController extends Controller
             if ($suppressionAnnonce){
                 return $this->redirectToRoute('backend_annoncebien_index');
             }else{
-                dump('Echec de suppression');die();
+                $message = "Echec de suppression de cette annonce. Assurez-vous qu'elle existe";
+                return $this->render("backend/404.html.twig",['message'=>$message]);
             }
         }
 
