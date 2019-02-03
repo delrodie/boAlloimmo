@@ -19,7 +19,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12 text-right">
-					<a href="{{ path('backend_bien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+					<a href="{{ path('backend_annoncebien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
 				</div>
 				<br>
 				<div class="col-md-12">
@@ -104,7 +104,7 @@
 
 							<div class="form-group row">
 								<div class="col-sm-7 ml-auto text-right">
-									<a class="btn btn-outline-dark" href="{{ path('backend_bien_edit', {'slug': annonceAutrebien.annoncebien.slug}) }}" >Modifier</a>
+									<a class="btn btn-outline-dark" href="{{ path('backend_annoncebien_edit', {'slug': annonceAutrebien.annoncebien.slug}) }}" >Modifier</a>
 								</div>
 								<div class="col-sm-3 text-left">
 									<form action="{{ absolute_url(path('backend_annonce_delete')) }}" method="post" onsubmit="return confirm('Voulez-vous supprimer cette annonce?')">
