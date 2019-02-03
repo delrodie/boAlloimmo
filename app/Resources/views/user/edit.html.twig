@@ -18,7 +18,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a href="{{ path('backend_mode_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des utilsateurs</a>
+                    <a href="{{ path('admin_user_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des utilsateurs</a>
                 </div>
                 <br>
                 <div class="col-md-12">
@@ -30,7 +30,14 @@
                         </div>
                         <div class="card-body">
                             {{ form_start(edit_form, {'attr': {'class': 'right-text-label-form', 'id':'signupForm'}}) }}
-
+                            {% if (partenaire) %}
+                                <div class="form-group row">
+                                    <label class="col-sm-3 control-label" for="titre">Partenaire</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="partenaire" value="{{ partenaire.partenaire }}" readonly class="form-control">
+                                    </div>
+                                </div>
+                            {% endif %}
                             <div class="form-group row">
                                 <label class="col-sm-3 control-label" for="titre">Nom utilisateur</label>
                                 <div class="col-sm-8">

@@ -55,6 +55,7 @@ class UserType extends AbstractType
             ->add('roles', ChoiceType::class, array(
               'choices' => array(
                 'UTILISATEUR '  => 'ROLE_USER',
+                'GESTIONNAIRE '  => 'ROLE_GESTIONNAIRE',
                 'ADMINISTRATEUR '  => 'ROLE_ADMIN',
               ),
               'attr' => ['class' => 'form-control'],

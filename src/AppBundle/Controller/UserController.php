@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $users = $em->getRepository('AppBundle:User')->findAll();
+        $users = $em->getRepository('AppBundle:User')->findListAll();
 
         return $this->render('user/index.html.twig', array(
             'users' => $users,
@@ -50,6 +50,15 @@ class UserController extends Controller
             $encoder = $this->container->get('security.password_encoder');
             $encoded = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($encoded);
+
+            // Test d'existence du compte partenaire
+            if ($partenaire){
+                $partenaireCompte = $em->getRepository('AppBundle:PartenaireCompte')->findOneBy(['partenaire'=>$partenaire]);
+                if ($partenaireCompte){
+                    $message = "Un compte existe déja pour ce partenaire. !!!";
+                    return $this->render('backend/404.html.twig',['message'=>$message]);
+                }
+            }
             $em->persist($user);
             $em->flush();
 
@@ -60,7 +69,7 @@ class UserController extends Controller
                 ]);
             }
 
-            return $this->redirectToRoute('admin_user_show', array('id' => $user->getId()));
+            return $this->redirectToRoute('admin_user_index');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -106,6 +115,8 @@ class UserController extends Controller
         ));
         $editForm->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $encoder = $this->container->get('security.password_encoder');
             $encoded = $encoder->encodePassword($user, $user->getPassword());
@@ -114,18 +125,21 @@ class UserController extends Controller
             $partenaire = $request->get('partenaire');
 
             if ($partenaire) { //die('ici');
+                $partenaireCompte = $em->getRepository('AppBundle:PartenaireCompte')->findOneBy(['partenaire'=>$partenaire]);
                 return $this->redirectToRoute('backend_compte_edit', [
-                    'partenaire' => $partenaire,
-                    'user' => $user->getUsername(),
+                    'id' => $partenaireCompte->getId(),
+                    'partenaire' => $partenaireCompte->getPartenaire(),
                 ]);
             }
             return $this->redirectToRoute('admin_user_index');
         }
+        $partenaire = $em->getRepository('AppBundle:PartenaireCompte')->findOneBy(['user'=> $user->getUsername()]);
 
         return $this->render('user/edit.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'partenaire' => $partenaire,
         ));
     }
 

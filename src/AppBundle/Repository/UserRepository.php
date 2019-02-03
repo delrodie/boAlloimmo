@@ -17,4 +17,14 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
                     ->setParameter('id', $id)
         ;
     }
+
+    public function findListAll()
+    {
+        return $this->createQueryBuilder('u')
+                    ->where('u.username <> :user')
+                    ->orderBy('u.username', 'ASC')
+                    ->setParameter('user', 'delrodie')
+                    ->getQuery()->getResult()
+            ;
+    }
 }
