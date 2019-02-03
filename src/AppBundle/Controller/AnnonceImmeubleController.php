@@ -14,50 +14,42 @@ use Symfony\Component\HttpFoundation\Request;
 class AnnonceImmeubleController extends Controller
 {
     /**
-     * @Route("/{slug}", name="backend_annonceimmeuble_show")
+     * @Route("/{id}", name="backend_annonceimmeuble_show")
      * @Method("GET")
      */
     public function showAction(AnnonceImmeuble $annonceImmeuble)
-    {
-        $deleteForm = $this->createDeleteForm($annonceImmeuble);
+    { //dump($annonceImmeuble->getAnnoncebien());die();
 
         return $this->render('annonceimmeuble/show.html.twig',[
             'annonceImmeuble' => $annonceImmeuble,
-            'delete_form' => $deleteForm->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="backend_annonceimmeuble_delete")
-     * @Method("DELETE")
+     * Displays a form to edit an existing immeuble entity.
+     *
+     * @Route("/{id}/edit/{annoncebien}", name="backend_annonceimmeuble_edit")
+     * @Method({"GET", "POST"})
      */
-    public function deleteAction(Request $request, AnnonceImmeuble $annonceImmeuble)
+    public function editAction(Request $request, AnnonceImmeuble $annonceImmeuble, $annoncebien)
     {
-        $form = $this->createDeleteForm($annonceImmeuble);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $bien = $em->getRepository('AppBundle:AnnonceBien')->findOneBy(array('slug' => $annoncebien));
 
-        if ($form->isSubmitted() && $form->isValid()){
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($annonceImmeuble);
-            $em->flush();
+        $editForm = $this->createForm('AppBundle\Form\AnnonceImmeubleType', $annonceImmeuble, array('bien' => $bien->getSlug()));
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush(); //dump($annoncebien);die();
+
+            return $this->redirectToRoute('backend_annonceimmeuble_show', array('id' => $annonceImmeuble->getId(), 'slug' => $annoncebien));
         }
 
-        return $this->redirectToRoute('backend_annoncebien_index');
+        return $this->render('annonceimmeuble/edit.html.twig', array(
+            'immeuble' => $annonceImmeuble,
+            'edit_form' => $editForm->createView(),
+        ));
     }
 
-    /**
-     * Cration du formulaire de suppression
-     *
-     * @param AnnonceImmeuble $annonceImmeuble
-     *
-     * @return \Symfony\Component\Form\Form
-     */
-    private function createDeleteForm(AnnonceImmeuble $annonceImmeuble)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('backend_annonceimmeuble_delete', ['id'=> $annonceImmeuble]))
-            ->setMethod('DELETE')
-            ->getForm()
-            ;
-    }
+
 }

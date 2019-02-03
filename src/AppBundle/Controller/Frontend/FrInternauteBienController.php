@@ -74,6 +74,8 @@ class FrInternauteBienController extends Controller
             $annonce->setTypebienslug($typebienslug);
             $annonce->setTags($annonce->getTitre()); //dump($annonce);die();
 
+            $annonce->setStatut(1);
+
             $em->persist($annonce);
             $em->flush(); 
 

@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a href="{{ path('backend_bien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+                    <a href="{{ path('backend_annoncebien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
                 </div>
                 <br>
                 <div class="col-md-12">
@@ -34,7 +34,11 @@
                                 <div class="col-sm-6">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <img src="{{ vich_uploader_asset(annonceImmeuble.annonceBien, 'imageFile') }}" alt="{{ annonceImmeuble.annoncebien.titre }}" title="{{ annonceImmeuble.annoncebien.titre }}"  class="card-img-top img-fluid"/>
+                                            {% if (annonceImmeuble.annoncebien.imageName) %}
+                                                <img src="{{ vich_uploader_asset(annonceImmeuble.annoncebien, 'imageFile') }}" alt="{{ annonceImmeuble.annoncebien.titre }}" title="{{ annonceImmeuble.annoncebien.titre }}"  class="card-img-top img-fluid"/>
+                                            {% else %}
+                                                <img src="{{ asset('frontend/images/icon-ai.png')}}" class="card-img-top img-fluid">
+                                            {% endif %}
                                         </div>
                                     </div>
                                     
@@ -45,7 +49,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12" style="margin-top: 15px">
-                                            <u>Partenaire</u> : <strong>{{ annonceImmeuble.annoncebien.partenaire }}</strong>
+                                            <u>Partenaire</u> : <strong>{{ annonceImmeuble.annoncebien.utilisateur }}</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -118,27 +122,17 @@
                                     </div>
                                 </div>
                             </div>
-                            {% if (photos) %}
-                                <div class="row" style="margin-top: 25px; margin-bottom: 35px;">
-                                    <div class="col-sm-12 mb-15">
-                                        <h4>Autres images</h4>
-                                    </div>
-                                    {% for photo in photos %}
-                                        <div class="col-sm-3">
-                                            <img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('bo_galleriebien') }}" alt="{{ photo.annonceBien }}" class="img-fluid">
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
+
                             <div class="form-group row">
                                 <div class="col-sm-7 ml-auto text-right">
-                                    <a href="{{ path('backend_galleriebien_new', {'bien': immeuble.annoncebien.id}) }}" class="btn btn-primary">Ajouter des photos</a>
-                                    <a class="btn btn-outline-dark" href="{{ path('backend_bien_edit', {'slug': immeuble.annoncebien.slug}) }}" >Modifier</a>
+                                    <a class="btn btn-outline-dark" href="{{ path('backend_annoncebien_edit', {'slug': annonceImmeuble.annoncebien.slug}) }}" >Modifier</a>
                                 </div>
                                 <div class="col-sm-3 text-left">
-                                    {{ form_start(delete_form, {'attr': {'onsubmit': 'return confirm("Voulez-vous supprimer ce bien?")'}}) }}
-                                    <input type="submit" value="Supprimer" class="btn btn-danger">
-                                    {{ form_end(delete_form) }}
+                                    <form action="{{ absolute_url(path('backend_annonce_delete')) }}" method="post" onsubmit="return confirm('Voulez-vous supprimer cette annonce?')">
+                                        <input type="hidden" name="bien" value="{{ annonceImmeuble.annoncebien.id }}">
+                                        <input type="hidden" name="crsf_annonce" value="AlloImmoHabitat!2019">
+                                        <input type="submit" value="Supprimer" class="btn btn-primary">
+                                    </form>
                                 </div>
                             </div>
                         </div>

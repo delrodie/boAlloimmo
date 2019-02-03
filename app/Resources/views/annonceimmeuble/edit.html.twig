@@ -1,0 +1,109 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Modification de l'immeuble {{ immeuble.annoncebien.titre }}{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0">
+                Gestion des biens
+                <small> </small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('backend_bien_index') }}" class="default-color">Bien</a></li>
+                <li class="breadcrumb-item active">Immeuble</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ path('backend_annoncebien_index') }}" class="btn  btn-light"><i class="fa fa-list"></i> Liste des biens</a>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Modification de l'immeuble  {{ immeuble.annoncebien.titre }}s
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(edit_form, {'attr': {'class': 'right-text-label-form', 'id':'signupForm'}}) }}
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {% if (immeuble.annoncebien.imageName) %}
+                                                <img src="{{ vich_uploader_asset(immeuble.annoncebien, 'imageFile') }}" alt="{{ immeuble.annoncebien.titre }}" title="{{ immeuble.annoncebien.titre }}"  class="card-img-top img-fluid"/>
+                                            {% else %}
+                                                <img src="{{ asset('frontend/images/icon-ai.png')}}" class="card-img-top img-fluid">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label class="control-label" for="rubrique">Type du bien</label>
+                                            <div class="elect2-container">
+                                                <input type="text" class="form-control" value="{{ immeuble.annoncebien.typebien.libelle }}" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Titre du bien</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.annoncebien, {'attr':{'readonly': 'readonly'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Appartement</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.appartement) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Etages</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.etage) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Parking</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.parking) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-16" style="margin-top:10px;">
+                                            <label class="control-label" for="rubrique">Ascenceur</label>
+                                            <div class="elect2-container">
+                                                {{ form_widget(edit_form.ascenceur) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-5 ml-auto">
+                                    <a class="btn btn-outline-dark" href="{{ path('backend_annoncebien_edit', {'slug': immeuble.annoncebien.slug}) }}" >&laquo; Précédent</a>
+                                    <button class="btn btn-primary" name="signup">Modifier</button>
+                                </div>
+                            </div>
+                            {{ form_end(edit_form) }}
+                            <div class="form-group row">
+                                <div class="col-sm-3 ml-auto">
+                                    <form action="{{ absolute_url(path('backend_annonce_delete')) }}" method="post" onsubmit="return confirm('Voulez-vous supprimer cette annonce?')">
+                                        <input type="hidden" name="bien" value="{{ immeuble.annoncebien.id }}">
+                                        <input type="hidden" name="crsf_annonce" value="AlloImmoHabitat!2019">
+                                        <input type="submit" value="Supprimer" class="btn btn-danger">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
