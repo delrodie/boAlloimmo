@@ -28,6 +28,8 @@ class AnnonceAutrebienRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere($whereMin)
             ->andWhere($whereMax)
             ->andWhere('m.libelle = :mode')
+            ->andWhere('b.statut = 1')
+            ->andWhere('b.fille = 1')
             ->setParameters(array(
                 'typebien'  => $typebien,
                 'localite'  => $localisation,

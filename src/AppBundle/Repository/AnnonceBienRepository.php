@@ -46,7 +46,9 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
 
     /**
      * Liste decroissante des annonces
-     * Utiliser par frontendController/AnnonceAction
+     * Utiliser par
+     *  - frontendController/AnnonceAction
+     *  - FRechercheController/LocationAction
      */
     public function findListDesc(){
         return $this->createQueryBuilder('b')
@@ -72,5 +74,26 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
         }else{
             return $this->createQueryBuilder('b')->orderBy('b.id', 'DESC')->getQuery()->getResult();
         }
+    }
+
+    /**
+     * Liste des biens selon la zone
+     */
+    public function findBienZone($localisation, $wherePrix, $min, $max, $mode)
+    {
+        return $this->createQueryBuilder('b')
+            ->innerJoin('b.zone', 'z')
+            ->innerJoin('b.mode', 'm')
+            ->where('z.libelle = :zone')
+            ->andWhere('m.libelle = :mode')
+            ->andWhere($wherePrix)
+            ->setParameters(array(
+                'zone'  => $localisation,
+                'min'   => $min,
+                'max'   => $max,
+                'mode'  => $mode,
+            ))
+            ->getQuery()->getResult()
+            ;
     }
 }

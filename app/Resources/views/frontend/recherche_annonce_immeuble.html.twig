@@ -33,9 +33,9 @@
 
                                 <div class="flex-wrap-center">
                                     {% if (immeuble.annoncebien.disponibilite) %}
-                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
                                     {% else %}
-                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                         {% endif %}
                                     </div>
                                     <div class="col-auto ml-auto">
-                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
                                         <div class="popover-content d-none">
                                             <ul>
                                                 <li>{{ immeuble.annoncebien.zone }}</li>
@@ -92,9 +92,9 @@
                                     {% endif %}
                                     <div class="flex-wrap-center">
                                         {% if (bien.disponibilite) %}
-                                            <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
                                         {% else %}
-                                            <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                             {% endif %}
                                         </div>
                                         <div class="col-auto ml-auto">
-                                            <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
                                             <div class="popover-content d-none">
                                                 <ul>
                                                     <li>{{ bien.zone }}</li>

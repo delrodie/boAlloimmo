@@ -83,7 +83,8 @@ class FRechercheController extends Controller
         $piece = $session->get('piece');
         $localisation = $session->get('localisation');
         $min = $session->get('min');
-        $max = $session->get('max'); //dump($typebien);die();
+        $max = $session->get('max');
+        $mode = $session->get('mode');
 
         $em = $this->getDoctrine()->getManager();
 
@@ -91,7 +92,7 @@ class FRechercheController extends Controller
             // Si le type de bien est selectionné veifier
             // sinon verifier uniquement la localite
             if ($typebien){
-                $mode = 'Location';
+                //$mode = 'Location';
                 $typebiens = $em->getRepository('AppBundle:Typebien')->findOneBy(array('libelle'=> $typebien));
                 $resume = $utilities->resume($typebiens->getSlug(), 5, '', true);
                 $nbPiece = $utilities->resume($piece, 1, '', true);
@@ -136,7 +137,7 @@ class FRechercheController extends Controller
 
                     $appartements = $em->getRepository('AppBundle:AnnonceAppartement')
                         ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
-                    ; //dump($appartements);die();
+                    ; //dump($mode);die();
                     $biens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
                     $pagination = null ;
 
@@ -170,7 +171,7 @@ class FRechercheController extends Controller
                     $autrebiens = $em->getRepository('AppBundle:AnnonceAutrebien')
                         ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $biens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_autrebien.html.twig',[
@@ -181,12 +182,8 @@ class FRechercheController extends Controller
                     ]);
                 }
 
-                $biens = $em->getRepository('AppBundle:Bien')->findBienR($typebiens->getId(), $whereZone, $localisation);
-
-                dump($biens);die();
-
             }elseif ($localisation){
-                $mode = 'Location'; //die($min);
+                //$mode = 'Location'; //die($min);
 
                 // Formulation de la requete du prix
                 //if ($min){ $whereMin = 'b.prix >= :min'; }else { $whereMin = 'b.prix >= :min'; $min = 0;}
@@ -203,23 +200,31 @@ class FRechercheController extends Controller
                     $wherePrix = 'b.prix BETWEEN :min and :max';
                     $min = 0; $max = 1000000000;
                 }
+                $localite = $em->getRepository('AppBundle:Zone')->findOneBy(['libelle'=>$localisation]);
+                $zones = $em->getRepository('AppBundle:AnnonceBien')->findBienZone($localisation, $wherePrix, $min, $max, $mode, 9, 0);
+                $biens = $em->getRepository('AppBundle:AnnonceBien')->findBy(['zone'=>$localite->getId()], null, 9, 0);
+                $pagination = null ;
 
-                $zones = $em->getRepository('AppBundle:Bien')->findBienZone($localisation, $wherePrix, $min, $max, $mode, 9, 0);
-                $biens = $em->getRepository('AppBundle:Bien')->findDernierBienEnPromo(0,9);
-                $pagination = null; //dump($zones);die();
-
-                return $this->render('frontend/recherche_zone.html.twig',[
+                return $this->render('frontend/recherche_annonce_zone.html.twig',[
                     'zones'        => $zones,
                     'pagination'    => $pagination,
                     'localisation'    => $localisation,
-                    'biens'    => $biens,
+                    'biens' => $biens,
                 ]);
             }else{
-                return $this->redirectToRoute('frontend_annonce');
+                $autrebiens = $em->getRepository('AppBundle:AnnonceBien')->findListDesc();
+                return $this->render('frontend/recherche_annoncebien.html.twig',[
+                    'biens' => $autrebiens,
+                    'pagination' => null
+                ]);
             }
 
         }else{
-            return $this->redirectToRoute('frontend_annonce');
+            $autrebiens = $em->getRepository('AppBundle:AnnonceBien')->findListDesc();
+            return $this->render('frontend/recherche_annoncebien.html.twig',[
+                'biens' => $autrebiens,
+                'pagination' => null
+            ]);
         }
     }
 
@@ -240,12 +245,17 @@ class FRechercheController extends Controller
         $min = $request->get('minimum');
         $max = $request->get('maximum');
 
-        if ($mode === 'Location'){
+        if ($mode === 'Location' || $mode === 'Achat'){
             $session->set('typebien', $typebien);
             $session->set('piece', $piece);
             $session->set('localisation', $localisation);
             $session->set('min', $min);
             $session->set('max', $max);
+            if ($mode === 'Achat'){
+                $session->set('mode', 'Vente');
+            }else{
+                $session->set('mode', 'Location');
+            }
 
             return $this->redirectToRoute('rfrontend_location');
         }

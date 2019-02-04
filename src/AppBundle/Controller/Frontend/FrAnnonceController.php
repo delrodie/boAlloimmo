@@ -166,8 +166,12 @@ class FrAnnonceController extends Controller
 
         }
 
-        return $this->render('internaute/annonce_show.html.twig',[
-            'bien' => $bien,
+        $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
+        $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
+        $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
+        $message .= "Email: <strong>info@alloimmo.ci</strong>";
+        return $this->render('internaute/404_internaute.html.twig',[
+            'messageError' => $message,
         ]);
     }
 }

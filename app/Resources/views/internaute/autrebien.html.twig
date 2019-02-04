@@ -65,9 +65,7 @@
                     {% else %}
                         <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bienshow_principal') }}" alt="{{ autrebien.annoncebien.titre }}"></li>
                     {% endif %}
-                    {% for photo in photos %}
-                        <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ photo.annoncebien.titre }}"></li>
-                    {% endfor %}
+
                 </ul>
             </div>
             <div class="row">
@@ -79,9 +77,7 @@
                             {% else %}
                                 <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ autrebien.annoncebien.titre }}"></li>
                             {% endif %}
-                            {% for photo in photos %}
-                                <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ photo.annoncebien.titre }}"></li>
-                            {% endfor %}
+
                         </ul>
                     </div>
                     <div class="info-grid">
@@ -127,7 +123,12 @@
                         </div>
                         <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">
                             <div class="info-box-grey">
-                                <img src="{{ vich_uploader_asset(autrebien.annoncebien.utilisateur, 'imageFile') }}" alt="{{ autrebien.annoncebien.utilisateur }}" title="{{ autrebien.annoncebien.utilisateur }}" class="img-fluid">
+                                {% if (autrebien.annoncebien.utilisateur.imageName) %}
+                                    <img src="{{ vich_uploader_asset(autrebien.annoncebien.utilisateur, 'imageFile') }}" alt="{{ autrebien.annoncebien.utilisateur }}" title="{{ autrebien.annoncebien.utilisateur }}" class="img-fluid">
+                                {% else %}
+                                    <img src="{{ asset('frontend/images/icon-ai.png')}}" alt="{{ autrebien.annoncebien.utilisateur.nom }}" title="{{ autrebien.annoncebien.utilisateur }}" class="img-fluid">
+                                {% endif %}
+
                                 <ul class="icn-list">
                                     <li><i class="icon-telephone"></i>+225 {{ autrebien.annoncebien.utilisateur.telephone }}</li>
                                     <li><i class="icon-closed-envelope"></i><a href="mailto:{{ autrebien.annoncebien.utilisateur.user.email }}">{{ autrebien.annoncebien.utilisateur.user.email }}</a></li>

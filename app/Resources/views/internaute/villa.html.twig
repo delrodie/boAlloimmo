@@ -66,9 +66,7 @@
                     {% else %}
                         <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bienshow_principal') }}" alt="{{ villa.annoncebien.titre }}"></li>
                     {% endif %}
-                    {% for photo in photos %}
-                        <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="#"></li>
-                    {% endfor %}
+
                 </ul>
             </div>
             <div class="row">
@@ -80,9 +78,7 @@
                             {% else %}
                                 <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ villa.annoncebien.titre }}"></li>
                             {% endif %}
-                            {% for photo in photos %}
-                                <li><img src="{{ asset('uploads/gallerie/biens/'~ photo.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="#"></li>
-                            {% endfor %}
+
                         </ul>
                     </div>
                     <div class="info-grid">
@@ -220,7 +216,11 @@
                         </div>
                         <div class="col-sm col-lg-12 mt-3 mt-sm-0 mt-lg-3">
                             <div class="info-box-grey">
-                                <img src="{{ vich_uploader_asset(villa.annoncebien.utilisateur, 'imageFile') }}" alt="{{ villa.annoncebien.utilisateur }}" title="{{ villa.annoncebien.utilisateur }}" class="img-fluid">
+                                {% if (villa.annoncebien.utilisateur.imageName) %}
+                                    <img src="{{ vich_uploader_asset(villa.annoncebien.utilisateur, 'imageFile') }}" alt="{{ villa.annoncebien.utilisateur }}" title="{{ villa.annoncebien.utilisateur }}" class="img-fluid">
+                                {% else %}
+                                    <img src="{{ asset('frontend/images/icon-ai.png')}}" alt="{{ villa.annoncebien.utilisateur.nom }}" title="{{ villa.annoncebien.utilisateur }}" class="img-fluid">
+                                {% endif %}
                                 <ul class="icn-list">
                                     <li><i class="icon-telephone"></i>+225 {{ villa.annoncebien.utilisateur.telephone }}</li>
                                     {% if (villa.annoncebien.utilisateur.user.email) %}

@@ -29,6 +29,8 @@ class AnnonceAppartementRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere($whereMax)
             ->andWhere($wherePiece)
             ->andWhere('m.libelle = :mode')
+            ->andWhere('b.statut = 1')
+            ->andWhere('b.fille = 1')
             ->setParameters(array(
                 'typebien'  => $typebien,
                 'localite'  => $localisation,
