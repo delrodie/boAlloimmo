@@ -28,6 +28,7 @@ class AutrebienRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere($whereMin)
             ->andWhere($whereMax)
             ->andWhere('m.libelle = :mode')
+            ->orderBy('b.flag', 'DESC')
             ->setParameters(array(
                 'typebien'  => $typebien,
                 'localite'  => $localisation,

@@ -12,35 +12,37 @@ class VillaRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
      * Recherche des villa
-     * findVilla($typebien, $limit, $offset)
+     * Fonction utlisée par FRechercheController(AchatAction)
      */
-    public function findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, $limit = null, $offset = null)
-    { //die($mode);
+    public function findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $mode, $localisation, $min, $max, $nbPiece)
+    {
         return $this->createQueryBuilder('v')
                     ->addSelect('b')
+                    ->addSelect('t')
                     ->addSelect('z')
                     ->addSelect('m')
                     ->innerJoin('v.bien', 'b')
                     ->innerJoin('b.typebien', 't')
                     ->innerJoin('b.zone', 'z')
-                    ->innerJoin('b.mode', 'm')
-                    ->where('t.libelle = :typebien')
+                    ->innerJoin('b.mode','m')
+                    ->where('b.typebien = :type')
                     ->andWhere($whereZone)
                     ->andWhere($whereMin)
                     ->andWhere($whereMax)
                     ->andWhere($wherePiece)
-                    ->andWhere('m.libelle = :mode')
-                    ->setFirstResult($offset)
-                    ->setMaxResults($limit)
-                    ->setParameters(array(
-                        'typebien'  => $typebien,
-                        'localite'  => $localisation,
-                        'min'       => $min,
-                        'max'       => $max,
-                        'piece'     => $nbPiece,
-                        'mode'      => $mode,
-                    ))
+                    ->andWhere('m.libelle LIKE :mode')
+                    ->andWhere('b.statut = 1')
+                    ->orderBy('b.flag', 'DESC')
+                    ->setParameters([
+                        'type' => $typebien,
+                        'localite' => $localisation,
+                        'min' => $min,
+                        'max' => $max,
+                        'piece' => $nbPiece,
+                        'mode' => $mode
+                    ])
                     ->getQuery()->getResult()
             ;
     }
+
 }

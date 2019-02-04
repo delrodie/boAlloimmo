@@ -13,7 +13,7 @@ class AppartementRepository extends \Doctrine\ORM\EntityRepository
     /**
     * Recherche des appartements
     */
-    public function findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, $limit, $offset)
+    public function findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
     { //die($mode);
         return $this->createQueryBuilder('a')
             ->addSelect('b')
@@ -29,8 +29,7 @@ class AppartementRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere($whereMax)
             ->andWhere($wherePiece)
             ->andWhere('m.libelle = :mode')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
+            ->orderBy('b.flag', 'DESC')
             ->setParameters(array(
                 'typebien'  => $typebien,
                 'localite'  => $localisation,

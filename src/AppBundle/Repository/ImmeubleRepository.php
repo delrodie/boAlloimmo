@@ -13,7 +13,7 @@ class ImmeubleRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Recherche des immeubles
      */
-    public function findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, $limit, $offset)
+    public function findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
     { //die($mode);
         return $this->createQueryBuilder('i')
             ->addSelect('b')
@@ -29,8 +29,7 @@ class ImmeubleRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere($whereMax)
             ->andWhere($wherePiece)
             ->andWhere('m.libelle = :mode')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
+            ->orderBy('b.flag', 'DESC')
             ->setParameters(array(
                 'typebien'  => $typebien,
                 'localite'  => $localisation,

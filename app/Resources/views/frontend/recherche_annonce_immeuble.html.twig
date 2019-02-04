@@ -25,45 +25,44 @@
                     <div class="col-sm-6 col-md-6 col-lg-4">
                         <div class="room-card">
                             <div class="room-card-photo">
-                                <img src="{{ asset('uploads/biens/'~ immeuble.bien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ immeuble.bien.titre }}" class="img-fluid">
+                                {% if (immeuble.annoncebien.imageName) %}
+                                    <img src="{{ asset('uploads/biens/'~ immeuble.annoncebien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ immeuble.annoncebien.titre }}" class="img-fluid">
+                                {% else %}
+                                    <img src="{{ asset('frontend/images/icon-ai.png')}}" class="card-img-top img-fluid">
+                                {% endif %}
+
                                 <div class="flex-wrap-center">
-                                    {% if (immeuble.bien.disponibilite) %}
-                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.bien.typebien.slug, 'slug': immeuble.bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                    {% if (immeuble.annoncebien.disponibilite) %}
+                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
                                     {% else %}
-                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.bien.typebien.slug, 'slug': immeuble.bien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
                                     {% endif %}
                                 </div>
                             </div>
                             <div class="room-card-info">
                                 <div class="row">
                                     <div class="col">
-                                        <h3 class="room-type">{{ immeuble.bien.typebien }}</h3>
+                                        <h3 class="room-type">{{ immeuble.annoncebien.typebien }}</h3>
                                     </div>
-                                    <div class="col-auto ml-auto">
-                                        <div class="room-card-attr">
-                                            {% if (immeuble.bien.promotion) %}
-                                                <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
-                                            {% endif %}
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="room-size mt-0" style="height: 100px;">
-                                    {{ immeuble.bien.resume|raw }}
+                                    {{ immeuble.annoncebien.resume|raw }}
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        {% if (immeuble.bien.prix) %}
+                                        {% if (immeuble.annoncebien.prix) %}
                                             <div class="room-price">
-                                                {{ immeuble.bien.prix|number_format(0,'','.') }}
+                                                {{ immeuble.annoncebien.prix|number_format(0,'','.') }}
                                             </div>
                                         {% endif %}
                                     </div>
                                     <div class="col-auto ml-auto">
-                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.bien.typebien.slug, 'slug': immeuble.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.annoncebien.typebien.slug, 'slug': immeuble.annoncebien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
                                         <div class="popover-content d-none">
                                             <ul>
-                                                <li>{{ immeuble.bien.zone }}</li>
-                                                <li>{{ immeuble.bien.mode }}</li>
+                                                <li>{{ immeuble.annoncebien.zone }}</li>
+                                                <li>{{ immeuble.annoncebien.mode }}</li>
                                             </ul>
                                         </div>
                                     </div>

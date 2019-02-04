@@ -151,6 +151,20 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * Liste des biens actifs pour la zone recherce
+     * Ordonné par ordre decroissant de Flag
+     * Utilisé dans FRechercheController(AchatAction)
+     */
+    public function findListActif()
+    {
+        return $this->createQueryBuilder('b')
+                    ->where('b.statut = 1')
+                    ->orderBy('b.flag', 'DESC')
+                    ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * fonction de recherche
      */
     public function QueryBien()

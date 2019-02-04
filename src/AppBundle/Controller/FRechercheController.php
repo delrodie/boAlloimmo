@@ -25,8 +25,7 @@ class FRechercheController extends Controller
     public function rechercheAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $typebiens = $em->getRepository('AppBundle:Typebien')
-            ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
+        $typebiens = $em->getRepository('AppBundle:Typebien')->findList(); //dump($typebiens);die();
         $zones = $em->getRepository('AppBundle:Zone')
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
         $services = $em->getRepository('AppBundle:Service')
@@ -285,7 +284,7 @@ class FRechercheController extends Controller
                     $immeubles = $em->getRepository('AppBundle:Immeuble')
                         ->findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, 9, 0)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_immeuble.html.twig',[
@@ -302,9 +301,9 @@ class FRechercheController extends Controller
                     } elseif ($nbPiece <= 5){ $wherePiece = 'a.piece = :piece'; } else{ $wherePiece = 'a.piece > :piece'; $nbPiece = 5;}
 
                     $appartements = $em->getRepository('AppBundle:Appartement')
-                        ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, 9, 0)
+                        ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_appartement.html.twig',[
@@ -314,16 +313,15 @@ class FRechercheController extends Controller
                         'biens'    => $biens,
                     ]);
 
-                }elseif ($resume === 'villa'){
+                }elseif ($resume === 'villa'){ //dump($typebiens);die();
                     // Formulation de la requete du nombre de pièce
                     if (!$nbPiece){
                         $wherePiece = 'v.piece > :piece'; $nbPiece = 0;
                     } elseif ($nbPiece <= 5){ $wherePiece = 'v.piece = :piece'; } else{ $wherePiece = 'v.piece > :piece'; $nbPiece = 5;}
 
-                    $villas = $em->getRepository('AppBundle:Villa')
-                        ->findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, 9, 0)
-                    ; //dump($villas);die();
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $villas = $em->getRepository('AppBundle:Villa')->findVilla($typebiens->getId(), $whereZone, $whereMin, $whereMax, $wherePiece, $mode, $localisation, $min, $max, $nbPiece);
+
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_villa.html.twig',[
@@ -335,9 +333,9 @@ class FRechercheController extends Controller
 
                 }else{
                     $autrebiens = $em->getRepository('AppBundle:Autrebien')
-                        ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max, 9, 0)
+                        ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_autrebien.html.twig',[
@@ -382,11 +380,21 @@ class FRechercheController extends Controller
                     'biens'    => $biens,
                 ]);
             }else{
-                return $this->redirectToRoute('frontend_annonce');
+                $biens = $em->getRepository('AppBundle:Bien')->findListActif();
+
+                return $this->render('frontend/recherche_bien.html.twig',[
+                    'biens' => $biens,
+                    'pagination' => null,
+                ]);
             }
 
         }else{
-            return $this->redirectToRoute('frontend_annonce');
+            $biens = $em->getRepository('AppBundle:Bien')->findListActif();
+
+            return $this->render('frontend/recherche_bien.html.twig',[
+                'biens' => $biens,
+                'pagination' => null,
+            ]);
         }
     }
 }

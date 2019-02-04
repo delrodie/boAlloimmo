@@ -20,4 +20,23 @@ class TypebienRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Liste des types de bien sauf cuisine et porte & fenetre
+     * function utilisée dans recherche principale (rfrontend_principale)
+     */
+    public function findList()
+    {
+        return $this->createQueryBuilder('t')
+                    ->where('t.slug <> :slug1')
+                    ->andWhere('t.slug <> :slug2')
+                    ->andWhere('t.statut = 1')
+                    ->orderBy('t.libelle', 'ASC')
+                    ->setParameters([
+                        'slug1' => 'cuisine',
+                        'slug2' => 'porte-fenetre'
+                    ])
+                    ->getQuery()->getResult()
+            ;
+    }
 }
