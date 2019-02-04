@@ -110,20 +110,37 @@
                                         {{ bien.resume|raw }}
                                     </div>
                                     <div class="row">
-                                        <div class="col">
-                                            <div class="room-price">
-                                                {{ bien.prix|number_format(0,'','.') }}
+                                        {% if bien.affichagePrix and bien.prix != 0 %}
+                                            <div class="col">
+                                                <span class="room-information">{{ bien.prix|number_format(0,'','.') }} FCFA</span>
                                             </div>
-                                        </div>
-                                        <div class="col-auto ml-auto">
-                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
-                                            <div class="popover-content d-none">
-                                                <ul>
-                                                    <li>{{ bien.zone }}</li>
-                                                    <li>{{ bien.mode }}</li>
-                                                </ul>
+                                            <div class="col-auto ml-auto">
+                                                <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                                <div class="popover-content d-none">
+                                                    <ul>
+                                                        <li>{{ bien.zone }}</li>
+                                                        {% if (bien.programme) %}
+                                                            <li>{{ bien.programme }}</li>
+                                                        {% endif %}
+                                                        <li>{{ bien.partenaire.nom }}</li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% else %}
+                                            <div class="col"></div>
+                                            <div class="col-auto ml-auto">
+                                                <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                                <div class="popover-content d-none">
+                                                    <ul>
+                                                        <li>{{ bien.zone }}</li>
+                                                        {% if (bien.programme) %}
+                                                            <li>{{ bien.programme }}</li>
+                                                        {% endif %}
+                                                        <li>{{ bien.partenaire.nom }}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

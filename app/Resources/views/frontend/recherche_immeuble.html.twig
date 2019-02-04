@@ -51,20 +51,37 @@
                                     {{ immeuble.bien.resume|raw }}
                                 </div>
                                 <div class="row">
-                                    <div class="col">
-                                        <div class="room-price">
-                                            {{ immeuble.bien.prix|number_format(0,'','.') }}
+                                    {% if immeuble.bien.affichagePrix and immeuble.bien.prix != 0 %}
+                                        <div class="col">
+                                            <span class="room-information">{{ immeuble.bien.prix|number_format(0,'','.') }} FCFA</span>
                                         </div>
-                                    </div>
-                                    <div class="col-auto ml-auto">
-                                        <a href="{{ path('frontend_bien', {'typebien': immeuble.bien.typebien.slug, 'slug': immeuble.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
-                                        <div class="popover-content d-none">
-                                            <ul>
-                                                <li>{{ immeuble.bien.zone }}</li>
-                                                <li>{{ immeuble.bien.mode }}</li>
-                                            </ul>
+                                        <div class="col-auto ml-auto">
+                                            <a href="{{ path('frontend_bien', {'typebien': immeuble.bien.typebien.slug, 'slug': immeuble.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                            <div class="popover-content d-none">
+                                                <ul>
+                                                    <li>{{ immeuble.bien.zone }}</li>
+                                                    {% if (immeuble.bien.programme) %}
+                                                        <li>{{ immeuble.bien.programme }}</li>
+                                                    {% endif %}
+                                                    <li>{{ immeuble.bien.partenaire.nom }}</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% else %}
+                                        <div class="col"></div>
+                                        <div class="col-auto ml-auto">
+                                            <a href="{{ path('frontend_bien', {'typebien': immeuble.bien.typebien.slug, 'slug': immeuble.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                            <div class="popover-content d-none">
+                                                <ul>
+                                                    <li>{{ immeuble.bien.zone }}</li>
+                                                    {% if (immeuble.bien.programme) %}
+                                                        <li>{{ immeuble.bien.programme }}</li>
+                                                    {% endif %}
+                                                    <li>{{ immeuble.bien.partenaire.nom }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

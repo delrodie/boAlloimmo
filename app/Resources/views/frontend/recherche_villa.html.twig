@@ -51,20 +51,37 @@
                                     {{ villa.bien.resume|raw }}
                                 </div>
                                 <div class="row">
-                                    <div class="col">
-                                        <div class="room-price">
-                                            {{ villa.bien.prix|number_format(0,'','.') }}
+                                    {% if villa.bien.affichagePrix and villa.bien.prix != 0 %}
+                                        <div class="col">
+                                            <span class="room-information">{{ villa.bien.prix|number_format(0,'','.') }} FCFA</span>
                                         </div>
-                                    </div>
-                                    <div class="col-auto ml-auto">
-                                        <a href="{{ path('frontend_bien', {'typebien': villa.bien.typebien.slug, 'slug': villa.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
-                                        <div class="popover-content d-none">
-                                            <ul>
-                                                <li>{{ villa.bien.zone }}</li>
-                                                <li>{{ villa.bien.mode }}</li>
-                                            </ul>
+                                        <div class="col-auto ml-auto">
+                                            <a href="{{ path('frontend_bien', {'typebien': villa.bien.typebien.slug, 'slug': villa.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                            <div class="popover-content d-none">
+                                                <ul>
+                                                    <li>{{ villa.bien.zone }}</li>
+                                                    {% if (villa.bien.programme) %}
+                                                        <li>{{ villa.bien.programme }}</li>
+                                                    {% endif %}
+                                                    <li>{{ villa.bien.partenaire.nom }}</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% else %}
+                                        <div class="col"></div>
+                                        <div class="col-auto ml-auto">
+                                            <a href="{{ path('frontend_bien', {'typebien': villa.bien.typebien.slug, 'slug': villa.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                            <div class="popover-content d-none">
+                                                <ul>
+                                                    <li>{{ villa.bien.zone }}</li>
+                                                    {% if (villa.bien.programme) %}
+                                                        <li>{{ villa.bien.programme }}</li>
+                                                    {% endif %}
+                                                    <li>{{ villa.bien.partenaire.nom }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
