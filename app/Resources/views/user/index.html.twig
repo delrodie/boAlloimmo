@@ -48,7 +48,7 @@
                                             {% if user.enabled %} <span class="badge badge-success">Actif</span>
                                             {% else %} <span class="badge badge-danger">Désactivé</span>
                                             {% endif %}
-                                            <a href="{{ path('admin_user_show', { 'id': user.id }) }}">{{ user.username }}</a>
+                                            <a href="{{ path('admin_user_edit', { 'id': user.id }) }}">{{ user.username }}</a>
                                         </td>
                                         <td>{{ user.email }}</td>
                                         <td>

@@ -111,6 +111,12 @@ class UtilisateurController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $annoncebien = $em->getRepository('AppBundle:AnnonceBien')->findOneBy(['utilisateur'=>$utilisateur->getId()]);
+            if ($annoncebien){
+                return $this->render('error/utilisateur_a_des_annonces.html.twig',[
+                    'utilisateur' => $utilisateur
+                ]);
+            }
             $em->remove($utilisateur);
             $em->flush();
         }

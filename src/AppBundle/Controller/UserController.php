@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Utils\Gestionuser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -149,13 +150,21 @@ class UserController extends Controller
      * @Route("/{id}", name="admin_user_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, User $user)
+    public function deleteAction(Request $request, User $user, Gestionuser $gestionuser)
     {
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            // Test d'appartenance a l'utilisateur
+            $utilisateur = $em->getRepository('AppBundle:Utilisateur')->findOneBy(['user'=>$user->getId()]);
+            //dump($user);die();
+            if ($utilisateur){
+                return $this->render('error/utilisateur_a_un_profil.html.twig',[
+                    'utilisateur' => $utilisateur,
+                ]);
+            }
             $em->remove($user);
             $em->flush();
         }

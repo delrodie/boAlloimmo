@@ -1,0 +1,43 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="error">
+                        <h1>23000</h1>
+                        <h4>Oups!!!</h4>
+                        <h6 class="text-left">
+                            Cet utilsateur a enregistré un ou plusieurs biens. <br>
+                            <br>
+                            Veuillez les supprimer  d'abord  pour pouvoir suprimer définitivement cet utilisateur.
+                        </h6>
+                        <a href="{{ absolute_url(path('backend_internaute_bien',{'slug': utilisateur.slug })) }}" class="btn btn-pill btn-danger">Voir la liste de ses biens</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .error{
+            position:relative;
+            z-index:10;
+            display:inline-block;
+            margin-top:5%;
+            padding:20px;
+        }
+        .error h1{
+            margin:0;
+            font-size:200px;
+            font-weight:800
+        }
+    </style>
+{% endblock %}
