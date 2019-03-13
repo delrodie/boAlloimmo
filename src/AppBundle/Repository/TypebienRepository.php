@@ -28,14 +28,14 @@ class TypebienRepository extends \Doctrine\ORM\EntityRepository
     public function findList()
     {
         return $this->createQueryBuilder('t')
-                    ->where('t.slug <> :slug1')
-                    ->andWhere('t.slug <> :slug2')
+                    //->where('t.slug <> :slug1')
+                    //->andWhere('t.slug <> :slug2')
                     ->andWhere('t.statut = 1')
                     ->orderBy('t.libelle', 'ASC')
-                    ->setParameters([
+                    /*->setParameters([
                         'slug1' => 'cuisine',
                         'slug2' => 'porte-fenetre'
-                    ])
+                    ])*/
                     ->getQuery()->getResult()
             ;
     }

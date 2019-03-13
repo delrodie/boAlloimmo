@@ -165,6 +165,20 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * recherche de bien par type de bien
+     */
+    public function findByTypebien($typebien)
+    {
+        return $this->createQueryBuilder('b')
+                    ->leftJoin('b.typebien', 't')
+                    ->where('t.slug = :typebien')
+                    ->orderBy('b.id', 'DESC')
+                    ->setParameter('typebien', $typebien)
+                    ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * fonction de recherche
      */
     public function QueryBien()

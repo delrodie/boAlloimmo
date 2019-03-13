@@ -21,14 +21,22 @@ class AnnonceBienController extends Controller
      * @Route("/", name="backend_annoncebien_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $filtre = $request->get('filtre');
 
-        $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findListBien();
+        if ($filtre){
+            $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findByTypeBien($filtre);
+        } else{
+            $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findListBien();
+        }
+
+        $typebiens = $em->getRepository('AppBundle:Typebien')->findList();
 
         return $this->render('annoncebien/index.html.twig', array(
             'annonceBiens' => $annonceBiens,
+            'typebiens' => $typebiens,
         ));
     }
 

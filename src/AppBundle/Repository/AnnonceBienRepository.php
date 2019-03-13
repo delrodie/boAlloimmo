@@ -77,6 +77,20 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * liste des biens annonces par type de bien
+     */
+    public function findByTypeBien($typebien)
+    {
+        return $this->createQueryBuilder('ab')
+                    ->leftJoin('ab.typebien', 't')
+                    ->where('t.slug = :typebien')
+                    ->orderBy('t.id', 'DESC')
+                    ->setParameter('typebien', $typebien)
+                    ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * Liste des biens selon la zone
      */
     public function findBienZone($localisation, $wherePrix, $min, $max, $mode)

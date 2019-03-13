@@ -16,6 +16,20 @@
 
         <div class="container-fluid">
 
+            <div class="row mt-3 mb-5">
+                <div class="col-md-3 text-left ml-3">
+                    <form action="{{ absolute_url(path('backend_annoncebien_index')) }}">
+                        <select name="filtre" id="bien_filtre" class="form-control" onchange="this.form.submit()">
+                            <option value="all">-- Filtrer par type de bien ---</option>
+                            <option value=""> Tous les biens </option>
+                            {% for typebien in typebiens %}
+                                <option value="{{ typebien.slug }}">{{ typebien.libelle }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </div>
+                <br>
+            </div>
 
             <div class="card-deck">
                 {% for annoncebien in annonceBiens %}
@@ -60,6 +74,10 @@
                                 </small>
                             </div>
                         </div>
+                    </div>
+                {% else %}
+                    <div class="col-md-12 text-center mt-5">
+                        <h2>Oups!!! Aucune annonce enregistrée pour cette selection. </h2>
                     </div>
                 {% endfor %}
             </div>

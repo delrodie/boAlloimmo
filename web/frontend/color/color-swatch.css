@@ -175,3 +175,9 @@
 	.colorswatch {
 	}
 }
+
+a.link-facebook:hover [class*='icon-'] {
+	color: #1d5dd8; }
+
+a.link-instagram:hover [class*='icon-'] {
+	color: #980762; }

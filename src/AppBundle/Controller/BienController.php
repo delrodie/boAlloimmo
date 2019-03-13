@@ -21,14 +21,22 @@ class BienController extends Controller
      * @Route("/", name="backend_bien_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $filtre = $request->get('filtre');
 
-        $biens = $em->getRepository('AppBundle:Bien')->findAllDesc();
+        if ($filtre){
+            $biens = $em->getRepository('AppBundle:Bien')->findByTypebien($filtre);
+        }else{
+            $biens = $em->getRepository('AppBundle:Bien')->findAllDesc();
+        }
+
+        $typebiens = $em->getRepository('AppBundle:Typebien')->findList();
 
         return $this->render('bien/index.html.twig', array(
             'biens' => $biens,
+            'typebiens' => $typebiens,
         ));
     }
 
