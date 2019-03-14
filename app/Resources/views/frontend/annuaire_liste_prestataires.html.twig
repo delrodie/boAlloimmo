@@ -117,9 +117,11 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <div class="room-price">
-                                                                        {{ promotion.prix|number_format(0,'','.') }}
-                                                                    </div>
+                                                                    {% if promotion.affichagePrix and promotion.prix != 0 %}
+                                                                        <div class="room-price">
+                                                                            {{ promotion.prix|number_format(0,'','.') }}
+                                                                        </div>
+                                                                    {% endif %}
                                                                 </div>
                                                                 <div class="col-auto ml-auto">
                                                                     <a href="#" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
@@ -169,9 +171,11 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <div class="room-price">
-                                                                        {{ bien.prix|number_format(0,'','.') }}
-                                                                    </div>
+                                                                    {% if bien.affichagePrix and bien.prix != 0 %}
+                                                                        <div class="room-price">
+                                                                            {{ bien.prix|number_format(0,'','.') }}
+                                                                        </div>
+                                                                    {% endif %}
                                                                 </div>
                                                                 <div class="col-auto ml-auto">
                                                                     <a href="#" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
