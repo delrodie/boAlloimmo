@@ -37,6 +37,13 @@ class Typebien
     private $statut;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="recherche", type="boolean", nullable=true, options={"default": 1})
+     */
+    private $recherche;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bien", mappedBy="typebien")
      */
     private $biens;
@@ -342,5 +349,29 @@ class Typebien
     public function getAnnoncebiens()
     {
         return $this->annoncebiens;
+    }
+
+    /**
+     * Set recherche
+     *
+     * @param boolean $recherche
+     *
+     * @return Typebien
+     */
+    public function setRecherche($recherche)
+    {
+        $this->recherche = $recherche;
+
+        return $this;
+    }
+
+    /**
+     * Get recherche
+     *
+     * @return boolean
+     */
+    public function getRecherche()
+    {
+        return $this->recherche;
     }
 }

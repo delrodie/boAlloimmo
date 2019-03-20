@@ -29,6 +29,7 @@ class AppartementRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere($whereMax)
             ->andWhere($wherePiece)
             ->andWhere('m.libelle = :mode')
+            ->andWhere('b.statut = 1')
             ->orderBy('b.flag', 'DESC')
             ->setParameters(array(
                 'typebien'  => $typebien,

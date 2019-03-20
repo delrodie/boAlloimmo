@@ -99,6 +99,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     public function findDernierBienEnPromo($limit, $offset)
     {
         return $q = $this->QueryBien()
+                         ->where('b.statut = 1')
                          ->addOrderBy('b.flag', 'DESC')
                          ->addOrderBy('b.promotion', 'ASC')
                          ->setFirstResult($offset)
@@ -154,6 +155,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
                     ->innerJoin('b.mode', 'm')
                     ->where('z.libelle = :zone')
                     ->andWhere('m.libelle = :mode')
+                    ->andWhere('b.statut => 1')
                     ->andWhere($wherePrix)
                     ->addOrderBy('b.flag', 'DESC')
                     ->setFirstResult($offset)

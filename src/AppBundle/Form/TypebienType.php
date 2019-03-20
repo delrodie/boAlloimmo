@@ -29,6 +29,7 @@ class TypebienType extends AbstractType
                 ),
                 'required' => false,
             ))
+            ->add('recherche', CheckboxType::class,['attr'=>['class'=>'custom-control-input'], 'required'=>false])
             //->add('slug')->add('publiePar')->add('modifiePar')->add('publieLe')->add('modifieLe')
         ;
     }/**

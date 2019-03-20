@@ -317,7 +317,7 @@ class FRechercheController extends Controller
                     $appartements = $em->getRepository('AppBundle:Appartement')
                         ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
                     $annonceAppartements = $em->getRepository('AppBundle:AnnonceAppartement')
@@ -342,7 +342,7 @@ class FRechercheController extends Controller
 
                     $villas = $em->getRepository('AppBundle:Villa')->findVilla($typebiens->getId(), $whereZone, $whereMin, $whereMax, $wherePiece, $mode, $localisation, $min, $max, $nbPiece);
 
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
                     // Annonce
@@ -364,14 +364,14 @@ class FRechercheController extends Controller
                     $autrebiens = $em->getRepository('AppBundle:Autrebien')
                         ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
+                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
                     // Annonce
                     $annonceAutrebiens = $em->getRepository('AppBundle:AnnonceAutrebien')
                         ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
                     ;
-                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), null, 9, 0);
 
                     return $this->render('frontend/recherche_autrebien.html.twig',[
                         'autrebiens'        => $autrebiens,

@@ -35,6 +35,7 @@
                                     <th scope="col" class="text-center">#ID</th>
                                     <th scope="col" class="text-center">Noms</th>
                                     <th scope="col" class="text-center">Statut</th>
+                                    <th scope="col" class="text-center">Recherhce</th>
                                     <th scope="col" class="text-center">Actions</th>
                                 </tr>
                                 </thead>
@@ -48,6 +49,13 @@
                                                 <span class="badge badge-pill badge-success">Actif</span>
                                             {% else %}
                                                 <span class="badge badge-pill badge-danger">Désactivé</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">
+                                            {% if (typebien.recherche) %}
+                                                <span class="badge badge-pill badge-success">Visible</span>
+                                            {% else %}
+                                                <span class="badge badge-pill badge-danger">Invisible</span>
                                             {% endif %}
                                         </td>
                                         <td class="text-center">
