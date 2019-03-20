@@ -56,6 +56,21 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * Liste des promotions
+     */
+    public function findListPromotion($offset, $limit)
+    {
+        return $this->createQueryBuilder('b')
+                    ->where('b.statut = 1')
+                    ->andWhere('b.promotion = 1')
+                    ->orderBy('b.flag', 'DESC')
+                    ->setFirstResult($offset)
+                    ->setMaxResults($limit)
+                    ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * Bien en publicité
      */
     public function findBienEnPromo($offset, $limit)
@@ -64,12 +79,15 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
                          ->where('b.statut = 1')
                          ->andWhere('b.datedebut <= :date')
                          ->andWhere('b.datefin >= :date')
+                         ->andWhere('b.heuredeb <= :heure')
+                         ->andWhere('b.heurefin >= :heure')
                          ->orderBy('b.flag', 'DESC')
                          ->addOrderBy('b.datedebut', 'ASC')
                          ->setFirstResult($offset)
                          ->setMaxResults($limit)
                          ->setParameters(array(
-                             'date' => date('Y-m-d', time())
+                             'date' => date('Y-m-d', time()),
+                             'heure' => date('H:i', time()),
                          ))
                          ->getQuery()->getResult()
             ;

@@ -20,56 +20,127 @@
             </div>
         </div>
         <div class="container">
-            <div class="row room-grid">
-                {% for autrebien in autrebiens %}
-                    <div class="col-sm-6 col-md-6 col-lg-4">
-                        <div class="room-card">
-                            <div class="room-card-photo">
-                                <img src="{{ asset('uploads/biens/'~ autrebien.bien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ autrebien.bien.titre }}" class="img-fluid">
-                                <div class="flex-wrap-center">
-                                    {% if (autrebien.bien.disponibilite) %}
-                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.bien.typebien.slug, 'slug': autrebien.bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
-                                    {% else %}
-                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.bien.typebien.slug, 'slug': autrebien.bien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="room-card-info">
-                                <div class="row">
-                                    <div class="col">
-                                        <h3 class="room-type">{{ autrebien.bien.typebien }}</h3>
+            {% if autrebiens %}
+                <div class="row room-grid">
+                    {% for autrebien in autrebiens %}
+                        <div class="col-sm-6 col-md-6 col-lg-4">
+                            <div class="room-card">
+                                <div class="room-card-photo">
+                                    <img src="{{ asset('uploads/biens/'~ autrebien.bien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ autrebien.bien.titre }}" class="img-fluid">
+                                    <div class="flex-wrap-center">
+                                        {% if (autrebien.bien.disponibilite) %}
+                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.bien.typebien.slug, 'slug': autrebien.bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                        {% else %}
+                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.bien.typebien.slug, 'slug': autrebien.bien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                        {% endif %}
                                     </div>
-                                    <div class="col-auto ml-auto">
-                                        <div class="room-card-attr">
-                                            {% if (autrebien.bien.promotion) %}
-                                                <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
-                                            {% endif %}
+                                </div>
+                                <div class="room-card-info">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h3 class="room-type">{{ autrebien.bien.typebien }}</h3>
+                                        </div>
+                                        <div class="col-auto ml-auto">
+                                            <div class="room-card-attr">
+                                                {% if (autrebien.bien.promotion) %}
+                                                    <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="room-size mt-0" style="height: 100px;">
-                                    {{ autrebien.bien.resume|raw }}
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="room-price">
-                                            {{ autrebien.bien.prix|number_format(0,'','.') }}
-                                        </div>
+                                    <div class="room-size mt-0" style="height: 100px;">
+                                        {{ autrebien.bien.resume|raw }}
                                     </div>
-                                    <div class="col-auto ml-auto">
-                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.bien.typebien.slug, 'slug': autrebien.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
-                                        <div class="popover-content d-none">
-                                            <ul>
-                                                <li>{{ autrebien.bien.zone }}</li>
-                                                <li>{{ autrebien.bien.mode }}</li>
-                                            </ul>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="room-price">
+                                                {{ autrebien.bien.prix|number_format(0,'','.') }}
+                                            </div>
+                                        </div>
+                                        <div class="col-auto ml-auto">
+                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.bien.typebien.slug, 'slug': autrebien.bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                            <div class="popover-content d-none">
+                                                <ul>
+                                                    <li>{{ autrebien.bien.zone }}</li>
+                                                    <li>{{ autrebien.bien.mode }}</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% else %}
+                    {% else %}
+                        {% for bien in biens %}
+                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                <div class="room-card">
+                                    <div class="room-card-photo">
+                                        <img src="{{ asset('uploads/biens/'~ bien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ bien.titre }}" class="img-fluid">
+                                        <div class="flex-wrap-center">
+                                            {% if (bien.disponibilite) %}
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                            {% else %}
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="room-card-info">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h3 class="room-type">{{ bien.typebien }}</h3>
+                                            </div>
+                                            <div class="col-auto ml-auto">
+                                                <div class="room-card-attr">
+                                                    {% if (bien.promotion) %}
+                                                        <span data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Offre promotionnelle"><i class="icon-star-black"></i></span>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="room-size mt-0" style="height: 100px;">
+                                            {{ bien.resume|raw }}
+                                        </div>
+                                        <div class="row">
+                                            {% if bien.affichagePrix and bien.prix != 0 %}
+                                                <div class="col">
+                                                    <span class="room-information">{{ bien.prix|number_format(0,'','.') }} FCFA</span>
+                                                </div>
+                                                <div class="col-auto ml-auto">
+                                                    <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                                    <div class="popover-content d-none">
+                                                        <ul>
+                                                            <li>{{ bien.zone }}</li>
+                                                            {% if (bien.programme) %}
+                                                                <li>{{ bien.programme }}</li>
+                                                            {% endif %}
+                                                            <li>{{ bien.partenaire.nom }}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <div class="col"></div>
+                                                <div class="col-auto ml-auto">
+                                                    <a href="{{ path('frontend_bien', {'typebien': bien.typebien.slug, 'slug': bien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                                    <div class="popover-content d-none">
+                                                        <ul>
+                                                            <li>{{ bien.zone }}</li>
+                                                            {% if (bien.programme) %}
+                                                                <li>{{ bien.programme }}</li>
+                                                            {% endif %}
+                                                            <li>{{ bien.partenaire.nom }}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="row room-grid">
                     <div class="row">
                         <div class="col-sm-4"></div>
                         <div class="col-sm-8 col-sm-offset-2 text-center" style="text-align: center">
@@ -80,7 +151,64 @@
                             </h6>
                         </div>
                     </div>
-                    {% for bien in biens %}
+                </div>
+            {% endif %}
+        </div>
+        <!-- Annonces -->
+        <div class="container">
+            <div class="title-wrap text-center">
+                <h2 class="h3" style="font-style: italic; margin-top: 50px;">Annonces</h2>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row room-grid">
+                {% for autrebien in annonceAutrebiens %}
+                    <div class="col-sm-6 col-md-6 col-lg-4">
+                        <div class="room-card">
+                            <div class="room-card-photo">
+                                {% if autrebien.annoncebien.imageName %}
+                                    <img src="{{ asset('uploads/biens/'~ autrebien.annoncebien.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ autrebien.annoncebien.titre }}" class="img-fluid">
+                                {% else %}
+                                    <img src="{{ absolute_url(asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') ) }}" alt="{{ autrebien.annoncebien.titre }}" class="img-fluid">
+                                {% endif %}
+                                <div class="flex-wrap-center">
+                                    {% if (autrebien.annoncebien.disponibilite) %}
+                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.annoncebien.typebien.slug, 'slug': autrebien.annoncebien.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                    {% else %}
+                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.annoncebien.typebien.slug, 'slug': autrebien.annoncebien.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="room-card-info">
+                                <div class="row">
+                                    <div class="col">
+                                        <h3 class="room-type">{{ autrebien.annoncebien.typebien }}</h3>
+                                    </div>
+                                </div>
+                                <div class="room-size mt-0" style="height: 100px;">
+                                    {{ autrebien.annoncebien.resume|raw }}
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="room-price">
+                                            {{ autrebien.annoncebien.prix|number_format(0,'','.') }}
+                                        </div>
+                                    </div>
+                                    <div class="col-auto ml-auto">
+                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': autrebien.annoncebien.typebien.slug, 'slug': autrebien.annoncebien.slug}) }}" class="room-information" data-toggle="popover" data-trigger="hover" data-placement="bottom"><i class="icon-information"></i>Details</a>
+                                        <div class="popover-content d-none">
+                                            <ul>
+                                                <li>{{ autrebien.annoncebien.zone }}</li>
+                                                <li>{{ autrebien.annoncebien.mode }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    {% for bien in annonceBiens %}
                         <div class="col-sm-6 col-md-4 col-lg-4">
                             <div class="room-card">
                                 <div class="room-card-photo">
@@ -148,29 +276,7 @@
                     {% endfor %}
                 {% endfor %}
             </div>
-            {% if (pagination) %}
-                <div class="row ">
-                    <div class="col-sm-12 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 text-center " style="">
-                        <ul class="paginations">
-                            <li class="page-item">
-                                <a href="#" class="page-link">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Prec</span>
-                                </a>
-                            </li>
-                            <li class="page-item disabled"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item">
-                                <a href="#" class="page-link">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Suiv</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            {% endif %}
         </div>
+        <!-- \Annonces -->
     </div>
 {% endblock %}

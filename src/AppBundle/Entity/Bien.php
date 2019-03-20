@@ -133,6 +133,20 @@ class Bien
     /**
      * @var string
      *
+     * @ORM\Column(name="heuredeb", type="string", length=255, nullable=true, options={"default":"00:00"})
+     */
+    private $heuredeb;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="heurefin", type="string", length=255, nullable=true, options={"default":"23:59"})
+     */
+    private $heurefin;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="video", type="string", length=255, nullable=true)
      */
     private $video;
@@ -979,5 +993,53 @@ class Bien
     public function getVideo()
     {
         return $this->video;
+    }
+
+    /**
+     * Set heuredeb
+     *
+     * @param string $heuredeb
+     *
+     * @return Bien
+     */
+    public function setHeuredeb($heuredeb)
+    {
+        $this->heuredeb = $heuredeb;
+
+        return $this;
+    }
+
+    /**
+     * Get heuredeb
+     *
+     * @return string
+     */
+    public function getHeuredeb()
+    {
+        return $this->heuredeb;
+    }
+
+    /**
+     * Set heurefin
+     *
+     * @param string $heurefin
+     *
+     * @return Bien
+     */
+    public function setHeurefin($heurefin)
+    {
+        $this->heurefin = $heurefin;
+
+        return $this;
+    }
+
+    /**
+     * Get heurefin
+     *
+     * @return string
+     */
+    public function getHeurefin()
+    {
+        return $this->heurefin;
     }
 }

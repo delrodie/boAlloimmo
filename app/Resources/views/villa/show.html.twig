@@ -47,6 +47,8 @@
                                             <div class="col-sm-12" style="margin-top: 10px;">
                                                 Publicité du <span style="font-style: italic; font-weight: bold">{{ villa.bien.datedebut|date('d/m/Y') }}</span>
                                                 au <span style="font-style: italic; font-weight: bold">{{ villa.bien.datefin|date('d/m/Y') }}</span>
+                                                entre <span style="font-style: italic; font-weight: bold">{{ villa.bien.heuredeb|date('H:i') }}</span>
+                                                et <span style="font-style: italic; font-weight: bold">{{ villa.bien.heurefin|date('H:i') }}</span>
                                             </div>
                                         {% endif %}
                                     </div>

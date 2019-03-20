@@ -27,7 +27,7 @@ class DefaultController extends Controller
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
         $domaines = $em->getRepository('AppBundle:Domaine')
             ->findBy(array('statut' => 1), array('ordre' => 'ASC'));
-        $biens = $em->getRepository('AppBundle:Bien')->findListBien(0, 6);
+        $biens = $em->getRepository('AppBundle:Bien')->findListPromotion(0, 10);
         $articleServices = $em->getRepository('AppBundle:Article')
             ->findArticleByRubrique($slug = 'service', $offset = 0, $limit = 3);
         $articlePresentations = $em->getRepository('AppBundle:Article')
@@ -38,7 +38,7 @@ class DefaultController extends Controller
             ->findBy(array('statut' => 1), array('id' => 'ASC'));
         $promotions = $em->getRepository('AppBundle:Bien')->findBienEnPromo(0,1);
         $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,4);
-        //dump($promotions);die();
+        //dump(date('H:i', time()));die();
 
         return $this->render('default/index.html.twig', [
             'sliders' => $sliders,

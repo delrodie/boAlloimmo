@@ -245,17 +245,14 @@ class FRechercheController extends Controller
         $min = $request->get('minimum');
         $max = $request->get('maximum');
 
-        if ($mode === 'Location' || $mode === 'Achat'){
+        if ($mode === 'Location'){
             $session->set('typebien', $typebien);
             $session->set('piece', $piece);
             $session->set('localisation', $localisation);
             $session->set('min', $min);
             $session->set('max', $max);
-            if ($mode === 'Achat'){
-                $session->set('mode', 'Vente');
-            }else{
-                $session->set('mode', 'Location');
-            }
+
+            $session->set('mode', 'Location');
 
             return $this->redirectToRoute('rfrontend_location');
         }
@@ -297,11 +294,18 @@ class FRechercheController extends Controller
                     $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
+                    $annonceImmeubles = $em->getRepository('AppBundle:AnnonceImmeuble')
+                        ->findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
+                    ;//dump($annonceImmeubles);die();
+                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+
                     return $this->render('frontend/recherche_immeuble.html.twig',[
                         'immeubles'        => $immeubles,
+                        'annonceImmeubles'        => $annonceImmeubles,
                         'pagination'    => $pagination,
                         'typebien'    => $typebien,
                         'biens'    => $biens,
+                        'annonceBiens'    => $annonceBiens,
                     ]);
 
                 }elseif ($resume === 'appar'){
@@ -316,11 +320,18 @@ class FRechercheController extends Controller
                     $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
+                    $annonceAppartements = $em->getRepository('AppBundle:AnnonceAppartement')
+                        ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
+                    ; //dump($mode);die();
+                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), null, 9, 0);
+
                     return $this->render('frontend/recherche_appartement.html.twig',[
                         'appartements'        => $appartements,
+                        'annonceAppartements'        => $annonceAppartements,
                         'pagination'    => $pagination,
                         'typebien'    => $typebien,
                         'biens'    => $biens,
+                        'annonceBiens'    => $annonceBiens,
                     ]);
 
                 }elseif ($resume === 'villa'){ //dump($typebiens);die();
@@ -334,11 +345,19 @@ class FRechercheController extends Controller
                     $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
+                    // Annonce
+                    $annonceVillas = $em->getRepository('AppBundle:AnnonceVilla')
+                        ->findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
+                    ;
+                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), null, 9, 0);
+
                     return $this->render('frontend/recherche_villa.html.twig',[
                         'villas'        => $villas,
+                        'annonceVillas'        => $annonceVillas,
                         'pagination'    => $pagination,
                         'typebien'    => $typebien,
                         'biens'    => $biens,
+                        'annonceBiens'    => $annonceBiens,
                     ]);
 
                 }else{
@@ -348,11 +367,19 @@ class FRechercheController extends Controller
                     $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
                     $pagination = null ;
 
+                    // Annonce
+                    $annonceAutrebiens = $em->getRepository('AppBundle:AnnonceAutrebien')
+                        ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
+                    ;
+                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+
                     return $this->render('frontend/recherche_autrebien.html.twig',[
                         'autrebiens'        => $autrebiens,
+                        'annonceAutrebiens'        => $annonceAutrebiens,
                         'pagination'    => $pagination,
                         'typebien'    => $typebien,
                         'biens'    => $biens,
+                        'annonceBiens'    => $annonceBiens,
                     ]);
                 }
 
