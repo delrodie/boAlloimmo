@@ -65,16 +65,18 @@ class FrontendController extends Controller
      *
      * @Route("/annonces", name="frontend_annonce")
      */
-    public function annonceAction()
+    public function annonceAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $biens = $em->getRepository('AppBundle:AnnonceBien')->findListDesc(); //dump($biens);die();
-        $pagination = true;
+        $listeBiens = $em->getRepository('AppBundle:AnnonceBien')->findListDesc(); //dump($biens);die();
+        $biens = $this->get('knp_paginator')->paginate(
+            $listeBiens,
+            $request->query->get('page', 1), 15
+        );
 
         return $this->render("internaute/annonce.html.twig", [
             'biens' => $biens,
-            'pagination'    => $pagination,
         ]);
     }
 

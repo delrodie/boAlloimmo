@@ -24,19 +24,31 @@ class PartenaireRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Liste des partenaires selon le service
      */
-    public function findListePartenaireBy($service, $limit, $offset)
+    public function findListePartenaireBy($service, $limit = null, $offset = null)
     {
-        return $this->createQueryBuilder('p')
-                    ->innerJoin('p.services', 's')
-                    ->where('s.slug = :service')
-                    ->andWhere('p.statut = 1')
-                    ->orderBy('p.ordre', 'DESC')
-                    ->addOrderBy('p.nom', 'ASC')
-                    ->setFirstResult($offset)
-                    ->setMaxResults($limit)
-                    ->setParameter('service', $service)
-                    ->getQuery()->getResult();
+        if ($limit){
+            return $this->createQueryBuilder('p')
+                ->innerJoin('p.services', 's')
+                ->where('s.slug = :service')
+                ->andWhere('p.statut = 1')
+                ->orderBy('p.ordre', 'DESC')
+                ->addOrderBy('p.nom', 'ASC')
+                ->setFirstResult($offset)
+                ->setMaxResults($limit)
+                ->setParameter('service', $service)
+                ->getQuery()->getResult();
             ;
+        }else{
+            return $this->createQueryBuilder('p')
+                ->innerJoin('p.services', 's')
+                ->where('s.slug = :service')
+                ->andWhere('p.statut = 1')
+                ->orderBy('p.ordre', 'DESC')
+                ->addOrderBy('p.nom', 'ASC')
+                ->setParameter('service', $service)
+                ->getQuery()->getResult();
+            ;
+        }
     }
 
     /**

@@ -109,7 +109,7 @@ class FrontendannuaireController extends Controller
      *
      * @Route("/{domaine}/{slug}/{page}", name="fannuaire_liste_partenaires")
      */
-    public function listeAction($domaine, $slug, $page = null)
+    public function listeAction($domaine, $slug, $page = null, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $typebiens = $em->getRepository('AppBundle:Typebien')
@@ -121,7 +121,12 @@ class FrontendannuaireController extends Controller
         $modes = $em->getRepository('AppBundle:Mode')
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
 
-        $partenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireBy($slug, 10, 0); //dump($partenaires); die();
+        $listePartenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireBy($slug); //dump($partenaires); die();
+        $partenaires = $this->get('knp_paginator')->paginate(
+            $listePartenaires,
+            $request->query->get('page', 1), 15
+        );
+
         $listeservices = $em->getRepository('AppBundle:Service')->findListeServiceBy($domaine);
         $domaine = $em->getRepository('AppBundle:Domaine')->findOneBy(array('slug' => $domaine));
         $autreDomaines = $em->getRepository('AppBundle:Domaine')->findAutreDomaine($domaine);

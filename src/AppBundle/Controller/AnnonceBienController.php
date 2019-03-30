@@ -27,9 +27,17 @@ class AnnonceBienController extends Controller
         $filtre = $request->get('filtre');
 
         if ($filtre){
-            $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findByTypeBien($filtre);
+            $listeAnnonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findByTypeBien($filtre);
+            $annonceBiens = $this->get('knp_paginator')->paginate(
+                $listeAnnonceBiens,
+                $request->query->get('page', 1), 6
+            );
         } else{
-            $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findListBien();
+            $listeAnnonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findListBien();
+            $annonceBiens = $this->get('knp_paginator')->paginate(
+                $listeAnnonceBiens,
+                $request->query->get('page', 1), 6
+            );
         }
 
         $typebiens = $em->getRepository('AppBundle:Typebien')->findList();

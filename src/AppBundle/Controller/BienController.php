@@ -27,9 +27,17 @@ class BienController extends Controller
         $filtre = $request->get('filtre');
 
         if ($filtre){
-            $biens = $em->getRepository('AppBundle:Bien')->findByTypebien($filtre);
+            $listeBiens = $em->getRepository('AppBundle:Bien')->findByTypebien($filtre);
+            $biens = $this->get('knp_paginator')->paginate(
+                $listeBiens,
+                $request->query->get('page', 1), 6
+            );
         }else{
-            $biens = $em->getRepository('AppBundle:Bien')->findAllDesc();
+            $listeBiens = $em->getRepository('AppBundle:Bien')->findAllDesc();
+            $biens = $this->get('knp_paginator')->paginate(
+                $listeBiens,
+                $request->query->get('page', 1), 6
+            );
         }
 
         $typebiens = $em->getRepository('AppBundle:Typebien')->findList();

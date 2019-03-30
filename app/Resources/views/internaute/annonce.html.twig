@@ -142,7 +142,9 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="paginator"></div>
+            <div class="text-center">
+                {{ knp_pagination_render(biens) }}
+            </div>
             <!--<ul class="pagination">
                 <li class="page-item"><a href="#" class="page-link">1</a></li>
                 <li class="page-item"><a href="#" class="page-link">2</a></li>
@@ -178,12 +180,3 @@
     </style>
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ absolute_url(asset('frontend/js/pagination.js')) }}"></script>
-    <script>
-        $(document).ready(function() {
-            pagination(15,'.bien','.paginator',3);
-        });
-    </script>
-{% endblock %}
