@@ -107,9 +107,9 @@ class FrontendannuaireController extends Controller
     /**
      * Liste des prestataires du service
      *
-     * @Route("/{domaine}/{slug}/{page}", name="fannuaire_liste_partenaires")
+     * @Route("/{domaine}/{slug}/", name="fannuaire_liste_partenaires")
      */
-    public function listeAction($domaine, $slug, $page = null, Request $request)
+    public function listeAction($domaine, $slug, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $typebiens = $em->getRepository('AppBundle:Typebien')
@@ -160,7 +160,7 @@ class FrontendannuaireController extends Controller
      *
      * @Route("/{domaine}/{service}/{annee}/{slug}", name="fannuaire_partenaire")
      */
-    public function partenaireAction($domaine, $service, $slug)
+    public function partenaireAction(Request $request, $domaine, $service, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $typebiens = $em->getRepository('AppBundle:Typebien')
@@ -178,8 +178,12 @@ class FrontendannuaireController extends Controller
 
         $promotions = $em->getRepository('AppBundle:Bien')
             ->findBienEnPromo(0, 4);
-        $biens = $em->getRepository('AppBundle:Bien')
+        $listeBiens = $em->getRepository('AppBundle:Bien')
             ->findBienPartenaire($slug);
+        $biens = $this->get('knp_paginator')->paginate(
+            $listeBiens,
+            $request->query->get('page', 1), 9
+        );
 
         return $this->render('frontend/annuaire_partenaire.html.twig',[
             'domaine' => $domaine,

@@ -108,7 +108,7 @@ class FrAnnonceController extends Controller
 
         }elseif ($bien->getTypebienslug() === 'villa'){
             $villa = $em->getRepository('AppBundle:AnnonceVilla')->findOneBy(array('annoncebien' => $bien->getId()));
-
+            //dump($villa);die();
             if(!$villa){
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";

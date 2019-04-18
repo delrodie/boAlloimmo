@@ -155,9 +155,13 @@
                         <div class="col-4">
                             <div class="room-card">
                                 <div class="room-card-photo">
-                                    <img src="{{ asset('uploads/biens/'~ similaire.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}" class="img-fluid">
+                                    {% if (similaire.imageName) %}
+                                        <img src="{{ asset('uploads/biens/'~ similaire.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}" class="img-fluid">
+                                    {% else %}
+                                        <img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}" class="img-fluid">
+                                    {% endif %}
                                     <div class="flex-wrap-center">
-                                        <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview" data-toggle="modal" data-target="#modalBooking">Voir les détails</a>
+                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview" data-toggle="modal" data-target="#modalBooking">Voir les détails</a>
                                     </div>
                                 </div>
                                 <div class="room-card-info">
@@ -172,34 +176,34 @@
                                     <div class="row">
                                         {% if similaire.affichagePrix and similaire.prix != 0 %}
                                             <div class="col room-information">
-                                                <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
                                                     <i class="fa fa-money"></i> <span class="">{{ similaire.prix|number_format(0,'','.') }} FCFA</span>
                                                 </a>
                                             </div>
                                             <div class="col room-information">
-                                                <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les détails">
                                                     <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
                                                 </a>
                                             </div>
                                         {% elseif (similaire.prix == 0) %}
                                             <div class="col room-information">
-                                                <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les details">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" title="Voir les details">
                                                     <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
                                                 </a>
                                             </div>
                                             <div class="col room-information">
-                                                <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
                                                     <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
                                                 </a>
                                             </div>
                                         {% else %}
                                             <div class="col room-information">
-                                                <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
                                                     <i class="fa fa-map-signs"></i> <span class="">{{ similaire.zone }}</span>
                                                 </a>
                                             </div>
                                             <div class="col room-information">
-                                                <a href="{{ path('frontend_bien', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
+                                                <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}">
                                                     <i class="fa fa-exclamation-circle"></i> <span class="">{{ similaire.mode }}</span>
                                                 </a>
                                             </div>
