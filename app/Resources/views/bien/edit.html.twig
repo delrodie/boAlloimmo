@@ -129,12 +129,19 @@
                                 </label>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-3 col-sm-offset-0">.</div>
-                                <label class="custom-control custom-checkbox">
-                                    {{ form_widget(edit_form.promotion) }}
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Offre promotionnelle</span>
-                                </label>
+                                <div class="input-group">
+                                    <div class="col-sm-3 col-sm-offset-0">.</div>
+                                    <label class="custom-control custom-checkbox">
+                                        {{ form_widget(edit_form.promotion) }}
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">Offre promotionnelle</span>
+                                    </label>
+                                    <div class="col-sm-6 input-group" data-date="2018-07-31" data-date-format="yyyy-mm-dd">
+                                        {{ form_widget(edit_form.promodebut) }}
+                                        <span class="input-group-addon">au</span>
+                                        {{ form_widget(edit_form.promofin) }}
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-3 col-sm-offset-0">.</div>

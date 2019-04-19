@@ -63,9 +63,12 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
         return $this->createQueryBuilder('b')
                     ->where('b.statut = 1')
                     ->andWhere('b.promotion = 1')
+                    ->andWhere('b.promodebut <= :date')
+                    ->andWhere('b.promofin >= :date')
                     ->orderBy('b.flag', 'DESC')
                     ->setFirstResult($offset)
                     ->setMaxResults($limit)
+                    ->setParameter('date', date('Y-m-d', time()))
                     ->getQuery()->getResult()
             ;
     }

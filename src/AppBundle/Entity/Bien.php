@@ -147,6 +147,20 @@ class Bien
     /**
      * @var string
      *
+     * @ORM\Column(name="promodebut", type="string", length=255, nullable=true)
+     */
+    private $promodebut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="promofin", type="string", length=255, nullable=true)
+     */
+    private $promofin;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="video", type="string", length=255, nullable=true)
      */
     private $video;
@@ -1041,5 +1055,53 @@ class Bien
     public function getHeurefin()
     {
         return $this->heurefin;
+    }
+
+    /**
+     * Set promodebut
+     *
+     * @param string $promodebut
+     *
+     * @return Bien
+     */
+    public function setPromodebut($promodebut)
+    {
+        $this->promodebut = $promodebut;
+
+        return $this;
+    }
+
+    /**
+     * Get promodebut
+     *
+     * @return string
+     */
+    public function getPromodebut()
+    {
+        return $this->promodebut;
+    }
+
+    /**
+     * Set promofin
+     *
+     * @param string $promofin
+     *
+     * @return Bien
+     */
+    public function setPromofin($promofin)
+    {
+        $this->promofin = $promofin;
+
+        return $this;
+    }
+
+    /**
+     * Get promofin
+     *
+     * @return string
+     */
+    public function getPromofin()
+    {
+        return $this->promofin;
     }
 }

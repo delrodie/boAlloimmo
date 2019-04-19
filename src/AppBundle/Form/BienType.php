@@ -74,6 +74,22 @@ class BienType extends AbstractType
                 ),
                 'required' => false,
             ))
+            ->add('promodebut', TextType::class, array(
+                'attr' => array(
+                    'class' => 'form-control dpd1',
+                    'autocomplete'  => 'off',
+                    'placeholder'   => 'La date debut de la promotion'
+                ),
+                'required' => false,
+            ))
+            ->add('promofin', TextType::class, array(
+                'attr' => array(
+                    'class' => 'form-control dpd2',
+                    'autocomplete'  => 'off',
+                    'placeholder'   => 'La date fin de la promotion'
+                ),
+                'required' => false,
+            ))
             ->add('heuredeb', TextType::class,[
                 'attr' => ['class' => 'form-control time-picker', 'placeholder'=> 'Heure debut de publicité']
             ])

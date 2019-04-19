@@ -33,7 +33,7 @@ class DefaultController extends Controller
         $articlePresentations = $em->getRepository('AppBundle:Article')
             ->findArticleByRubrique($slug = 'somme', $offset = 0, $limit = 1);
         $articleConseils = $em->getRepository('AppBundle:Article')
-            ->findArticleByRubrique($slug = 'conseil', $offset = 0, $limit = 4); //dump($articleConseils);die();
+            ->findArticleByRubrique($slug = 'conseil', $offset = 0, $limit = 4); //dump($biens);die();
         $faqs = $em->getRepository('AppBundle:Faq')
             ->findBy(array('statut' => 1), array('id' => 'ASC'));
         $promotions = $em->getRepository('AppBundle:Bien')->findBienEnPromo(0,1);

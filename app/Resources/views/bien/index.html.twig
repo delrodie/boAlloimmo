@@ -43,8 +43,9 @@
                             <div class="card-body">
                                 <span class="text-right">{{ bien.typebien.libelle }}</span>
                                 {% if (bien.promotion) %}
-                                    <span style="color: red; font-weight: bold; float: right;"><i class="fa fa-star"></i> Promotion</span>
+                                    <span style="color: red; font-weight: bold; float: right;"><i class="fa fa-star"></i> Promotion </span><span style="float: right; font-size: 10px;">({{ bien.promodebut|date('d-m-Y') }} au {{ bien.promofin|date('d-m-Y') }})</span>
                                 {% endif %}
+
                                 <h5 class="card-title"><span class="badge badge-primary">{{ bien.programme }}</span> {{ bien.titre }}</h5>
                                 <p class="card-text">{{ bien.resume|raw }}</p>
                                 <p class="card-text">
