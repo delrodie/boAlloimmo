@@ -138,6 +138,7 @@ class FrontendannuaireController extends Controller
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
         $biens = $em->getRepository('AppBundle:Bien')
             ->findDernierBienEnPromo(4, 0);
+        $promoBiens = $em->getRepository('AppBundle:Bien')->findListPromotion(0, 10);
 
         return $this->render('frontend/annuaire_liste_prestataires.html.twig',[
             'domaine' => $domaine,
@@ -152,6 +153,7 @@ class FrontendannuaireController extends Controller
             'domaines' => $domaines,
             'promotions' => $promotions,
             'biens' => $biens,
+            'promoBiens' => $promoBiens
         ]);
     }
 

@@ -13,7 +13,7 @@ class FrontenddomaineController extends Controller
      *
      * @Route("/categorie/{slug}/{page}", name="fannuaire_domaine_partenaire")
      */
-    public function categorieAction($slug, $page = null)
+    public function categorieAction(Request $request, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $typebiens = $em->getRepository('AppBundle:Typebien')
@@ -25,7 +25,11 @@ class FrontenddomaineController extends Controller
         $modes = $em->getRepository('AppBundle:Mode')
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
 
-        $partenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireByDomaine($slug, 10, 0); //dump($partenaires); die();
+        $listePartenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireByDomaine($slug, 10, 0); //dump($partenaires); die();
+        $partenaires = $this->get('knp_paginator')->paginate(
+            $listePartenaires,
+            $request->query->get('page', 1), 15
+        );
         $listeservices = $em->getRepository('AppBundle:Service')->findListeServiceBy($slug);
         $domaine = $em->getRepository('AppBundle:Domaine')->findOneBy(array('slug' => $slug)); //dump($domaine);die();
         $autreDomaines = $em->getRepository('AppBundle:Domaine')->findAutreDomaine($slug);
@@ -37,6 +41,7 @@ class FrontenddomaineController extends Controller
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
         $biens = $em->getRepository('AppBundle:Bien')
             ->findDernierBienEnPromo(4, 0);
+        $promoBiens = $em->getRepository('AppBundle:Bien')->findListPromotion(0, 10);
 
         return $this->render('frontend/annuaire_domaine_prestataires.html.twig',[
             'domaine' => $domaine,
@@ -51,6 +56,7 @@ class FrontenddomaineController extends Controller
             'domaines' => $domaines,
             'promotions' => $promotions,
             'biens' => $biens,
+            'promoBiens' => $promoBiens
         ]);
     }
 
