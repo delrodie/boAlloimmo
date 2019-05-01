@@ -291,11 +291,7 @@
                                         <img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') }}" alt="{{ similaire.titre }}">
                                     {% endif %}
                                     <div class="flex-wrap-center">
-                                        {% if (similaire.disponibilite) %}
-                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
-                                        {% else %}
-                                            <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
-                                        {% endif %}
+                                        <a href="{{ path('frontend_internaute_annonce_show', {'typebien': similaire.typebien.slug, 'slug': similaire.slug}) }}" class="btn btn-primary room-qview">Voir les détails</a>
                                     </div>
                                 </div>
                                 <div class="room-card-info">

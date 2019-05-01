@@ -11,7 +11,7 @@ class FrontenddomaineController extends Controller
     /**
      * Liste des prestataires du domaine
      *
-     * @Route("/categorie/{slug}/{page}", name="fannuaire_domaine_partenaire")
+     * @Route("/categorie/{slug}", name="fannuaire_domaine_partenaire")
      */
     public function categorieAction(Request $request, $slug)
     {
@@ -25,7 +25,7 @@ class FrontenddomaineController extends Controller
         $modes = $em->getRepository('AppBundle:Mode')
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
 
-        $listePartenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireByDomaine($slug, 10, 0); //dump($partenaires); die();
+        $listePartenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireByDomaine($slug); //dump($partenaires); die();
         $partenaires = $this->get('knp_paginator')->paginate(
             $listePartenaires,
             $request->query->get('page', 1), 15

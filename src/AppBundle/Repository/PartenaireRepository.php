@@ -54,19 +54,32 @@ class PartenaireRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Liste des partenaires selon le domaine
      */
-    public function findListePartenaireByDomaine($slug, $limit, $offset)
+    public function findListePartenaireByDomaine($slug, $limit = null, $offset = null)
     {
-        return $this->createQueryBuilder('p')
-                    ->innerJoin('p.services', 's')
-                    ->innerJoin('s.domaine', 'd')
-                    ->where('d.slug = :slug')
-                    ->andWhere('p.statut = 1')
-                    ->orderBy('p.ordre', 'DESC')
-                    ->addOrderBy('p.nom', 'ASC')
-                    ->setFirstResult($offset)
-                    ->setMaxResults($limit)
-                    ->setParameter('slug', $slug)
-                    ->getQuery()->getResult()
-            ;
+        if ($limit){
+            return $this->createQueryBuilder('p')
+                        ->innerJoin('p.services', 's')
+                        ->innerJoin('s.domaine', 'd')
+                        ->where('d.slug = :slug')
+                        ->andWhere('p.statut = 1')
+                        ->orderBy('p.ordre', 'DESC')
+                        ->addOrderBy('p.nom', 'ASC')
+                        ->setFirstResult($offset)
+                        ->setMaxResults($limit)
+                        ->setParameter('slug', $slug)
+                        ->getQuery()->getResult()
+                        ;
+        }else{
+            return $this->createQueryBuilder('p')
+                        ->innerJoin('p.services', 's')
+                        ->innerJoin('s.domaine', 'd')
+                        ->where('d.slug = :slug')
+                        ->andWhere('p.statut = 1')
+                        ->orderBy('p.ordre', 'DESC')
+                        ->addOrderBy('p.nom', 'ASC')
+                        ->setParameter('slug', $slug)
+                        ->getQuery()->getResult()
+                        ;
+        }
     }
 }

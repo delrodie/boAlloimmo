@@ -26,7 +26,7 @@ class FrontendannuaireController extends Controller
             ->findDernierBienEnPromo(6, 0);
 
         $promotions = $em->getRepository('AppBundle:Bien')
-            ->findBienEnPromo(0, 6);
+            ->findListPromotion(0, 10);
 
         $domaines = $em->getRepository('AppBundle:Domaine')
             ->findBy(array('statut' => 1), array('ordre' => 'ASC'));

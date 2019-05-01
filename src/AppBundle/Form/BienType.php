@@ -91,10 +91,10 @@ class BienType extends AbstractType
                 'required' => false,
             ))
             ->add('heuredeb', TextType::class,[
-                'attr' => ['class' => 'form-control time-picker', 'placeholder'=> 'Heure debut de publicité']
+                'attr' => ['class' => 'form-control time-picker', 'placeholder'=> 'Heure debut de publicité'], 'required' => false
             ])
             ->add('heurefin', TextType::class,[
-                'attr'=> ['class'=> 'form-control time-picker', 'placeholder'=> 'Heure fin de publicite']
+                'attr'=> ['class'=> 'form-control time-picker', 'placeholder'=> 'Heure fin de publicite'], 'required' => false
             ])
             ->add('promotion', CheckboxType::class, array(
                 'attr'  => array(
