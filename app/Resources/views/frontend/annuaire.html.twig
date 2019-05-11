@@ -98,12 +98,12 @@
                             <div class="col-6">
                                 <div class="room-card">
                                     <div class="room-card-photo">
-                                        <img src="{{ asset('uploads/biens/'~ promotions.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ promotions.titre }}" class="img-fluid">
+                                        <img src="{{ asset('uploads/biens/'~ promotion.imageName) | imagine_filter('bienAccueil_thumb') }}" alt="{{ promotion.titre }}" class="img-fluid">
                                         <div class="flex-wrap-center">
-                                            {% if (promotions.disponibilite) %}
-                                                <a href="{{ path('frontend_bien', {'typebien': promotions.typebien.slug, 'slug': promotions.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
+                                            {% if (promotion.disponibilite) %}
+                                                <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="btn btn-primary room-qview">Disponible</a>
                                             {% else %}
-                                                <a href="{{ path('frontend_bien', {'typebien': promotions.typebien.slug, 'slug': promotions.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
+                                                <a href="{{ path('frontend_bien', {'typebien': promotion.typebien.slug, 'slug': promotion.slug}) }}" class="btn btn-primary room-qview">Non disponible</a>
                                             {% endif %}
                                         </div>
                                     </div>
