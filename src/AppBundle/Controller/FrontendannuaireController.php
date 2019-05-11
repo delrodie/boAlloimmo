@@ -143,7 +143,7 @@ class FrontendannuaireController extends Controller
         return $this->render('frontend/annuaire_liste_prestataires.html.twig',[
             'domaine' => $domaine,
             'autreDomaines' => $autreDomaines,
-            'partenaires'    => $listePartenaires,
+            'partenaires'    => $partenaires,
             'typebiens' => $typebiens,
             'zones' => $zones,
             'services' => $services,
