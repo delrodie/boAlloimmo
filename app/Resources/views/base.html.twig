@@ -269,12 +269,10 @@
                     <a href="{{ absolute_url(path('homepage')) }}" class="header-logo">
                         <img src="{{ absolute_url(asset('frontend/images/logo-ai.png')) }}" alt="" class="img-fluid">
                     </a>
+
                 </div>
                 <div class="col-sm-8 d-none d-lg-block">
-                    <!--<img src="images/publicite3.png">-->
-                </div>
-                <div class="col-sm-">
-
+                    <img src="{{ absolute_url(asset('frontend/images/header.jpg')) }}">
                 </div>
                 <div class="col-auto ml-auto d-flex d-lg-none">
                     <button class="navbar-btn" data-target='#modalNavigation' data-toggle='modal'>
@@ -362,17 +360,17 @@
                 <div class="row mt-5 mb-1 mt-lg-auto mb-md-0 align-items-center">
                     <div class="col-sm-auto col-lg-12 col-xl-auto">
                         <div class="footer-copyright text-left">
-                            © 2017 Allo Immo.
+                            © 2018-{{ "now"|date('Y') }} Allo Immo.
                             <div class="clearfix d-md-none"></div>
                             <a href="#">Termes & Conditions</a> <span>|</span> <a href="#">Mentions légales</a>
                         </div>
                     </div>
                     <div class="col-sm mt-2 mt-sm-0 mt-md-1 mt-xl-0">
                         <div class="footer-social text-left text-sm-right text-lg-left text-xl-right">
-                            <a href="#"><i class="icon-facebook-logo"></i></a>
-                            <a href="#"><i class="icon-twitter-logo1"></i></a>
-                            <a href="#"><i class="icon-google-logo"></i></a>
-                            <a href="#"><i class="icon-instagram-logo"></i></a>
+                            <a href="https://facebook.com/alloimmo.ci/" target="_blank"><i class="icon-facebook-logo"></i></a>
+                            <a href="https://twitter.com/alloimmoci"><i class="icon-twitter-logo1"></i></a>
+                            <a href="https://www.google-plus.com/alloimmoci/"><i class="icon-google-logo"></i></a>
+                            <a href="https://www.instagram.com/alloimmoci/"><i class="icon-instagram-logo"></i></a>
                         </div>
                     </div>
                 </div>
