@@ -124,7 +124,7 @@ class FrontendannuaireController extends Controller
         $listePartenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireBy($slug);
         $partenaires = $this->get('knp_paginator')->paginate(
             $listePartenaires,
-            $request->query->get('page', 1), 5
+            $request->query->get('page', 1), 10
         );//dump($partenaires); die();
 
         $listeservices = $em->getRepository('AppBundle:Service')->findListeServiceBy($domaine);
