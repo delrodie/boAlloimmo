@@ -121,11 +121,11 @@ class FrontendannuaireController extends Controller
         $modes = $em->getRepository('AppBundle:Mode')
             ->findBy(array('statut' => 1), array('libelle' => 'ASC'));
 
-        $listePartenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireBy($slug); //dump($partenaires); die();
+        $listePartenaires = $em->getRepository('AppBundle:Partenaire')->findListePartenaireBy($slug);
         $partenaires = $this->get('knp_paginator')->paginate(
             $listePartenaires,
-            $request->query->get('page', 1), 15
-        );
+            $request->query->get('page', 1), 1
+        );//dump($partenaires); die();
 
         $listeservices = $em->getRepository('AppBundle:Service')->findListeServiceBy($domaine);
         $domaine = $em->getRepository('AppBundle:Domaine')->findOneBy(array('slug' => $domaine));
