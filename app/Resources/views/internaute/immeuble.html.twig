@@ -328,7 +328,7 @@
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:description" content="{{ immeuble.annonceBien.resume|raw }}"/>
     <meta name="twitter:title" content="{{ immeuble.annoncebien.titre }}"/>
-    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_annonce')) }}"/>
+    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_internaute_annonce_show',{'typebien': immeuble.annonceBien.typebien.slug, 'slug': immeuble.annonceBien.slug})) }}"/>
     {% if (immeuble.annonceBien.imageName) %}
         <meta name="twitter:image:src" content="{{ absolute_url(vich_uploader_asset(immeuble.annonceBien, 'imageFile')) }}"/>
     {% else %}

@@ -396,9 +396,9 @@
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:description" content="{{ villa.annoncebien.resume|raw }}"/>
     <meta name="twitter:title" content="{{ vila.annoncebien.titre }}"/>
-    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_annonce')) }}"/>
+    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_internaute_annonce_show',{'typebien': villa.annoncebien.typebien.slug, 'slug': villa.annoncebien.slug})) }}"/>
     {% if (villa.annoncebien.imageName) %}
-        <meta name="twitter:image:src" content="{{ vich_uploader_asset(villa.annoncebien, 'imageFile') }}"/>
+        <meta name="twitter:image:src" content="{{ absolute_url(vich_uploader_asset(villa.annoncebien, 'imageFile')) }}"/>
     {% else %}
         <meta name="twitter:image:src" content="http://alloimmo.ci/frontend/images/logo-ai.png"/>
     {% endif %}

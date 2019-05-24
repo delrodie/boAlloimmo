@@ -399,14 +399,14 @@
     <meta property="article:modified_time" content="{{ appartement.annoncebien.modifieLe|date('Y-m-d') }}T{{ appartement.annoncebien.modifieLe|date('H:i:s') }}+00:00" />
     <meta property="og:updated_time" content="{{ appartement.annoncebien.modifieLe|date('Y-m-d') }}T{{ appartement.annoncebien.modifieLe|date('H:i:s') }}+00:00" />
     {% if (appartement.annoncebien.imageName) %}
-        <meta property="og:image" content="{{ vich_uploader_asset(appartement.annoncebien, 'imageFile') }}" />
+        <meta property="og:image" content="{{ absolute_url(vich_uploader_asset(appartement.annoncebien, 'imageFile')) }}" />
     {% else %}
         <meta property="og:image" content="http://alloimmo.ci/frontend/images/logo-ai.png" />
     {% endif %}
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:description" content="{{ appartement.annoncebien.resume|raw }}"/>
     <meta name="twitter:title" content="{{ appartement.annoncebien.titre }}"/>
-    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_annonce')) }}"/>
+    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_internaute_annonce_show',{'typebien': appartement.annoncebien.typebien.slug, 'slug': appartement.annoncebien.slug}))  }}"/>
     {% if (appartement.annoncebien.imageName) %}
         <meta name="twitter:image:src" content="{{ absolute_url(vich_uploader_asset(appartement.annoncebien, 'imageFile')) }}"/>
     {% else %}

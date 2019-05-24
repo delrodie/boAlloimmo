@@ -266,9 +266,9 @@
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:description" content="{{ autrebien.annoncebien.resume|raw }}"/>
     <meta name="twitter:title" content="Alloimmo"/>
-    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_annonce')) }}"/>
+    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_internaute_annonce_show',{'typebien': autrebien.annoncebien.typebien.slug, 'slug': autrebien.annoncebien.slug})) }}"/>
     {% if (autrebien.annoncebien.imageName) %}
-        <meta name="twitter:image:src" content="{{ vich_uploader_asset(autrebien.annoncebien, 'imageFile') }}"/>
+        <meta name="twitter:image:src" content="{{ absolute_url(vich_uploader_asset(autrebien.annoncebien, 'imageFile')) }}"/>
     {% else %}
         <meta name="twitter:image:src" content="http://alloimmo.ci/frontend/images/logo-ai.png"/>
     {% endif %}
@@ -278,7 +278,7 @@
             "@type": "NewsArticle",
             "mainEntityOfPage": {
                 "@type": "WebPage",
-                "@id": "{{ absolute_url(path('frontend_bien',{'typebien': autrebien.annoncebien.typebien.slug, 'slug': autrebien.annoncebien.slug})) }}"
+                "@id": "{{ absolute_url(path('frontend_internaute_annonce_show',{'typebien': autrebien.annoncebien.typebien.slug, 'slug': autrebien.annoncebien.slug})) }}"
             },
             "headline": "{{ autrebien.annoncebien.titre }}",
             "image": [

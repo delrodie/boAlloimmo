@@ -309,7 +309,7 @@
     <meta property="article:modified_time" content="{{ autrebien.bien.modifieLe|date('Y-m-d') }}T{{ autrebien.bien.modifieLe|date('H:i:s') }}+00:00" />
     <meta property="og:updated_time" content="{{ autrebien.bien.modifieLe|date('Y-m-d') }}T{{ autrebien.bien.modifieLe|date('H:i:s') }}+00:00" />
     {% if (autrebien.bien.imageName) %}
-        <meta property="og:image" content="{{ vich_uploader_asset(autrebien.bien, 'imageFile') }}" />
+        <meta property="og:image" content="{{ absolute_url(vich_uploader_asset(autrebien.bien, 'imageFile')) }}" />
     {% else %}
         <meta property="og:image" content="http://alloimmo.ci/frontend/images/logo-ai.png" />
     {% endif %}
@@ -318,7 +318,7 @@
     <meta name="twitter:title" content="{{ autrebien.bien.titre }}"/>
     <meta name="twitter:domain" content="{{ absolute_url(path('frontend_bien',{'typebien': autrebien.bien.typebien.slug, 'slug': autrebien.bien.slug})) }}"/>
     {% if (autrebien.bien.imageName) %}
-        <meta name="twitter:image:src" content="{{ vich_uploader_asset(autrebien.bien, 'imageFile') }}"/>
+        <meta name="twitter:image:src" content="{{ absolute_url(vich_uploader_asset(autrebien.bien, 'imageFile')) }}"/>
     {% else %}
         <meta name="twitter:image:src" content="http://alloimmo.ci/frontend/images/logo-ai.png"/>
     {% endif %}
@@ -332,7 +332,7 @@
             },
             "headline": "{{ autrebien.bien.titre }}",
             "image": [
-                "{{ vich_uploader_asset(autrebien.bien, 'imageFile') }}",
+                "{{ absolute_url(vich_uploader_asset(autrebien.bien, 'imageFile')) }}",
                 "http://alloimmo.ci/frontend/images/logo-ai.png"
             ],
             "datePublished": "{{ autrebien.bien.publieLe|date('Y-m-d') }}T{{ autrebien.bien.publieLe|date('H:i:s') }}+00:00",
