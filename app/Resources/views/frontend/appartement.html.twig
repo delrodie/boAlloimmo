@@ -95,20 +95,9 @@
                     <div class="row">
                         <div class="col-md-12 mb-1"><p>.</p></div>
                     </div>
-                    <div class="share-btn">
-                        <a class="fb-share-button" data-href="{{ absolute_url(path('frontend_bien',{'typebien': appartement.bien.typebien.slug, 'slug': appartement.bien.slug})) }}" data-layout="button_count"></a>
-                        <!--<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Titre de a page" style="padding-top: 15px;" >Partager</a>-->
-                        <a class="twitter-share-button"
-                           href="https://twitter.com/intent/tweet"
-                           data-size="small"
-                           data-text="{{ appartement.bien.resume|raw }}"
-                           data-url="{{ absolute_url(path('frontend_bien',{'typebien': appartement.bien.typebien.slug, 'slug': appartement.bien.slug})) }}"
-                           data-hashtags="alloimmoci,{{ appartement.bien.tags }}"
-                           data-via="alloimmoci"
-                           data-related="delrodie,twitter" target="_blank">
-                            Tweet
-                        </a>
-                    </div>
+                    <!-- Partage reseaux sociaux -->
+                    <div class="sharethis-inline-share-buttons"></div>
+                    <!-- /Paratge reseaux sociaux -->
                     <div class="mt-3 mt-md-7"></div>
                     <h2>Description</h2>
                     <p>
@@ -509,4 +498,6 @@
 
             return t;
         }(document, "script", "twitter-wjs"));</script>
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d129b1ca0d27e001207a599&product=inline-share-buttons"></script>
+
 {% endblock %}
