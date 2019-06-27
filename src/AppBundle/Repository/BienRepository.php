@@ -202,6 +202,31 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * Recherche de bien selon la requette
+     * use by BienController:indexAction()
+     */
+    public function findBySearch($recherche)
+    {
+        return $this->createQueryBuilder('b')
+                    ->leftJoin('b.typebien', 't')
+                    ->leftJoin('b.mode', 'm')
+                    ->leftJoin('b.partenaire', 'p')
+                    ->leftJoin('b.zone', 'z')
+                    ->where('b.titre LIKE :recherche')
+                    ->orWhere('b.description LIKE :recherche')
+                    ->orWhere('b.prix LIKE :recherche')
+                    ->orWhere('b.localisation LIKE :recherche')
+                    ->orWhere('t.libelle LIKE :recherche')
+                    ->orWhere('m.libelle LIKE :recherche')
+                    ->orWhere('p.nom LIKE :recherche')
+                    ->orWhere('z.libelle LIKE :recherche')
+                    ->orderBy('b.id', 'DESC')
+                    ->setParameter('recherche', '%'.$recherche.'%')
+                    ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * fonction de recherche
      */
     public function QueryBien()

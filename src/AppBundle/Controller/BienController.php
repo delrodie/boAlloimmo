@@ -25,6 +25,7 @@ class BienController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $filtre = $request->get('filtre');
+        $recherche = $request->get('recherche');
 
         if ($filtre){
             $listeBiens = $em->getRepository('AppBundle:Bien')->findByTypebien($filtre);
@@ -32,7 +33,14 @@ class BienController extends Controller
                 $listeBiens,
                 $request->query->get('page', 1), 6
             );
-        }else{
+        }elseif ($recherche){
+            $listeBiens = $em->getRepository('AppBundle:Bien')->findBySearch($recherche);
+            $biens = $this->get('knp_paginator')->paginate(
+                $listeBiens,
+                $request->query->get('page', 1), 6
+            );
+        }
+        else{
             $listeBiens = $em->getRepository('AppBundle:Bien')->findAllDesc();
             $biens = $this->get('knp_paginator')->paginate(
                 $listeBiens,

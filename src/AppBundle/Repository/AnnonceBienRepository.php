@@ -91,6 +91,31 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * Recherche de bien selon la requette
+     * use by annoncebienController:indexAction()
+     */
+    public function findBySearch($recherche)
+    {
+        return $this->createQueryBuilder('b')
+            ->leftJoin('b.typebien', 't')
+            ->leftJoin('b.mode', 'm')
+            ->leftJoin('b.utilisateur', 'u')
+            ->leftJoin('b.zone', 'z')
+            ->where('b.titre LIKE :recherche')
+            ->orWhere('b.description LIKE :recherche')
+            ->orWhere('b.prix LIKE :recherche')
+            ->orWhere('b.localisation LIKE :recherche')
+            ->orWhere('t.libelle LIKE :recherche')
+            ->orWhere('m.libelle LIKE :recherche')
+            ->orWhere('u.nom LIKE :recherche')
+            ->orWhere('z.libelle LIKE :recherche')
+            ->orderBy('b.id', 'DESC')
+            ->setParameter('recherche', '%'.$recherche.'%')
+            ->getQuery()->getResult()
+            ;
+    }
+
+    /**
      * Liste des biens selon la zone
      */
     public function findBienZone($localisation, $wherePrix, $min, $max, $mode)

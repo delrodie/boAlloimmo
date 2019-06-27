@@ -28,6 +28,12 @@
                         </select>
                     </form>
                 </div>
+                <div class="col-md-6 text-center">
+                    <form action="{{ absolute_url(path('backend_annoncebien_index')) }}" class="form-inline">
+                        <input name="recherche" type="text" class="form-control mb-2 mr-sm-2" autocomplete="off" placeholder="Recherche du bien">
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
                 <br>
             </div>
 

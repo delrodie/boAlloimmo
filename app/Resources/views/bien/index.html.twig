@@ -29,7 +29,13 @@
                         </select>
                     </form>
                 </div>
-                <div class="col-md-9 text-right">
+                <div class="col-md-6 text-center">
+                    <form action="{{ absolute_url(path('backend_bien_index')) }}" class="form-inline">
+                        <input name="recherche" type="text" class="form-control mb-2 mr-sm-2" autocomplete="off" placeholder="Recherche du bien">
+                        <button type="submit" class="btn btn-primary mb-2"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="col-md-3 text-right">
                     <a href="{{ path('backend_bien_new') }}" class="btn  btn-light"><i class="fa fa-plus"></i> Ajouter un bien</a>
                 </div>
                 <br>

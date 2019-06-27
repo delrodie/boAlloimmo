@@ -25,6 +25,7 @@ class AnnonceBienController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $filtre = $request->get('filtre');
+        $recherche = $request->get('recherche');
 
         if ($filtre){
             $listeAnnonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findByTypeBien($filtre);
@@ -32,7 +33,14 @@ class AnnonceBienController extends Controller
                 $listeAnnonceBiens,
                 $request->query->get('page', 1), 6
             );
-        } else{
+        } elseif ($recherche){
+            $listeAnnonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBySearch($recherche);
+            $annonceBiens = $this->get('knp_paginator')->paginate(
+                $listeAnnonceBiens,
+                $request->query->get('page', 1), 6
+            );
+        }
+        else{
             $listeAnnonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findListBien();
             $annonceBiens = $this->get('knp_paginator')->paginate(
                 $listeAnnonceBiens,
