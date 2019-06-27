@@ -47,7 +47,7 @@ class ArticleController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $resume = $utilities->resume($article->getContenu(), 300, '...', true);
+            $resume = $utilities->resume(strip_tags($article->getContenu()), 300, '...', true);
             $article->setResume($resume);
             $em->persist($article);
             $em->flush();
@@ -90,7 +90,7 @@ class ArticleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $resume = $utilities->resume($article->getContenu(), 300, '...', true);
+            $resume = $utilities->resume(strip_tags($article->getContenu()), 300, '...', true);
             $article->setResume($resume);
             $this->getDoctrine()->getManager()->flush();
 

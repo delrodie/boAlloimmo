@@ -103,11 +103,15 @@ class FrontendController extends Controller
      *
      * @Route("/{page}/conseils-et-guide/", name="frontend_conseils")
      */
-    public function conseilAction()
+    public function conseilAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $articles = $em->getRepository('AppBundle:Article')
+        $listeArticles = $em->getRepository('AppBundle:Article')
             ->findArticleByRubrique($slug = 'conseil');
+        $articles = $this->get('knp_paginator')->paginate(
+            $listeArticles,
+            $request->query->get('page', 1), 6
+        );
         $publicites = $em->getRepository('AppBundle:Publicite')->findPubliciteEncours(0,4);
 
 

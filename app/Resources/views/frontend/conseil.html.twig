@@ -47,7 +47,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="paginator"></div>
+                    {{ knp_pagination_render(articles) }}
                     <!--<ul class="pagination" style="margin-top: 50px">
                         <li class="page-item active"><a class="page-link" href="#">1</a></li>
                         <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -64,12 +64,7 @@
                     <div class="row" style="margin-top: 50px">
                         <div class="col-sm-12">
                             <h4>Nous suivre</h4>
-                            <div class="text-center" style="margin-left: 25px">
-                                <a href="#"><i class="icon-facebook-logo fa-2x"></i></a>
-                                <a href="#"><i class="icon-twitter-logo1 fa-2x"></i></a>
-                                <a href="#"><i class="icon-google-logo fa-2x"></i></a>
-                                <a href="#"><i class="icon-instagram-logo fa-2x"></i></a>
-                            </div>
+                            <div class="sharethis-inline-follow-buttons"></div>
                         </div>
                     </div>
 
@@ -104,10 +99,6 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ absolute_url(asset('frontend/js/pagination.js')) }}"></script>
-    <script>
-        $(document).ready(function() {
-            pagination(4,'.page','.paginator',3);
-        });
-    </script>
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d129b1ca0d27e001207a599&product=inline-share-buttons"></script>
+
 {% endblock %}

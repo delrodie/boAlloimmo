@@ -23,11 +23,14 @@
             <div class="row">
                 <div class="col-md-8">
                     <h3 class="mt-15">{{ page.titre }}</h3>
-                    <div class="text-justify">
+                    <div class="text-justify mb-15 pb-15">
                         <!--<img src="{{ vich_uploader_asset(page, 'imageFile') }}" class="w-100" alt="{{ page.titre }}" style="float: left;">-->
                         <img src="{{ absolute_url(asset('uploads/asset/'~ page.imageName) | imagine_filter('fo_page')) }}" alt="{{ page.titre }}" style="float: left; padding-right: 25px;">
                         {{ page.contenu|raw }}
                     </div>
+                    <!-- Partage reseaux sociaux -->
+                    <div class="sharethis-inline-share-buttons"></div>
+                    <!-- /Paratge reseaux sociaux -->
 
                 </div>
                 <div class="col-md-4 mt-3 mt-md-0">
@@ -40,12 +43,17 @@
                     <div class="row" style="margin-top: 50px">
                         <div class="col-sm-12">
                             <h4>Nous suivre</h4>
-                            <div class="text-center" style="margin-left: 25px">
+                            <div class="sharethis-inline-follow-buttons"></div>
+                            <div id="fb-root"></div>
+                            <div class="mt-15 pt-15">
+                                <div class="fb-page" data-href="https://www.facebook.com/alloimmoci/" data-tabs="timeline" data-width="" data-height="800" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/alloimmoci/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/alloimmoci/">Allo Immo</a></blockquote></div>
+                            </div>
+                            <!--<div class="text-center" style="margin-left: 25px">
                                 <a href="#"><i class="icon-facebook-logo fa-2x"></i></a>
                                 <a href="#"><i class="icon-twitter-logo1 fa-2x"></i></a>
                                 <a href="#"><i class="icon-google-logo fa-2x"></i></a>
                                 <a href="#"><i class="icon-instagram-logo fa-2x"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
 
@@ -53,4 +61,108 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block meta %}
+    <meta name="keywords" content="{{ page.tags|join(',') }}"  />
+    <meta name="description" content="{{ page.resume|raw }}" />
+    <meta name="revisit" content="7 days" />
+    <meta name="revisit-after" content="7 days">
+    <meta name="Author" content="Esthete, Delrodie AMOIKON">
+    <meta name="Copyright" content="www.alloimmo.ci">
+    <meta name="Content-Language" content="FR">
+    <meta name="distribution" content="global" />
+    <meta name="Audience" content="All" />
+    <meta name="Robots" content="full">
+
+    <link rel="canonical" href="{{ absolute_url(path('frontend_page', {'rubrique': page.rubrique.slug, 'slug':page.slug})) }}" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content="Item" />
+    <meta property="og:title" content="{{ page.titre }}" />
+    <meta property="og:description" content="{{ page.resume|raw }}" />
+    <meta property="og:url" content="{{ absolute_url(path('frontend_page', {'rubrique': page.rubrique.slug, 'slug':page.slug})) }}" />
+    <meta property="og:site_name" content="AlloImmo CI" />
+    <meta property="page:section" content="Item" />
+    <meta property="page:published_time" content="{{ page.publieLe|date('Y-m-d') }}T{{ page.publieLe|date('H:i:s') }}+00:00" />
+    <meta property="page:modified_time" content="{{ page.modifieLe|date('Y-m-d') }}T{{ page.modifieLe|date('H:i:s') }}+00:00" />
+    <meta property="og:updated_time" content="{{ page.modifieLe|date('Y-m-d') }}T{{ page.modifieLe|date('H:i:s') }}+00:00" />
+    {% if (page.imageName) %}
+        <meta property="og:image" content="{{ absolute_url(vich_uploader_asset(page, 'imageFile')) }}" />
+    {% else %}
+        <meta property="og:image" content="http://alloimmo.ci/frontend/images/logo-ai.png" />
+    {% endif %}
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:description" content="{{ page.resume|raw }}"/>
+    <meta name="twitter:title" content="{{ page.titre }}"/>
+    <meta name="twitter:domain" content="{{ absolute_url(path('frontend_page', {'rubrique': page.rubrique.slug, 'slug':page.slug})) }}"/>
+    {% if (page.imageName) %}
+        <meta name="twitter:image:src" content="{{ absolute_url(vich_uploader_asset(page, 'imageFile')) }}"/>
+    {% else %}
+        <meta name="twitter:image:src" content="http://alloimmo.ci/frontend/images/logo-ai.png"/>
+    {% endif %}
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Newspage",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "{{ absolute_url(path('frontend_page', {'rubrique': page.rubrique.slug, 'slug':page.slug})) }}"
+            },
+            "headline": "{{ page.titre }}",
+            "image": [
+                "{{ absolute_url(vich_uploader_asset(page, 'imageFile')) }}",
+                "http://alloimmo.ci/frontend/images/logo-ai.png"
+            ],
+            "datePublished": "{{ page.publieLe|date('Y-m-d') }}T{{ page.publieLe|date('H:i:s') }}+00:00",
+            "dateModified": "{{ page.modifieLe|date('Y-m-d') }}T{{ page.modifieLe|date('H:i:s') }}+00:00",
+            "author": {
+                "@type": "Person",
+                "name": "Delrodie AMOIKON"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Allo Immo",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "http://alloimmo.ci/frontend/images/logo-ai.png"
+                }
+            },
+            "description": "{{ page.resume|raw }}"
+        }
+    </script>
+
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "url": "http://www.alloimmo.ci",
+            "contactPoint": [{
+                "@type": "ContactPoint",
+                "telephone": "+225 75 83 33 75",
+                "contactType": "Direction",
+                "contactOption": "TollFree",
+                "areaServed": "FR"
+            },{
+                "@type": "ContactPoint",
+                "telephone": "+225 75 83 33 75",
+                "contactType": "Direction",
+                "contactOption": "TollFree",
+                "areaServed": [
+                    "CI",
+                    "FR"
+                ],
+                "availableLanguage": [
+                    "French",
+                    "English"
+                ]
+            }]
+        }
+    </script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d129b1ca0d27e001207a599&product=inline-share-buttons"></script>
+
 {% endblock %}
