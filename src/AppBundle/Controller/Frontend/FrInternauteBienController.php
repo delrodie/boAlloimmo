@@ -35,7 +35,11 @@ class FrInternauteBienController extends Controller
         // Test de la non existence d'un compte pur cet user
         $utilisateur = $em->getRepository('AppBundle:Utilisateur')->findOneBy(array('user'=>$user->getId()));
 
-        $biens = $em->getRepository('AppBundle:AnnonceBien')->findListAnnonce($utilisateur);
+        $listeBiens = $em->getRepository('AppBundle:AnnonceBien')->findListAnnonce($utilisateur);
+        $biens = $this->get('knp_paginator')->paginate(
+            $listeBiens,
+            $request->query->get('page', 1), 10
+        );
 
         return $this->render('internaute/annonce_list.html.twig',[
             'utilisateur' => $utilisateur,
@@ -68,7 +72,7 @@ class FrInternauteBienController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             //$em = $this->getDoctrine()->getManager();
-            $resume = $utilities->resume($annonce->getDescription(), 103, '...', true);
+            $resume = $utilities->resume(strip_tags($annonce->getDescription()), 103, '...', true);
             $typebienslug = $utilities->resume($annonce->getTypebien()->getSlug(), 5, '', true);
             $annonce->setResume($resume);
             $annonce->setTypebienslug($typebienslug);

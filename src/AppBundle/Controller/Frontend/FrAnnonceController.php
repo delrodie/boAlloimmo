@@ -41,7 +41,17 @@ class FrAnnonceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $bien = $em->getRepository('AppBundle:AnnonceBien')->findOneBy(array('slug' => $slug)); //dump($bien);die();
+        $bien = $em->getRepository('AppBundle:AnnonceBien')->findOneBy(array('slug' => $slug));
+        if (!$bien){
+            $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
+            $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
+            $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+            $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
+            return $this->render('internaute/404_internaute.html.twig',[
+                'messageError' => $message,
+            ]);
+        }
+
         $similaires = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $bien->getTypebien()->getId()), array('slug' => 'DESC'), 4, 0);
         $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $bien->getId()));
         $compteurSimilaire = $em->getRepository('AppBundle:AnnonceBien')->cpteur($bien->getTypebien()->getId());
@@ -53,8 +63,8 @@ class FrAnnonceController extends Controller
             if (!$immeuble){
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-                $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
-                $message .= "Email: <strong>info@alloimmo.ci</strong>";
+                $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+                $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
                 return $this->render('internaute/404_internaute.html.twig',[
                     'messageError' => $message,
                 ]);
@@ -63,8 +73,8 @@ class FrAnnonceController extends Controller
             if (!$immeuble->getAnnoncebien()->getStatut()){
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-                $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
-                $message .= "Email: <strong>info@alloimmo.ci</strong>";
+                $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+                $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
                 return $this->render('internaute/404_internaute.html.twig',[
                     'messageError' => $message,
                 ]);
@@ -83,8 +93,8 @@ class FrAnnonceController extends Controller
             if (!$appartement) {
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-                $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
-                $message .= "Email: <strong>info@alloimmo.ci</strong>";
+                $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+                $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
                 return $this->render('internaute/404_internaute.html.twig',[
                     'messageError' => $message,
                 ]);
@@ -92,8 +102,8 @@ class FrAnnonceController extends Controller
             if (!$appartement->getAnnoncebien()->getStatut()){
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-                $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
-                $message .= "Email: <strong>info@alloimmo.ci</strong>";
+                $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+                $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
                 return $this->render('internaute/404_internaute.html.twig',[
                     'messageError' => $message,
                 ]);
@@ -112,8 +122,8 @@ class FrAnnonceController extends Controller
             if(!$villa){
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-                $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
-                $message .= "Email: <strong>info@alloimmo.ci</strong>";
+                $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+                $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
                 return $this->render('internaute/404_internaute.html.twig',[
                     'messageError' => $message,
                 ]);
@@ -121,7 +131,8 @@ class FrAnnonceController extends Controller
             if (!$villa->getAnnoncebien()->getStatut()){
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-                $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
+                $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+                $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";$message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
                 $message .= "Email: <strong>info@alloimmo.ci</strong>";
                 return $this->render('internaute/404_internaute.html.twig',[
                     'messageError' => $message,
@@ -140,8 +151,8 @@ class FrAnnonceController extends Controller
             if (!$autrebien){
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-                $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
-                $message .= "Email: <strong>info@alloimmo.ci</strong>";
+                $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+                $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
                 return $this->render('internaute/404_internaute.html.twig',[
                     'messageError' => $message,
                 ]);
@@ -150,8 +161,8 @@ class FrAnnonceController extends Controller
             if (!$autrebien->getAnnoncebien()->getStatut()){
                 $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
                 $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-                $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
-                $message .= "Email: <strong>info@alloimmo.ci</strong>";
+                $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+                $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
                 return $this->render('internaute/404_internaute.html.twig',[
                     'messageError' => $message,
                 ]);
@@ -168,8 +179,8 @@ class FrAnnonceController extends Controller
 
         $message = "Le bien recherché n'a pas été trouvé. Soit il a été rétiré par l'annonceur ou il a été vendu. <br>";
         $message .= "Mais si vous pensez que c'est une erreur alors veuillez contacter l'administrateur de la plateforme. <br> ";
-        $message .= "Contact : <strong>+225 75 83 33 75</strong><br>";
-        $message .= "Email: <strong>info@alloimmo.ci</strong>";
+        $message .= "Contact : <strong><a href='tel:+22575833375'>+225 75 83 33 75</a></strong><br>";
+        $message .= "Email: <strong><a href='mailto:info@alloimmo.ci'>info@alloimmo.ci</a></strong>";
         return $this->render('internaute/404_internaute.html.twig',[
             'messageError' => $message,
         ]);
