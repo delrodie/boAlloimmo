@@ -127,6 +127,11 @@ class AnnonceBien
     private $utilisateur;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\GallerieAnnonce", mappedBy="annonce")
+     */
+    private $photos;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="bien_image", fileNameProperty="imageName", size="imageSize", nullable=true)
@@ -789,5 +794,46 @@ class AnnonceBien
     public function getStatut()
     {
         return $this->statut;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add photo
+     *
+     * @param \AppBundle\Entity\GallerieAnnonce $photo
+     *
+     * @return AnnonceBien
+     */
+    public function addPhoto(\AppBundle\Entity\GallerieAnnonce $photo)
+    {
+        $this->photos[] = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Remove photo
+     *
+     * @param \AppBundle\Entity\GallerieAnnonce $photo
+     */
+    public function removePhoto(\AppBundle\Entity\GallerieAnnonce $photo)
+    {
+        $this->photos->removeElement($photo);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
     }
 }

@@ -163,6 +163,15 @@ vich_uploader:
              delete_on_update:   true
              delete_on_remove:   true
 
+        gallerieannonce_image:
+          uri_prefix:         /uploads/gallerie/annonces
+          upload_destination: '%kernel.root_dir%/../web/uploads/gallerie/annonces'
+          namer: vich_uploader.namer_uniqid
+
+          inject_on_load:     false
+          delete_on_update:   true
+          delete_on_remove:   true
+
         utilisateur_image:
              uri_prefix:         /uploads/profile
              upload_destination: '%kernel.root_dir%/../web/uploads/profile'

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gallerieannonces list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Imagename</th>
+                <th>Imagesize</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gallerieAnnonce in gallerieAnnonces %}
+            <tr>
+                <td><a href="{{ path('gallerieannonce_show', { 'id': gallerieAnnonce.id }) }}">{{ gallerieAnnonce.id }}</a></td>
+                <td>{{ gallerieAnnonce.imageName }}</td>
+                <td>{{ gallerieAnnonce.imageSize }}</td>
+                <td>{% if gallerieAnnonce.updatedAt %}{{ gallerieAnnonce.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('gallerieannonce_show', { 'id': gallerieAnnonce.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('gallerieannonce_edit', { 'id': gallerieAnnonce.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('gallerieannonce_new') }}">Create a new gallerieAnnonce</a>
+        </li>
+    </ul>
+{% endblock %}
