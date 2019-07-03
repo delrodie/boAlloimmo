@@ -49,13 +49,16 @@ class FrInternauteAutrebienController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $btn = $request->get('ajouter');
             $em->persist($autrebien);
             $em->flush(); //dump($villa);die('ici');
 
             $majBien = $gestionannonce->maj($bien);
 
             if ($majBien){
+                if ($btn){
+                    return $this->redirectToRoute('gallerieannonce_new', ['annonce'=>$bien]);
+                }
                 return $this->redirectToRoute('frontend_annonceur_index', [
                     'id' => $utilisateur->getId(),
                     'user' => $utilisateur->getUser()->getUsername(),
@@ -102,13 +105,16 @@ class FrInternauteAutrebienController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $btn = $request->get('ajouter');
             $em->persist($autrebien);
             $em->flush(); //dump($autrebien);die('ici');
 
             $majBien = $gestionannonce->maj($bien);
 
             if ($majBien){
+                if ($btn){
+                    return $this->redirectToRoute('gallerieannonce_new', ['annonce'=>$bien]);
+                }
                 return $this->redirectToRoute('frontend_annonceur_index', [
                     'id' => $utilisateur->getId(),
                     'user' => $utilisateur->getUser()->getUsername(),
