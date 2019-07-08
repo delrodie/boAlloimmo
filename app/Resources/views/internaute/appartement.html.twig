@@ -66,7 +66,7 @@
                         <li><img src="{{ asset('frontend/images/icon-ai.png') | imagine_filter('fo_bienshow_principal') }}" alt="{{ appartement.annoncebien.titre }}"></li>
                     {% endif %}
                     {% for photo in appartement.annoncebien.photos %}
-                        <li><img src="{{ asset('uploads/gallerie/annonces/'~ photo.imageName) | imagine_filter('fo_bien_show_secondaire') }}" alt="{{ photo.annonce.titre }}"></li>
+                        <li><img src="{{ asset('uploads/gallerie/annonces/'~ photo.imageName) | imagine_filter('fo_bienshow_principal') }}" alt="{{ photo.annonce.titre }}"></li>
                     {% endfor %}
 
                 </ul>
