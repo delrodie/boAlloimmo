@@ -16,6 +16,17 @@
             <div class="title-wrap text-center">
                 <h2 class="h1">Enregistrement d'annonce</h2>
             </div>
+            <div class="title-wrap text-center">
+                <h5 class="h5" style="font-style: italic">
+                    <div class="" style="color: #0703ca;">
+                        {% for message in app.flashes('erreur') %}
+                            <div class="flash-notice">
+                                <i class="fa fa-exclamation-triangle fa-2x"></i>{{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </h5>
+            </div>
         </div>
         <div class="container">
             {% if (app.flashes('notice')) %}
@@ -121,13 +132,15 @@
                             {% for photo in annonce.photos %}
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="room-card">
-                                        <div class="room-card-photo">
-                                            {% if photo.imageName %}
-                                                <img src="{{ absolute_url(asset('uploads/gallerie/annonces/'~ photo.imageName) | imagine_filter('bienAccueil_thumb')) }}" alt="{{ photo.annonce.titre }}" class="img-fluid">
-                                            {% else %}
-                                                <img src="{{ absolute_url(asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') ) }}" alt="{{ photo.annonce.titre }}" class="img-fluid">
-                                            {% endif %}
-                                        </div>
+                                        <a href="{{ path('gallerieannonce_edit', {'id': photo.id}) }}">
+                                            <div class="room-card-photo">
+                                                {% if photo.imageName %}
+                                                    <img src="{{ absolute_url(asset('uploads/gallerie/annonces/'~ photo.imageName) | imagine_filter('bienAccueil_thumb')) }}" alt="{{ photo.annonce.titre }}" class="img-fluid">
+                                                {% else %}
+                                                    <img src="{{ absolute_url(asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') ) }}" alt="{{ photo.annonce.titre }}" class="img-fluid">
+                                                {% endif %}
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
                             {% endfor %}

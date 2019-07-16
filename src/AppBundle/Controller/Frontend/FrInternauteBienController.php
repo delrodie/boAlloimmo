@@ -71,7 +71,16 @@ class FrInternauteBienController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$em = $this->getDoctrine()->getManager();
+            // Verification de remplissage des champs
+            $titre = $annonce->getTitre();
+            $description = $annonce->getDescription();
+            $typbien = $annonce->getTypebien();
+            $zone = $annonce->getZone();
+            if (!$titre OR !$description OR !$typbien OR !$zone){
+                $this->addFlash('erreur', "Attention, veuillez renseigner tous les champs pour passer au formaulaire suivant");
+                return $this->redirectToRoute('frontend_annonceur_new', ['user'=> $user->getUsername(), 'id'=>$user->getID()]);
+            }
+
             $resume = $utilities->resume(strip_tags($annonce->getDescription()), 103, '...', true);
             $typebienslug = $utilities->resume($annonce->getTypebien()->getSlug(), 5, '', true);
             $annonce->setResume($resume);

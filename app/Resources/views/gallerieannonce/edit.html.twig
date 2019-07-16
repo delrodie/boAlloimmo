@@ -1,21 +1,203 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}annonce{% endblock %}
+
 {% block body %}
-    <h1>Gallerieannonce edit</h1>
+    <div class="section section-booking">
+        <div class="booking-form-wrap">
+            {{ render(url('rfrontend_principale')) }}
+            <div class="booking-form-toggle d-md-none"><a href="tel:+225 03 25 54 47"><i class="icon-telephone"></i></a>
+                <div class="js-booking-form-toggle"><span>Detail</span><span class="close-text js-close-text">CLOSE</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="title-wrap text-center">
+                <h2 class="h1">Enregistrement d'annonce</h2>
+            </div>
+            <div class="title-wrap text-center">
+                <h5 class="h5" style="font-style: italic">
+                    <div class="" style="color: #0703ca;">
+                        {% for message in app.flashes('erreur') %}
+                            <div class="flash-notice">
+                                <i class="fa fa-exclamation-triangle fa-2x"></i>{{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </h5>
+            </div>
+        </div>
+        <div class="container">
+            {% if (app.flashes('notice')) %}
+                <div class="modal fade" id="overlay">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title text-center">Votre message a été envoyé avec succès! </h4>
+                            </div>
+                            <div class="modal-body">
+                                {% for message in app.flashes('notice') %}
+                                    <div class="flash-notice">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+            {% if (app.flashes('erreur')) %}
+                <div class="modal fade" id="overlay">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title text-center">Oups!! votre message n'a pas été envoyé, veuillez réessayer plutard! </h4>
+                            </div>
+                            <div class="modal-body">
+                                {% for message in app.flashes('erreur') %}
+                                    <div class="flash-notice">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-lg-8 mt-3 mt-sm-0 order-lg-2 text-lg-right">
+                    <div class="col-sm-10 col-sm-offset-1 text-center">
+                        <h4 class="text-left text-primary">Ajout de photos </h4>
+                        {% if (app.flashes('erreur')) %}
+                            <div class="modal fade" id="overlay">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title text-center">Oups!! votre message n'a pas été envoyé, veuillez réessayer plutard! </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% for message in app.flashes('erreur') %}
+                                                <div class="flash-notice">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <!--<form class="contact-form" id="contactForm" method="post" novalidate="novalidate">-->
+                        {{ form_start(edit_form, {'attr': {'class': 'profile-form', 'id': 'profileForm', 'novalidate': 'novalidate' }})}}
+                        <div class="successform">
+                            <p>Message envoyé avec succès!</p>
+                        </div>
+                        <div class="errorform">
+                            <p>Echec! Veuillez reessayer plutard.</p>
+                        </div>
+                        <div class="mt-15 alert-conseil text-left">
+                            {{ form_widget(edit_form.annonce)}}
+                            {{ form_errors(edit_form.annonce)}}
+                        </div>
+                        <div class="mt-15 text-left">
+                            <label>Telecharger la photo du bien</label>
+                            {{ form_widget(edit_form.imageFile)}}
+                            {{ form_errors(edit_form.imageFile)}}
+                        </div>
+                        <div class="mt-3 text-right">
+                            <a href="{{ path('frontend_annonceur_index', {'id': utilisateur.id, 'user': utilisateur.slug}) }}" class="btn btn-primary">Annuler</a>
+                            <button type="submit" class="btn btn-primary" name="ajouter" value="ajouter">Ajouter une autre photo</button>
 
-    <ul>
-        <li>
-            <a href="{{ path('gallerieannonce_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                        </div>
+                        <!--</form>-->
+                        {{ form_end(edit_form)}}
+                        <div class="text-left">
+                            {{ form_start(delete_form, {'attr': {'onsubmit': "return confirm('Etes-vous sûr de vouloir vraiment supprimer cette photo?');"}}) }}
+                            <input type="hidden" name="annonce" value="{{ annonce.slug }}">
+                            <input type="submit" value="Supprimer" class="btn btn-secondary">
+                            {{ form_end(delete_form) }}
+                        </div>
+                    </div>
+                    <div class="col-lg-10 text-left mt-15 pt-15">
+                        <div class="row room-grid">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="room-card">
+                                    <div class="room-card-photo">
+                                        {% if annonce.imageName %}
+                                            <img src="{{ absolute_url(asset('uploads/biens/'~ annonce.imageName) | imagine_filter('bienAccueil_thumb')) }}" alt="{{ annonce.titre }}" class="img-fluid">
+                                        {% else %}
+                                            <img src="{{ absolute_url(asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') ) }}" alt="{{ annonce.titre }}" class="img-fluid">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% for photo in annonce.photos %}
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="room-card">
+                                        <a href="{{ path('gallerieannonce_edit', {'id': photo.id}) }}">
+                                            <div class="room-card-photo">
+                                                {% if photo.imageName %}
+                                                    <img src="{{ absolute_url(asset('uploads/gallerie/annonces/'~ photo.imageName) | imagine_filter('bienAccueil_thumb')) }}" alt="{{ photo.annonce.titre }}" class="img-fluid">
+                                                {% else %}
+                                                    <img src="{{ absolute_url(asset('frontend/images/icon-ai.png') | imagine_filter('bienAccueil_thumb') ) }}" alt="{{ photo.annonce.titre }}" class="img-fluid">
+                                                {% endif %}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-3 mt-lg-0">
+                    <div class="row flex-lg-column">
+                        <div class="special-card-2">
+                            <div class="special-card-2-photo">
+                                {% if utilisateur.imagename %}
+                                    <img src="{{ absolute_url(vich_uploader_asset(utilisateur, 'imageFile')) }}" class="img-fluid" alt="{{ utilisateur.nom }}">
+                                {% else %}
+                                    <img src="{{ absolute_url(asset('frontend/images/icon-ai.png')) }}" alt="" class="img-fluid">
+                                {% endif %}
+
+                            </div>
+                            <div class="special-card-2-info">
+                                <div class="row">
+                                    <div class="col-md ml-auto mt-3 mt-md-0">
+                                        <ul class="services-list">
+                                            <li><i class="icon-user"> {{ utilisateur.nom }}</i><span class="badge badge-primary">{{ utilisateur.user.username|title }}</span></li>
+                                            <li><i class="fa fa-map-marker">&nbsp;&nbsp;&nbsp; {{ utilisateur.adresse }}</i>.</li>
+                                            <li><i class="icon icon-telephone"> {{ utilisateur.telephone }}</i>.</li>
+                                            {% if utilisateur.website %}
+                                                <li><i class="fa fa-globe">&nbsp;&nbsp;&nbsp; {{ utilisateur.website }}</i>.</li>
+                                            {% endif %}
+                                            <li><i class="icon-closed-envelope"> {{ utilisateur.user.email }}</i>.</li>
+                                            <li></li>
+                                        </ul>
+                                        <p class="text-justify">
+                                            {{ utilisateur.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm col-lg-auto mt-3 mt-sm-0 mt-lg-2">
+                            <a href="{{ absolute_url(path('frontend_profile_edit', {'user': utilisateur.user.username, 'id': utilisateur.id}))}}" class="btn btn-primary dropdown-toggle w-100" title="Modifier le profile">
+                                <i class="icon-user"></i>Profile
+                            </a>
+                            <a href="{{ absolute_url(path('frontend_annonceur_new', {'user':utilisateur.user.username, 'id': utilisateur.id }))}}" class="btn btn-primary btn-light dropdown-toggle w-100">
+                                <i class="icon-completed-tasks"></i>Faire une annonce
+                            </a>
+                            <a href="{{ absolute_url(path('frontend_annonceur_index', {'user': utilisateur.user.username, 'id':utilisateur.id}))}}" class="btn btn-primary btn-light dropdown-toggle w-100" >
+                                <i class="icon-completed-tasks"></i>Voir ses annonces
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

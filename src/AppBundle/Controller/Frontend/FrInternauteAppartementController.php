@@ -51,6 +51,17 @@ class FrInternauteAppartementController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $piece = $appartement->getPiece();
+            $douche = $appartement->getDouche();
+            $wc = $appartement->getWc();
+            if (!$piece OR !$douche Or !$wc){
+                $this->addFlash('erreur', " Les champs PIECE, DOUCHE et SALLE D'EAU sont obligatoires");
+                return $this->redirectToRoute('frontend_annonceur_appartement_new', [
+                    'user' => $user->getUsername(),
+                    'id' => $user->getId(),
+                    'bien' => $bien
+                ]);
+            }
             $btn = $request->get('ajouter');
             $em->persist($appartement);
             $em->flush(); //dump($appartement);die('ici');

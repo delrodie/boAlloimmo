@@ -51,6 +51,17 @@ class FrInternauteVillaController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $piece = $villa->getPiece();
+            $douche = $villa->getDouche();
+            $wc = $villa->getToilette();
+            if (!$piece OR !$douche OR !$wc){
+                $this->addFlash('erreur', "<br> Les champs NOMBRE DE PIECES, NOMBRE DE DOUCHES <br> et NOMBRE DE TOILETTES sont obligatoires.");
+                return $this->redirectToRoute('frontend_annonceur_villa_new', [
+                    'user' => $user->getUsername(),
+                    'id' => $user->getId(),
+                    'bien' => $bien
+                ]);
+            }
             $btn = $request->get('ajouter');
             $em->persist($villa);
             $em->flush(); //dump($villa);die('ici');

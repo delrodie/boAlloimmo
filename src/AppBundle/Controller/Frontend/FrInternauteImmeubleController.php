@@ -52,6 +52,8 @@ class FrInternauteImmeubleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $appartement = $immeuble->getAppartement();
+            $etage = $immeuble->getEtage();
             $btn = $request->get('ajouter');
             $em->persist($immeuble);
             $em->flush();

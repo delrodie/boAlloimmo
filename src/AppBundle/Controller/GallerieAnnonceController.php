@@ -106,10 +106,21 @@ class GallerieAnnonceController extends Controller
      * @Route("/{id}/edit", name="gallerieannonce_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, GallerieAnnonce $gallerieAnnonce)
+    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, GallerieAnnonce $gallerieAnnonce)
     {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        if (true === $authChecker->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('backend');
+        }
+
+        // Test de la non existence d'un compte pur cet user
+        $utilisateur = $em->getRepository('AppBundle:Utilisateur')->findOneBy(array('user'=>$user->getId()));
+        $annonceEntity = $em->getRepository("AppBundle:AnnonceBien")->findOneBy(['slug'=>$gallerieAnnonce->getAnnonce()->getSlug()]);
+        //dump($gallerieAnnonce);die();
         $deleteForm = $this->createDeleteForm($gallerieAnnonce);
-        $editForm = $this->createForm('AppBundle\Form\GallerieAnnonceType', $gallerieAnnonce);
+        $editForm = $this->createForm('AppBundle\Form\GallerieAnnonceType', $gallerieAnnonce,['annonce'=> $gallerieAnnonce->getAnnonce()->getSlug()]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -122,6 +133,8 @@ class GallerieAnnonceController extends Controller
             'gallerieAnnonce' => $gallerieAnnonce,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'utilisateur' => $utilisateur,
+            'annonce' => $annonceEntity
         ));
     }
 
@@ -137,12 +150,13 @@ class GallerieAnnonceController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $annonce = $request->get('annonce'); //dump($annonce);die();
             $em = $this->getDoctrine()->getManager();
             $em->remove($gallerieAnnonce);
             $em->flush();
         }
 
-        return $this->redirectToRoute('gallerieannonce_index');
+        return $this->redirectToRoute('gallerieannonce_new', ['annonce'=> $annonce]);
     }
 
     /**

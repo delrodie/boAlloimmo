@@ -154,3 +154,20 @@
         </div>
     </div>
 {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery("#profileForm").validate({
+                rules: {
+                    "appbundle_annonceimmeuble[appartement]":{
+                        "required": true
+                    },
+                    "appbundle_annonceimmeuble[etage]": {
+                        "required": true
+                    }
+                })
+        });
+    </script>
+{% endblock %}
