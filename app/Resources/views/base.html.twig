@@ -230,7 +230,8 @@
                             {% endif %}
 
                         {% else %}
-                            <a href="{{ path('fos_user_security_login') }}" class="dropdown-item">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                            <a class="dropdown-item" href="{{ path('frontend_profile_new') }}">Connexion</a>
+                            <!--<a href="{{ path('fos_user_security_login') }}" class="dropdown-item">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>-->
                             <a class="dropdown-item" href="{{ path('fos_user_registration_register')}}">Inscription</a>
                         {% endif %}
                         </div>
