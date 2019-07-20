@@ -42,6 +42,12 @@ class FrProfileController extends Controller
                 ), 'text/html'
             )
         ;
+
+        if ($mailer->send($message)) {
+            $this->addFlash('notice', 'Votre message a bien été envoyé !?');
+        } else {
+            $this->addFlash('erreur', 'ne sommes desolé votre message n\'a pas pu être envoyé');
+        }
         /*return $this->render('email/mail_confirmation.html.twig',[
             'user' => $user,
         ]);*/
