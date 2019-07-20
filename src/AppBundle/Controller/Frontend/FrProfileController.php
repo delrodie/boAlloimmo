@@ -20,10 +20,32 @@ class FrProfileController extends Controller
      * @Route("/", name="frontend_profile_confirmation")
      * @Method({"GET", "POST"})
      */
-    public function confirmationAction(Request $request, AuthorizationCheckerInterface $authChecker)
+    public function confirmationAction(Request $request, AuthorizationCheckerInterface $authChecker, \Swift_Mailer $mailer)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+
+        // Envoi de mail de confirmation d'enregistrement de compte utilisateur
+        $message = (new \Swift_Message('Enregistrement de compte effectif sur alloimmo.ci'))
+            ->setFrom(['noreply@alloimmo.ci' => 'ALLOIMMO.CI'])
+            //->setTo($partenaire)
+            ->setTo($user->getEmail())
+            //->setTo(['delrodieamoikon@gmail.com', 'delrodieamoikon@outlook.fr'])
+            //->setBcc(['info@alloimmo.ci', 'delrodieamoikon@gmail.com'])
+            ->setBcc(['delrodieamoikon@gmail.com', 'info@alloimmo.ci'])
+            ->setReplyTo('info@alloimmo.ci')
+            ->setBody(
+                $this->renderView(
+                    'email/mail_confirmation.html.twig',[
+                        'user' => $user,
+                    ]
+                ), 'text/html'
+            )
+        ;
+        /*return $this->render('email/mail_confirmation.html.twig',[
+            'user' => $user,
+        ]);*/
+        //dump($user->get);die();
 
         if (true === $authChecker->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('backend');
