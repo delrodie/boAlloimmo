@@ -20,7 +20,7 @@ class FrInternauteVillaController extends Controller
     /**
      * Liste des annonces de l'internaute
      * 
-     * @Route("/{user}{id}/{bien}", name="frontend_annonceur_villa_index")
+     * @Route("/{user}-{id}/{bien}", name="frontend_annonceur_villa_index")
      * @Method({"GET", "POST"})
      */
     public function indexAction()
@@ -29,7 +29,7 @@ class FrInternauteVillaController extends Controller
     }
     /**
      * 
-     * @Route("/{user}{id}/{bien}/enregistrement", name="frontend_annonceur_villa_new")
+     * @Route("/{user}-{id}/{bien}/enregistrement", name="frontend_annonceur_villa_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
@@ -95,7 +95,7 @@ class FrInternauteVillaController extends Controller
     
     /**
      * 
-     * @Route("/{user}{id}/{bien}/modification/{villa}", name="frontend_annonceur_villa_edit")
+     * @Route("/{user}-{id}/{bien}/modification/{villa}", name="frontend_annonceur_villa_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)

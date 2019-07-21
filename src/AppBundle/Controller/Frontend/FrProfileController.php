@@ -147,12 +147,14 @@ class FrProfileController extends Controller
     }
 
     /**
-     * @Route("/{user}{id}", name="frontend_profile_show")
+     * @Route("/{user}-{id}", name="frontend_profile_show")
      * @Method("GET")
      */
     public function showAction(Utilisateur $utilisateur, AuthorizationCheckerInterface $authChecker)
     {
-
+        $em = $this->getDoctrine()->getManager();
+        //$utilisateur = $em->getRepository("AppBundle:Utilisateur")->findOneBy(['id'=>$id]);
+        //dump($utilisateur);die();
         if (true === $authChecker->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('backend');
         }
@@ -175,7 +177,7 @@ class FrProfileController extends Controller
     }
 
     /**
-     * @Route("/{user}{id}/modifier", name="frontend_profile_edit")
+     * @Route("/{user}-{id}/modifier", name="frontend_profile_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Utilisateur $utilisateur, AuthorizationCheckerInterface $authChecker)

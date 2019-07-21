@@ -21,7 +21,7 @@ class FrInternauteImmeubleController extends Controller
     /**
      * Liste des annonces de l'internaute
      * 
-     * @Route("/{user}{id}/{bien}", name="frontend_annonceur_immeuble_index")
+     * @Route("/{user}-{id}/{bien}", name="frontend_annonceur_immeuble_index")
      * @Method({"GET", "POST"})
      */
     public function indexAction()
@@ -30,7 +30,7 @@ class FrInternauteImmeubleController extends Controller
     }
     /**
      * 
-     * @Route("/{user}{id}/{bien}/enregistrement", name="frontend_annonceur_immeuble_new")
+     * @Route("/{user}-{id}/{bien}/enregistrement", name="frontend_annonceur_immeuble_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
@@ -88,7 +88,7 @@ class FrInternauteImmeubleController extends Controller
     
     /**
      * 
-     * @Route("/{user}{id}/{bien}/modification/{immeuble}", name="frontend_annonceur_immeuble_edit")
+     * @Route("/{user}-{id}/{bien}/modification/{immeuble}", name="frontend_annonceur_immeuble_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)

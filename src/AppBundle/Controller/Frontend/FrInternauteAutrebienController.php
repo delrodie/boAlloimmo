@@ -27,7 +27,7 @@ class FrInternauteAutrebienController extends Controller
     }
     /**
      * 
-     * @Route("/{user}{id}/{bien}/enregistrement", name="frontend_annonceur_autrebien_new")
+     * @Route("/{user}-{id}/{bien}/enregistrement", name="frontend_annonceur_autrebien_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)
@@ -82,7 +82,7 @@ class FrInternauteAutrebienController extends Controller
     
     /**
      * 
-     * @Route("/{user}{id}/{bien}/modification/{autrebien}", name="frontend_annonceur_autrebien_edit")
+     * @Route("/{user}-{id}/{bien}/modification/{autrebien}", name="frontend_annonceur_autrebien_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Gestionannonce $gestionannonce)

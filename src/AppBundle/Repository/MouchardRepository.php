@@ -28,7 +28,8 @@ class MouchardRepository extends \Doctrine\ORM\EntityRepository
     public function findList()
     {
         return $this->createQueryBuilder('m')
-                    ->orderBy('m.createdAt', 'DESC')
+                    ->orderBy('m.flag', 'ASC')
+                    ->addOrderBy('m.createdAt', 'DESC')
                     ->getQuery()->getResult()
             ;
     }

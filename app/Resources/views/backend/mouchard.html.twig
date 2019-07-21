@@ -16,6 +16,12 @@
                     <em>{{ mouchard.createdAt|date('Y-m-d h:i:s') }}</em>
                 </a>
             {% endfor %}
+            {% if nombre > 5 %}
+                <hr>
+                <a href="{{ absolute_url(path('backend_mouchard_index')) }}" class="dropdown-item">
+                    <em>Voir toutes les notifications</em>
+                </a>
+            {% endif %}
 
         </div>
     </li>

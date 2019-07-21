@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Frontend;
 
+use AppBundle\Utils\GestionMouchard;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,7 +19,7 @@ class FrInternauteBienController extends Controller
     /**
      * Liste des annonces de l'internaute
      * 
-     * @Route("/{user}{id}", name="frontend_annonceur_index")
+     * @Route("/{user}-{id}", name="frontend_annonceur_index")
      * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request, AuthorizationCheckerInterface $authChecker)
@@ -49,10 +50,10 @@ class FrInternauteBienController extends Controller
     }
     /**
      * 
-     * @Route("/{user}{id}/enregistrement", name="frontend_annonceur_new")
+     * @Route("/{user}-{id}/enregistrement", name="frontend_annonceur_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Utilities $utilities)
+    public function newAction(Request $request, AuthorizationCheckerInterface $authChecker, Utilities $utilities, GestionMouchard $mouchard)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -90,7 +91,14 @@ class FrInternauteBienController extends Controller
             $annonce->setStatut(1);
 
             $em->persist($annonce);
-            $em->flush(); 
+            $em->flush();
+
+            // Enregistrement du mouchard
+            $username = $user->getUsername();
+            $titreMouchard = "Enregistrement d'une annonce";
+            $descriptionMouchard = "L'internaute ".$username." a enregistré l'annonce: '".$titre."' avec la description: ".$resume;
+            $lienMouchard = "www.alloimmo.ci/annonce/".$annonce->getTypebien()->getSlug()."/".$annonce->getSlug();
+            $mouchard->createMouchard($username,$titreMouchard,$descriptionMouchard,$lienMouchard);
 
             if ($typebienslug === 'immeu'){
                 return $this->redirectToRoute('frontend_annonceur_immeuble_new', [
@@ -128,10 +136,10 @@ class FrInternauteBienController extends Controller
     
     /**
      * 
-     * @Route("/{user}{id}/modification/{slug}", name="frontend_annonceur_edit")
+     * @Route("/{user}-{id}/modification/{slug}", name="frontend_annonceur_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Utilities $utilities)
+    public function editAction(Request $request, AuthorizationCheckerInterface $authChecker, Utilities $utilities, GestionMouchard $mouchard)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
@@ -158,7 +166,14 @@ class FrInternauteBienController extends Controller
             $annonce->setTags($annonce->getTitre()); //dump($annonce);die();
 
             $em->persist($annonce);
-            $em->flush(); 
+            $em->flush();
+
+            // Enregistrement du mouchard
+            $username = $user->getUsername();
+            $titreMouchard = "Modification d'une annonce";
+            $descriptionMouchard = "L'internaute ".$username." a modifié l'annonce: '".$annonce->getTitre()."' avec la description: ".$resume;
+            $lienMouchard = "www.alloimmo.ci/annonce/".$annonce->getTypebien()->getSlug()."/".$annonce->getSlug();
+            $mouchard->createMouchard($username,$titreMouchard,$descriptionMouchard,$lienMouchard);
 
             if ($typebienslug === 'immeu'){
                 $immeuble = $em->getRepository('AppBundle:AnnonceImmeuble')->findOneBy(array('annoncebien' => $annonce->getId()));

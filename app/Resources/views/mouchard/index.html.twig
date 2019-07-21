@@ -30,7 +30,7 @@
                                             <h6><a href="{{ absolute_url(path('backend_mouchard_show',{'id': mouchard.id})) }}">{{ mouchard.titre }} par {{ mouchard.user }}</a> {% if mouchard.flag is null %}
                                                     <span class="badge badge-success">nouveau</span>
                                                 {% endif %} </h6>
-                                            <a href="http://{{ mouchard.lien }}">http://{{ mouchard.lien }}</a>
+                                            <a href="http://{{ mouchard.lien }}" target="_blank">http://{{ mouchard.lien }}</a>
                                         </div>
                                         <p>
                                             {{ mouchard.description }} <br>
