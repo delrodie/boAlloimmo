@@ -1,0 +1,22 @@
+{% if (nombre) %}
+    <li class="nav-item dropdown dropdown-slide d-md-down-none">
+        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="ti-bell"></i>
+            <span class="badge badge-danger notification-alarm"> </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+
+            <div class="dropdown-header pb-3">
+                <strong>Vous avez {{ nombre }} notifications</strong>
+            </div>
+
+            {% for mouchard in mouchards %}
+                <a href="{{ absolute_url(path('backend_mouchard_show',{'id': mouchard.id})) }}" class="dropdown-item">
+                    <span class="badge badge-primary">{{ mouchard.user }}</span> {{ mouchard.titre }} <br>
+                    <em>{{ mouchard.createdAt|date('Y-m-d h:i:s') }}</em>
+                </a>
+            {% endfor %}
+
+        </div>
+    </li>
+{% endif %}

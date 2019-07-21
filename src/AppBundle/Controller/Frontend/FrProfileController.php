@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Utilisateur;
+use AppBundle\Utils\GestionMouchard;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -20,10 +21,17 @@ class FrProfileController extends Controller
      * @Route("/", name="frontend_profile_confirmation")
      * @Method({"GET", "POST"})
      */
-    public function confirmationAction(Request $request, AuthorizationCheckerInterface $authChecker, \Swift_Mailer $mailer)
+    public function confirmationAction(Request $request, AuthorizationCheckerInterface $authChecker, \Swift_Mailer $mailer, GestionMouchard $mouchard)
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+
+        // Enregistrement du mouchard
+        $username = $user->getUsername();
+        $titre = "Creation de compte utilisateur";
+        $description = "L'internaute ".$username." s'est enregistré comme annonceur. ";
+        $lien = "www.alloimmo.ci/admin/user/".$user->getId()."/edit";
+        $mouchard->createMouchard($username,$titre,$description,$lien);
 
         // Envoi de mail de confirmation d'enregistrement de compte utilisateur
         $message = (new \Swift_Message('Enregistrement de compte effectif sur alloimmo.ci'))
@@ -44,14 +52,15 @@ class FrProfileController extends Controller
         ;
 
         if ($mailer->send($message)) {
-            $this->addFlash('notice', 'Votre message a bien été envoyé !?');
+            //dump($message);die();
+            $this->addFlash('notice', 'Les champs avec axterix sont obligatoires');
         } else {
-            $this->addFlash('erreur', 'ne sommes desolé votre message n\'a pas pu être envoyé');
+            $this->addFlash('erreur', 'Les champs avec asterix sont obligatoires!');
         }
         /*return $this->render('email/mail_confirmation.html.twig',[
             'user' => $user,
         ]);*/
-        //dump($user->get);die();
+        //dump($user);die();
 
         if (true === $authChecker->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('backend');

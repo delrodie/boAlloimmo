@@ -1,0 +1,57 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}Liste des mouchards{% endblock %}
+
+{% block body %}
+    <main class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0"> Gestion des mouchards
+                <small></small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="#" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item active">liste des mouchards</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+
+            <!-- state start-->
+            <div class="row">
+
+                <div class=" col-sm-12">
+                    <div class="card card-shadow mb-4">
+
+                        <div class="card-body">
+                            <ul class="list-unstyled search-results">
+                                {% for mouchard in mouchards %}
+                                    <li>
+                                        <div class="title">
+                                            <h6><a href="{{ absolute_url(path('backend_mouchard_show',{'id': mouchard.id})) }}">{{ mouchard.titre }} par {{ mouchard.user }}</a> {% if mouchard.flag is null %}
+                                                    <span class="badge badge-success">nouveau</span>
+                                                {% endif %} </h6>
+                                            <a href="http://{{ mouchard.lien }}">http://{{ mouchard.lien }}</a>
+                                        </div>
+                                        <p>
+                                            {{ mouchard.description }} <br>
+                                            {{ mouchard.createdAt|date('Y-m-d h:i:s') }}
+                                        </p>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination pagination-custom">
+                                    {{ knp_pagination_render(mouchards) }}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- state end-->
+
+        </div>
+    </main>
+{% endblock %}

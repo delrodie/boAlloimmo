@@ -58,6 +58,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * Liste des actions du mouchard non lues
+     * @Route("/mouchard", name="mouchard")
+     */
+    public function mouchardAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $mouchards = $em->getRepository('AppBundle:Mouchard')->findBy(['flag'=>null],['createdAt'=>'DESC'], 5, 0);
+        $nombreNonLu = $em->getRepository('AppBundle:Mouchard')->findNonLu();
+        //dump($nombreNonLu);die();
+        return $this->render('backend/mouchard.html.twig',[
+            'mouchards' => $mouchards,
+            'nombre' => $nombreNonLu
+        ]);
+    }
+
+    /**
      * @Route("/backend/tableau-de-bord", name="backend")
      */
     public function backendAction(Request $request)

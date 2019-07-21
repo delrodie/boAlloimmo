@@ -50,7 +50,7 @@
     </ul>
 
     <ul class="nav navbar-nav ml-auto">
-
+        {{ render(url('mouchard')) }}
         <li class="nav-item dropdown dropdown-slide">
             <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <img src="{{ asset('backend/img/user1.png') }}" alt="">
@@ -101,6 +101,7 @@
                     </a>
                     <ul class="sub">
                         <li><a  href="#">Statistiques</a></li>
+                        <li><a  href="{{ absolute_url(path('backend_mouchard_index')) }}">Mouchard</a></li>
                     </ul>
                 </li>
 
