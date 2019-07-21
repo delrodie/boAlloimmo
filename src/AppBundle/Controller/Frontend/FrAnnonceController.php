@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Faq;
+use AppBundle\Utils\Gestionannonce;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +38,7 @@ class FrAnnonceController extends Controller
      * @Route("/{typebien}/{slug}", name="frontend_internaute_annonce_show")
      * @Method({"GET", "POST"}) 
      */
-    public function annonceAction($typebien, $slug)
+    public function annonceAction($typebien, $slug, Gestionannonce $gestionannonce)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -80,6 +81,9 @@ class FrAnnonceController extends Controller
                 ]);
             }
 
+            // Mise ajour du nombre de vue
+            $gestionannonce->vue($bien->getId());
+
             return $this->render("internaute/immeuble.html.twig", [
                 'immeuble' => $immeuble,
                 'similaires'    => $similaires,
@@ -108,6 +112,9 @@ class FrAnnonceController extends Controller
                     'messageError' => $message,
                 ]);
             }
+
+            // Mise ajour du nombre de vue
+            $gestionannonce->vue($bien->getId());
 
             return $this->render("internaute/appartement.html.twig", [
                 'appartement' => $appartement,
@@ -139,6 +146,9 @@ class FrAnnonceController extends Controller
                 ]);
             }
 
+            // Mise ajour du nombre de vue
+            $gestionannonce->vue($bien->getId());
+
             return $this->render("internaute/villa.html.twig", [
                 'villa' => $villa,
                 'similaires'    => $similaires,
@@ -167,6 +177,9 @@ class FrAnnonceController extends Controller
                     'messageError' => $message,
                 ]);
             }
+
+            // Mise ajour du nombre de vue
+            $gestionannonce->vue($bien->getId());
 
             return $this->render("internaute/autrebien.html.twig", [
                 'autrebien' => $autrebien,

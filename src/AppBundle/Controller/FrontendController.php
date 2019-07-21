@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Utils\Gestionbien;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,12 +13,14 @@ class FrontendController extends Controller
      *
      * @Route("/page/{typebien}/{slug}", name="frontend_bien")
      */
-    public function bienAction(Request $request, $typebien, $slug)
+    public function bienAction(Request $request, $typebien, $slug, Gestionbien $gestionbien)
     {
         $em = $this->getDoctrine()->getManager();
         $bien = $em->getRepository('AppBundle:Bien')->findOneBy(array('slug' => $slug)); 
         $similaires = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $bien->getTypebien()->getId()), array('slug' => 'DESC'), 3, 0);
         $photos = $em->getRepository('AppBundle:Galleriebien')->findBy(array('bien' => $bien->getId()));
+
+        $gestionbien->vue($bien->getId());
 
         // Verification du type de bien puis renvoie a la page correspondante a ce type de bien
         if ($bien->getTypebienslug() === 'immeu'){

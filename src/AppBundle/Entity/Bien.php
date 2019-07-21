@@ -166,6 +166,13 @@ class Bien
     private $video;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="vue", type="integer", nullable=true)
+     */
+    private $vue;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Galleriebien", mappedBy="bien")
      */
     private $photos;
@@ -1103,5 +1110,29 @@ class Bien
     public function getPromofin()
     {
         return $this->promofin;
+    }
+
+    /**
+     * Set vue
+     *
+     * @param integer $vue
+     *
+     * @return Bien
+     */
+    public function setVue($vue)
+    {
+        $this->vue = $vue;
+
+        return $this;
+    }
+
+    /**
+     * Get vue
+     *
+     * @return integer
+     */
+    public function getVue()
+    {
+        return $this->vue;
     }
 }

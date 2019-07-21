@@ -103,6 +103,13 @@ class AnnonceBien
     private $statut;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="vue", type="integer", nullable=true)
+     */
+    private $vue;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="annoncebiens")
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
@@ -835,5 +842,29 @@ class AnnonceBien
     public function getPhotos()
     {
         return $this->photos;
+    }
+
+    /**
+     * Set vue
+     *
+     * @param integer $vue
+     *
+     * @return AnnonceBien
+     */
+    public function setVue($vue)
+    {
+        $this->vue = $vue;
+
+        return $this;
+    }
+
+    /**
+     * Get vue
+     *
+     * @return integer
+     */
+    public function getVue()
+    {
+        return $this->vue;
     }
 }

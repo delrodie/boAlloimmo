@@ -44,4 +44,21 @@ class Gestionbien
             return false;
         }
     }
+
+    /**
+     * Interaction du nombre de vues
+     */
+    public function vue($bienId)
+    {
+        $bien = $this->em->getRepository("AppBundle:Bien")->findOneBy(['id'=>$bienId]);
+        if ($bien){
+            $vue = $bien->getVue() + 1;
+            $bien->setVue($vue);
+            $this->em->flush();
+
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

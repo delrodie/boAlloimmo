@@ -103,9 +103,19 @@
                             {% endif %}
                         </div>
                     </div>
+                    <!-- Ligne de vue -->
                     <div class="row">
-                        <div class="col-md-12 mb-1"><p>.</p></div>
+                        <div class="col-md-12 mb-1 text-right">
+                            <p style="color: #818181">
+                                {% if (autrebien.bien.vue == 1) %}
+                                    <em><i class="fa fa-eye"></i> {{ autrebien.bien.vue }} vue</em>
+                                {% else %}
+                                    <em><i class="fa fa-eye"></i> {{ autrebien.bien.vue }} vues</em>
+                                {% endif %}
+                            </p>
+                        </div>
                     </div>
+                    <!-- /ligne de vue -->
                     <!-- Partage reseaux sociaux -->
                     <div class="sharethis-inline-share-buttons"></div>
                     <!-- /Paratge reseaux sociaux -->
