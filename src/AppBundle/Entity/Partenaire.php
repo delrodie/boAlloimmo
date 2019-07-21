@@ -112,6 +112,13 @@ class Partenaire
     private $statut;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="vue", type="integer", nullable=true)
+     */
+    private $vue;
+
+    /**
      * Plusieurs partenaire font plusieurs services.
      * @ManyToMany(targetEntity="Service", inversedBy="partenaires")
      * @JoinTable(name="partenaires_services")
@@ -832,5 +839,29 @@ class Partenaire
     public function getOrdre()
     {
         return $this->ordre;
+    }
+
+    /**
+     * Set vue
+     *
+     * @param integer $vue
+     *
+     * @return Partenaire
+     */
+    public function setVue($vue)
+    {
+        $this->vue = $vue;
+
+        return $this;
+    }
+
+    /**
+     * Get vue
+     *
+     * @return integer
+     */
+    public function getVue()
+    {
+        return $this->vue;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Utils\GestionPartenaire;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -162,7 +163,7 @@ class FrontendannuaireController extends Controller
      *
      * @Route("/{domaine}/{service}/{annee}/{slug}", name="fannuaire_partenaire")
      */
-    public function partenaireAction(Request $request, $domaine, $service, $slug)
+    public function partenaireAction(Request $request, $domaine, $service, $slug, GestionPartenaire $gestionPartenaire)
     {
         $em = $this->getDoctrine()->getManager();
         $typebiens = $em->getRepository('AppBundle:Typebien')
@@ -186,6 +187,8 @@ class FrontendannuaireController extends Controller
             $listeBiens,
             $request->query->get('page', 1), 9
         );
+
+        $gestionPartenaire->vue($partenaire->getId());
 
         return $this->render('frontend/annuaire_partenaire.html.twig',[
             'domaine' => $domaine,
