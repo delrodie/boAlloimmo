@@ -33,4 +33,17 @@ class MouchardRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Liste des derniers mouchards
+     */
+    public function findLast($limit)
+    {
+        return $this->createQueryBuilder('m')
+                    ->orderBy('m.createdAt', 'DESC')
+                    ->setFirstResult(0)
+                    ->setMaxResults($limit)
+                    ->getQuery()->getResult()
+            ;
+    }
 }

@@ -17,4 +17,32 @@ class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
                     ->setParameter('id', $user)
         ;
     }
+
+    /**
+     * Nombre d'utilisateur
+     * use DefaultController:backendAction
+     */
+    public function cptUser()
+    {
+        return $this->createQueryBuilder('u')
+                    ->select('count(u.id)')
+                    ->where('u.statut IS NULL')
+                    ->getQuery()->getSingleScalarResult()
+            ;
+    }
+
+    /**
+     * Liste des derniers inscrits
+     * use DefaultController:backendAction
+     */
+    public function findLastUser($limit)
+    {
+        return $this->createQueryBuilder('u')
+                    ->where('u.statut IS NULL')
+                    ->orderBy('u.publieLe', 'DESC')
+                    ->setFirstResult(0)
+                    ->setMaxResults($limit)
+                    ->getQuery()->getResult()
+            ;
+    }
 }

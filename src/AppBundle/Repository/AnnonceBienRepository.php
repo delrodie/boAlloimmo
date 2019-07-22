@@ -135,4 +135,32 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Nombre d'annonces
+     * use DefaultController:backendAction
+     */
+    public function cpteurAnnonce()
+    {
+        return $this->createQueryBuilder('ab')
+                    ->select('count(ab.id)')
+                    ->where('ab.statut = 1')
+                    ->getQuery()->getSingleScalarResult()
+            ;
+    }
+
+    /**
+     * Liste des annonces les plus vues
+     * use DefaultController:backendAction
+     */
+    public function findAnnoncePlusVues()
+    {
+        return $this->createQueryBuilder('ab')
+                    ->where('ab.statut = 1')
+                    ->orderBy('ab.vue', 'DESC')
+                    ->setFirstResult(0)
+                    ->setMaxResults(10)
+                    ->getQuery()->getResult()
+            ;
+    }
 }

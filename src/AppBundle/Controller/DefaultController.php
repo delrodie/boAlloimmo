@@ -78,6 +78,27 @@ class DefaultController extends Controller
      */
     public function backendAction(Request $request)
     {
-        return $this->render('default/dashboard.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $cpteurPartenaire = $em->getRepository("AppBundle:Partenaire")->cpteurPartenaire();
+        $cpteurAnnonceur = $em->getRepository("AppBundle:Utilisateur")->cptUser();
+        $cpteurBien = $em->getRepository("AppBundle:Bien")->calcul()->getQuery()->getSingleScalarResult();
+        $cpteurAnnonce = $em->getRepository("AppBundle:AnnonceBien")->cpteurAnnonce();
+        // Liste des biens et annonces les plus vus
+        $vuBiens = $em->getRepository("AppBundle:Bien")->findBienPlusVu();
+        $vuAnnonces = $em->getRepository("AppBundle:AnnonceBien")->findAnnoncePlusVues();
+        //Liste des nouveaux inscrits
+        $utilisateurs = $em->getRepository("AppBundle:Utilisateur")->findLastUser(6);
+        // Liste des logs
+        $logs = $em->getRepository("AppBundle:Mouchard")->findLast(6);
+        return $this->render('default/dashboard.html.twig',[
+            'partenaire' => $cpteurPartenaire,
+            'annonceur' => $cpteurAnnonceur,
+            'bien' => $cpteurBien,
+            'annonce' => $cpteurAnnonce,
+            'biens' => $vuBiens,
+            'annonces' => $vuAnnonces,
+            'utilisateurs' => $utilisateurs,
+            'logs' => $logs,
+        ]);
     }
 }

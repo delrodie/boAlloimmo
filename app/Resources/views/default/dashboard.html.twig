@@ -12,6 +12,210 @@
                 <small> </small>
             </h4>
         </div>
+        <div class="container-fluid">
+            <!-- Statistiques partenaires -->
+            <div class="row">
+                <div class="col-xl-3 col-sm-6 mb-4">
+                    <div class="card card-shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                        <span class="bg-warning text-center wb-icon-box">
+                                            <i class="icon-people text-light f24"></i>
+                                        </span>
+                                </div>
+                                <div class="col-9">
+                                    <h6 class="mt-1 mb-0">{{ partenaire|number_format(0,'','.') }}</h6>
+                                    <p class="f12 mb-0">Partenaires </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-4">
+                    <div class="card card-shadow ">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-3">
+                                        <span class="bg-info text-center wb-icon-box">
+                                            <i class="icon-people text-light f24"></i>
+                                        </span>
+                                </div>
+                                <div class="col-9">
+                                    <h6 class="mt-1 mb-0">{{ annonceur|number_format(0,'','.') }}</h6>
+                                    <p class="f12 mb-0">Annonceurs</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-4">
+                    <div class="card card-shadow">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-3">
+                                        <span class="bg-success text-center wb-icon-box">
+                                            <i class="icon-home text-light f24"></i>
+                                        </span>
+                                </div>
+                                <div class="col-9">
+                                    <h6 class="mt-1 mb-0">{{ bien|number_format(0,'','.') }} </h6>
+                                    <p class="f12 mb-0">Biens partenaires</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-4">
+                    <div class="card card-shadow">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-3">
+                                        <span class="bg-danger text-center wb-icon-box">
+                                            <i class="icon-home text-light f24"></i>
+                                        </span>
+                                </div>
+                                <div class="col-9">
+                                    <h6 class="mt-1 mb-0">{{ annonce|number_format(0,'','.') }} </h6>
+                                    <p class="f12 mb-0">Annonces des internautes
+                                        <span class="float-right text-success"> </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Statistiques partenaires -->
+            <!-- Pages visitées -->
+            <div class="row">
+                <!--Biens les plus visités-->
+                <div class="col-xl-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Les biens, les plus visités
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-vertical-middle">
+                                <thead>
+                                <tr>
+                                    <th class="border-0">Partenaires</th>
+                                    <th class="border-0">Page</th>
+                                    <th class="border-0 text-right">Vues</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for bien in biens %}
+                                    <tr>
+                                        <td>{{ bien.partenaire.nom }}</td>
+                                        <td><a href="{{ absolute_url(path('frontend_bien',{'typebien':bien.typebien.slug,'slug':bien.slug })) }}" target="_blank">{{ bien.titre }}</a></td>
+                                        <td class="text-right">{{ bien.vue }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--/Biens-->
+
+                <!-- Annonce les plus visitées-->
+                <div class="col-xl-6">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Les annonces les plus visitées
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-vertical-middle">
+                                <thead>
+                                <tr>
+                                    <th class="border-0">Annonceurs</th>
+                                    <th class="border-0">Page</th>
+                                    <th class="border-0 text-right">Vues</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for annonce in annonces %}
+                                    <tr>
+                                        <td>{{ annonce.utilisateur.nom }}</td>
+                                        <td>
+                                            <a href="{{ absolute_url(path('frontend_internaute_annonce_show',{'typebien': annonce.typebien.slug,'slug': annonce.slug})) }}" target="_blank">
+                                                {{ annonce.titre }}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">{{ annonce.vue }} </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!--/Annonce-->
+            </div>
+            <!-- /Pages visitées -->
+            <!-- Nouveaux utilisteurs et logs -->
+            <div class="row ">
+                <div class="col-xl-6 col-sm-6">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Nouveaux annonceurs
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {% for utilisateur in utilisateurs %}
+                                <div class="media mb-4">
+                                    {% if (utilisateur.imageName) %}
+                                        <img src="{{ vich_uploader_asset(utilisateur, 'imageFile') }}" alt="{{ utilisateur.nom }}" class="align-self-center mr-3 rounded-circle" style="width: 50px; height: 50px;"/>
+                                    {% else %}
+                                        <img src="{{ asset('frontend/images/icon-ai.png')}}" class="align-self-center mr-3 rounded-circle" style="width: 50px; height: 50px;">
+                                    {% endif %}
+                                    <div class="media-body">
+                                        <p class="mb-0"><strong class="">{{ utilisateur.nom }}</strong></p>
+                                        <span><a href="mailto:{{ utilisateur.user.email }}">{{ utilisateur.user.email }}</a></span>
+                                    </div>
+                                    <div class="btn-group float-right task-list-action">
+                                        Tel: {{ utilisateur.telephone }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-sm-6">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                Logs
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="baseline baseline-border">
+                                {% for log in logs %}
+                                    <div class="baseline-list baseline-border baseline-primary">
+                                        <div class="baseline-info">
+                                            <div><a href="#" class="default-color"><strong>{{ log.user }}</strong></a>
+                                                <a href="{{ absolute_url(path('backend_mouchard_show',{'id': log.id})) }}" class="default-color">{{ log.titre }}</a>
+                                                {% if log.flag is null %}
+                                                    <span class="badge badge-pill badge-success">nouveau</span>
+                                                {% endif %}</div>
+                                            <span class="text-muted">{{ log.createdAt|date('d-m-Y h:i:s') }}</span>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Nouveaux utilisateurs et logs -->
+        </div>
 
     </div>
 {% endblock %}

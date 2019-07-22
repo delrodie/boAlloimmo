@@ -82,4 +82,17 @@ class PartenaireRepository extends \Doctrine\ORM\EntityRepository
                         ;
         }
     }
+
+    /**
+     * Nombre de partenaires enregistrés dans le système
+     * use DefaultController::BackendAction
+     */
+    public function cpteurPartenaire()
+    {
+        return $this->createQueryBuilder('p')
+                    ->select('count(p.id)')
+                    ->where('p.statut = 1')
+                    ->getQuery()->getSingleScalarResult();
+            ;
+    }
 }

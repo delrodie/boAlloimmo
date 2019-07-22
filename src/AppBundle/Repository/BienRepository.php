@@ -243,4 +243,19 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->createQueryBuilder('b')->select('count(b.id)')->where('b.statut = 1');
     }
+
+    /**
+     * Liste des biens les plus vues
+     * use DefaultController:BackendAction
+     */
+    public function findBienPlusVu()
+    {
+        return $this->createQueryBuilder('b')
+                    ->where('b.statut = 1')
+                    ->orderBy('b.vue', 'DESC')
+                    ->setFirstResult(0)
+                    ->setMaxResults(10)
+                    ->getQuery()->getResult();
+            ;
+    }
 }
