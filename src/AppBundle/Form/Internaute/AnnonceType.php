@@ -80,7 +80,8 @@ class AnnonceType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'plceholder' => 'Selectionnez le mode'
-                ]
+                ],
+                'required' => true,
             ])
             ->add('utilisateur', EntityType::class, array(
                 'attr'  => array(
