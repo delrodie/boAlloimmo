@@ -119,6 +119,7 @@ class BienRepository extends \Doctrine\ORM\EntityRepository
         return $this->QueryBien()
                     ->innerJoin('b.partenaire', 'p')
                     ->where('p.slug = :partenaire')
+                    ->andWhere('b.statut = 1')
                     ->addOrderBy('b.flag', 'DESC')
                     ->addOrderBy('b.promotion', 'DESC')
                     ->setFirstResult($offset)

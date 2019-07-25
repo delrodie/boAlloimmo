@@ -119,7 +119,11 @@ class FRechercheController extends Controller
                     $immeubles = $em->getRepository('AppBundle:AnnonceImmeuble')
                         ->findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ;//dump($immeubles);die();
-                    $biens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $listeBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1));
+                    $biens = $this->get('knp_paginator')->paginate(
+                        $listeBiens,
+                        $request->query->get('page', 1), 9
+                    );
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_annonce_immeuble.html.twig',[
@@ -138,7 +142,11 @@ class FRechercheController extends Controller
                     $appartements = $em->getRepository('AppBundle:AnnonceAppartement')
                         ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ; //dump($mode);die();
-                    $biens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $listeBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1));
+                    $biens = $this->get('knp_paginator')->paginate(
+                        $listeBiens,
+                        $request->query->get('page', 1), 9
+                    );
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_annonce_appartement.html.twig',[
@@ -157,7 +165,11 @@ class FRechercheController extends Controller
                     $villas = $em->getRepository('AppBundle:AnnonceVilla')
                         ->findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ;
-                    $biens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $listeBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), null, 9, 0);
+                    $biens = $this->get('knp_paginator')->paginate(
+                        $listeBiens,
+                        $request->query->get('page', 1), 9
+                    );
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_annonce_villa.html.twig',[
@@ -171,7 +183,11 @@ class FRechercheController extends Controller
                     $autrebiens = $em->getRepository('AppBundle:AnnonceAutrebien')
                         ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
                     ;
-                    $biens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $listeBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1));
+                    $biens = $this->get('knp_paginator')->paginate(
+                        $listeBiens,
+                        $request->query->get('page', 1), 9
+                    );
                     $pagination = null ;
 
                     return $this->render('frontend/recherche_autrebien.html.twig',[
@@ -202,7 +218,11 @@ class FRechercheController extends Controller
                 }
                 $localite = $em->getRepository('AppBundle:Zone')->findOneBy(['libelle'=>$localisation]);
                 $zones = $em->getRepository('AppBundle:AnnonceBien')->findBienZone($localisation, $wherePrix, $min, $max, $mode, 9, 0);
-                $biens = $em->getRepository('AppBundle:AnnonceBien')->findBy(['zone'=>$localite->getId()], null, 9, 0);
+                $listeBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(['zone'=>$localite->getId(),'statut'=>1]);
+                $biens = $this->get('knp_paginator')->paginate(
+                    $listeBiens,
+                    $request->query->get('page', 1), 9
+                );
                 $pagination = null ;
 
                 return $this->render('frontend/recherche_annonce_zone.html.twig',[
@@ -291,13 +311,21 @@ class FRechercheController extends Controller
                     $immeubles = $em->getRepository('AppBundle:Immeuble')
                         ->findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece, 9, 0)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId()), ['flag'=>'DESC'], 9, 0);
+                    $listeBiens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC']);
+                    $biens = $this->get('knp_paginator')->paginate(
+                        $listeBiens,
+                        $request->query->get('page', 1), 9
+                    );
                     $pagination = null ;
 
                     $annonceImmeubles = $em->getRepository('AppBundle:AnnonceImmeuble')
                         ->findImmeuble($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ;//dump($annonceImmeubles);die();
-                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId()), null, 9, 0);
+                    $listannonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1));
+                    $annonceBiens = $this->get('knp_paginator')->paginate(
+                        $listannonceBiens,
+                        $request->query->get('page', 1), 9
+                    );
 
                     return $this->render('frontend/recherche_immeuble.html.twig',[
                         'immeubles'        => $immeubles,
@@ -317,13 +345,21 @@ class FRechercheController extends Controller
                     $appartements = $em->getRepository('AppBundle:Appartement')
                         ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC'], 9, 0);
+                    $listeBiens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC']);
+                    $biens = $this->get('knp_paginator')->paginate(
+                        $listeBiens,
+                        $request->query->get('page', 1), 9
+                    );
                     $pagination = null ;
 
                     $annonceAppartements = $em->getRepository('AppBundle:AnnonceAppartement')
                         ->findAppartement($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ; //dump($mode);die();
-                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), null, 9, 0);
+                    $listannonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1));
+                    $annonceBiens = $this->get('knp_paginator')->paginate(
+                        $listannonceBiens,
+                        $request->query->get('page', 1), 9
+                    );
 
                     return $this->render('frontend/recherche_appartement.html.twig',[
                         'appartements'        => $appartements,
@@ -342,14 +378,22 @@ class FRechercheController extends Controller
 
                     $villas = $em->getRepository('AppBundle:Villa')->findVilla($typebiens->getId(), $whereZone, $whereMin, $whereMax, $wherePiece, $mode, $localisation, $min, $max, $nbPiece);
 
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC'], 9, 0);
+                    $listeBiens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC']);
+                    $biens = $this->get('knp_paginator')->paginate(
+                        $listeBiens,
+                        $request->query->get('page', 1), 9
+                    );
                     $pagination = null ;
 
                     // Annonce
                     $annonceVillas = $em->getRepository('AppBundle:AnnonceVilla')
                         ->findVilla($typebien, $whereZone, $whereMin, $whereMax, $wherePiece, $localisation, $mode, $min, $max, $nbPiece)
                     ;
-                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), null, 9, 0);
+                    $listannonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1));
+                    $annonceBiens = $this->get('knp_paginator')->paginate(
+                        $listannonceBiens,
+                        $request->query->get('page', 1), 9
+                    );
 
                     return $this->render('frontend/recherche_villa.html.twig',[
                         'villas'        => $villas,
@@ -364,14 +408,22 @@ class FRechercheController extends Controller
                     $autrebiens = $em->getRepository('AppBundle:Autrebien')
                         ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
                     ;
-                    $biens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC'], 9, 0);
+                    $listeBiens = $em->getRepository('AppBundle:Bien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), ['flag'=>'DESC']);
+                    $biens = $this->get('knp_paginator')->paginate(
+                        $listeBiens,
+                        $request->query->get('page', 1), 9
+                    );
                     $pagination = null ;
 
                     // Annonce
                     $annonceAutrebiens = $em->getRepository('AppBundle:AnnonceAutrebien')
                         ->findAutrebien($typebien, $whereZone, $whereMin, $whereMax, $localisation, $mode, $min, $max)
                     ;
-                    $annonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1), null, 9, 0);
+                    $listannonceBiens = $em->getRepository('AppBundle:AnnonceBien')->findBy(array('typebien' => $typebiens->getId(), 'statut'=>1));
+                    $annonceBiens = $this->get('knp_paginator')->paginate(
+                        $listannonceBiens,
+                        $request->query->get('page', 1), 9
+                    );
 
                     return $this->render('frontend/recherche_autrebien.html.twig',[
                         'autrebiens'        => $autrebiens,
