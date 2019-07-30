@@ -39,4 +39,16 @@ class TypebienRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    /**
+     * Liste de bien par ordre alphabetique
+     * use AnnonceType - BienType
+     */
+    public function getList()
+    {
+        return $this->createQueryBuilder('t')
+                    ->where('t.statut = 1')
+                    ->orderBy('t.libelle', 'ASC')
+            ;
+    }
 }

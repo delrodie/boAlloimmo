@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -120,7 +121,12 @@ class BienType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control select-typebien',
                     'placeholder'   => 'Le type de bien'
-                )
+                ),
+                'class' => 'AppBundle:Typebien',
+                'query_builder' =>  function(EntityRepository $er){
+                    return $er->getList();
+                },
+                'choice_label'  => 'libelle',
             ))
             ->add('mode', null, array(
                 'attr' => array(

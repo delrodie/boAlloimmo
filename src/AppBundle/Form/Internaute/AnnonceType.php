@@ -68,6 +68,11 @@ class AnnonceType extends AbstractType
                     'placeholder' => 'Selectionnez le type de bien'
                 ],
                 'required' => true,
+                'class' => 'AppBundle:Typebien',
+                'query_builder' =>  function(EntityRepository $er){
+                    return $er->getList();
+                },
+                'choice_label'  => 'libelle',
             ])
             ->add('zone', null, [
                 'attr' => [

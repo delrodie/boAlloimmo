@@ -63,5 +63,5 @@ security:
         - { path: ^/backend/domaine, role: ROLE_GESTIONNAIRE }
         - { path: ^/backend/service, role: ROLE_GESTIONNAIRE }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/profile/, role: ROLE_USER }
+        - { path: ^/profiles/, role: ROLE_USER }
         - { path: ^/internaute, role: ROLE_USER }

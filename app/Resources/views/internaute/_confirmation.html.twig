@@ -67,6 +67,9 @@
 								<a href="#" class="btn btn-primary dropdown-toggle w-100" title="Veuillez vous enregistrer pour voir votre profile">
 										<i class="icon-user"></i>Profile 
 									</a>
+								<a href="{{ path('fos_user_change_password') }}" class="btn btn-primary btn-light dropdown-toggle w-100">
+									<i class="icon-user"></i>{{ 'change_password.submit'|trans({}, 'FOSUserBundle') }}
+								</a>
 								<a href="#" class="btn btn-primary btn-light dropdown-toggle w-100" title="Veuillez  vous enregistrer pour faire une annonce">
 										<i class="icon-completed-tasks"></i>Faire une annonce
 									</a>
