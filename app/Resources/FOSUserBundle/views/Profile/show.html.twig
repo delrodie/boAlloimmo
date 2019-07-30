@@ -1,5 +1,27 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
+{% block body %}
 
-{% block fos_user_content %}
-{% include "@FOSUser/Profile/show_content.html.twig" %}
-{% endblock fos_user_content %}
+    <div class="section section-booking">
+        <div class="booking-form-wrap">
+            {{ render(url('rfrontend_principale')) }}
+            <div class="booking-form-toggle d-md-none"><a href="tel:+225 03 25 54 47"><i class="icon-telephone"></i></a>
+                <div class="js-booking-form-toggle"><span>Detail</span><span class="close-text js-close-text">CLOSE</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+
+        <div class="container" style="margin-bottom: 100px">
+            {{ render(url('frontend_profile_new'))}}
+        </div>
+    </div>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent()}}
+
+    <script src="{{ asset('frontend/vendor/form-validation/jquery.form.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/form-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('frontend/vendor/scroll-with-ease/jquery.scroll-with-ease.min.js') }}"></script>
+    <script src="{{ asset('frontend/form/forms.js') }}"></script>
+{% endblock %}

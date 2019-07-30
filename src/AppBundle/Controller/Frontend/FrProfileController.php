@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
- * @Route("profiles")
+ * @Route("profile")
  */
 class FrProfileController extends Controller
 {
@@ -147,7 +147,7 @@ class FrProfileController extends Controller
     }
 
     /**
-     * @Route("/{user}-{id}", name="frontend_profile_show")
+     * @Route("s/{user}-{id}", name="frontend_profile_show")
      * @Method("GET")
      */
     public function showAction(Utilisateur $utilisateur, AuthorizationCheckerInterface $authChecker)
@@ -177,7 +177,7 @@ class FrProfileController extends Controller
     }
 
     /**
-     * @Route("/{user}-{id}/modifier", name="frontend_profile_edit")
+     * @Route("s/{user}-{id}/modifier", name="frontend_profile_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Utilisateur $utilisateur, AuthorizationCheckerInterface $authChecker)
