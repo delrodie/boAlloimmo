@@ -1,0 +1,52 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ profile.titre }}{% endblock %}
+
+{% block body %}
+    <main class="main-content">
+        <div class="page-title">
+            <h4 class="mb-0"> Gestion des profiles
+                <small></small>
+            </h4>
+            <ol class="breadcrumb mb-0 pl-0 pt-1 pb-0">
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ path('homepage') }}" class="default-color">{{ profile.titre }}</a></li>
+                <li class="breadcrumb-item active">profile</li>
+            </ol>
+        </div>
+
+        <div class="container-fluid">
+
+
+            <div class="row mt-5 mb-3">
+                <div class="col-md-12 ">
+                    <p>{{ profile.titre }}</p>
+                </div>
+            </div>
+
+            <div class="card-deck">
+                <div class="card mb-9">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <p class="card-text">
+                            {{ profile.contenu|raw }}
+                        </p>
+                        <a href="{{ path('backend_profile_edit', {'slug': profile.slug}) }}" class="btn btn-outline-danger"><i class="fa fa-edit"></i> Modifier</a>
+                        <a href="#" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Aperçu visiteur</a>
+                        <a href="{{ path('backend_profile_index') }}" class="btn btn-outline-secondary"><i class="fa fa-list"></i> Liste des profiles</a>
+                        <div class="form-group row">
+                            <div class="col-sm-3 col-sm-offset-8 ml-auto">
+                                {{ form_start(delete_form, {'attr': {'onsubmit': "return confirm('Etes-vous sûr de vouloir vraiment supprimer cet profile?');"}}) }}
+                                <input type="submit" value="Supprimer" class="btn btn-danger">
+                                {{ form_end(delete_form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}
+
+
