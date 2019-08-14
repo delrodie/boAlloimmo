@@ -23,6 +23,7 @@ class TypebienType extends AbstractType
                     'placeholder'   => 'Nom du type de bien'
                 )
             ))
+            ->add('code', TextType::class,['attr'=>['class'=>'form-control', 'placeholder'=>'Le code tu type de bien']])
             ->add('statut', CheckboxType::class, array(
                 'attr'  => array(
                     'class' => 'custom-control-input'

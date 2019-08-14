@@ -33,6 +33,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">#ID</th>
+                                    <th scope="col" class="text-center">Codes</th>
                                     <th scope="col" class="text-center">Noms</th>
                                     <th scope="col" class="text-center">Statut</th>
                                     <th scope="col" class="text-center">Recherhce</th>
@@ -43,6 +44,7 @@
                                 {% for typebien in typebiens %}
                                     <tr>
                                         <th scope="col" class="text-right">{{ loop.index }}</th>
+                                        <td class="text-center">{{ typebien.code }}</td>
                                         <td>{{ typebien.libelle }}</td>
                                         <td class="text-center">
                                             {% if (typebien.statut) %}

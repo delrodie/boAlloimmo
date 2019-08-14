@@ -46,6 +46,7 @@ class TypebienController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $typebien->setCode(strtoupper($typebien->getCode()));
             $em->persist($typebien);
             $em->flush();
 
@@ -87,6 +88,7 @@ class TypebienController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $typebien->setCode(strtoupper($typebien->getCode()));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_typebien_index');
