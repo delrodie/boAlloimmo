@@ -14,7 +14,7 @@
     <div class="section">
         <div class="container">
             <div class="title-wrap text-center">
-                <h2 class="h1">Enregistrement d'annonce</h2>
+                <h2 class="h1">Demande de promotion</h2>
             </div>
 			<div class="title-wrap text-center">
 				<h5 class="h5" style="font-style: italic">
@@ -58,69 +58,65 @@
 									{{ message }}
 								</div>
 							{% endfor %}
-                            <h4 class="text-left text-primary">Enregistrement de bien <span class="badge badge-primary">1/2</span></h4>
-							<!--<form class="contact-form" id="contactForm" method="post" novalidate="novalidate">-->
-                            {{ form_start(form, {'attr': {'class': 'profile-form', 'id': 'profileForm', 'novalidate': 'novalidate', 'action': path('frontend_annonceur_new', {'user':utilisateur.user.username, 'id': utilisateur.id}) }})}}
-								<div class="successform">
-									<p>Message envoyé avec succès!</p>
+                            <h4 class="text-left text-primary">Promotion de mon annonce <span class="badge badge-primary"></span></h4>
+							<form class="profile-form" id="profileForm" method="post" novalidate="novalidate">
+								<div class="mt-15 text-left row">
+									<div class="col-md-4 text-justify">
+										<div class="row">
+											<div class="col-md-12">
+												<h6>Package 1</h6>
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorum quibusdam reiciendis rem. Beatae blanditiis consequuntur, dolorum eveniet, minima nihil nostrum, numquam odio officiis quo similique tenetur! A, assumenda quaerat.
+
+											</div>
+											<div class="col-md-12 text-center mt-5">
+												<h6><input type="radio" name="choix"> &nbsp;<span style="color: darkred">150.000 FCFA</span></h6>
+											</div>
+											<div class="col-md-12 text-center mt-5">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 text-justify">
+										<div class="row">
+											<div class="col-md-12">
+												<h6>Package 2</h6>
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorum quibusdam reiciendis rem. Beatae blanditiis consequuntur, dolorum eveniet, minima nihil nostrum, numquam odio officiis quo similique tenetur! A, assumenda quaerat.
+
+											</div>
+											<div class="col-md-12 text-center mt-5">
+												<h6><input type="radio" name="choix"> &nbsp;<span style="color: darkred">200.000 FCFA</span></h6>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-4 text-justify">
+										<div class="row">
+											<div class="col-md-12">
+												<h6>Package 3</h6>
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dolorum quibusdam reiciendis rem. Beatae blanditiis consequuntur, dolorum eveniet, minima nihil nostrum, numquam odio officiis quo similique tenetur! A, assumenda quaerat.
+
+											</div>
+											<div class="col-md-12 text-center mt-5">
+												<h6><input type="radio" name="choix"> &nbsp;<span style="color: darkred">250.000 FCFA</span></h6>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="errorform">
-									<p>Echec! Veuillez reessayer plutard.</p>
+								<div class="mt-15 alert-conseil text-left row">
+									<div class="col-md-6">
+										<label for="debut">Date début promotion</label>
+										<input type="date" name="debut" class="form-control">
+									</div>
+									<div class="col-md-6">
+										<label for="fin">Date fin promotion</label>
+										<input type="date" name="fin" class="form-control">
+									</div>
 								</div>
 								<div class="mt-15 alert-conseil text-left">
-									{{ form_widget(form.utilisateur)}}
-                                    {{ form_errors(form.utilisateur)}}
+
 								</div>
-								<div class="mt-15 alert-conseil text-left">
-									{{ form_widget(form.typebien)}}
-                                    {{ form_errors(form.typebien)}}
-								</div>
-								<div class="mt-15 alert-conseil text-left">
-                                    {{ form_widget(form.titre)}}
-                                    {{ form_errors(form.titre)}}
-                                    <label class="alert-conseil">Utiliser des mots qu'un acheteur utiliserait pour rechercher votre bien</label>
-								</div>
-								<div class="mt-15 alert-conseil text-left">
-									{{ form_widget(form.prix)}}
-                                    {{ form_errors(form.prix)}}
-								</div>
-								<div class="mt-15 alert-conseil text-left">
-									{{ form_widget(form.mode)}}
-                                    {{ form_errors(form.mode)}}
-								</div>
-								<div class="mt-15 alert-conseil text-left">
-									{{ form_widget(form.zone)}}
-                                    {{ form_errors(form.zone)}}
-								</div>
-								<div class="mt-15 alert-conseil text-left">
-									{{ form_widget(form.description)}}
-                                    {{ form_errors(form.description)}}
-								</div>
-								<div class="mt-15 text-left">
-                                    <label>Telecharger la photo du bien</label>
-									{{ form_widget(form.imageFile)}}
-                                    {{ form_errors(form.imageFile)}}
-								</div>
-								<div class="mt-15 text-left">
-									{{ form_widget(form.affichagePrix )}}
-                                    {{ form_errors(form.affichagePrix)}}
-                                    <label> Afficher le prix</label>
-								</div>
-								<div class="mt-15 text-left">
-									{{ form_widget(form.disponibilite, {'attr':{'class':'custom-checbox'}} )}}
-                                    {{ form_errors(form.disponibilite)}}
-                                    <label> Disponiilite</label>
-								</div>
-								<!--<div class="mt-15 text-left">
-									{{ form_widget(form.promotion, {'attr':{'class':'custom-checbox'}} )}}
-									{{ form_errors(form.promotion)}}
-									<label> Faire la promotion du bien</label>
-								</div>-->
 								<div class="mt-3">
-									<button type="submit" class="btn btn-primary">Suivant</button>
+									<button type="submit" class="btn btn-primary">Enregistrer</button>
 								</div>
-							<!--</form>-->
-                            {{ form_end(form)}}
+							</form>
 						</div>
 						
 					</div>

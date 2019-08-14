@@ -72,6 +72,13 @@ class FrInternauteAppartementController extends Controller
                 if ($btn){
                     return $this->redirectToRoute('gallerieannonce_new', ['annonce'=>$bien]);
                 }
+                if ($appartement->getAnnoncebien()->getPromotion()){
+                    return $this->redirectToRoute('internaute_annonce_promotion',[
+                        'annonce'=> $appartement->getAnnoncebien()->getSlug(),
+                        'user' => $utilisateur->getUser()->getUsername(),
+                        'id' => $utilisateur->getId(),
+                    ]);
+                }
                 return $this->redirectToRoute('frontend_annonceur_index', [
                     'id' => $utilisateur->getId(),
                     'user' => $utilisateur->getUser()->getUsername(),

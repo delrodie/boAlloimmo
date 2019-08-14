@@ -85,11 +85,13 @@
                                 </div>
                                 <div class="room-card-info">
                                     <div class="row">
-                                        <div class="col room-information">
-                                            <span style="font-size: 0.7em">
-                                                {{ bien.utilisateur.nom }}
-                                            </span>
-                                        </div>
+                                        <a href="{{ path('frontend_internaute_annonces_filtre', {'id': bien.utilisateur.id, 'slug': bien.utilisateur.slug}) }}">
+                                            <div class="col room-information">
+                                                <span style="font-size: 0.7em">
+                                                   {{ bien.utilisateur.nom }}
+                                                </span>
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="row">
                                         <div class="col room-information">

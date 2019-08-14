@@ -198,4 +198,25 @@ class FrAnnonceController extends Controller
             'messageError' => $message,
         ]);
     }
+
+    /**
+     * Liste des annonces de l'utlisateur
+     *
+     * @Route("s/-{id}/{slug}", name="frontend_internaute_annonces_filtre")
+     * @Method("GET")
+     */
+    public function filtreAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $listeBiens = $em->getRepository('AppBundle:AnnonceBien')->findListDesc($id); //dump($biens);die();
+        $biens = $this->get('knp_paginator')->paginate(
+            $listeBiens,
+            $request->query->get('page', 1), 15
+        );
+
+        return $this->render("internaute/annonce.html.twig", [
+            'biens' => $biens,
+        ]);
+    }
 }

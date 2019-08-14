@@ -43,6 +43,7 @@ class AnnonceBienType extends AbstractType
             ])
             ->add('localisation', TextType::class, ['attr'=> ['class'=> 'form-control'], 'required'=> false])
             ->add('disponibilite', CheckboxType::class, ['attr' => ['class' => 'custom-control-input'], 'required' => false])
+            ->add('promotion', CheckboxType::class, ['attr' => ['class' => 'custom-control-input'], 'required' => false])
             ->add('tags', TextType::class,[
                 'attr' => [
                     'class' => 'form-control tag-input',

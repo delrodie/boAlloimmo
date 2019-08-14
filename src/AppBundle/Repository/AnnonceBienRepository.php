@@ -50,7 +50,17 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
      *  - frontendController/AnnonceAction
      *  - FRechercheController/LocationAction
      */
-    public function findListDesc(){
+    public function findListDesc($user = null){
+        if ($user){
+            return $this->createQueryBuilder('b')
+                ->where('b.fille = 1')
+                ->andWhere('b.statut = 1')
+                ->andWhere('b.utilisateur = :user')
+                ->orderBy('b.id', 'DESC')
+                ->setParameter('user', $user)
+                ->getQuery()->getResult()
+                ;
+        }
         return $this->createQueryBuilder('b')
                     ->where('b.fille = 1')
                     ->andWhere('b.statut = 1')

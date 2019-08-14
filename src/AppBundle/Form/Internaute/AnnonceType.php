@@ -51,6 +51,7 @@ class AnnonceType extends AbstractType
             ->add('disponibilite', CheckboxType::class, [
                 'required' => false,
             ])
+            ->add('promotion', CheckboxType::class,['required'=>false])
             //->add('tags', TextType::class)
             //->add('typebienslug')
             ->add('affichagePrix', CheckboxType::class, [

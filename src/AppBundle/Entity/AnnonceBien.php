@@ -91,6 +91,27 @@ class AnnonceBien
     /**
      * @var bool
      *
+     * @ORM\Column(name="promotion", type="boolean", nullable=true)
+     */
+    private $promotion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="datedebut", type="string", length=255, nullable=true)
+     */
+    private $datedebut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="datefin", type="string", length=255, nullable=true)
+     */
+    private $datefin;
+
+    /**
+     * @var bool
+     *
      * @ORM\Column(name="fille", type="boolean", nullable=true)
      */
     private $fille;
@@ -866,5 +887,77 @@ class AnnonceBien
     public function getVue()
     {
         return $this->vue;
+    }
+
+    /**
+     * Set promotion
+     *
+     * @param boolean $promotion
+     *
+     * @return AnnonceBien
+     */
+    public function setPromotion($promotion)
+    {
+        $this->promotion = $promotion;
+
+        return $this;
+    }
+
+    /**
+     * Get promotion
+     *
+     * @return boolean
+     */
+    public function getPromotion()
+    {
+        return $this->promotion;
+    }
+
+    /**
+     * Set datedebut
+     *
+     * @param string $datedebut
+     *
+     * @return AnnonceBien
+     */
+    public function setDatedebut($datedebut)
+    {
+        $this->datedebut = $datedebut;
+
+        return $this;
+    }
+
+    /**
+     * Get datedebut
+     *
+     * @return string
+     */
+    public function getDatedebut()
+    {
+        return $this->datedebut;
+    }
+
+    /**
+     * Set datefin
+     *
+     * @param string $datefin
+     *
+     * @return AnnonceBien
+     */
+    public function setDatefin($datefin)
+    {
+        $this->datefin = $datefin;
+
+        return $this;
+    }
+
+    /**
+     * Get datefin
+     *
+     * @return string
+     */
+    public function getDatefin()
+    {
+        return $this->datefin;
     }
 }
