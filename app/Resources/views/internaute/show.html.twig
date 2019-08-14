@@ -60,20 +60,8 @@
                 <div class="row">
 					<div class="col-lg-8 mt-3 mt-sm-0 order-lg-2 text-lg-right">
 						<div class="col-sm-10 col-sm-offset-1 text-justify">
-							<!--<form class="contact-form" id="contactForm" method="post" novalidate="novalidate">-->
-                            L’équipe AlloImmo vous souhaite la bienvenue sur sa plateforme et une meilleure expérience
-                            utilisateur pour la diffusion et la promotion de vos annonces de biens immobiliers.
-                            <p>
-                                Pour toute assistance vous pouvez nous joindre aux numéros suivants :
-                            </p>
-                            <p>
-                                Telephone : <b>
-                                <a href="tel:+22507535551" title="Cliquez pour appeler">+ 225 07 53 55 51</a> /
-                                <a href="tel:+22571303000">71 30 30 00</a>
-                                </b>
-                            <p>
-                                WhatsApp : <b><a href="https://api.whatsapp.com/send?phone=22507535551" target="_blank">07 53 55 51</a></b>
-                            </p>
+							<h6>{{ profile.titre }}</h6>
+                            {{ profile.contenu|raw }}
 						</div>
 						
 					</div>

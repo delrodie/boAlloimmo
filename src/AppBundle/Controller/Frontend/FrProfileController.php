@@ -171,8 +171,11 @@ class FrProfileController extends Controller
                 'utilisateur' => $utilisateur
             ]);
         }
+
+        $profile = $em->getRepository("AppBundle:Profile")->findOneBy(['statut'=>1], ['id'=>'DESC']);
         return $this->render('internaute/show.html.twig', [
             'utilisateur' => $utilisateur,
+            'profile' => $profile
         ]);
     }
 
