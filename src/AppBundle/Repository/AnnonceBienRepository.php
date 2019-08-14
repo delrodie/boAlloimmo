@@ -88,41 +88,82 @@ class AnnonceBienRepository extends \Doctrine\ORM\EntityRepository
 
     /**
      * liste des biens annonces par type de bien
+     * use AnnonceBienController::index
+     * use InternauteBienController::index
      */
-    public function findByTypeBien($typebien)
+    public function findByTypeBien($typebien, $user = null)
     {
-        return $this->createQueryBuilder('ab')
-                    ->leftJoin('ab.typebien', 't')
-                    ->where('t.slug = :typebien')
-                    ->orderBy('t.id', 'DESC')
-                    ->setParameter('typebien', $typebien)
-                    ->getQuery()->getResult()
-            ;
+        if ($user){
+            return $this->createQueryBuilder('ab')
+                        ->leftJoin('ab.typebien', 't')
+                        ->where('t.slug = :typebien')
+                        ->andWhere('ab.utilisateur = :user')
+                        ->orderBy('t.id', 'DESC')
+                        ->setParameters([
+                            'typebien' =>  $typebien,
+                            'user' => $user
+                        ])
+                        ->getQuery()->getResult()
+                        ;
+        }else{
+            return $this->createQueryBuilder('ab')
+                        ->leftJoin('ab.typebien', 't')
+                        ->where('t.slug = :typebien')
+                        ->orderBy('t.id', 'DESC')
+                        ->setParameter('typebien', $typebien)
+                        ->getQuery()->getResult()
+                        ;
+        }
     }
 
     /**
      * Recherche de bien selon la requette
      * use by annoncebienController:indexAction()
+     * use InternauteBienController::indexAction
      */
-    public function findBySearch($recherche)
+    public function findBySearch($recherche, $user = null)
     {
-        return $this->createQueryBuilder('b')
-            ->leftJoin('b.typebien', 't')
-            ->leftJoin('b.mode', 'm')
-            ->leftJoin('b.utilisateur', 'u')
-            ->leftJoin('b.zone', 'z')
-            ->where('b.titre LIKE :recherche')
-            ->orWhere('b.description LIKE :recherche')
-            ->orWhere('b.prix LIKE :recherche')
-            ->orWhere('b.localisation LIKE :recherche')
-            ->orWhere('t.libelle LIKE :recherche')
-            ->orWhere('m.libelle LIKE :recherche')
-            ->orWhere('u.nom LIKE :recherche')
-            ->orWhere('z.libelle LIKE :recherche')
-            ->orderBy('b.id', 'DESC')
-            ->setParameter('recherche', '%'.$recherche.'%')
-            ->getQuery()->getResult()
-            ;
+        if ($user){
+            return $this->createQueryBuilder('b')
+                        ->leftJoin('b.typebien', 't')
+                        ->leftJoin('b.mode', 'm')
+                        ->leftJoin('b.utilisateur', 'u')
+                        ->leftJoin('b.zone', 'z')
+                        ->where('b.titre LIKE :recherche')
+                        ->orWhere('b.description LIKE :recherche')
+                        ->orWhere('b.prix LIKE :recherche')
+                        ->orWhere('b.localisation LIKE :recherche')
+                        ->orWhere('t.libelle LIKE :recherche')
+                        ->orWhere('m.libelle LIKE :recherche')
+                        ->orWhere('u.nom LIKE :recherche')
+                        ->orWhere('z.libelle LIKE :recherche')
+                        ->andWhere('b.utilisateur = :user')
+                        ->orderBy('b.id', 'DESC')
+                        ->setParameter([
+                            'recherche'=> '%'.$recherche.'%',
+                            'user' => $user
+                        ])
+                        ->getQuery()->getResult()
+                        ;
+        }else{
+            return $this->createQueryBuilder('b')
+                ->leftJoin('b.typebien', 't')
+                ->leftJoin('b.mode', 'm')
+                ->leftJoin('b.utilisateur', 'u')
+                ->leftJoin('b.zone', 'z')
+                ->where('b.titre LIKE :recherche')
+                ->orWhere('b.description LIKE :recherche')
+                ->orWhere('b.prix LIKE :recherche')
+                ->orWhere('b.localisation LIKE :recherche')
+                ->orWhere('t.libelle LIKE :recherche')
+                ->orWhere('m.libelle LIKE :recherche')
+                ->orWhere('u.nom LIKE :recherche')
+                ->orWhere('z.libelle LIKE :recherche')
+                ->orderBy('b.id', 'DESC')
+                ->setParameter('recherche', '%'.$recherche.'%')
+                ->getQuery()->getResult()
+                ;
+        }
     }
 
     /**
