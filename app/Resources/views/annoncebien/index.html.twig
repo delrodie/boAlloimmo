@@ -49,7 +49,13 @@
                             <div class="card-body">
                                 <span class="text-right">{{ annoncebien.typebien.libelle }}</span>
 
-                                <h5 class="card-title">{{ annoncebien.titre }}</h5>
+                                <h5 class="card-title">{{ annoncebien.titre }}
+                                    {% if (annoncebien.visite) %}
+                                        <span class="pull-right" title="Viste 360°">
+                                            <a href="{{ asset('visitevirtuelle/'~annoncebien.visite~'/index.html') }}" target="_blank"><i class="fa fa-street-view"></i></a>
+                                        </span>
+                                    {% endif %}
+                                </h5>
                                 <p class="card-text">{{ annoncebien.resume|raw }}</p>
                                 <p class="card-text">
                                     <i class="fa fa-money"> {{ annoncebien.prix|number_format(0,'','.') }}</i> &nbsp; &nbsp;

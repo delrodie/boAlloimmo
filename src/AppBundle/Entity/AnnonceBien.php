@@ -131,6 +131,13 @@ class AnnonceBien
     private $vue;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="visite", type="string", length=255, nullable=true)
+     */
+    private $visite;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="annoncebiens")
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
@@ -959,5 +966,29 @@ class AnnonceBien
     public function getDatefin()
     {
         return $this->datefin;
+    }
+
+    /**
+     * Set visite
+     *
+     * @param string $visite
+     *
+     * @return AnnonceBien
+     */
+    public function setVisite($visite)
+    {
+        $this->visite = $visite;
+
+        return $this;
+    }
+
+    /**
+     * Get visite
+     *
+     * @return string
+     */
+    public function getVisite()
+    {
+        return $this->visite;
     }
 }

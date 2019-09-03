@@ -57,6 +57,9 @@ class AnnonceBienType extends AbstractType
                 'allow_delete' => true,
                 'label' => '.'
             ])
+            ->add('visite', TextType::class,[
+                'attr'=>['class'=>'form-control', 'placeholder'=>"Dossier de la visite guidée"], 'required'=>false
+            ])
             //->add('imageSize')->add('updatedAt')->add('slug')->add('publiePar')->add('modifiePar')->add('publieLe')->add('modifieLe')
             ->add('typebien', null, ['attr'=>['class' => 'form-control']])
             ->add('zone', null, ['attr'=>['class' => 'form-control']])
