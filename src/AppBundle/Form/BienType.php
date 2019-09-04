@@ -112,6 +112,7 @@ class BienType extends AbstractType
                 ),
                 'required' => false,
             ))
+            ->add('visite', TextType::class,['attr'=>['class'=>"form-control", 'placeholder'=>"Le dossier de la visite guidée"],'required'=>false])
             ->add('statut', CheckboxType::class, ['attr'=>['class'=> 'custom-control-input'], 'required'=> false])
             ->add('flag', ChoiceType::class,[
                 'attr'=> ['class'=> 'form-control'],

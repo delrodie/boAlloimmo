@@ -173,6 +173,13 @@ class Bien
     private $vue;
 
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="visite", type="string", length=255, nullable=true)
+     */
+    private $visite;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Galleriebien", mappedBy="bien")
      */
     private $photos;
@@ -1134,5 +1141,29 @@ class Bien
     public function getVue()
     {
         return $this->vue;
+    }
+
+    /**
+     * Set visite
+     *
+     * @param string $visite
+     *
+     * @return Bien
+     */
+    public function setVisite($visite)
+    {
+        $this->visite = $visite;
+
+        return $this;
+    }
+
+    /**
+     * Get visite
+     *
+     * @return string
+     */
+    public function getVisite()
+    {
+        return $this->visite;
     }
 }

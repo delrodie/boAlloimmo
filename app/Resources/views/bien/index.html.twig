@@ -52,7 +52,15 @@
                                     <span style="color: red; font-weight: bold; float: right;"><i class="fa fa-star"></i> Promotion </span><span style="float: right; font-size: 10px;">({{ bien.promodebut|date('d-m-Y') }} au {{ bien.promofin|date('d-m-Y') }})</span>
                                 {% endif %}
 
-                                <h5 class="card-title"><span class="badge badge-primary">{{ bien.programme }}</span> {{ bien.titre }}</h5>
+                                <h5 class="card-title"><span class="badge badge-primary">{{ bien.programme }}</span> {{ bien.titre }}
+                                    <!-- visite guidée -->
+                                    {% if (bien.visite) %}
+                                        <span class="pull-right" title="Viste 360°">
+                                            <a href="{{ asset('visitevirtuelle/'~bien.visite~'/index.html') }}" target="_blank"><i class="fa fa-street-view"></i></a>
+                                        </span>
+                                    {% endif %}
+                                    <!-- /visite guidée -->
+                                </h5>
                                 <p class="card-text">{{ bien.resume|raw }}</p>
                                 <p class="card-text">
                                     <i class="fa fa-money"> {{ bien.prix|number_format(0,'','.') }}</i> &nbsp; &nbsp;
