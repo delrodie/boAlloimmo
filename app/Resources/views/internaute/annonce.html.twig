@@ -94,7 +94,7 @@
                                         </div>
                                         {% if bien.visite %}
                                             <div class="col room-information pull-right">
-                                                <a href="{{ absolute_url(asset('visitevirtuelle/'~bien.visite~'/index.html'))}}" class="fancybox fancybox.iframe" style="color: #af3c65" title="Visite 360° guidée">
+                                                <a href="{{ absolute_url(asset('visitevirtuelle/'~bien.visite~'/index.html'))}}" class="fancybox fancybox.iframe" style="color: #af3c65" title="Visite virtuelle 360°">
                                                     <span style="font-size: 0.7em" class="pull-right">
                                                        <i class="fa fa-street-view fa-lg"></i> visite guidée
                                                     </span>
@@ -102,7 +102,7 @@
                                             </div>
                                         {% elseif bien.visiteCubix %}
                                             <div class="col room-information pull-right">
-                                                <a href="{{ bien.visiteCubix}}" class="fancybox fancybox.iframe" style="color: #af3c65" title="Visite 360° guidée">
+                                                <a href="{{ bien.visiteCubix}}" class="fancybox fancybox.iframe" style="color: #af3c65" title="Visite virtuelle 3D 360°">
                                                     <span style="font-size: 0.7em" class="pull-right">
                                                        <i class="fa fa-street-view fa-lg"></i> visite guidée
                                                     </span>
