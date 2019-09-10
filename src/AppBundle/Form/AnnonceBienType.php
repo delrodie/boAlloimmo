@@ -60,6 +60,9 @@ class AnnonceBienType extends AbstractType
             ->add('visite', TextType::class,[
                 'attr'=>['class'=>'form-control', 'placeholder'=>"Dossier de la visite guidée"], 'required'=>false
             ])
+            ->add('visiteCubix', TextType::class,[
+                'attr'=>['class'=>'form-control', 'placeholder'=>"Lien cubix de la visite guidée"], 'required'=>false
+            ])
             //->add('imageSize')->add('updatedAt')->add('slug')->add('publiePar')->add('modifiePar')->add('publieLe')->add('modifieLe')
             ->add('typebien', null, ['attr'=>['class' => 'form-control']])
             ->add('zone', null, ['attr'=>['class' => 'form-control']])

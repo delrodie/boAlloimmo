@@ -138,6 +138,13 @@ class AnnonceBien
     private $visite;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="visite_cubix", type="string", length=255, nullable=true)
+     */
+    private $visiteCubix;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Typebien", inversedBy="annoncebiens")
      * @ORM\JoinColumn(name="typebien_id", referencedColumnName="id")
      */
@@ -990,5 +997,29 @@ class AnnonceBien
     public function getVisite()
     {
         return $this->visite;
+    }
+
+    /**
+     * Set visiteCubix
+     *
+     * @param string $visiteCubix
+     *
+     * @return AnnonceBien
+     */
+    public function setVisiteCubix($visiteCubix)
+    {
+        $this->visiteCubix = $visiteCubix;
+
+        return $this;
+    }
+
+    /**
+     * Get visiteCubix
+     *
+     * @return string
+     */
+    public function getVisiteCubix()
+    {
+        return $this->visiteCubix;
     }
 }
